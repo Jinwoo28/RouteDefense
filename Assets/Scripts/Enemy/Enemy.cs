@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+   
 public class Enemy : MonoBehaviour
 {
-
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
     private int UnitCoin = 10;
@@ -13,9 +13,12 @@ public class Enemy : MonoBehaviour
     protected float unitSpeed = 1.0f;
     protected float unitHp = 10;
 
+    enum currentstate { nomal, posion, fire, ice, }
+    currentstate CS;
+
     void Start()
     {
-        
+        CS = currentstate.nomal;
     }
 
     private void Update()

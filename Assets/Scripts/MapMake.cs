@@ -53,11 +53,14 @@ public class MapMake : MonoBehaviour
         canaddtile = false;
     }
 
-    private void Start()
+    private void Awake()
     {
         BuildManager.buttonoff += AllbuttonOff;
 
+
         Mapmake();
+        grid[2, 2].SetActiveTile(true);
+        Debug.Log("mapmake"+grid.Length);
         int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)
@@ -113,7 +116,6 @@ public class MapMake : MonoBehaviour
         grid = new Node[gridX, gridY];
 
         if (parentgrid != null) Destroy(parentgrid);
-
         parentgrid = new GameObject("ParentGrid");
 
         //중심점을 기준으로 양옆,위아래로 타일을 배치하기 위해 전체 길이의 절반 계산
@@ -283,7 +285,7 @@ public class MapMake : MonoBehaviour
     public void StartMapTileAdd()
     {
       
-            StartCoroutine("MapTileAdd");
+      StartCoroutine("MapTileAdd");
         
     }
 
@@ -877,6 +879,21 @@ X X 10 X
         get
         {
            return grid;
+        }
+    }
+
+    public Node GetStartNode
+    {
+        get
+        {
+            return StartNode;
+        }
+    }
+    public Node GetEndNode
+    {
+        get
+        {
+            return EndNode;
         }
     }
 }

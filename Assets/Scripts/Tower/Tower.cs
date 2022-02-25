@@ -22,6 +22,7 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("dd");
         atkdelay = AtkDelay;
         InvokeRepeating("AutoSearch",0,0.5f);
        // StartCoroutine("AutoAttack");

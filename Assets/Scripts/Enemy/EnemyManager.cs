@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class StageInfo
+{
+    [SerializeField] private int Level;
+    [SerializeField] private int StageNum;
+}
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private StageInfo stageinfo = null;
+
     [SerializeField] private GameObject[] Enemy_Test = null;
 
     [SerializeField] private PlayerState playerstate = null;

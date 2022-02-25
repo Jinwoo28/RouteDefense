@@ -35,6 +35,9 @@ public class MakeTile : MonoBehaviour
         gridY = mapmake.GetgridY;
         Tilecolor = mapmake.GetMaterials;
         grid = mapmake.GetGrid;
+
+        Debug.Log(grid.Length);
+        grid[1, 1].SetActiveTile(true);
     }
 
     public void StartMapTileAdd()
