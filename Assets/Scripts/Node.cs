@@ -45,8 +45,6 @@ public class Node : MonoBehaviour
 
 
 
-
-
     public void SetColor(Material[] color)
     {
         tilecolor = color;
@@ -80,6 +78,7 @@ public class Node : MonoBehaviour
 
     private void Start()
     {
+        walkablecolorT = Color.red;
         Invoke("ColorChange2", 1.0f);
     }
 
@@ -89,6 +88,11 @@ public class Node : MonoBehaviour
         {
             return alreadymove;
         }
+    }
+
+    public void OriginColor()
+    {
+        this.GetComponentInChildren<MeshRenderer>().material.color = walkablecolorF;
     }
 
     public bool GetDDDD
@@ -156,7 +160,7 @@ public class Node : MonoBehaviour
             Vector3 neighbourpos = _neighbournode[i].transform.localScale;
             if (ydepth > 0.5f && X.y > neighbourpos.y)
             {
-                _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, (int)Xxx);
+                _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, Xxx);
             }
         }
     }
@@ -241,43 +245,43 @@ public class Node : MonoBehaviour
                   //  Debug.Log("111");
                     color = tilecolor[0].color;
                     walkablecolorF = tilecolor[0].color;
-                    walkablecolorT = tilecolor[7].color;
+  //                  walkablecolorT = tilecolor[7].color;
                     break;
                 case 2:
                     ChangeColor(tilecolor[1].color);
                     color = tilecolor[1].color;
                     walkablecolorF = tilecolor[1].color;
-                    walkablecolorT = tilecolor[8].color;
+   //                 walkablecolorT = tilecolor[8].color;
                     break;
                 case 3:
                     ChangeColor(tilecolor[2].color);
                     color = tilecolor[2].color;
                     walkablecolorF = tilecolor[2].color;
-                    walkablecolorT = tilecolor[9].color;
+   //                 walkablecolorT = tilecolor[9].color;
                     break;
                 case 4:
                     ChangeColor(tilecolor[3].color);
                     color = tilecolor[3].color;
                     walkablecolorF = tilecolor[3].color;
-                    walkablecolorT = tilecolor[10].color;
+  //                  walkablecolorT = tilecolor[10].color;
                     break;
                 case 5:
                     ChangeColor(tilecolor[4].color);
                     color = tilecolor[4].color;
                     walkablecolorF = tilecolor[4].color;
-                    walkablecolorT = tilecolor[11].color;
+    //                walkablecolorT = tilecolor[11].color;
                     break;
                 case 6:
                     ChangeColor(tilecolor[5].color);
                     color = tilecolor[5].color;
                     walkablecolorF = tilecolor[5].color;
-                    walkablecolorT = tilecolor[12].color;
+     //               walkablecolorT = tilecolor[12].color;
                     break;
                 case 7:
                     ChangeColor(tilecolor[6].color);
                     color = tilecolor[6].color;
                     walkablecolorF = tilecolor[6].color;
-                    walkablecolorT = tilecolor[13].color;
+   //                 walkablecolorT = tilecolor[13].color;
                     break;
             }
         }
@@ -387,6 +391,9 @@ public class Node : MonoBehaviour
             return (!end && !start);
         }
     }
+
+
+
 
 
 

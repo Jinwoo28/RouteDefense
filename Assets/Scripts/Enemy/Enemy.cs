@@ -8,28 +8,26 @@ public class Enemy : MonoBehaviour
 {
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
-    private int UnitCoin = 10;
+    protected int UnitCoin = 10;
 
-    protected float unitSpeed = 1.0f;
-    protected float unitHp = 10;
+    [SerializeField] private float unitSpeed = 0;
+    [SerializeField] private float unitHp = 0;
+    [SerializeField] private float Amour = 0;
 
-    enum currentstate { nomal, posion, fire, ice, }
-    currentstate CS;
+    protected enum currentstate { nomal, posion, fire, ice, }
+    protected currentstate CS;
 
-    void Start()
-    {
-        CS = currentstate.nomal;
-    }
-
-    private void Update()
-    {
-
-    }
+    protected enum EnemyType { creture, machine, unconfineobject }
+    protected EnemyType enemytype;
 
     public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint)
     {
         Waypoint = _waypoint;
         EM = _enemymanager;
+    }
+
+   protected void StartMove()
+    {
         StartCoroutine("MoveUnit");
     }
 
@@ -38,7 +36,7 @@ public class Enemy : MonoBehaviour
         int waypointindex = 0;
 
         Vector3 MoveToPoint = Waypoint[waypointindex];
-       
+
         while (waypointindex != Waypoint.Length - 1)
         {
 
@@ -53,7 +51,18 @@ public class Enemy : MonoBehaviour
                 }
 
                 this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitSpeed * Time.deltaTime);
-                this.transform.forward = Waypoint[waypointindex];
+
+                Vector3 relativePos = Waypoint[waypointindex] - this.transform.position;
+                //현재 위치에서 타겟위치로의 방향값
+                Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
+
+
+                //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
+                Vector3 TowerDir = Quaternion.RotateTowards(this.transform.rotation, rotationtotarget, 270 * Time.deltaTime).eulerAngles;
+
+                //현재의 rotation값에 Vector3형태로 저장한 값 사용
+                this.transform.rotation = Quaternion.Euler(TowerDir.x, TowerDir.y, 0);
+                
                 yield return null;
             }
             else
@@ -61,25 +70,52 @@ public class Enemy : MonoBehaviour
                 yield break;
             }
         }
-        Debug.Log("이동끝");
         EM.EnemyArriveDestination(this);
         Destroy(this.gameObject);
     }
 
-
-
-    public void EnemyDie(float _damage)
+    public void EnemyAttack(float _damage)
     {
-        if (_damage > unitHp)
+        float realdamage = _damage - Amour;
+        if (realdamage > unitHp)
         {
-            EM.EnemyDie(this, UnitCoin);
-            Destroy(this.gameObject);
+            EnemyDie();
         }
         else
         {
-            unitHp -= _damage;
+            unitHp -= realdamage;
         }
     }
+
+    public void EnemyDie()
+    {
+        EM.EnemyDie(this, UnitCoin);
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator DotDamage(float _damage,currentstate damagetype)
+    {
+        int damagecount = 5;
+        while (damagecount >= 0)
+        {
+            if (_damage < unitHp)
+            {
+                damagecount--;
+                unitHp -= _damage;
+                CS = damagetype;
+            }
+            else
+            {
+                EnemyDie();
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+        CS = currentstate.nomal;
+    }
+
+    virtual protected void UnitCharacteristic() { }
+
+    virtual protected void UnitSkill() { }
 
 
 

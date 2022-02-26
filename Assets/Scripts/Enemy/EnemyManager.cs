@@ -2,41 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class StageInfo
 {
-    [SerializeField] private int Level;
     [SerializeField] private int StageNum;
+    [SerializeField] private int EnemyCount;
+    [SerializeField] private GameObject[] enemykind;
 }
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private StageInfo stageinfo = null;
+    [SerializeField] private StageInfo[] stageinfo = null;
 
     [SerializeField] private GameObject[] Enemy_Test = null;
 
     [SerializeField] private PlayerState playerstate = null;
 
-    private int StageNum = 0;
+
+
+    private int StageNum = 1;
     private Vector3[] WayPoint = null;
     private bool boolGameStart = false;
     private bool boolGameEnd = false;
 
     private bool SpawnFinish = false;
 
+    Vector3[] waypoint;
+    Vector3 SpawnPos;
+
     List<Enemy> EnemyCount = null;
 
     private void Start()
     {
         EnemyCount = new List<Enemy>();
+
     }
 
-    public void gameStartCourtain(Vector3[] waypoint, Vector3 SpawnPos)
+    public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
-        StartCoroutine(GameStart(waypoint,SpawnPos));
+        waypoint = _waypoint;
+        SpawnPos = _SpawnPos;
+        StartCoroutine("GameStart");
     }
 
-    IEnumerator GameStart(Vector3[] waypoint, Vector3 SpawnPos)
+    IEnumerator GameStart()
     {
+        StartCoroutine("GameClear");
         for (int i = 0; i < 10; i++)
         {
             GameObject enemy = Instantiate(Enemy_Test[0], SpawnPos, Quaternion.identity);
@@ -47,17 +58,18 @@ public class EnemyManager : MonoBehaviour
         }
 
         SpawnFinish = true;
-
-        GameManager.canslestage += StageStop;
     }
 
     public void StageStop()
     {
         SpawnFinish = false;
-        for(int i = 0; i < EnemyCount.Count; i++)
+        StopCoroutine("GameStart");
+        StopCoroutine("GameClear");
+        for (int i = 0; i < EnemyCount.Count; i++)
         {
             Destroy(EnemyCount[i].gameObject);
         }
+        EnemyCount.Clear();
     }
 
     
@@ -68,7 +80,7 @@ public class EnemyManager : MonoBehaviour
         {
             if(SpawnFinish&&EnemyCount.Count == 0)
             {
-
+                Debug.Log("스테이지 클리어");
                 StageNum++;
                 break;
             }

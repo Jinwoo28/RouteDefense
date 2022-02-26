@@ -51,7 +51,8 @@ public class TowerPreview : MonoBehaviour
                 int X = hit.collider.GetComponent<Node>().gridX;
                 int Z = hit.collider.GetComponent<Node>().gridY;
                 float Y = hit.collider.transform.localScale.y;
-                this.transform.position = new Vector3(X, (Y/2)+0.15f, Z);
+
+                this.transform.position = new Vector3(X, (Y/2), Z);
                 checkOnroute = hit.collider.GetComponent<Node>().Getwalkable;
                 startendnode = hit.collider.GetComponent<Node>().GetStartEnd;
                 alreadytower = hit.collider.GetComponent<Node>().GetOnTower;

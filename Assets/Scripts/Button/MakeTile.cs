@@ -23,6 +23,11 @@ public class MakeTile : MonoBehaviour
     private int gridX = 0;
     private int gridY = 0;
 
+    private int addtileprice = 100;
+
+    [SerializeField] private PlayerState playerstate = null;
+    
+
 
     private void Awake()
     {
@@ -35,9 +40,6 @@ public class MakeTile : MonoBehaviour
         gridY = mapmake.GetgridY;
         Tilecolor = mapmake.GetMaterials;
         grid = mapmake.GetGrid;
-
-        Debug.Log(grid.Length);
-        grid[1, 1].SetActiveTile(true);
     }
 
     public void StartMapTileAdd()
@@ -47,130 +49,143 @@ public class MakeTile : MonoBehaviour
 
     private IEnumerator MapTileAdd()
     {
-        AddTile = true;
-        Vector3 mousepos = Vector3.zero;
-        Vector3 tilepos = Vector3.zero;
-
-        GameObject[] AddtileX = new GameObject[4];
-
-        for (int i = 0; i < 4; i++)
+        Debug.Log("작동");
+        Debug.Log("player coin : " + playerstate.PlayerCoin);
+        Debug.Log("tile price : " + addtileprice);
+        if (playerstate.PlayerCoin >= addtileprice)
         {
-            AddtileX[i] = Instantiate(AddTilePrefab, mousepos, Quaternion.identity);
-            AddTileActive = true;
-        }
+            Debug.Log("돈 있음");
+            playerstate.PlayerCoin = addtileprice;
 
-        int tiledir = 0;
-        while (AddTile)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            AddTile = true;
+            Vector3 mousepos = Vector3.zero;
+            Vector3 tilepos = Vector3.zero;
 
-            //마우스 위치에 타일 생성
+            GameObject[] AddtileX = new GameObject[4];
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            for (int i = 0; i < 4; i++)
             {
-                // if(!hit.collider.CompareTag("Tile")&&hit.point.x>=0&& hit.point.x<gridX)
-                mousepos = hit.point;
+                AddtileX[i] = Instantiate(AddTilePrefab, mousepos, Quaternion.identity);
+                AddTileActive = true;
             }
 
-            if (AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z < gridY
-                )
+            int tiledir = 0;
+            while (AddTile)
             {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-                for (int i = 0; i < 4; i++)
+                //마우스 위치에 타일 생성
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
-                    int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x;
-                    int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z;
-                    AddtileX[i].transform.position = AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i];
-                    Vector3 intmousepos = Vector3.zero;
-                    intmousepos = grid[Y, X].GetComponent<Node>().transform.localScale;
+                    // if(!hit.collider.CompareTag("Tile")&&hit.point.x>=0&& hit.point.x<gridX)
+                    mousepos = hit.point;
+                }
 
-                    AddtileX[i].transform.localScale = intmousepos;
+                if (AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z < gridY
+                    )
+                {
 
-
-
-                    if (AddtileX[0].GetComponent<Preview>().CanBuildable && AddtileX[1].GetComponent<Preview>().CanBuildable && AddtileX[2].GetComponent<Preview>().CanBuildable && AddtileX[3].GetComponent<Preview>().CanBuildable)
+                    for (int i = 0; i < 4; i++)
                     {
-                        canaddtile = true;
-                        switch ((int)intmousepos.y)
+                        int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x;
+                        int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z;
+                        AddtileX[i].transform.position = AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i];
+                        Vector3 intmousepos = Vector3.zero;
+                        intmousepos = grid[Y, X].GetComponent<Node>().transform.localScale;
+
+                        AddtileX[i].transform.localScale = intmousepos;
+
+
+
+                        if (AddtileX[0].GetComponent<Preview>().CanBuildable && AddtileX[1].GetComponent<Preview>().CanBuildable && AddtileX[2].GetComponent<Preview>().CanBuildable && AddtileX[3].GetComponent<Preview>().CanBuildable)
                         {
-                            case 1:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[0].color;
-                                break;
-                            case 2:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[1].color;
-                                break;
-                            case 3:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[2].color;
-                                break;
-                            case 4:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[3].color;
-                                break;
-                            case 5:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[4].color;
-                                break;
-                            case 6:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[5].color;
-                                break;
-                            case 7:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[6].color;
-                                break;
+                            canaddtile = true;
+                            switch ((int)intmousepos.y)
+                            {
+                                case 1:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[0].color;
+                                    break;
+                                case 2:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[1].color;
+                                    break;
+                                case 3:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[2].color;
+                                    break;
+                                case 4:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[3].color;
+                                    break;
+                                case 5:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[4].color;
+                                    break;
+                                case 6:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[5].color;
+                                    break;
+                                case 7:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[6].color;
+                                    break;
+                            }
                         }
-                    }
-                    else
-                    {
-                        AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[14].color;
-                        canaddtile = false;
-                    }
+                        else
+                        {
+                            AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[14].color;
+                            canaddtile = false;
+                        }
 
 
+                    }
                 }
-            }
 
-            if (AddTileActive)
-            {
-                if (Input.GetMouseButtonDown(1))
+                if (AddTileActive)
                 {
-                    tiledir++;
-                    if (tiledir >= 4) tiledir = 0;
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        tiledir++;
+                        if (tiledir >= 4) tiledir = 0;
+                    }
                 }
-            }
 
-            if (canaddtile)
-            {
-                if (Input.GetMouseButtonDown(0))
+                if (canaddtile)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        AddTile = false;
+                        AddTileActive = false;
+
+                        for (int j = 0; j < 4; j++)
+                        {
+                            int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
+                            int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
+                            Destroy(AddtileX[j]);
+                            grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+
+                        }
+                            addtileprice += 100;
+                        AddtileNum = Random.Range(0, 7);
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     AddTile = false;
                     AddTileActive = false;
-
-                    for (int j = 0; j < 4; j++)
+                    for (int i = 0; i < 4; i++)
                     {
-                        int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
-                        int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
-                        Destroy(AddtileX[j]);
-                        grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+                 
+                        Destroy(AddtileX[i]);
                     }
-                    AddtileNum = Random.Range(0, 7);
+                        playerstate.PlayerCoin = -addtileprice;
                 }
+                yield return null;
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                AddTile = false;
-                AddTileActive = false;
-                for (int i = 0; i < 4; i++)
-                {
-                    Destroy(AddtileX[i]);
-                }
-            }
-            yield return null;
         }
     }
 
@@ -371,9 +386,9 @@ X X 10 X
                 break;
         }
 
-        /*if (AddTilePos2(returntilepos))*/
+
         return returntilepos;
-        //else return null;
+
 
 
     }

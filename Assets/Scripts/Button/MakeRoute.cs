@@ -92,4 +92,12 @@ public class MakeRoute : MonoBehaviour
             i.ChangeWalkableColor(false);
         }
     }
+
+    public void ReturnColor()
+    {
+        foreach (Node i in overlapcheck)
+        {
+            i.ChangeWalkableColor(true);
+        }
+    }
 }

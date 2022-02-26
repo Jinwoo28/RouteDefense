@@ -59,8 +59,6 @@ public class MapMake : MonoBehaviour
 
 
         Mapmake();
-        grid[2, 2].SetActiveTile(true);
-        Debug.Log("mapmake"+grid.Length);
         int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)

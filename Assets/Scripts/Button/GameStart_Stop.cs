@@ -13,9 +13,18 @@ public class GameStart_Stop : MonoBehaviour
     private Node StartNode;
     private Node EndNode;
 
+    [SerializeField] private GameObject startbutton = null;
+    [SerializeField] private GameObject endbutton = null;
+
+    private List<Node> waypointnode = null;
+
     [SerializeField] private EnemyManager EM = null;
     private void Start()
     {
+        endbutton.SetActive(false);
+
+        waypointnode = new List<Node>();
+
         mapmake = this.GetComponent<MapMake>();
         gridX = mapmake.GetgridX;
         gridY = mapmake.GetgridY;
@@ -23,7 +32,6 @@ public class GameStart_Stop : MonoBehaviour
         StartNode = mapmake.GetStartNode;
         EndNode = mapmake.GetEndNode;
 
-        Debug.Log(grid.Length);
     }
 
     ///////////////////////////////////////////////////////////
@@ -67,8 +75,8 @@ public class GameStart_Stop : MonoBehaviour
             //    Debug.Log("현재노드 " + currentNode.gridX + " : " + currentNode.gridY);
             // Debug.Log(currentNode.parent.GetX + " : " + currentNode.parent.GetY + "이웃노드의 부모");
 
-            if (currentNode != StartNode)
-                currentNode.ChangeColor(Color.white);
+            //if (currentNode != StartNode)
+            //    currentNode.OriginColor();
 
             //현재 노드의 이웃노드를 찾아서 OpenList에 추가
             foreach (Node neighbournode in GetNeighbours(currentNode))
@@ -103,9 +111,11 @@ public class GameStart_Stop : MonoBehaviour
 
             if (currentNode == EndNode)
             {
+
                 findpath = true;
                 Debug.Log("길찾기 성공");
-
+                startbutton.SetActive(false);
+                endbutton.SetActive(true);
                 break;
             }
 
@@ -130,29 +140,62 @@ public class GameStart_Stop : MonoBehaviour
 
     }
 
+
     //길 찾기 완료후 해당 타일의 위치값 반환
     private Vector3[] WayPoint(Node Startnode, Node Endnode)
     {
         Node currentNode = Endnode;
         List<Vector3> waypoint = new List<Vector3>();
 
-        Vector3 tilePos = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth, currentNode.ThisPos.z);
+        
+
+        Vector3 tilePos = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth/2, currentNode.ThisPos.z);
 
         //끝 노드를 추가
         waypoint.Add(tilePos);
 
+        waypointnode.Add(currentNode);
+
         while (currentNode != Startnode)
         {
-            Vector3 tilePos2 = new Vector3(currentNode.ThisPos.x, (currentNode.GetYDepth / 2) + 0.15f, currentNode.ThisPos.z);
+            Vector3 tilePos2 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z);
             currentNode = currentNode.parent;
 
+            
+
             waypoint.Add(tilePos2);
+            waypointnode.Add(currentNode);
         }
-        Vector3 tilePos3 = new Vector3(currentNode.ThisPos.x, (currentNode.GetYDepth / 2) + 0.15f, currentNode.ThisPos.z);
+        Vector3 tilePos3 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z); 
         waypoint.Add(tilePos3);
 
+        waypointnode.Reverse();
         waypoint.Reverse();
         Vector3[] waypointary = waypoint.ToArray();
+
+        for(int i = 1; i < waypointnode.Count-1; i++)
+        {
+            waypointnode[i].OriginColor();
+            if (waypointnode[i].gridX < waypointnode[i + 1].gridX)
+            {//오른쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(1);
+            }
+            else if (waypointnode[i].gridX > waypointnode[i + 1].gridX)
+            {//왼쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(2);
+            }
+            else if (waypointnode[i].gridY < waypointnode[i + 1].gridY)
+            {//위쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(3);
+            }
+            else if (waypointnode[i].gridY > waypointnode[i + 1].gridY)
+            {//아래쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(4);
+            }
+
+        }
+        
+
         return waypointary;
     }
 
@@ -175,7 +218,7 @@ public class GameStart_Stop : MonoBehaviour
     //이 게임에는 대각선 이동은 없으므로 좌,우,위,아래에 대한 이웃만 사용
     public List<Node> GetNeighbours(Node node)
     {
-        Debug.Log(node.gridX);
+        
         List<Node> neighbours = new List<Node>();
 
         //현재 노드를 기준으로 x,y인덱스값에 위,아래,왼쪽,오른쪽을 계산할 2차원 int배열 
@@ -183,7 +226,7 @@ public class GameStart_Stop : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            Debug.Log(node.gridX);
+            
             int checkX = node.gridX + temp[i, 0]; //1,-1,0,0
             int checkY = node.gridY + temp[i, 1]; //0,0,1,-1
 
@@ -196,6 +239,19 @@ public class GameStart_Stop : MonoBehaviour
 
         return neighbours;
     }
+
+    public void GameStop()
+    {
+        //foreach(Node node in waypointnode)
+        //{
+        //    node.ChangeWalkableColor(true);
+        //    node.GetComponentInChildren<ShowRoute>().ReturnArrow();
+        //}
+        startbutton.SetActive(true);
+        endbutton.SetActive(false);
+        EM.StageStop();
+    }
+
 
 
 }

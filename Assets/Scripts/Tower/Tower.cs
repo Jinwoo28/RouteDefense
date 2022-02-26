@@ -11,7 +11,7 @@ public class Tower : MonoBehaviour
 
     [SerializeField] private LayerMask enemylayer;
 
-    [SerializeField] private float AtkDelay = 3.0f;
+    [SerializeField] private float AtkDelay = 0;
     private float atkdelay = 0;
     private float AtkRange = 10;
     private float AtkDamage = 0;
@@ -22,10 +22,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("dd");
         atkdelay = AtkDelay;
         InvokeRepeating("AutoSearch",0,0.5f);
-       // StartCoroutine("AutoAttack");
     }
 
     private void Update()
@@ -112,7 +110,6 @@ public class Tower : MonoBehaviour
                 atkdelay = AtkDelay;
                 GameObject BT = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                 BT.GetComponent<BulletTest>().SetTarget=FinalTarget.position;
-                Debug.Log("น฿ป็");
             }
         }
 

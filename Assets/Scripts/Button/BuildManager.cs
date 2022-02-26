@@ -8,14 +8,17 @@ using UnityEngine;
 public class BuildTower
 {
     public string name;
-    public GameObject preview;
-    public GameObject builditem;
+    public GameObject preview = null;
+    public GameObject builditem = null;
+    public int buildcoin;
 }
 
 
 public class BuildManager : MonoBehaviour
 {
     [SerializeField] private BuildTower[] buildtower = null;
+    [SerializeField] private PlayerState playerstate= null;
+    int playercoin = 0;
 
     //타워 미리보기 프리펩
     private GameObject preview = null;
@@ -48,11 +51,14 @@ public class BuildManager : MonoBehaviour
 
     private void Update()
     {
+        playercoin = playerstate.PlayerCoin;
+
         if (towerpreviewActive)
         {
             TowerPos();
         }
     }
+
 
     //포탑 짓기
     //타일이 없는 곳, 이미 포탑이 있는 곳, 길이 있는 곳은 포탑 짓기 불가
@@ -65,13 +71,22 @@ public class BuildManager : MonoBehaviour
     public void SlotClick(int _slotnum)
     {
         buttonoff();
-        if (!towerpreviewActive)
+        if (playercoin >= buildtower[_slotnum].buildcoin)
         {
-            towerpreviewActive = true;
-            preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
-            craft = buildtower[_slotnum].builditem;
+            if (!towerpreviewActive)
+            {
+                towerpreviewActive = true;
+                preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
+                craft = buildtower[_slotnum].builditem;
+
+                playerstate.PlayerCoin = buildtower[_slotnum].buildcoin;
+                towerprice = buildtower[_slotnum].buildcoin;
+            }
         }
     }
+
+    int towerprice;
+
 
     private void TowerPos()
     {
@@ -91,12 +106,14 @@ public class BuildManager : MonoBehaviour
                 node.GetOnTower = true;
                 Destroy(preview);
                 towerpreviewActive = false;
+                
             }
         }  
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             towerpreviewActive = false;
+            playerstate.PlayerCoin = -towerprice;
             Destroy(preview);
         }
     }
