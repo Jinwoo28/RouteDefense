@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
    
 public class Enemy : MonoBehaviour
@@ -14,24 +15,42 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float unitHp = 0;
     [SerializeField] private float Amour = 0;
 
+    [SerializeField] private GameObject hpbar = null;
+
+    private GameObject hpbarprefab = null;
+
+    [SerializeField] private GameObject damagenum = null;
+    private Camera cam = null;
     protected enum currentstate { nomal, posion, fire, ice, }
     protected currentstate CS;
 
     protected enum EnemyType { creture, machine, unconfineobject }
     protected EnemyType enemytype;
 
-    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint)
+    private Transform canvas = null;
+    
+
+    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas)
     {
         Waypoint = _waypoint;
         EM = _enemymanager;
+        canvas = _canvas;
     }
 
    protected void StartMove()
     {
+
+         hpbarprefab = Instantiate(hpbar);
+        hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
+        hpbarprefab.transform.SetParent(canvas);
+
         StartCoroutine("MoveUnit");
+
     }
 
-   public IEnumerator MoveUnit()
+   
+
+    public IEnumerator MoveUnit()
     {
         int waypointindex = 0;
 
@@ -71,27 +90,31 @@ public class Enemy : MonoBehaviour
             }
         }
         EM.EnemyArriveDestination(this);
+        Destroy(hpbarprefab);
         Destroy(this.gameObject);
     }
 
-    public void EnemyAttack(float _damage)
+    public void EnemyAttacked(float _damage)
     {
         float realdamage = _damage - Amour;
-        if (realdamage > unitHp)
+        if (realdamage >= unitHp)
         {
             EnemyDie();
         }
         else
         {
+            ShowDamage(realdamage);
             unitHp -= realdamage;
         }
     }
 
     public void EnemyDie()
     {
+        Destroy(hpbarprefab);
         EM.EnemyDie(this, UnitCoin);
         Destroy(this.gameObject);
     }
+
 
     IEnumerator DotDamage(float _damage,currentstate damagetype)
     {
@@ -113,10 +136,27 @@ public class Enemy : MonoBehaviour
         CS = currentstate.nomal;
     }
 
+    public void ShowDamage(float _damage)
+    {
+        cam = Camera.main;
+    
+        GameObject damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position),
+            Quaternion.identity);
+        damagecount.transform.SetParent(canvas);
+        damagecount.GetComponent<HpNum>().SetUp(this.transform, _damage);
+        Debug.Log(this.transform.position.x);
+    }
+
     virtual protected void UnitCharacteristic() { }
 
     virtual protected void UnitSkill() { }
 
-
+    public float GetHp
+    {
+        get
+        {
+            return unitHp;
+        }
+    }
 
 }

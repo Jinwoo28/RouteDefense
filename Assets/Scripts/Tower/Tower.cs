@@ -30,12 +30,12 @@ public class Tower : MonoBehaviour
     {
         if (FinalTarget == null)
         {
-            Debug.Log("적 없음");
+ 
         }
         else
         {
              RotateToTarget();
-            Debug.Log("적 발견");
+
         }
     }
 
@@ -43,7 +43,6 @@ public class Tower : MonoBehaviour
     //타워 자동 탐색 함수
     public void AutoSearch()
     {
-        Debug.Log("탐색 시작");
 
             //OverlapSphere : 객체 주변의 Collider를 검출
             //검출한 collider를 배열형 변수에 저장

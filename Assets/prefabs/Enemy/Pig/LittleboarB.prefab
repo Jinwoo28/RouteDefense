@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635488760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635503054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: momo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635573236}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635461676}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635572662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635570666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635490412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635547960}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635575046}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4629278294635568306}
   - component: {fileID: 4629278294649067478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Littleboar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635573376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,9 +416,9 @@ GameObject:
   - component: {fileID: 4629278294644680536}
   - component: {fileID: 4629278294637715700}
   - component: {fileID: 3810196208780713811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleboarB
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -483,9 +483,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7104ab6519eb98149bd37559a077a49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSpeed: 1.5
+  unitSpeed: 0.5
   unitHp: 20
   Amour: 1
+  hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}
+  damagenum: {fileID: 1949477120848397248, guid: b144792fec3bb2e45a0ad7dfcd3bfa83, type: 3}
 --- !u!1 &4629278294635405872
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4629278294635574380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

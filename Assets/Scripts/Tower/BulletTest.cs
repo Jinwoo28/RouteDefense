@@ -32,7 +32,7 @@ public class BulletTest : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Destroy(this.gameObject);
-            other.GetComponent<Enemy>().EnemyAttack(bullDamage);
+            other.GetComponent<Enemy>().EnemyAttacked(bullDamage);
         }
     }
 }

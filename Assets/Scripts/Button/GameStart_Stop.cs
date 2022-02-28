@@ -13,15 +13,13 @@ public class GameStart_Stop : MonoBehaviour
     private Node StartNode;
     private Node EndNode;
 
-    [SerializeField] private GameObject startbutton = null;
-    [SerializeField] private GameObject endbutton = null;
-
     private List<Node> waypointnode = null;
 
     [SerializeField] private EnemyManager EM = null;
+
+    private bool gameisgoing = false;
     private void Start()
     {
-        endbutton.SetActive(false);
 
         waypointnode = new List<Node>();
 
@@ -39,105 +37,106 @@ public class GameStart_Stop : MonoBehaviour
     //길찾기 함수
     public void FindPath()
     {
-        bool findpath = false;
-
-        List<Node> OpenList = new List<Node>();
-
-        //closedList는 내용의 순서가 상관이 없기 때문에 HashSet으로 정의
-        //HastSet은 내용의 순서와 상관없이 중복여부만 체크, 중복일 경우 false로 들어가지 않는다.
-        HashSet<Node> ClosedList = new HashSet<Node>();
-
-        OpenList.Add(StartNode);
-
-        //openList의 노드가 없을 때 까지 반복
-        //openList가 비었다는 것은 모든 노드를 검색했다는 뜻
-        while (OpenList.Count > 0)
+        if (!gameisgoing)
         {
+            bool findpath = false;
 
-            //현재 노드는 OpenList[0] 즉, 시작 노드부터
-            Node currentNode = OpenList[0];
-            for (int i = 1; i < OpenList.Count; i++)
-            {
-                //i가 1부터 시작하는 이유는 startNode가 이미 OpenList에 들어가있기 때문.
-                //openList에 있는 노드들의 거리 계산 후 가장 낮은 비용을 가진 node를 currentnode로 변경
-                if (currentNode.GetfCost < OpenList[i].GetfCost || currentNode.GetfCost == OpenList[i].GetfCost && currentNode.GethCost < OpenList[i].GethCost)
-                {
+            List<Node> OpenList = new List<Node>();
 
-                    currentNode = OpenList[i];
-                }
-            }
+            //closedList는 내용의 순서가 상관이 없기 때문에 HashSet으로 정의
+            //HastSet은 내용의 순서와 상관없이 중복여부만 체크, 중복일 경우 false로 들어가지 않는다.
+            HashSet<Node> ClosedList = new HashSet<Node>();
 
-            //currentNode는 검색을 끝낸 Node이기 때문에 closedList에 추가
-            OpenList.Remove(currentNode);
-            ClosedList.Add(currentNode);
+            OpenList.Add(StartNode);
 
-
-            //    Debug.Log("현재노드 " + currentNode.gridX + " : " + currentNode.gridY);
-            // Debug.Log(currentNode.parent.GetX + " : " + currentNode.parent.GetY + "이웃노드의 부모");
-
-            //if (currentNode != StartNode)
-            //    currentNode.OriginColor();
-
-            //현재 노드의 이웃노드를 찾아서 OpenList에 추가
-            foreach (Node neighbournode in GetNeighbours(currentNode))
+            //openList의 노드가 없을 때 까지 반복
+            //openList가 비었다는 것은 모든 노드를 검색했다는 뜻
+            while (OpenList.Count > 0)
             {
 
-                //이웃 노드가 closedlist에 있거나(이미 검색한 Node) 이동불가면 제외
-                if (!neighbournode.Getwalkable || ClosedList.Contains(neighbournode))
+                //현재 노드는 OpenList[0] 즉, 시작 노드부터
+                Node currentNode = OpenList[0];
+                for (int i = 1; i < OpenList.Count; i++)
                 {
-
-                    continue;
-                }
-
-
-                //이웃 노드의 cost계산
-                int newMovementCost = currentNode.GetgCost + GetDistanceCost(currentNode, neighbournode);
-                if (newMovementCost < neighbournode.GetgCost || !OpenList.Contains(neighbournode))
-                {
-
-                    neighbournode.GetgCost = newMovementCost;
-                    neighbournode.GethCost = GetDistanceCost(neighbournode, EndNode);
-                    neighbournode.parent = currentNode;
-
-
-                    if (!OpenList.Contains(neighbournode))
+                    //i가 1부터 시작하는 이유는 startNode가 이미 OpenList에 들어가있기 때문.
+                    //openList에 있는 노드들의 거리 계산 후 가장 낮은 비용을 가진 node를 currentnode로 변경
+                    if (currentNode.GetfCost < OpenList[i].GetfCost || currentNode.GetfCost == OpenList[i].GetfCost && currentNode.GethCost < OpenList[i].GethCost)
                     {
 
-                        OpenList.Add(neighbournode);
+                        currentNode = OpenList[i];
                     }
                 }
 
+                //currentNode는 검색을 끝낸 Node이기 때문에 closedList에 추가
+                OpenList.Remove(currentNode);
+                ClosedList.Add(currentNode);
+
+
+                //    Debug.Log("현재노드 " + currentNode.gridX + " : " + currentNode.gridY);
+                // Debug.Log(currentNode.parent.GetX + " : " + currentNode.parent.GetY + "이웃노드의 부모");
+
+                //if (currentNode != StartNode)
+                //    currentNode.OriginColor();
+
+                //현재 노드의 이웃노드를 찾아서 OpenList에 추가
+                foreach (Node neighbournode in GetNeighbours(currentNode))
+                {
+
+                    //이웃 노드가 closedlist에 있거나(이미 검색한 Node) 이동불가면 제외
+                    if (!neighbournode.Getwalkable || ClosedList.Contains(neighbournode))
+                    {
+
+                        continue;
+                    }
+
+
+                    //이웃 노드의 cost계산
+                    int newMovementCost = currentNode.GetgCost + GetDistanceCost(currentNode, neighbournode);
+                    if (newMovementCost < neighbournode.GetgCost || !OpenList.Contains(neighbournode))
+                    {
+
+                        neighbournode.GetgCost = newMovementCost;
+                        neighbournode.GethCost = GetDistanceCost(neighbournode, EndNode);
+                        neighbournode.parent = currentNode;
+
+
+                        if (!OpenList.Contains(neighbournode))
+                        {
+
+                            OpenList.Add(neighbournode);
+                        }
+                    }
+
+                }
+
+                if (currentNode == EndNode)
+                {
+                    gameisgoing = true;
+                    findpath = true;
+                    Debug.Log("길찾기 성공");
+                    break;
+                }
+
+
+                // https://kiyongpro.github.io/algorithm/AStarPathFinding/
+
             }
 
-            if (currentNode == EndNode)
+            if (findpath)
             {
 
-                findpath = true;
-                Debug.Log("길찾기 성공");
-                startbutton.SetActive(false);
-                endbutton.SetActive(true);
-                break;
+                Vector3[] ddd = WayPoint(StartNode, EndNode);
+
+                EM.gameStartCourtain(ddd, ddd[0]);
+
             }
 
-
-            // https://kiyongpro.github.io/algorithm/AStarPathFinding/
-
-        }
-
-        if (findpath)
-        {
-
-            Vector3[] ddd = WayPoint(StartNode, EndNode);
-
-            EM.gameStartCourtain(ddd, ddd[0]);
+            else
+            {
+                Debug.Log("길찾기 실패");
+            }
 
         }
-
-        else
-        {
-            Debug.Log("길찾기 실패");
-        }
-
     }
 
 
@@ -240,17 +239,7 @@ public class GameStart_Stop : MonoBehaviour
         return neighbours;
     }
 
-    public void GameStop()
-    {
-        //foreach(Node node in waypointnode)
-        //{
-        //    node.ChangeWalkableColor(true);
-        //    node.GetComponentInChildren<ShowRoute>().ReturnArrow();
-        //}
-        startbutton.SetActive(true);
-        endbutton.SetActive(false);
-        EM.StageStop();
-    }
+
 
 
 
