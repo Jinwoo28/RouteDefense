@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MakeRoute : MonoBehaviour
 {
-    private MapMake mapmake = null;
-    private Node[,] grid = null;
     private bool TileChange = false;
     private bool AddTileActive = false;
 
@@ -14,8 +12,6 @@ public class MakeRoute : MonoBehaviour
 
     void Start()
     {
-        mapmake = this.GetComponent<MapMake>();
-        grid = mapmake.GetGrid;
         savenode = new List<Node>();
         overlapcheck = new HashSet<Node>();
     }
@@ -37,7 +33,7 @@ public class MakeRoute : MonoBehaviour
             }
         }
     }
-    ///////////////////////////////////////////////////////////
+ 
     //////////////////////////////////////////////////////////////
     //길 만들기 함수
     //타일 클릭시 해당 노드의 색과 walkable 바꾸기
@@ -85,8 +81,6 @@ public class MakeRoute : MonoBehaviour
 
     public void RouteReset()
     {
-        Debug.Log("1111");
-
          foreach(Node i in overlapcheck)
         {
             i.ChangeWalkableColor(false);

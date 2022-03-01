@@ -1252,7 +1252,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60caf0edb102c5541b1438a02df84df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  color:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cam: {fileID: 0}
   _object: {fileID: 1833294170}
+  x: 0
 --- !u!1 &441435973
 GameObject:
   m_ObjectHideFlags: 0
@@ -3014,7 +3022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageinfo:
   - StageNum: 0
-    EnemyCount: 20
+    EnemyCount: 2
     enemykind:
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
   - StageNum: 1
@@ -3039,12 +3047,6 @@ MonoBehaviour:
     EnemyCount: 50
     enemykind:
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  Enemy_Test:
-  - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
-  - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
-  - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
-  - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
   playerstate: {fileID: 968497605}
   canvas: {fileID: 441435977}
 --- !u!4 &1667784360

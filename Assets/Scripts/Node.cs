@@ -217,6 +217,10 @@ public class Node : MonoBehaviour
     }
 
     private Color color = Color.yellow;
+    public void ReturnColor()
+    {
+        ChangeColor(walkablecolorT);
+    }
 
     public Color GetColor
     {

@@ -20,7 +20,6 @@ public class GameStart_Stop : MonoBehaviour
     private bool gameisgoing = false;
     private void Start()
     {
-
         waypointnode = new List<Node>();
 
         mapmake = this.GetComponent<MapMake>();
@@ -29,7 +28,30 @@ public class GameStart_Stop : MonoBehaviour
         grid = mapmake.GetGrid;
         StartNode = mapmake.GetStartNode;
         EndNode = mapmake.GetEndNode;
+    }
 
+    private void Update()
+    {
+        //스폰이 끝나고 필드에 적이 없을 때만 게임이 실행
+        gameisgoing = EM.GameOnGoing;
+    }
+
+    IEnumerator GameStartCheck()
+    {
+        while (true)
+        {
+            gameisgoing = EM.GameOnGoing;
+            if (!gameisgoing) break;
+            yield return null;
+        }
+
+        
+
+        for (int i = 1; i < waypointnode.Count-1; i++)
+        {
+            waypointnode[i].GetComponentInChildren<ShowRoute>().ReturnArrow();
+        }
+        waypointnode.Clear();
     }
 
     ///////////////////////////////////////////////////////////
@@ -39,6 +61,7 @@ public class GameStart_Stop : MonoBehaviour
     {
         if (!gameisgoing)
         {
+            gameisgoing = true;
             bool findpath = false;
 
             List<Node> OpenList = new List<Node>();
@@ -70,10 +93,6 @@ public class GameStart_Stop : MonoBehaviour
                 //currentNode는 검색을 끝낸 Node이기 때문에 closedList에 추가
                 OpenList.Remove(currentNode);
                 ClosedList.Add(currentNode);
-
-
-                //    Debug.Log("현재노드 " + currentNode.gridX + " : " + currentNode.gridY);
-                // Debug.Log(currentNode.parent.GetX + " : " + currentNode.parent.GetY + "이웃노드의 부모");
 
                 //if (currentNode != StartNode)
                 //    currentNode.OriginColor();
@@ -111,7 +130,7 @@ public class GameStart_Stop : MonoBehaviour
 
                 if (currentNode == EndNode)
                 {
-                    gameisgoing = true;
+                    
                     findpath = true;
                     Debug.Log("길찾기 성공");
                     break;
@@ -128,25 +147,23 @@ public class GameStart_Stop : MonoBehaviour
                 Vector3[] ddd = WayPoint(StartNode, EndNode);
 
                 EM.gameStartCourtain(ddd, ddd[0]);
-
+                StartCoroutine("GameStartCheck");
             }
 
             else
             {
                 Debug.Log("길찾기 실패");
+                gameisgoing = false;
             }
 
         }
     }
-
 
     //길 찾기 완료후 해당 타일의 위치값 반환
     private Vector3[] WayPoint(Node Startnode, Node Endnode)
     {
         Node currentNode = Endnode;
         List<Vector3> waypoint = new List<Vector3>();
-
-        
 
         Vector3 tilePos = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth/2, currentNode.ThisPos.z);
 
@@ -160,20 +177,22 @@ public class GameStart_Stop : MonoBehaviour
             Vector3 tilePos2 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z);
             currentNode = currentNode.parent;
 
-            
-
             waypoint.Add(tilePos2);
             waypointnode.Add(currentNode);
         }
+
         Vector3 tilePos3 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z); 
         waypoint.Add(tilePos3);
 
         waypointnode.Reverse();
+
         waypoint.Reverse();
         Vector3[] waypointary = waypoint.ToArray();
 
         for(int i = 1; i < waypointnode.Count-1; i++)
         {
+            Debug.Log($"gridX : {waypointnode[i].gridX}, gridY : {waypointnode[i].gridY}, 갯수 : {waypointnode.Count}");
+
             waypointnode[i].OriginColor();
             if (waypointnode[i].gridX < waypointnode[i + 1].gridX)
             {//오른쪽
@@ -191,10 +210,9 @@ public class GameStart_Stop : MonoBehaviour
             {//아래쪽
                 waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(4);
             }
-
         }
-        
 
+       
         return waypointary;
     }
 
@@ -238,6 +256,8 @@ public class GameStart_Stop : MonoBehaviour
 
         return neighbours;
     }
+
+
 
 
 

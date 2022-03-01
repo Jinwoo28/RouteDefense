@@ -24,7 +24,7 @@ public class ShowRoute : MonoBehaviour
         switch (num)
         {
             case 1:
-            Anima.SetTrigger("RIght");
+                Anima.SetTrigger("RIght");
                 break;
             case 2:
                 Anima.SetTrigger("Left");
@@ -45,6 +45,7 @@ public class ShowRoute : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             Arrow[i].SetActive(false);
+            this.GetComponentInParent<Node>().ReturnColor();
         }
     }
 

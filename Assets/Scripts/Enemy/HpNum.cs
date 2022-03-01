@@ -30,7 +30,6 @@ public class HpNum : MonoBehaviour
         if (followenemy != null)
         {
             text.transform.position = cam.WorldToScreenPoint(new Vector3(X, followenemy.position.y + 1f + speed * 1.5f, Z));
-            Debug.Log(X);
         }
         else
         {

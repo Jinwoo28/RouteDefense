@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
             Quaternion.identity);
         damagecount.transform.SetParent(canvas);
         damagecount.GetComponent<HpNum>().SetUp(this.transform, _damage);
-        Debug.Log(this.transform.position.x);
+ 
     }
 
     virtual protected void UnitCharacteristic() { }

@@ -13,23 +13,27 @@ public class StageInfo
 }
 public class EnemyManager : MonoBehaviour
 {
+    //스테이지 정보
     [SerializeField] private StageInfo[] stageinfo = null;
 
-    [SerializeField] private GameObject[] Enemy_Test = null;
-
+    //적이 죽거나 도착지에 도착했을 때, 골드획득이나 라이프 감소를 위한 플레이어 정보
     [SerializeField] private PlayerState playerstate = null;
+
+    //enemy의 체력바와 공격시 데미지를 띄우는 UI정보를 위한 canvas
     [SerializeField] private Transform canvas = null;
 
-    private int StageNum = 1;
-    private Vector3[] WayPoint = null;
-    private bool boolGameStart = false;
-    private bool boolGameEnd = false;
+    private int StageNum = 0;
 
+    //스테이지가 실행중인지 판단
+    private bool gameongoing = false;
+
+    //적 스폰이 끝났는지 여부
     private bool SpawnFinish = false;
 
-    Vector3[] waypoint;
-    Vector3 SpawnPos;
+    private Vector3[] waypoint;
+    private Vector3 SpawnPos;
 
+    //소환되는 적들의 정보를 담을 List
     List<Enemy> EnemyCount = null;
 
     private void Start()
@@ -37,6 +41,7 @@ public class EnemyManager : MonoBehaviour
         EnemyCount = new List<Enemy>();
     }
 
+    //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
     public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         waypoint = _waypoint;
@@ -46,26 +51,40 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator GameStart()
     {
+        gameongoing = true;
 
-        int count = stageinfo[StageNum - 1].EnemyCount;
-       
+        //적이 나올 개수
+        int count = stageinfo[StageNum ].EnemyCount;
+        //적 종류
+        GameObject[] EnemyList = stageinfo[StageNum].enemykind;
 
-        for (int i = 0; i < 1; i++)
+        int enemykind = EnemyList.Length;
+
+        for (int i = 0; i < count; i++)
         {
-            GameObject enemy = Instantiate(Enemy_Test[0], SpawnPos, Quaternion.identity);
-
+            int enemynum = Random.Range(0, enemykind);
+            GameObject enemy = Instantiate(EnemyList[enemynum], SpawnPos, Quaternion.identity);
             enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas);
-            EnemyCount.Add(enemy.GetComponent<Enemy>());
 
-            
+            //소환되는 enemy를 list에 추가
+            EnemyCount.Add(enemy.GetComponent<Enemy>());
 
             yield return new WaitForSeconds(1.5f);
         }
 
         SpawnFinish = true;
         StageNum++;
+
+        while (true)
+        {
+            if (SpawnFinish && EnemyCount.Count == 0)
+            {
+                gameongoing = false;
+                break;
+            }
+            yield return null;
+        }
     }
-   
 
     //출현한 적이 체력이 다 되서 죽을 때
     public void EnemyDie(Enemy enemy,int coin)
@@ -79,7 +98,14 @@ public class EnemyManager : MonoBehaviour
     {
         playerstate.PlayerLifeDown();
         EnemyCount.Remove(enemy);
-       
+    }
+
+    public bool GameOnGoing
+    {
+        get
+        {
+            return gameongoing;
+        }
     }
 
 

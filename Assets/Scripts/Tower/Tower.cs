@@ -51,6 +51,8 @@ public class Tower : MonoBehaviour
             //가장 짧은 거리의 오브젝트 위치를 담을 변수
             Transform ShortestTarget = null;
 
+        if (FinalTarget == null)
+        {
             if (E_collider.Length > 0)
             {
                 float S_ShortestTarget = Mathf.Infinity;
@@ -75,6 +77,7 @@ public class Tower : MonoBehaviour
                 //가장 거리가 짧은 대상을 최종 타겟으로 설정.
 
             }
+        }
 
 
 
