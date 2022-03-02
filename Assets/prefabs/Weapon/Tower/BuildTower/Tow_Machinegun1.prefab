@@ -256,9 +256,10 @@ GameObject:
   - component: {fileID: 1635208637264414647}
   - component: {fileID: 1635208637257164881}
   - component: {fileID: -3423111201600372782}
+  - component: {fileID: 3748098821182790111}
   m_Layer: 0
   m_Name: Tow_Machinegun1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,4 +316,22 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
-  AtkDelay: 2
+  AtkDelay: 0.7
+  upgradevalue:
+    updamagevalue: 1
+    updamagecri: 5
+    upspeed: 0
+    uprange: 0
+--- !u!65 &3748098821182790111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635208637264452503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}

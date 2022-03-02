@@ -4,76 +4,39 @@ using UnityEngine;
 
 public class CamControl : MonoBehaviour
 {
-    [SerializeField] private Transform CamPos = null;
-
-
     private void Update()
     {
-        CamControlFunc();
+        CamMove();
     }
-    private void CamControlFunc()
+   
+
+    private void CamMove()
     {
-        // Camera CamPos = Camera.main;
-
-        float Mousewheel = Input.GetAxis("Mouse ScrollWheel");
-        int layerMask = 1 << LayerMask.NameToLayer("Floor");
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Raycast(ray,out hit, Mathf.Infinity, layerMask))
+        Vector2 mouseDela2 = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        if (Input.GetMouseButton(1))
         {
-            Vector3 CamMoveDir = hit.point - CamPos.position;
-            CamPos.transform.position += CamMoveDir.normalized *Mousewheel;
+            //마우스의 이동값 좌표 저장
+            Vector2 mouseDelat = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+            Vector3 CamAngle = this.transform.rotation.eulerAngles; //카메라의 부모 오브젝트의 회전값을 변수로 저장
+           
+
+            //마우스의 Y축 회전은 3D오브젝트의 X축 회전
+            float X = CamAngle.x -= mouseDelat.y;
+            
+            //카메라 상하의 제한
+            X = Mathf.Clamp(X, 1f, 90f);
+            Debug.Log(X);
+
+            this.transform.rotation = Quaternion.Euler(X, CamAngle.y + mouseDelat.x, CamAngle.z).normalized;
         }
 
-        //if (CamPos.transform.position.y >= 3 && CamPos.transform.position.y <= 25)
-        //{
-        //    CamPos.transform.position += new Vector3(0, -Mousewheel * 2, 0);
-        //}
+        //카메라 이동
+        float MoveX = Input.GetAxisRaw("Horizontal");
+        float MoveZ = Input.GetAxisRaw("Vertical");
 
-        if (CamPos.transform.position.y > 25)
-        {
-            CamPos.transform.position += new Vector3(0, -1, 0);
-        }
-
-        if (CamPos.transform.position.y < 3)
-        {
-            CamPos.transform.position += new Vector3(0, +1, 0);
-        }
-
-
-        if (Input.GetKey(KeyCode.W)) { CamPos.transform.position += CamPos.transform.forward * Time.deltaTime * 3; }
-        if (Input.GetKey(KeyCode.S)) { CamPos.transform.position -= CamPos.transform.forward * Time.deltaTime * 3; }
-        if (Input.GetKey(KeyCode.A)) { CamPos.transform.position -= CamPos.transform.right * Time.deltaTime * 3; }
-        if (Input.GetKey(KeyCode.D)) { CamPos.transform.position += CamPos.transform.right * Time.deltaTime * 3; }
-
-
-    }
-
-    public void TurnRIght() { StartCoroutine("CamTurnRight"); }
-    public void TurnLeft() { StartCoroutine("CamTurnLeft"); }
-
-    IEnumerator CamTurnLeft()
-    {
-
-        while (true)
-        {
-            this.transform.Rotate(0, +45 * Time.deltaTime, 0);
-            if (Input.GetMouseButtonUp(0)) yield break;
-
-            yield return null;
-        }
-
-    }
-
-    IEnumerator CamTurnRight()
-    {
-        while (true)
-        {
-            this.transform.Rotate(0, -45 * Time.deltaTime, 0);
-            if (Input.GetMouseButtonUp(0)) yield break;
-
-            yield return null;
-        }
+        this.transform.position += this.transform.forward*MoveZ* Time.deltaTime*2.0f;
+        this.transform.position += this.transform.right*MoveX*Time.deltaTime*2.0f;
 
     }
 

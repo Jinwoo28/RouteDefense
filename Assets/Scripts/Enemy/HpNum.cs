@@ -12,6 +12,7 @@ public class HpNum : MonoBehaviour
     private float damage = 0;
     private Transform followenemy = null;
     float X = 0;
+    float Y = 0;
     float Z = 0;
     void Start()
     {
@@ -27,23 +28,19 @@ public class HpNum : MonoBehaviour
     void Update()
     {
         speed += Time.deltaTime;
-        if (followenemy != null)
-        {
-            text.transform.position = cam.WorldToScreenPoint(new Vector3(X, followenemy.position.y + 1f + speed * 1.5f, Z));
-        }
-        else
-        {
-            return;
-        }
+
+            text.transform.position = cam.WorldToScreenPoint(new Vector3(X, Y + 1f + speed * 1.5f, Z));
         alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime*1.5f);
         text.color = alpha;
     }
 
-    public void SetUp(Transform _transform, float _damage)
+    public void SetUp(float _x, float _y, float _z, float _damage)
     {
-        followenemy = _transform;
-        X = followenemy.position.x;
-        Z = followenemy.position.z;
+        X = _x;
+        Y = _y;
+        Z = _z;
+
+
         damage = _damage;
 
     }

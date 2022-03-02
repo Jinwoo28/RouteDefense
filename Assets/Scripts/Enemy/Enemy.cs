@@ -97,13 +97,14 @@ public class Enemy : MonoBehaviour
     public void EnemyAttacked(float _damage)
     {
         float realdamage = _damage - Amour;
+        ShowDamage(realdamage);
         if (realdamage >= unitHp)
         {
             EnemyDie();
         }
         else
         {
-            ShowDamage(realdamage);
+           
             unitHp -= realdamage;
         }
     }
@@ -143,7 +144,7 @@ public class Enemy : MonoBehaviour
         GameObject damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position),
             Quaternion.identity);
         damagecount.transform.SetParent(canvas);
-        damagecount.GetComponent<HpNum>().SetUp(this.transform, _damage);
+        damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage);
  
     }
 

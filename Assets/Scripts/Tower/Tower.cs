@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class UpgradeValue
+{
+    public float updamagevalue = 0;
+    public float updamagecri = 0;
+    public float upspeed = 0;
+    public float uprange = 0;
+}
+
 public class Tower : MonoBehaviour
 {
 
@@ -13,17 +22,29 @@ public class Tower : MonoBehaviour
 
     [SerializeField] private float AtkDelay = 0;
     private float atkdelay = 0;
-    private float AtkRange = 10;
-    private float AtkDamage = 0;
+    private float atkrange = 10;
+    private float atkdamage = 0;
+    private float criticalrate = 0;
 
-    private float rotationspeed = 180;
+    [SerializeField] private UpgradeValue upgradevalue = null;
+
+    private PlayerState playerstate = null;
+    private float towerprice = 0;
+
+    private float rotationspeed = 270;
 
     private Transform FinalTarget = null;
 
+    public float getatkdelay => atkdelay;
+    public float getatkdamage => atkdamage;
+    public float getatkrange => atkrange;
+    public float getatkcritical => criticalrate;
+
     void Start()
     {
+        
         atkdelay = AtkDelay;
-        InvokeRepeating("AutoSearch",0,0.5f);
+        StartCoroutine("AutoSearch");
     }
 
     private void Update()
@@ -39,44 +60,52 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public void SetUp(PlayerState _playerstate)
+    {
+        playerstate = _playerstate;
+    }
+
     
     //타워 자동 탐색 함수
-    public void AutoSearch()
+    IEnumerator AutoSearch()
     {
-
+        while (true)
+        {
             //OverlapSphere : 객체 주변의 Collider를 검출
             //검출한 collider를 배열형 변수에 저장
-            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, AtkRange, enemylayer);
+            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, atkrange, enemylayer);
 
             //가장 짧은 거리의 오브젝트 위치를 담을 변수
             Transform ShortestTarget = null;
 
-        if (FinalTarget == null)
-        {
-            if (E_collider.Length > 0)
+            if (FinalTarget == null)
             {
-                float S_ShortestTarget = Mathf.Infinity;
-                // 거리계산에 사용할 변수 선언.
-
-                foreach (Collider EC in E_collider)
+                if (E_collider.Length > 0)
                 {
-                    float CalDistance = Vector3.SqrMagnitude(EC.transform.position - this.transform.position);
-                    // 터렛과 검출된 collider와의 거리를 담을 변수선언
-                    // Vector3.Distance와 Vector3.magnitude도 거리비교를 할 수 있지만 이 둘은 Root을 통해 실제 거리를 계산하기 때문에 연산이 더 들어간다.
-                    //SqrMagnitude는 실제거리*실제거리로 Root가 계산되지 않는 함수로 단순 거리비교일 때는 이것을 쓰는 게 연산 속도가 빠르다.
+                    float S_ShortestTarget = Mathf.Infinity;
+                    // 거리계산에 사용할 변수 선언.
 
-                    if (CalDistance < S_ShortestTarget)
+                    foreach (Collider EC in E_collider)
                     {
-                        S_ShortestTarget = CalDistance;
-                        ShortestTarget = EC.transform;
+                        float CalDistance = Vector3.SqrMagnitude(EC.transform.position - this.transform.position);
+                        // 터렛과 검출된 collider와의 거리를 담을 변수선언
+                        // Vector3.Distance와 Vector3.magnitude도 거리비교를 할 수 있지만 이 둘은 Root을 통해 실제 거리를 계산하기 때문에 연산이 더 들어간다.
+                        //SqrMagnitude는 실제거리*실제거리로 Root가 계산되지 않는 함수로 단순 거리비교일 때는 이것을 쓰는 게 연산 속도가 빠르다.
+
+                        if (CalDistance < S_ShortestTarget)
+                        {
+                            S_ShortestTarget = CalDistance;
+                            ShortestTarget = EC.transform;
+                        }
                     }
+
+
+                    FinalTarget = ShortestTarget;
+                    //가장 거리가 짧은 대상을 최종 타겟으로 설정.
+
                 }
-
-
-                FinalTarget = ShortestTarget;
-                //가장 거리가 짧은 대상을 최종 타겟으로 설정.
-
             }
+            yield return null;
         }
 
 
@@ -114,6 +143,19 @@ public class Tower : MonoBehaviour
                 BT.GetComponent<BulletTest>().SetTarget=FinalTarget.position;
             }
         }
+
+    }
+
+    public void TowerUpgrade()
+    {
+        atkdamage += upgradevalue.updamagevalue;
+        atkdelay += upgradevalue.upspeed;
+        atkrange +=upgradevalue.uprange;
+        criticalrate +=upgradevalue.updamagecri;
+    }
+
+    public void SellTower()
+    {
 
     }
 }

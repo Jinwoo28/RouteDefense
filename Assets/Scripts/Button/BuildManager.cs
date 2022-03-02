@@ -101,9 +101,10 @@ public class BuildManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(craft, preview.transform.position,Quaternion.identity);
+                GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
                 Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
                 node.GetOnTower = true;
+                buildtower.GetComponent<Tower>().SetUp(playerstate);
                 Destroy(preview);
                 towerpreviewActive = false;
                 
