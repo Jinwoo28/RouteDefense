@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TowerPreview : MonoBehaviour
 {
+    [SerializeField] private GameObject uppertower = null;
+
     private bool alreadytower = false;
     private bool ontile = false;
     private bool canbuildable = false;
@@ -54,7 +56,7 @@ public class TowerPreview : MonoBehaviour
 
                 this.transform.position = new Vector3(X, (Y/2), Z);
                 checkOnroute = hit.collider.GetComponent<Node>().Getwalkable;
-                startendnode = hit.collider.GetComponent<Node>().GetStartEnd;
+               // startendnode = hit.collider.GetComponent<Node>().GetStartEnd;
                 alreadytower = hit.collider.GetComponent<Node>().GetOnTower;
                 towernode = hit.collider.GetComponent<Node>();
             }

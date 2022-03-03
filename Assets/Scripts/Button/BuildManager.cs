@@ -10,7 +10,8 @@ public class BuildTower
     public string name;
     public GameObject preview = null;
     public GameObject builditem = null;
-    public int buildcoin;
+    public int buildcoin=0;
+    public int upgradeprice=0;
 }
 
 
@@ -81,11 +82,13 @@ public class BuildManager : MonoBehaviour
 
                 playerstate.PlayerCoin = buildtower[_slotnum].buildcoin;
                 towerprice = buildtower[_slotnum].buildcoin;
+                upgradeprice = buildtower[_slotnum].upgradeprice;
             }
         }
     }
 
     int towerprice;
+    int upgradeprice;
 
 
     private void TowerPos()
@@ -104,9 +107,10 @@ public class BuildManager : MonoBehaviour
                 GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
                 Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
                 node.GetOnTower = true;
-                buildtower.GetComponent<Tower>().SetUp(playerstate);
+                buildtower.GetComponent<Tower>().SetUp(playerstate,towerprice,upgradeprice);
                 Destroy(preview);
                 towerpreviewActive = false;
+                
                 
             }
         }  

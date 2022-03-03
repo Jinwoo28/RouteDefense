@@ -13,7 +13,6 @@ public class UpgradeValue
 
 public class Tower : MonoBehaviour
 {
-
     [SerializeField] private Transform TowerBody;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform bulletpos;
@@ -25,11 +24,13 @@ public class Tower : MonoBehaviour
     private float atkrange = 10;
     private float atkdamage = 0;
     private float criticalrate = 0;
+    private int towerlevel = 1;
+    private float towerprice = 0;
+    private float upgradeprice = 0;
 
     [SerializeField] private UpgradeValue upgradevalue = null;
 
     private PlayerState playerstate = null;
-    private float towerprice = 0;
 
     private float rotationspeed = 270;
 
@@ -60,9 +61,11 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void SetUp(PlayerState _playerstate)
+    public void SetUp(PlayerState _playerstate,int _towerprice,int _upgradeprice)
     {
         playerstate = _playerstate;
+        towerprice = _towerprice;
+        upgradeprice = _upgradeprice;
     }
 
     
@@ -148,6 +151,7 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
+        towerlevel++;
         atkdamage += upgradevalue.updamagevalue;
         atkdelay += upgradevalue.upspeed;
         atkrange +=upgradevalue.uprange;
@@ -156,6 +160,8 @@ public class Tower : MonoBehaviour
 
     public void SellTower()
     {
-
+        playerstate.PlayerCoin = -(int)((towerprice + upgradeprice * towerlevel) * 0.7f);
+        Destroy(this.gameObject);
     }
+
 }

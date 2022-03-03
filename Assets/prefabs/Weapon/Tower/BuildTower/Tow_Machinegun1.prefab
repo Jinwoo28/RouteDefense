@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1635208637264414641}
   - component: {fileID: 1635208637267806097}
   - component: {fileID: 1635208637266707793}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1635208637264414643}
   - component: {fileID: 1635208637267806099}
   - component: {fileID: 1635208637266707795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 1635208637264414645}
   - component: {fileID: 1635208637267806101}
   - component: {fileID: 1635208637266707797}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 1635208637257164881}
   - component: {fileID: -3423111201600372782}
   - component: {fileID: 3748098821182790111}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tow_Machinegun1
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -310,6 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9188fa89c9e8d634c80485c21da53afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TowerLevel2: {fileID: 0}
+  TowerLevel3: {fileID: 0}
   TowerBody: {fileID: 1635208637264414643}
   bullet: {fileID: 177688283286534501, guid: 4f580ab3b2322ce4ebb8005a92d4062e, type: 3}
   bulletpos: {fileID: 1635208637264414641}

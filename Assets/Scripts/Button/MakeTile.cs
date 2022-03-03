@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MakeTile : MonoBehaviour
 {
@@ -146,7 +147,7 @@ public class MakeTile : MonoBehaviour
 
                 if (AddTileActive)
                 {
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
                         tiledir++;
                         if (tiledir >= 4) tiledir = 0;
@@ -157,19 +158,22 @@ public class MakeTile : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        AddTile = false;
-                        AddTileActive = false;
-
-                        for (int j = 0; j < 4; j++)
+                        if (!EventSystem.current.IsPointerOverGameObject())
                         {
-                            int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
-                            int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
-                            Destroy(AddtileX[j]);
-                            grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+                            AddTile = false;
+                            AddTileActive = false;
 
-                        }
+                            for (int j = 0; j < 4; j++)
+                            {
+                                int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
+                                int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
+                                Destroy(AddtileX[j]);
+                                grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+
+                            }
                             addtileprice += 100;
-                        AddtileNum = Random.Range(0, 7);
+                            AddtileNum = Random.Range(0, 7);
+                        }
                     }
                 }
 
