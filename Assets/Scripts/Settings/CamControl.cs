@@ -39,7 +39,6 @@ public class CamControl : MonoBehaviour
         this.transform.position += this.transform.right*MoveX*Time.deltaTime*2.0f;
 
         float Y = Input.GetAxisRaw("Mouse ScrollWheel");
-        Debug.Log(Y);
         this.transform.position -= new Vector3(0, Y, 0).normalized * Time.deltaTime*5.0f;
 
     }

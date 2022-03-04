@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class MapMake : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
+    [SerializeField]private PlayerState playerstate = null;
+
     //tile 프리펩
     [SerializeField] private GameObject Tile;
-    //AddTile프리펩
-    [SerializeField] private GameObject AddTilePrefab;
 
     //전체 타일 사이즈크기
     //짝수 단위로 입력할 것
@@ -31,33 +32,47 @@ public class MapMake : MonoBehaviour
     private Node StartNode;
     private Node EndNode;
 
-    private bool TileChange = false;
-    private bool AddTile = false;
+    /// ////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+
+    //타일의 길 만들기 버튼 활성화 bool 값_ true일 때만 길이 만들어짐
+    private bool TileCanChange = false;
+
+
+    private HashSet<Node> overlapcheck = null;
+
+    /// ////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+   
+    //AddTile프리펩
+    [SerializeField] private GameObject AddTilePrefab;
 
     //추가될 테트리스 타일 넘버
     private int AddtileNum = 0;
+    private int addtileprice = 100;
 
+   // private bool TileCanAdd = false;
+   // private bool AddTile = false;
     private bool AddTileActive = false;
     private bool canaddtile = false;
 
+
+    /// ////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////
+    private bool isgameing = false;
+
+    private List<Node> waypointnode = null;
+
     public EnemyManager EM = null;
 
-    public delegate void ButtonOff();
-    public static event ButtonOff buttonoff;
-
-    public void AllbuttonOff()
+    private void Start()
     {
-        TileChange = false;
-        AddTile = false;
-        AddTileActive = false;
-        canaddtile = false;
+        waypointnode = new List<Node>();
+        overlapcheck = new HashSet<Node>();
     }
-
     private void Awake()
     {
-        BuildManager.buttonoff += AllbuttonOff;
-
-
+   
         Mapmake();
         int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
@@ -90,8 +105,9 @@ public class MapMake : MonoBehaviour
     }
     private void Update()
     {
-       
-            if (TileChange)
+        isgameing = EM.GameOnGoing;
+
+        if (TileCanChange)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -99,14 +115,14 @@ public class MapMake : MonoBehaviour
 
                     if (node != null)
                     {
-                        StartCoroutine("NodeWalkableChange", node);
+                       StartCoroutine(NodeWalkableChange(node));
                     }
                 }
             }
         
     }
 
-    void Mapmake()
+    private void Mapmake()
     {
         //게임 시작시 타일맵을 만드는 함수
 
@@ -280,139 +296,152 @@ public class MapMake : MonoBehaviour
     ///////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //타일추가 함수
-    public void StartMapTileAdd()
+    public void OnClickMapAdd()
     {
-      
-      StartCoroutine("MapTileAdd");
-        
+        StartCoroutine("MapTileAdd");
     }
 
-    private IEnumerator MapTileAdd()
+    IEnumerator MapTileAdd()
     {
-        AddTile = true;
-        Vector3 mousepos = Vector3.zero;
-        Vector3 tilepos = Vector3.zero;
-
-        GameObject[] AddtileX = new GameObject[4];
-
-        for (int i = 0; i < 4; i++)
+        if (playerstate.GetSetPlayerCoin >= addtileprice)
         {
-            AddtileX[i] = Instantiate(AddTilePrefab, mousepos, Quaternion.identity);
-            AddTileActive = true;
-        }
+            //추가타일 가격만큼 플레이어 코인 감소
+            playerstate.GetSetPlayerCoin = addtileprice;
 
-        int tiledir = 0;
-        while (AddTile)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            //타일의 방향 변수
+            int tiledir = 0;
+            
+            //AddTile = true;
+            Vector3 mousepos = Vector3.zero;
+            Vector3 tilepos = Vector3.zero;
 
-            //마우스 위치에 타일 생성
+            GameObject[] AddtileX = new GameObject[4];
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            //타일 4개 생성
+            for (int i = 0; i < 4; i++)
             {
-                // if(!hit.collider.CompareTag("Tile")&&hit.point.x>=0&& hit.point.x<gridX)
-                mousepos = hit.point;
+                AddtileX[i] = Instantiate(AddTilePrefab, mousepos, Quaternion.identity);
             }
+                AddTileActive = true;
 
-            if (AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z < gridY
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x < gridX
-                && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z < gridY
-                )
+            while (AddTileActive)
             {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-                for (int i = 0; i < 4; i++)
+                //마우스 위치에 타일 생성
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
-                    int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x;
-                    int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z;
-                    AddtileX[i].transform.position = AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i];
-                    Vector3 intmousepos = Vector3.zero;
-                    intmousepos = grid[Y, X].GetComponent<Node>().transform.localScale;
+                    // if(!hit.collider.CompareTag("Tile")&&hit.point.x>=0&& hit.point.x<gridX)
+                    mousepos = hit.point;
+                }
 
-                    AddtileX[i].transform.localScale = intmousepos;
-
-
-
-                    if (AddtileX[0].GetComponent<Preview>().CanBuildable && AddtileX[1].GetComponent<Preview>().CanBuildable && AddtileX[2].GetComponent<Preview>().CanBuildable && AddtileX[3].GetComponent<Preview>().CanBuildable)
+                if (AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z < gridY
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x < gridX
+                    && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z >= 0 && AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z < gridY
+                    )
+                {
+                    //4개 타일의 위치
+                    for (int i = 0; i < 4; i++)
                     {
-                        canaddtile = true;
-                        switch ((int)intmousepos.y)
+                        int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x;
+                        int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z;
+                       
+                        AddtileX[i].transform.position = AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i];
+
+                        Vector3 intmousepos = Vector3.zero;
+                        intmousepos = grid[Y, X].GetComponent<Node>().transform.localScale;
+
+                        AddtileX[i].transform.localScale = intmousepos;
+
+
+                        //4개 타일의 크기와 색
+                        if (AddtileX[0].GetComponent<Preview>().CanBuildable && AddtileX[1].GetComponent<Preview>().CanBuildable && AddtileX[2].GetComponent<Preview>().CanBuildable && AddtileX[3].GetComponent<Preview>().CanBuildable)
                         {
-                            case 1:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[0].color;
-                                break;
-                            case 2:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[1].color;
-                                break;
-                            case 3:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[2].color;
-                                break;
-                            case 4:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[3].color;
-                                break;
-                            case 5:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[4].color;
-                                break;
-                            case 6:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[5].color;
-                                break;
-                            case 7:
-                                AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[6].color;
-                                break;
+                            canaddtile = true;
+                            switch ((int)intmousepos.y)
+                            {
+                                case 1:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[0].color;
+                                    break;
+                                case 2:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[1].color;
+                                    break;
+                                case 3:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[2].color;
+                                    break;
+                                case 4:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[3].color;
+                                    break;
+                                case 5:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[4].color;
+                                    break;
+                                case 6:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[5].color;
+                                    break;
+                                case 7:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[6].color;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[14].color;
+                            canaddtile = false;
                         }
                     }
-                    else
+                }
+
+                if (AddTileActive)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[14].color;
-                        canaddtile = false;
+                        tiledir++;
+                        if (tiledir >= 4) tiledir = 0;
                     }
-
-
                 }
-            }
 
-            if (AddTileActive)
-            {
-                if (Input.GetMouseButtonDown(1))
+                if (canaddtile)
                 {
-                    tiledir++;
-                    if (tiledir >= 4) tiledir = 0;
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (!EventSystem.current.IsPointerOverGameObject())
+                        {
+                            //AddTile = false;
+                            AddTileActive = false;
+
+                            for (int j = 0; j < 4; j++)
+                            {
+                                int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
+                                int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
+                                Destroy(AddtileX[j]);
+                                grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+                                AddTileActive = false;
+                            }
+                            addtileprice += 100;
+                            AddtileNum = Random.Range(0, 7);
+                        }
+                    }
                 }
-            }
 
-            if (canaddtile)
-            {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    AddTile = false;
+                    //AddTile = false;
                     AddTileActive = false;
-
-                    for (int j = 0; j < 4; j++)
+                    for (int i = 0; i < 4; i++)
                     {
-                        int X = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].x;
-                        int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
-                        Destroy(AddtileX[j]);
-                        grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+                        Destroy(AddtileX[i]);
                     }
-                    AddtileNum = Random.Range(0, 7);
+                    playerstate.GetSetPlayerCoin = -addtileprice;
                 }
+                yield return null;
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                AddTile = false;
-                AddTileActive = false;
-                for (int i = 0; i < 4; i++)
-                {
-                    Destroy(AddtileX[i]);
-                }
-            }
-            yield return null;
         }
     }
 
@@ -636,44 +665,38 @@ X X 10 X
             if (changenode != null)
             {
                 ReturnNode().ChangeWalkableColor(walkable);
+
+                if (walkable)
+                {
+                    overlapcheck.Add(changenode);
+                }
             }
-            //while문 안에서 이러한 코루틴 없이 실행이 되면
-            //무한 루프 때문에 유니티가 멈춰버림
             yield return null;
         }
     }
-
-    //버튼으로 길찾기를 활성화, 비활성화 시킬 버튼함수
-    public void WalkableChangeButton()
+    //버튼으로 길만들기 활성화, 비활성화 시킬 버튼함수
+    public void OnClickWalkableChange()
     {
-        if (!AddTileActive)
-            TileChange = !TileChange;
-    }
-
-    //마우스 위치의 노드 반환
-    public Node ReturnNode()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (!isgameing)
         {
-            return hit.collider.GetComponent<Node>();
+            if (!AddTileActive)
+                TileCanChange = !TileCanChange;
         }
-        return null;
     }
 
-    public int ReturngridX(int x, int y)
+    public void RouteReset()
     {
-        return grid[x, y].gridX;
+        if (!isgameing)
+        {
+            foreach (Node i in overlapcheck)
+            {
+                i.ChangeWalkableColor(false);
+            }
+        }
+        
     }
-    public int Returngridy(int x, int y)
-    {
-        return grid[x, y].gridY;
-    }
-    public float Returngriddepth(int x, int y)
-    {
-        return grid[x, y].GetYDepth;
-    }
+
+
 
 
     ///////////////////////////////////////////////////////////
@@ -681,104 +704,121 @@ X X 10 X
     //길찾기 함수
     public void FindPath()
     {
-        bool findpath = false;
-
-        List<Node> OpenList = new List<Node>();
-
-        //closedList는 내용의 순서가 상관이 없기 때문에 HashSet으로 정의
-        //HastSet은 내용의 순서와 상관없이 중복여부만 체크, 중복일 경우 false로 들어가지 않는다.
-        HashSet<Node> ClosedList = new HashSet<Node>();
-
-        OpenList.Add(StartNode);
-
-        //openList의 노드가 없을 때 까지 반복
-        //openList가 비었다는 것은 모든 노드를 검색했다는 뜻
-        while (OpenList.Count > 0)
+        if (!isgameing)
         {
+            isgameing = true;
+            bool findpath = false;
 
-            //현재 노드는 OpenList[0] 즉, 시작 노드부터
-            Node currentNode = OpenList[0];
-            for (int i = 1; i < OpenList.Count; i++)
-            {
-                //i가 1부터 시작하는 이유는 startNode가 이미 OpenList에 들어가있기 때문.
-                //openList에 있는 노드들의 거리 계산 후 가장 낮은 비용을 가진 node를 currentnode로 변경
-                if (currentNode.GetfCost < OpenList[i].GetfCost || currentNode.GetfCost == OpenList[i].GetfCost && currentNode.GethCost < OpenList[i].GethCost)
-                {
+            List<Node> OpenList = new List<Node>();
 
-                    currentNode = OpenList[i];
-                }
-            }
+            //closedList는 내용의 순서가 상관이 없기 때문에 HashSet으로 정의
+            //HastSet은 내용의 순서와 상관없이 중복여부만 체크, 중복일 경우 false로 들어가지 않는다.
+            HashSet<Node> ClosedList = new HashSet<Node>();
 
-            //currentNode는 검색을 끝낸 Node이기 때문에 closedList에 추가
-            OpenList.Remove(currentNode);
-            ClosedList.Add(currentNode);
+            OpenList.Add(StartNode);
 
-
-            //    Debug.Log("현재노드 " + currentNode.gridX + " : " + currentNode.gridY);
-            // Debug.Log(currentNode.parent.GetX + " : " + currentNode.parent.GetY + "이웃노드의 부모");
-
-            if (currentNode != StartNode)
-                currentNode.ChangeColor(Color.white);
-
-            //현재 노드의 이웃노드를 찾아서 OpenList에 추가
-            foreach (Node neighbournode in GetNeighbours(currentNode))
+            //openList의 노드가 없을 때 까지 반복
+            //openList가 비었다는 것은 모든 노드를 검색했다는 뜻
+            while (OpenList.Count > 0)
             {
 
-                //이웃 노드가 closedlist에 있거나(이미 검색한 Node) 이동불가면 제외
-                if (!neighbournode.Getwalkable || ClosedList.Contains(neighbournode))
+                //현재 노드는 OpenList[0] 즉, 시작 노드부터
+                Node currentNode = OpenList[0];
+                for (int i = 1; i < OpenList.Count; i++)
                 {
-
-                    continue;
-                }
-
-
-                //이웃 노드의 cost계산
-                int newMovementCost = currentNode.GetgCost + GetDistanceCost(currentNode, neighbournode);
-                if (newMovementCost < neighbournode.GetgCost || !OpenList.Contains(neighbournode))
-                {
-
-                    neighbournode.GetgCost = newMovementCost;
-                    neighbournode.GethCost = GetDistanceCost(neighbournode, EndNode);
-                    neighbournode.parent = currentNode;
-
-
-                    if (!OpenList.Contains(neighbournode))
+                    //i가 1부터 시작하는 이유는 startNode가 이미 OpenList에 들어가있기 때문.
+                    //openList에 있는 노드들의 거리 계산 후 가장 낮은 비용을 가진 node를 currentnode로 변경
+                    if (currentNode.GetfCost < OpenList[i].GetfCost || currentNode.GetfCost == OpenList[i].GetfCost && currentNode.GethCost < OpenList[i].GethCost)
                     {
 
-                        OpenList.Add(neighbournode);
+                        currentNode = OpenList[i];
                     }
                 }
 
+                //currentNode는 검색을 끝낸 Node이기 때문에 closedList에 추가
+                OpenList.Remove(currentNode);
+                ClosedList.Add(currentNode);
+
+                //if (currentNode != StartNode)
+                //    currentNode.OriginColor();
+
+                //현재 노드의 이웃노드를 찾아서 OpenList에 추가
+                foreach (Node neighbournode in GetNeighbours(currentNode))
+                {
+
+                    //이웃 노드가 closedlist에 있거나(이미 검색한 Node) 이동불가면 제외
+                    if (!neighbournode.Getwalkable || ClosedList.Contains(neighbournode))
+                    {
+
+                        continue;
+                    }
+
+
+                    //이웃 노드의 cost계산
+                    int newMovementCost = currentNode.GetgCost + GetDistanceCost(currentNode, neighbournode);
+                    if (newMovementCost < neighbournode.GetgCost || !OpenList.Contains(neighbournode))
+                    {
+
+                        neighbournode.GetgCost = newMovementCost;
+                        neighbournode.GethCost = GetDistanceCost(neighbournode, EndNode);
+                        neighbournode.parent = currentNode;
+
+
+                        if (!OpenList.Contains(neighbournode))
+                        {
+
+                            OpenList.Add(neighbournode);
+                        }
+                    }
+
+                }
+
+                if (currentNode == EndNode)
+                {
+
+                    findpath = true;
+                    Debug.Log("길찾기 성공");
+                    break;
+                }
+
+
+                // https://kiyongpro.github.io/algorithm/AStarPathFinding/
+
             }
 
-            if (currentNode == EndNode)
+            if (findpath)
             {
-                findpath = true;
-                Debug.Log("길찾기 성공");
-      
-                break;
+                TileCanChange = false;
+                Vector3[] waypoint = WayPoint(StartNode, EndNode);
+                EM.gameStartCourtain(waypoint, waypoint[0]);
+                StartCoroutine("GameStartCheck");
             }
 
-
-            // https://kiyongpro.github.io/algorithm/AStarPathFinding/
-
-        }
-
-        if (findpath)
-        {
-           
-            Vector3[] ddd = WayPoint(StartNode, EndNode);
-
-            EM.gameStartCourtain(ddd, ddd[0]);
+            else
+            {
+                Debug.Log("길찾기 실패");
+                isgameing = false;
+            }
 
         }
-
-        else
-        {
-            Debug.Log("길찾기 실패");
-        }
-
     }
+
+    IEnumerator GameStartCheck()
+    {
+        while (true)
+        {
+            isgameing = EM.GameOnGoing;
+            if (!isgameing) break;
+            yield return null;
+        }
+
+        for (int i = 0; i < waypointnode.Count - 1; i++)
+        {
+            waypointnode[i].GetComponentInChildren<ShowRoute>().ReturnArrow();
+        }
+        waypointnode.Clear();
+    }
+
 
     //길 찾기 완료후 해당 타일의 위치값 반환
     private Vector3[] WayPoint(Node Startnode, Node Endnode)
@@ -786,23 +826,53 @@ X X 10 X
         Node currentNode = Endnode;
         List<Vector3> waypoint = new List<Vector3>();
 
-        Vector3 tilePos = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth, currentNode.ThisPos.z);
+        Vector3 tilePos = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z);
 
         //끝 노드를 추가
         waypoint.Add(tilePos);
 
+        waypointnode.Add(currentNode);
+
         while (currentNode != Startnode)
         {
-            Vector3 tilePos2 = new Vector3(currentNode.ThisPos.x, (currentNode.GetYDepth / 2) + 0.15f, currentNode.ThisPos.z);
+            Vector3 tilePos2 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z);
             currentNode = currentNode.parent;
 
             waypoint.Add(tilePos2);
+            waypointnode.Add(currentNode);
         }
-        Vector3 tilePos3 = new Vector3(currentNode.ThisPos.x, (currentNode.GetYDepth / 2) + 0.15f, currentNode.ThisPos.z);
+
+        Vector3 tilePos3 = new Vector3(currentNode.ThisPos.x, currentNode.GetYDepth / 2, currentNode.ThisPos.z);
         waypoint.Add(tilePos3);
+
+        waypointnode.Reverse();
 
         waypoint.Reverse();
         Vector3[] waypointary = waypoint.ToArray();
+
+        for (int i = 0; i < waypointnode.Count - 1; i++)
+        {
+            Debug.Log($"gridX : {waypointnode[i].gridX}, gridY : {waypointnode[i].gridY}, 갯수 : {waypointnode.Count}");
+
+            waypointnode[i].OriginColor();
+            if (waypointnode[i].gridX < waypointnode[i + 1].gridX)
+            {//오른쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(1);
+            }
+            else if (waypointnode[i].gridX > waypointnode[i + 1].gridX)
+            {//왼쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(2);
+            }
+            else if (waypointnode[i].gridY < waypointnode[i + 1].gridY)
+            {//위쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(3);
+            }
+            else if (waypointnode[i].gridY > waypointnode[i + 1].gridY)
+            {//아래쪽
+                waypointnode[i].GetComponentInChildren<ShowRoute>().ShowArrow(4);
+            }
+        }
+
         return waypointary;
     }
 
@@ -844,6 +914,21 @@ X X 10 X
 
         return neighbours;
     }
+
+
+
+    //마우스 위치의 노드 반환
+    public Node ReturnNode()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            return hit.collider.GetComponent<Node>();
+        }
+        return null;
+    }
+
 
     //////////////////////////////////////////////////////////
     ///    //////////////////////////////////////////////////////////
@@ -892,6 +977,22 @@ X X 10 X
         get
         {
             return EndNode;
+        }
+    }
+
+    public bool GetSetTileChange
+    {
+        set
+        {
+            TileCanChange = value;
+        }
+    }
+
+    public bool GetSetAddTile
+    {
+        get
+        {
+            return AddTileActive;
         }
     }
 }

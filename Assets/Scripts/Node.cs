@@ -92,6 +92,7 @@ public class Node : MonoBehaviour
 
     public void OriginColor()
     {
+        if(!start&&!end)
         this.GetComponentInChildren<MeshRenderer>().material.color = walkablecolorF;
     }
 

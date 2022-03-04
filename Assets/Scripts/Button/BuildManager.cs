@@ -7,16 +7,15 @@ using UnityEngine;
 [System.Serializable]
 public class BuildTower
 {
-    public string name;
     public GameObject preview = null;
     public GameObject builditem = null;
-    public int buildcoin=0;
-    public int upgradeprice=0;
 }
 
 
 public class BuildManager : MonoBehaviour
 {
+    string towername = null;
+
     [SerializeField] private BuildTower[] buildtower = null;
     [SerializeField] private PlayerState playerstate= null;
     int playercoin = 0;
@@ -38,21 +37,24 @@ public class BuildManager : MonoBehaviour
     
     private bool canbuild = false;
 
-    public delegate void MapButtonOff();
-    public static event MapButtonOff buttonoff;
 
     Vector3 mousepos = Vector3.zero;
 
     public GameObject Testtile = null;
 
-    private void Awake()
-    {
+    private MapManager mapmanager = null;
+    private bool addtileactive = false;
 
+    private void Start()
+    {
+        mapmanager = this.GetComponent<MapManager>();
     }
 
     private void Update()
     {
-        playercoin = playerstate.PlayerCoin;
+        addtileactive = mapmanager.GetSetAddTile;
+
+        playercoin = playerstate.GetSetPlayerCoin;
 
         if (towerpreviewActive)
         {
@@ -71,18 +73,21 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-        buttonoff();
-        if (playercoin >= buildtower[_slotnum].buildcoin)
-        {
-            if (!towerpreviewActive)
-            {
-                towerpreviewActive = true;
-                preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
-                craft = buildtower[_slotnum].builditem;
+        int towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
 
-                playerstate.PlayerCoin = buildtower[_slotnum].buildcoin;
-                towerprice = buildtower[_slotnum].buildcoin;
-                upgradeprice = buildtower[_slotnum].upgradeprice;
+        if (!addtileactive)
+        {
+            if (playercoin >= towerprice)
+            {
+                if (!towerpreviewActive)
+                {
+                    mapmanager.GetSetTileChange = false;
+                    towerpreviewActive = true;
+                    preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
+                    craft = buildtower[_slotnum].builditem;
+
+                    playerstate.GetSetPlayerCoin = towerprice;
+                }
             }
         }
     }
@@ -107,7 +112,7 @@ public class BuildManager : MonoBehaviour
                 GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
                 Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
                 node.GetOnTower = true;
-                buildtower.GetComponent<Tower>().SetUp(playerstate,towerprice,upgradeprice);
+                buildtower.GetComponent<Tower>().SetUp(playerstate);
                 Destroy(preview);
                 towerpreviewActive = false;
                 
@@ -118,7 +123,7 @@ public class BuildManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             towerpreviewActive = false;
-            playerstate.PlayerCoin = -towerprice;
+            playerstate.GetSetPlayerCoin = -towerprice;
             Destroy(preview);
         }
     }

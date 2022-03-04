@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletTest : MonoBehaviour
 {
     protected float bullspeed = 10.0f;
-    protected float bullDamage = 5.0f;
+    protected float bullDamage = 0;
 
     private Vector3 Target;
 
@@ -15,6 +15,14 @@ public class BulletTest : MonoBehaviour
         {
             Vector3 target = Target - this.transform.position;
             this.transform.position += target.normalized * bullspeed * Time.deltaTime;
+        }
+    }
+
+    public float SetDamage
+    {
+        set
+        {
+            bullDamage = value;
         }
     }
 

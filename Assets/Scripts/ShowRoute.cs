@@ -45,8 +45,9 @@ public class ShowRoute : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             Arrow[i].SetActive(false);
-            this.GetComponentInParent<Node>().ReturnColor();
         }
+
+            this.GetComponentInParent<Node>().ReturnColor();
     }
 
 

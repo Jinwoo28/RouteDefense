@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameStart_Stop : MonoBehaviour
 {
-    private MapMake mapmake = null;
+    private MapManager mapmake = null;
     private Node[,] grid = null;
     private int gridX=0;
     private int gridY=0;
@@ -22,7 +22,7 @@ public class GameStart_Stop : MonoBehaviour
     {
         waypointnode = new List<Node>();
 
-        mapmake = this.GetComponent<MapMake>();
+        mapmake = this.GetComponent<MapManager>();
         gridX = mapmake.GetgridX;
         gridY = mapmake.GetgridY;
         grid = mapmake.GetGrid;
@@ -44,8 +44,6 @@ public class GameStart_Stop : MonoBehaviour
             if (!gameisgoing) break;
             yield return null;
         }
-
-        
 
         for (int i = 1; i < waypointnode.Count-1; i++)
         {

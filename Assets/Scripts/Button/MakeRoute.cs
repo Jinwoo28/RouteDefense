@@ -7,12 +7,12 @@ public class MakeRoute : MonoBehaviour
     private bool TileChange = false;
     private bool AddTileActive = false;
 
-    private List<Node> savenode = null;
+   // private List<Node> savenode = null;
     private HashSet<Node> overlapcheck = null;
 
     void Start()
     {
-        savenode = new List<Node>();
+
         overlapcheck = new HashSet<Node>();
     }
 

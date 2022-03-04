@@ -8,29 +8,22 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private Text life = null;
     [SerializeField] private Text Coin = null;
 
-    private int playercoin = 500;
+    private int playercoin = 5000;
     private int playerlife = 20;
 
-    private void Start()
+
+
+
+    private void Update()
     {
-        StartCoroutine("ShowPlayerInfo");
+        life.text = "Life : " + playerlife.ToString();
+        Coin.text = "Coin : " + playercoin.ToString();
     }
 
 
 
-    IEnumerator ShowPlayerInfo()
-    {
-        while (true)
-        {
 
-            life.text = "Life : " + playerlife.ToString();
-            Coin.text = "Coin : " + playercoin.ToString();
-            yield return null;
-        }
-    }
-
-
-    public int PlayerCoin
+    public int GetSetPlayerCoin
     {
         get
         {

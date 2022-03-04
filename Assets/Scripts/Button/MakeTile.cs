@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MakeTile : MonoBehaviour
 {
-    private MapMake mapmake = null;
+    private MapManager mapmake = null;
 
     //AddTile«¡∏Æ∆È
     [SerializeField] private GameObject AddTilePrefab;
@@ -32,7 +32,7 @@ public class MakeTile : MonoBehaviour
 
     private void Awake()
     {
-        mapmake = this.GetComponent<MapMake>();
+        mapmake = this.GetComponent<MapManager>();
     }
 
     private void Start()
@@ -50,13 +50,10 @@ public class MakeTile : MonoBehaviour
 
     private IEnumerator MapTileAdd()
     {
-        Debug.Log("¿€µø");
-        Debug.Log("player coin : " + playerstate.PlayerCoin);
-        Debug.Log("tile price : " + addtileprice);
-        if (playerstate.PlayerCoin >= addtileprice)
+
+        if (playerstate.GetSetPlayerCoin >= addtileprice)
         {
-            Debug.Log("µ∑ ¿÷¿Ω");
-            playerstate.PlayerCoin = addtileprice;
+            playerstate.GetSetPlayerCoin = addtileprice;
 
             AddTile = true;
             Vector3 mousepos = Vector3.zero;
@@ -186,7 +183,7 @@ public class MakeTile : MonoBehaviour
                  
                         Destroy(AddtileX[i]);
                     }
-                        playerstate.PlayerCoin = -addtileprice;
+                        playerstate.GetSetPlayerCoin = -addtileprice;
                 }
                 yield return null;
             }

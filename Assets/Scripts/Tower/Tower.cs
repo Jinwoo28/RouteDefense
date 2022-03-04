@@ -4,47 +4,72 @@ using UnityEngine;
 
 [System.Serializable]
 public class UpgradeValue
+{   
+    //타워 업그레이드 비용
+    public int upgradeprice = 0;
+    public float damagevalue = 0;
+    public float upcriticalvalue = 0;
+}
+
+[System.Serializable]
+public class TowerInfo
 {
-    public float updamagevalue = 0;
-    public float updamagecri = 0;
-    public float upspeed = 0;
-    public float uprange = 0;
+    //타워의 가격
+    public int towerprice = 0;
+    public string towername = null;
+    public float towerdamage = 0;
+    public float towercritical = 0;
+    public float towerrange = 0;
+    public float towerspeed = 0;
 }
 
 public class Tower : MonoBehaviour
 {
+    //진화할 상위 타워
+    [SerializeField] private GameObject uppertower = null;
+    //미리보기 타워
+    [SerializeField] private GameObject towerpreview = null;
+
+    //합체할 때 잠시 사라질 오브젝트와 collider
+    [SerializeField] private GameObject Base = null;
+    private BoxCollider towercollider = null;
+
+    //적 방향으로 돌아갈 포신
     [SerializeField] private Transform TowerBody;
-    [SerializeField] private GameObject bullet;
+
+    //총알을 발사할 위치와 총알 프리펩
     [SerializeField] private Transform bulletpos;
+    [SerializeField] private GameObject bullet;
 
+    //적을 검사할 레이어
     [SerializeField] private LayerMask enemylayer;
-
-    [SerializeField] private float AtkDelay = 0;
-    private float atkdelay = 0;
-    private float atkrange = 10;
-    private float atkdamage = 0;
-    private float criticalrate = 0;
-    private int towerlevel = 1;
-    private float towerprice = 0;
-    private float upgradeprice = 0;
-
-    [SerializeField] private UpgradeValue upgradevalue = null;
 
     private PlayerState playerstate = null;
 
-    private float rotationspeed = 270;
+    [SerializeField] UpgradeValue upgradevalue = null;
+    [SerializeField] TowerInfo towerinfo = null;
 
+    //포탄을 발사 후 공격속도 값을 구할 떄 사용할 변수
+    private float atkspeed = 0;
+
+    //타워의 업그레이드 수준
+    private int towerlevel = 1;
+    
+    //타워의 합체 단계 1,2,3단계
+    private int towerstep = 1;
+
+    //포신이 회전할 속도
+    private float rotationspeed = 360;
+
+    //적 타겟 Transform
     private Transform FinalTarget = null;
 
-    public float getatkdelay => atkdelay;
-    public float getatkdamage => atkdamage;
-    public float getatkrange => atkrange;
-    public float getatkcritical => criticalrate;
+   
 
     void Start()
     {
-        
-        atkdelay = AtkDelay;
+        towercollider = this.GetComponent<BoxCollider>();
+        atkspeed = towerinfo.towerspeed;
         StartCoroutine("AutoSearch");
     }
 
@@ -57,15 +82,13 @@ public class Tower : MonoBehaviour
         else
         {
              RotateToTarget();
-
         }
     }
 
-    public void SetUp(PlayerState _playerstate,int _towerprice,int _upgradeprice)
+    public void SetUp(PlayerState _playerstate)
     {
         playerstate = _playerstate;
-        towerprice = _towerprice;
-        upgradeprice = _upgradeprice;
+
     }
 
     
@@ -74,9 +97,18 @@ public class Tower : MonoBehaviour
     {
         while (true)
         {
+            if (FinalTarget != null)
+            {
+                Vector3 GetDistance = FinalTarget.position - this.transform.position;
+                if (Vector3.Magnitude(GetDistance)>towerinfo.towerrange)
+                {
+                    FinalTarget = null;
+                }
+            }
+
             //OverlapSphere : 객체 주변의 Collider를 검출
             //검출한 collider를 배열형 변수에 저장
-            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, atkrange, enemylayer);
+            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, enemylayer);
 
             //가장 짧은 거리의 오브젝트 위치를 담을 변수
             Transform ShortestTarget = null;
@@ -138,12 +170,19 @@ public class Tower : MonoBehaviour
 
         if (Quaternion.Angle(TowerBody.rotation, rotationtotarget) < 3.0f)
         {
-            atkdelay -= Time.deltaTime;
-            if (atkdelay <= 0)
+            atkspeed -= Time.deltaTime;
+            if (atkspeed <= 0)
             {
-                atkdelay = AtkDelay;
+                atkspeed = towerinfo.towerspeed;
                 GameObject BT = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                 BT.GetComponent<BulletTest>().SetTarget=FinalTarget.position;
+
+                int critical = Random.Range(1, 101);
+                if (critical < towerinfo.towercritical) 
+                BT.GetComponent<BulletTest>().SetDamage = towerinfo.towerdamage*2;
+
+                else
+                BT.GetComponent<BulletTest>().SetDamage = towerinfo.towerdamage;
             }
         }
 
@@ -151,17 +190,88 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
-        towerlevel++;
-        atkdamage += upgradevalue.updamagevalue;
-        atkdelay += upgradevalue.upspeed;
-        atkrange +=upgradevalue.uprange;
-        criticalrate +=upgradevalue.updamagecri;
+        
+        if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
+        {
+            towerlevel++;
+            towerinfo.towerdamage += upgradevalue.damagevalue;
+            towerinfo.towercritical += upgradevalue.upcriticalvalue;
+            playerstate.GetSetPlayerCoin = upgradevalue.upgradeprice;
+        }
     }
 
     public void SellTower()
     {
-        playerstate.PlayerCoin = -(int)((towerprice + upgradeprice * towerlevel) * 0.7f);
+        playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
         Destroy(this.gameObject);
     }
+
+    public void Combine()
+    {
+        StartCoroutine("TowerCombination");
+    }
+
+    IEnumerator TowerCombination()
+    {
+        Base.SetActive(false);
+        towercollider.enabled = false;
+        GameObject preview = Instantiate(towerpreview);
+        preview.GetComponent<TowerPreview>().SetUp(towerinfo.towername,towerstep);
+
+        while (true)
+        {
+            preview.GetComponent<TowerPreview>().Ontile();
+
+            if (preview.GetComponent<TowerPreview>().GetCanCombine&& preview.GetComponent<TowerPreview>().AlreadyTower)
+            {
+                Debug.Log(preview.GetComponent<TowerPreview>().GetCanCombine);
+                Debug.Log(preview.GetComponent<TowerPreview>().AlreadyTower);
+                if (Input.GetMouseButtonDown(0))
+                { 
+                    GameObject UpperTower = Instantiate(uppertower, preview.transform.position, Quaternion.identity);
+                    if (preview.GetComponent<TowerPreview>().GetTower != null)
+                    {
+                        Tower tower = preview.GetComponent<TowerPreview>().GetTower;
+                        Destroy(tower.gameObject);
+                        UpperTower.GetComponent<Tower>().SetState(towerlevel, tower.GetTowerLevel);
+                        UpperTower.GetComponent<Tower>().SetUp(playerstate);
+                    }
+                    Destroy(preview);
+                    Destroy(this.gameObject);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Destroy(preview);
+                Base.SetActive(true);
+                break;
+            }
+
+
+
+
+            yield return null;
+        }
+        
+    }
+
+
+    public void SetState(int _lev1, int _lev2)
+    {
+        int lev = (_lev1 + _lev2) / 2;
+        towerlevel = lev;
+        towerinfo.towerdamage += (lev * upgradevalue.damagevalue);
+        towerinfo.towercritical += (lev * (float)upgradevalue.upcriticalvalue);
+    }
+
+    public string Getname => towerinfo.towername;
+    public int gettowerstep => towerstep;
+    public float getatkdelay => atkspeed;
+    public float getatkdamage => towerinfo.towerdamage;
+    public float getatkrange => towerinfo.towerrange;
+    public float getatkcritical => towerinfo.towercritical;
+    public int Gettowerprice => towerinfo.towerprice;
+    public int GetTowerLevel => towerlevel;
 
 }
