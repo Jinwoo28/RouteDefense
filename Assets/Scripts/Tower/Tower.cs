@@ -29,6 +29,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject uppertower = null;
     //미리보기 타워
     [SerializeField] private GameObject towerpreview = null;
+    //타워 미리보기 프리펩
+    private GameObject preview = null;
 
     //합체할 때 잠시 사라질 오브젝트와 collider
     [SerializeField] private GameObject Base = null;
@@ -64,7 +66,11 @@ public class Tower : MonoBehaviour
     //적 타겟 Transform
     private Transform FinalTarget = null;
 
+    private bool towermove = false;
+
     private Node node = null;
+
+    public ShowTowerInfo showtowerinfo = null;
    
 
     void Start()
@@ -72,6 +78,10 @@ public class Tower : MonoBehaviour
         towercollider = this.GetComponent<BoxCollider>();
         atkspeed = towerinfo.towerspeed;
         StartCoroutine("AutoSearch");
+        node.GetComponent<Node>().GetOnTower = true;
+
+        Base.SetActive(true);
+        towercollider.enabled = true;
     }
 
     private void Update()
@@ -85,13 +95,22 @@ public class Tower : MonoBehaviour
              RotateToTarget();
         }
 
+        if (towermove)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Base.SetActive(true);
+                towercollider.enabled = true;
+                Destroy(preview);
+            }
+        }
+
 
     }
 
     public void SetUp(PlayerState _playerstate)
     {
         playerstate = _playerstate;
-
     }
 
     
@@ -210,75 +229,105 @@ public class Tower : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Combine()
-    {
-        StartCoroutine("TowerCombination");
-    }
+    //public void Combine()
+    //{
+    //    StartCoroutine("TowerCombination");
+    //}
 
-    IEnumerator TowerCombination()
+    //IEnumerator TowerCombination()
+    //{
+    //    Base.SetActive(false);
+    //    towercollider.enabled = false;
+    //    GameObject preview = Instantiate(towerpreview);
+    //    preview.GetComponent<TowerPreview>().SetUp(this.gameObject);
+
+    //    while (true)
+    //    {
+
+    //        if (preview.GetComponent<TowerPreview>().GetCanCombine && preview.GetComponent<TowerPreview>().AlreadyTower)
+    //        {
+    //            Debug.Log(preview.GetComponent<TowerPreview>().GetCanCombine);
+    //            Debug.Log(preview.GetComponent<TowerPreview>().AlreadyTower);
+    //            if (Input.GetMouseButtonDown(0))
+    //            {
+    //                GameObject UpperTower = Instantiate(uppertower, preview.transform.position, Quaternion.identity);
+    //                if (preview.GetComponent<TowerPreview>().GetTower != null)
+    //                {
+    //                    Tower tower = preview.GetComponent<TowerPreview>().GetTower;
+    //                    Destroy(tower.gameObject);
+    //                    UpperTower.GetComponent<Tower>().SetState(towerlevel, tower.GetTowerLevel);
+    //                    UpperTower.GetComponent<Tower>().SetUp(playerstate);
+    //                }
+
+    //                Destroy(preview);
+    //                Destroy(this.gameObject);
+    //            }
+    //        }
+
+    //        if (Input.GetKeyDown(KeyCode.Escape))
+    //        {
+    //            Destroy(preview);
+    //            Base.SetActive(true);
+    //            towercollider.enabled = true;
+    //            break;
+    //        }
+
+    //        yield return null;
+    //    }
+
+    //}
+
+    public void TowerMove()
     {
+        towermove = true;
+
         Base.SetActive(false);
         towercollider.enabled = false;
-        GameObject preview = Instantiate(towerpreview);
-        preview.GetComponent<TowerPreview>().SetUp(towerinfo.towername,towerstep);
+        preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
+        preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
+        preview.GetComponent<TowerPreview>().SetUp(this.gameObject);
+        preview.GetComponent<TowerPreview>().SetOriginTower=this.gameObject;
 
-        while (true)
-        {
-            preview.GetComponent<TowerPreview>().Ontile();
-
-            if (preview.GetComponent<TowerPreview>().GetCanCombine&& preview.GetComponent<TowerPreview>().AlreadyTower)
-            {
-                Debug.Log(preview.GetComponent<TowerPreview>().GetCanCombine);
-                Debug.Log(preview.GetComponent<TowerPreview>().AlreadyTower);
-                if (Input.GetMouseButtonDown(0))
-                { 
-                    GameObject UpperTower = Instantiate(uppertower, preview.transform.position, Quaternion.identity);
-                    if (preview.GetComponent<TowerPreview>().GetTower != null)
-                    {
-                        Tower tower = preview.GetComponent<TowerPreview>().GetTower;
-                        Destroy(tower.gameObject);
-                        UpperTower.GetComponent<Tower>().SetState(towerlevel, tower.GetTowerLevel);
-                        UpperTower.GetComponent<Tower>().SetUp(playerstate);
-                    }
-                    
-                    Destroy(preview);
-                    Destroy(this.gameObject);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Destroy(preview);
-                Base.SetActive(true);
-                towercollider.enabled = true;
-                break;
-            }
-
-            yield return null;
-        }
-        
     }
 
 
     public void SetState(int _lev1, int _lev2)
     {
         int lev = (_lev1 + _lev2) / 2;
+        Debug.Log(lev);
         towerlevel = lev;
         towerinfo.towerdamage += (lev * upgradevalue.damagevalue);
         towerinfo.towercritical += (lev * (float)upgradevalue.upcriticalvalue);
     }
 
-    private void OnDestroy()
+    public void TowerStepUp(Tower _tower)
     {
-        node.GetOnTower = false;
+        GameObject buildedtower =Instantiate(uppertower, this.transform.position, Quaternion.identity);
+        buildedtower.GetComponent<Tower>().SetNode = node;
+        buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
+        Debug.Log(_tower.GetTowerLevel + " : " + towerlevel);
+        buildedtower.GetComponent<Tower>().SetUp(playerstate);
+        buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
+        Destroy(this.gameObject);
     }
+
+ 
 
     public Node SetNode
     {
+        get
+        {
+            return node;
+        }
         set
         {
             node = value;
         }
+    }
+
+    public void TowerDestroy()
+    {
+        Destroy(this.gameObject);
     }
         
     

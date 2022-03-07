@@ -88,7 +88,7 @@ public class ShowTowerInfo : MonoBehaviour
         int rotation = 0;
         float range = _range;
         Vector3 DD = towerpos.forward * range;
-        Debug.Log(DD);
+
     
         for(int i = 0; i < 72; i++)
         {
@@ -134,9 +134,9 @@ public class ShowTowerInfo : MonoBehaviour
         tower.TowerUpgrade();
     }
 
-    public void OnClickCombine()
+    public void OnClickTowerMove()
     {
-        tower.Combine();
+        tower.TowerMove();
         RangeOff();
     }
 

@@ -57,10 +57,19 @@ public class BuildManager : MonoBehaviour
 
         playercoin = playerstate.GetSetPlayerCoin;
 
+        if (preview == null) towerpreviewActive = false;
+
         if (towerpreviewActive)
         {
-            TowerPos();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                towerpreviewActive = false;
+                playerstate.GetSetPlayerCoin = -towerprice;
+                showtowerinfo.RangeOff();
+                Destroy(preview);
+            }
         }
+
     }
 
 
@@ -74,68 +83,68 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-        int towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
+        
+         towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
 
-        if (!addtileactive)
-        {
             if (playercoin >= towerprice)
             {
                 if (!towerpreviewActive)
                 {
+                     towerpreviewActive = true;
                     mapmanager.GetSetTileChange = false;
-                    towerpreviewActive = true;
+
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
                     preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
-
-                    craft = buildtower[_slotnum].builditem;
+                    preview.GetComponent<TowerPreview>().SetUp(buildtower[_slotnum].builditem);
+                preview.GetComponent<TowerPreview>().playerstate = playerstate;
+                    //                    craft = buildtower[_slotnum].builditem;
 
                     playerstate.GetSetPlayerCoin = towerprice;
                 }
             }
-        }
+        
     }
 
     int towerprice;
     int upgradeprice;
 
 
-    private void TowerPos()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            mousepos = hit.point;
-        }
+    //private void TowerPos()
+    //{
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+    //    {
+    //        mousepos = hit.point;
+    //    }
 
-        if (preview.GetComponent<TowerPreview>().CanBuildable())
-        {
+    //    if (preview.GetComponent<TowerPreview>().CanBuildable())
+    //    {
             
-            if (Input.GetMouseButtonDown(0))
-            {
-                GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
-                Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
-                node.GetOnTower = true;
-                buildtower.GetComponent<Tower>().SetUp(playerstate);
-                buildtower.GetComponent<Tower>().SetNode=node;
-                Destroy(preview);
-                towerpreviewActive = false;
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
+    //            Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
+    //            node.GetOnTower = true;
+    //            buildtower.GetComponent<Tower>().SetUp(playerstate);
+    //            buildtower.GetComponent<Tower>().SetNode=node;
+    //            Destroy(preview);
+    //            towerpreviewActive = false;
 
-                showtowerinfo.ShowRange(buildtower.transform, buildtower.GetComponent<Tower>().GetRange);
-                showtowerinfo.ClickTower();
+    //            showtowerinfo.ShowRange(buildtower.transform, buildtower.GetComponent<Tower>().GetRange);
+    //            showtowerinfo.ClickTower();
                 
-            }
-        }  
+    //        }
+    //    }  
         
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            towerpreviewActive = false;
-            playerstate.GetSetPlayerCoin = -towerprice;
-            showtowerinfo.RangeOff();
-            Destroy(preview);
-
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        towerpreviewActive = false;
+    //        playerstate.GetSetPlayerCoin = -towerprice;
+    //        showtowerinfo.RangeOff();
+    //        Destroy(preview);
+    //    }
+    //}
 
 }
