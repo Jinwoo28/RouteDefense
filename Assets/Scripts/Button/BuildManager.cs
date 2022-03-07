@@ -16,6 +16,7 @@ public class BuildManager : MonoBehaviour
 {
     string towername = null;
 
+    [SerializeField] private ShowTowerInfo showtowerinfo = null;
     [SerializeField] private BuildTower[] buildtower = null;
     [SerializeField] private PlayerState playerstate= null;
     int playercoin = 0;
@@ -84,6 +85,9 @@ public class BuildManager : MonoBehaviour
                     mapmanager.GetSetTileChange = false;
                     towerpreviewActive = true;
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
+
+                    preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
+
                     craft = buildtower[_slotnum].builditem;
 
                     playerstate.GetSetPlayerCoin = towerprice;
@@ -107,15 +111,19 @@ public class BuildManager : MonoBehaviour
 
         if (preview.GetComponent<TowerPreview>().CanBuildable())
         {
+            
             if (Input.GetMouseButtonDown(0))
             {
                 GameObject buildtower = Instantiate(craft, preview.transform.position,Quaternion.identity);
                 Node node = preview.GetComponent<TowerPreview>().GetTowerNode;
                 node.GetOnTower = true;
                 buildtower.GetComponent<Tower>().SetUp(playerstate);
+                buildtower.GetComponent<Tower>().SetNode=node;
                 Destroy(preview);
                 towerpreviewActive = false;
-                
+
+                showtowerinfo.ShowRange(buildtower.transform, buildtower.GetComponent<Tower>().GetRange);
+                showtowerinfo.ClickTower();
                 
             }
         }  
@@ -124,7 +132,9 @@ public class BuildManager : MonoBehaviour
         {
             towerpreviewActive = false;
             playerstate.GetSetPlayerCoin = -towerprice;
+            showtowerinfo.RangeOff();
             Destroy(preview);
+
         }
     }
 

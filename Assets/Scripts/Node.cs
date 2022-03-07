@@ -54,7 +54,7 @@ public class Node : MonoBehaviour
     /// ////////////////////////////////////
 
     private bool alreadymove = true;
-    private bool DDDD = true;
+    //private bool DDDD = true;
     public List<Node> neighbournode;
 
     
@@ -72,8 +72,8 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        alreadymove = true;
-        DDDD = true;
+        //alreadymove = true;
+        //DDDD = true;
     }
 
     private void Start()
@@ -82,13 +82,13 @@ public class Node : MonoBehaviour
         Invoke("ColorChange2", 1.0f);
     }
 
-    public bool GetAlreadymove
-    {
-        get
-        {
-            return alreadymove;
-        }
-    }
+    //public bool GetAlreadymove
+    //{
+    //    get
+    //    {
+    //        return alreadymove;
+    //    }
+    //}
 
     public void OriginColor()
     {
@@ -96,13 +96,6 @@ public class Node : MonoBehaviour
         this.GetComponentInChildren<MeshRenderer>().material.color = walkablecolorF;
     }
 
-    public bool GetDDDD
-    {
-        get
-        {
-            return DDDD;
-        }
-    }
 
     //타일의 인근 높이를 정하기 위해 타일마다 주위 노드의 정보를 가지는 함수
     public void GetNeighbournode(List<Node> _neighbournode)
@@ -116,54 +109,67 @@ public class Node : MonoBehaviour
 
     public void UpDownTile(List<Node> _neighbournode, float _Ydepth)
     {
-        alreadymove = false;
-        DDDD = false;
+        //이미 높이가 변한 적이 있는지
+        alreadymove = true;
 
-        Vector3 X = this.transform.localScale;
+        //y축 크기를 바꾸기 위한 변수선언
+        Vector3 thislocalscale = this.transform.localScale;
+
+        //현재 노드의 y값 초기화
         ydepth = _Ydepth;
 
-        if (_Ydepth >= X.y)
+        //최고 높이를 기준으로 타일의 높이 정렬
+        if (_Ydepth >= thislocalscale.y)
         {
-            X.y = ydepth;
+            thislocalscale.y = ydepth;
         }
-        this.transform.localScale = X;
-        float Xxx = X.y - 0.5f;
 
+        //시작 높이를 기준으로 현재 높이를 변경
+        this.transform.localScale = thislocalscale;
 
+        //현재 Node기준 이웃의 높이값
+        float neighbourYscale = thislocalscale.y - 0.5f;
+
+        //이웃 노드개수 만큼 for문을 돌려 이웃의 높이를 설정
         for (int i = 0; i < _neighbournode.Count; i++)
         {
             Vector3 neighbourpos = _neighbournode[i].transform.localScale;
-            float Y = _neighbournode[i].transform.localScale.y;
 
-            int Xddd = (int)(X.y - Y);
-            if (_neighbournode[i].alreadymove && Xxx > 0 && X.y > neighbourpos.y)
+            float neiYdepth = neighbourpos.y;
+
+            float yhightgap = thislocalscale.y - neiYdepth;
+
+            //타일의 크기가 바뀐적이 없고, 바뀔 높이가 0보다 클 때
+            if (!_neighbournode[i].alreadymove && neighbourYscale > 0 /*&& thislocalscale.y > neighbourpos.y*/)
             {
-
-                _neighbournode[i].alreadymove = false;
-                neighbourpos.y = Xxx;
+                _neighbournode[i].alreadymove = true;
+                neighbourpos.y = neighbourYscale;
                 _neighbournode[i].transform.localScale = neighbourpos;
-
-
             }
 
-            else if (!_neighbournode[i].alreadymove && Xddd > 0.5f)
+            //바뀐적이 있고, 갭이 0.5이상 차이가 난다면
+            else if (_neighbournode[i].alreadymove && yhightgap > 0.5f)
             {
-
-
-                neighbourpos.y = Xxx;
+                neighbourpos.y = neighbourYscale;
                 _neighbournode[i].transform.localScale = neighbourpos;
-
             }
+
+            if (ydepth > 0.5f && thislocalscale.y > neighbourpos.y)
+            {
+                _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, neighbourYscale);
+            }
+
         }
 
-        for (int i = 0; i < _neighbournode.Count; i++)
-        {
-            Vector3 neighbourpos = _neighbournode[i].transform.localScale;
-            if (ydepth > 0.5f && X.y > neighbourpos.y)
-            {
-                _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, Xxx);
-            }
-        }
+        //for (int i = 0; i < _neighbournode.Count; i++)
+        //{
+        //    Vector3 neighboutscale = _neighbournode[i].transform.localScale;
+
+        //    if (ydepth > 0.5f && thislocalscale.y > neighboutscale.y)
+        //    {
+        //        _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, neighbourYscale);
+        //    }
+        //}
     }
 
 

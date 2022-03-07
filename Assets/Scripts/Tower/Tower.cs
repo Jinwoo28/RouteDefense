@@ -64,6 +64,7 @@ public class Tower : MonoBehaviour
     //적 타겟 Transform
     private Transform FinalTarget = null;
 
+    private Node node = null;
    
 
     void Start()
@@ -83,6 +84,8 @@ public class Tower : MonoBehaviour
         {
              RotateToTarget();
         }
+
+
     }
 
     public void SetUp(PlayerState _playerstate)
@@ -197,6 +200,7 @@ public class Tower : MonoBehaviour
             towerinfo.towerdamage += upgradevalue.damagevalue;
             towerinfo.towercritical += upgradevalue.upcriticalvalue;
             playerstate.GetSetPlayerCoin = upgradevalue.upgradeprice;
+            upgradevalue.upgradeprice += 25;
         }
     }
 
@@ -236,6 +240,7 @@ public class Tower : MonoBehaviour
                         UpperTower.GetComponent<Tower>().SetState(towerlevel, tower.GetTowerLevel);
                         UpperTower.GetComponent<Tower>().SetUp(playerstate);
                     }
+                    
                     Destroy(preview);
                     Destroy(this.gameObject);
                 }
@@ -245,11 +250,9 @@ public class Tower : MonoBehaviour
             {
                 Destroy(preview);
                 Base.SetActive(true);
+                towercollider.enabled = true;
                 break;
             }
-
-
-
 
             yield return null;
         }
@@ -265,13 +268,35 @@ public class Tower : MonoBehaviour
         towerinfo.towercritical += (lev * (float)upgradevalue.upcriticalvalue);
     }
 
+    private void OnDestroy()
+    {
+        node.GetOnTower = false;
+    }
+
+    public Node SetNode
+    {
+        set
+        {
+            node = value;
+        }
+    }
+        
+    
+    //타워 이름
     public string Getname => towerinfo.towername;
-    public int gettowerstep => towerstep;
-    public float getatkdelay => atkspeed;
-    public float getatkdamage => towerinfo.towerdamage;
-    public float getatkrange => towerinfo.towerrange;
-    public float getatkcritical => towerinfo.towercritical;
-    public int Gettowerprice => towerinfo.towerprice;
+    //타워 단계
+    public int GetStep => towerstep;
+    //타워레벨
     public int GetTowerLevel => towerlevel;
+    //타워 데미지
+    public float GetDamage => towerinfo.towerdamage;
+    //크리티컬 확률
+    public float GetCritical => towerinfo.towercritical;
+    //타워 공격 속도
+    public float GetSpeed => atkspeed;
+    //타워 공격범위
+    public float GetRange => towerinfo.towerrange;
+    //타워가격
+    public int Gettowerprice => towerinfo.towerprice;
 
 }

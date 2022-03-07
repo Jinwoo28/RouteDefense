@@ -9,19 +9,22 @@ public class ShowTowerInfo : MonoBehaviour
 {
     private Tower tower;
 
-    public GameObject towerinfopanel = null;
+    [SerializeField] private GameObject towerinfopanel = null;
 
     private DetectObject detectob = null;
 
     [SerializeField] private Button upgradebutton;
 
-    [SerializeField] private TextMeshProUGUI atkdamage;
-    [SerializeField] private TextMeshProUGUI atkrange;
-    [SerializeField] private TextMeshProUGUI atkcritical;
-    [SerializeField] private TextMeshProUGUI atkspeed;
+    [SerializeField] private TextMeshProUGUI towername = null;
+    [SerializeField] private TextMeshProUGUI towerlevel = null;
+    [SerializeField] private TextMeshProUGUI atkdamage = null;
+    [SerializeField] private TextMeshProUGUI atkcritical = null;
+    [SerializeField] private TextMeshProUGUI atkrange = null;
+    [SerializeField] private TextMeshProUGUI atkspeed = null;
 
     //공격 범위 표시에 사용할 Sprite이미지
     [SerializeField] private GameObject rangePrefab = null;
+
     private GameObject[] rangesprite = null;
 
     private void Start()
@@ -53,7 +56,7 @@ public class ShowTowerInfo : MonoBehaviour
                     towerinfopanel.SetActive(true);
                     tower = towertransform.GetComponent<Tower>();
                     ShowInfo(tower);
-                    ShowRange(towertransform.transform);
+                    ShowRange(towertransform.transform, towertransform.GetComponent<Tower>().GetRange);
                 }
                 else
                 {
@@ -65,10 +68,12 @@ public class ShowTowerInfo : MonoBehaviour
 
         if (tower != null)
         {
-            atkdamage.text = "Towerlev : " + tower.GetTowerLevel.ToString();
-            atkrange.text = "AtkRange : "+tower.getatkrange.ToString();
-            atkcritical.text = "AtkCritical : "+tower.getatkcritical.ToString();
-            atkspeed.text = "Towerlev : " +tower.GetTowerLevel.ToString();
+            towername.text = $"{tower.Getname} {tower.GetStep}Step";
+            towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
+            atkdamage.text = "Damage : "+tower.GetDamage.ToString();
+            atkcritical.text = "Critical : "+tower.GetCritical.ToString();
+            atkspeed.text = "Speed : " +tower.GetSpeed.ToString();
+            atkrange.text = "Range : " + tower.GetRange.ToString();
         }
     }
 
@@ -77,11 +82,11 @@ public class ShowTowerInfo : MonoBehaviour
         tower = _tower;
     }
 
-    public void ShowRange(Transform _transform)
+    public void ShowRange(Transform _transform,float _range)
     {
         Transform towerpos = _transform;
         int rotation = 0;
-        float range = towerpos.GetComponent<Tower>().getatkrange;
+        float range = _range;
         Vector3 DD = towerpos.forward * range;
         Debug.Log(DD);
     
@@ -109,7 +114,7 @@ public class ShowTowerInfo : MonoBehaviour
         }
     }
 
-    private void RangeOff()
+    public void RangeOff()
     {
         for (int i = 0; i < 72; i++)
         {
@@ -132,6 +137,7 @@ public class ShowTowerInfo : MonoBehaviour
     public void OnClickCombine()
     {
         tower.Combine();
+        RangeOff();
     }
 
 

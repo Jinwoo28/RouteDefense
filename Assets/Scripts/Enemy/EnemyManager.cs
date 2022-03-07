@@ -22,6 +22,9 @@ public class EnemyManager : MonoBehaviour
     //enemy의 체력바와 공격시 데미지를 띄우는 UI정보를 위한 canvas
     [SerializeField] private Transform canvas = null;
 
+    [SerializeField] private GameObject hpbar = null;
+    [SerializeField] private GameObject damagenum = null;
+
     private int StageNum = 0;
 
     //스테이지가 실행중인지 판단
@@ -55,6 +58,7 @@ public class EnemyManager : MonoBehaviour
 
         //적이 나올 개수
         int count = stageinfo[StageNum ].EnemyCount;
+        int stagenum = StageNum;
         //적 종류
         GameObject[] EnemyList = stageinfo[StageNum].enemykind;
 
@@ -64,12 +68,14 @@ public class EnemyManager : MonoBehaviour
         {
             int enemynum = Random.Range(0, enemykind);
             GameObject enemy = Instantiate(EnemyList[enemynum], SpawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas);
+            enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas,hpbar,damagenum);
 
             //소환되는 enemy를 list에 추가
             EnemyCount.Add(enemy.GetComponent<Enemy>());
 
-            yield return new WaitForSeconds(1.5f);
+
+                yield return new WaitForSeconds(1.5f);
+            
         }
 
         SpawnFinish = true;

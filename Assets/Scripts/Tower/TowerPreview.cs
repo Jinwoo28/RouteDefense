@@ -12,11 +12,13 @@ public class TowerPreview : MonoBehaviour
     //타일 위인지 검사
     private bool ontile = false;
 
+    //이동하는 길목인지 확인
+    private bool checkOnroute = false;
+    
     //build할 수 있는지 최종 여부
     private bool canbuildable = false;
 
-    //이동하는 길목인지 확인
-    private bool checkOnroute = false;
+    [SerializeField] private LayerMask layermask;
 
     private bool CanCombination = false;
 
@@ -27,24 +29,15 @@ public class TowerPreview : MonoBehaviour
     private Node towernode;
 
     private Tower tower = null;
+    private ShowTowerInfo showtowerinfo = null;
 
-    private void Start()
-    {
-        PreviewPos();
-    }
+    private float range = 0;
 
-    private void Update()
-    {
-        
-    }
-
-    private void PreviewPos()
-    {
-
-    }
+    //
 
     public bool CanBuildable()
     {
+        showtowerinfo.ShowRange(this.gameObject.transform,range);
         if (Ontile() && !alreadytower&&!checkOnroute)
         {
             canbuildable = true;
@@ -54,15 +47,18 @@ public class TowerPreview : MonoBehaviour
             return canbuildable;
     }
 
+    //빈 타일 / 길X => 타워 짓기
+    //타워가 있을 경우 같은 이름, 같은 step이면 바로 진화
 
+    //타일 위, 길 X, 타워 X => 타워 짓기
+    //타일 위, 길 X, 타워 O -- 형재 미리보기와 같은 이름 단게 => 진화타워짓기
 
     public bool Ontile()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Tower"));
-
-        if (Physics.Raycast(ray,out hit, Mathf.Infinity, layerMask))
+       
+        if (Physics.Raycast(ray,out hit, Mathf.Infinity, layermask))
         {
             if (hit.collider.CompareTag("Tile"))
             {
@@ -119,7 +115,7 @@ public class TowerPreview : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().gettowerstep==towerstep)
+            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep)
             { 
                 CanCombination = true;
                 tower = other.GetComponent<Tower>();
@@ -155,5 +151,10 @@ public class TowerPreview : MonoBehaviour
         }
     }
 
+    public void SetShowTowerInfo(ShowTowerInfo _showtowerinfo, float _range)
+    {
+        showtowerinfo = _showtowerinfo;
+        range = _range;
+    }
 
 }

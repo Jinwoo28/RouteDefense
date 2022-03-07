@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7294384252974742680}
   - component: {fileID: 8403321044665587082}
   m_Layer: 9
-  m_Name: CubeTest
+  m_Name: NomalTowerPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towername: 
+  layermask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &8403321044665587082
 Rigidbody:
   m_ObjectHideFlags: 0

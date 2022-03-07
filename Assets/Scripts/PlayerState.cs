@@ -8,7 +8,7 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private Text life = null;
     [SerializeField] private Text Coin = null;
 
-    private int playercoin = 5000;
+    [SerializeField] private int playercoin = 500;
     private int playerlife = 20;
 
 

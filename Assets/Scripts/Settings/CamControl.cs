@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class CamControl : MonoBehaviour
 {
+
+    float xrotation = 0;
+
     private void Update()
     {
         CamMove();
+        xrotation = this.transform.rotation.x;
     }
    
 
@@ -17,7 +21,6 @@ public class CamControl : MonoBehaviour
         {
             //마우스의 이동값 좌표 저장
             Vector2 mouseDelat = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-
             Vector3 CamAngle = this.transform.rotation.eulerAngles; //카메라의 부모 오브젝트의 회전값을 변수로 저장
            
 
@@ -26,20 +29,35 @@ public class CamControl : MonoBehaviour
             
             //카메라 상하의 제한
             X = Mathf.Clamp(X, 1f, 90f);
-            Debug.Log(X);
+
+            xrotation = X;
 
             this.transform.rotation = Quaternion.Euler(X, CamAngle.y + mouseDelat.x, CamAngle.z).normalized;
         }
 
+        else if (Input.GetMouseButton(2))
+        {
+
+            Vector3 thispos = this.transform.position;
+            thispos.x -= mouseDela2.x * 10.0f * Time.deltaTime;
+            thispos.z -= mouseDela2.y * 10.0f * Time.deltaTime;
+            if (xrotation > 50)
+            {
+                this.transform.position -= this.transform.forward * mouseDela2.y * Time.deltaTime * 12.0f;
+            }
+            else if (xrotation <= 50)
+            {
+                this.transform.position -= this.transform.up * mouseDela2.y * Time.deltaTime * 12.0f;
+            }
+
+
+            this.transform.position -= this.transform.right * mouseDela2.x * Time.deltaTime * 12.0f;
+
+        }
+
         //카메라 이동
-        float MoveX = Input.GetAxisRaw("Horizontal");
-        float MoveZ = Input.GetAxisRaw("Vertical");
-
-        this.transform.position += this.transform.forward*MoveZ* Time.deltaTime*2.0f;
-        this.transform.position += this.transform.right*MoveX*Time.deltaTime*2.0f;
-
-        float Y = Input.GetAxisRaw("Mouse ScrollWheel");
-        this.transform.position -= new Vector3(0, Y, 0).normalized * Time.deltaTime*5.0f;
+        float zoominout = Input.GetAxisRaw("Mouse ScrollWheel") * 10f;
+        this.transform.position += this.transform.forward * zoominout * Time.deltaTime * 20f;
 
     }
 

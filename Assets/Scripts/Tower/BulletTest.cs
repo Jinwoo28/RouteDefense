@@ -9,6 +9,11 @@ public class BulletTest : MonoBehaviour
 
     private Vector3 Target;
 
+    private void Start()
+    {
+        Destroy(this.gameObject, 0.5f);
+    }
+
     private void Update()
     {
         if (Target != null)
@@ -42,5 +47,6 @@ public class BulletTest : MonoBehaviour
             Destroy(this.gameObject);
             other.GetComponent<Enemy>().EnemyAttacked(bullDamage);
         }
+
     }
 }

@@ -342,4 +342,4 @@ MonoBehaviour:
     towerdamage: 4
     towercritical: 0
     towerrange: 1
-    towerspeed: 1
+    towerspeed: 0.7

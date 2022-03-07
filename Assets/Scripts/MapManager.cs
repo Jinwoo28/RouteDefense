@@ -38,7 +38,6 @@ public class MapManager : MonoBehaviour
     //타일의 길 만들기 버튼 활성화 bool 값_ true일 때만 길이 만들어짐
     private bool TileCanChange = false;
 
-
     private HashSet<Node> overlapcheck = null;
 
     /// ////////////////////////////////////////////////////
@@ -49,7 +48,7 @@ public class MapManager : MonoBehaviour
 
     //추가될 테트리스 타일 넘버
     private int AddtileNum = 0;
-    private int addtileprice = 100;
+    private int addtileprice = 0;
 
    // private bool TileCanAdd = false;
    // private bool AddTile = false;
@@ -84,19 +83,19 @@ public class MapManager : MonoBehaviour
             int Xnum = Random.Range(0, gridX);
             int Ynum = Random.Range(0, gridY);
             grid[Xnum, Ynum].UpDownTile(grid[Xnum, Ynum].neighbournode, RanNum);
-            //if (Near >= 1)
-            //{
-            //    while (Near >= 1)
-            //    {
-            //        Near = Random.Range(0, 3);
-            //        int RanNum2 = Random.Range(0, 4);
-            //        if (Xnum + temp[RanNum2, 0] < gridX && Xnum + temp[RanNum2, 0] >= 0 && Ynum + temp[RanNum2, 1] < gridY && Ynum + temp[RanNum2, 1] >= 0)
-            //        {
-            //            grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].UpDownTile(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
+            if (Near >= 1)
+            {
+                while (Near >= 1)
+                {
+                    Near = Random.Range(0, 3);
+                    int RanNum2 = Random.Range(0, 4);
+                    if (Xnum + temp[RanNum2, 0] < gridX && Xnum + temp[RanNum2, 0] >= 0 && Ynum + temp[RanNum2, 1] < gridY && Ynum + temp[RanNum2, 1] >= 0)
+                    {
+                        grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].UpDownTile(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
 
-            //        }
-            //    }
-            //}
+                    }
+                }
+            }
 
         }
 
@@ -149,7 +148,8 @@ public class MapManager : MonoBehaviour
                 //생성과 동시에 인덱스 번호 부여
                 //grid[i, j] = new Node(tile,false, i, j, 0,false);
 
-                grid[i, j] = tile.AddComponent<Node>();
+                grid[i, j] = tile.GetComponent<Node>();
+                   // tile.AddComponent<Node>();
                 tile.GetComponent<Node>().Setnode(tile, false, j, i, false);
                 tile.GetComponent<Node>().SetColor(Tilecolor);
 
@@ -424,7 +424,7 @@ public class MapManager : MonoBehaviour
                                 grid[Y, X].GetComponent<Node>().SetActiveTile(true);
                                 AddTileActive = false;
                             }
-                            addtileprice += 100;
+                            addtileprice += 50;
                             AddtileNum = Random.Range(0, 7);
                         }
                     }
@@ -808,7 +808,11 @@ X X 10 X
         while (true)
         {
             isgameing = EM.GameOnGoing;
-            if (!isgameing) break;
+            if (!isgameing)
+            {
+                addtileprice = 0;
+                break;
+            }
             yield return null;
         }
 
@@ -852,8 +856,7 @@ X X 10 X
 
         for (int i = 0; i < waypointnode.Count - 1; i++)
         {
-            Debug.Log($"gridX : {waypointnode[i].gridX}, gridY : {waypointnode[i].gridY}, 갯수 : {waypointnode.Count}");
-
+          
             waypointnode[i].OriginColor();
             if (waypointnode[i].gridX < waypointnode[i + 1].gridX)
             {//오른쪽
