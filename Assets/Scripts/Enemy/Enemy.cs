@@ -42,8 +42,15 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        
+        MultipleSpeed.speedup += SpeedUP;
     }
+
+    private void SpeedUP(int x)
+    {
+        Time.timeScale = x;
+    }
+
+
 
     public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum)
     {

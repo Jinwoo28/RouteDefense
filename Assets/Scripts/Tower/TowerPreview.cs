@@ -40,11 +40,18 @@ public class TowerPreview : MonoBehaviour
 
     private Tower tower = null;
     private ShowTowerInfo showtowerinfo = null;
-
+    private BuildManager buildmanager = null;
     private float range = 0;
 
     private GameObject Origintower = null;
 
+    public BuildManager Setbuildmanager
+    {
+        set
+        {
+            buildmanager = value;
+        }
+    }
 
     public GameObject SetOriginTower
     {
@@ -54,15 +61,27 @@ public class TowerPreview : MonoBehaviour
         }
     }
 
+    public delegate void MakeRouteOff();
+    public static MakeRouteOff makerouteoff;
+
+    private void Start()
+    {
+        makerouteoff();
+    }
+
     private void Update()
     {
-        
+        Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
     }
 
     IEnumerator BuildTower()
     {
         while (true)
         {
+           
+
+
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -74,6 +93,8 @@ public class TowerPreview : MonoBehaviour
                     int Z = hit.collider.GetComponent<Node>().gridY;
                     float Y = hit.collider.transform.localScale.y;
                     this.transform.position = new Vector3(X, (Y / 2), Z);
+
+                    showtowerinfo.ShowRange(this.gameObject.transform, range);
 
                     //타일 위에 있는지
                     ontile = true;
@@ -87,11 +108,15 @@ public class TowerPreview : MonoBehaviour
                 else
                 {
                     ontile = false;
+
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                showtowerinfo.RangeOff();
             }
 
 
-            showtowerinfo.ShowRange(this.gameObject.transform, range);
 
             if (ontile && !checkOnroute)
             {
@@ -101,33 +126,58 @@ public class TowerPreview : MonoBehaviour
                     {
                         if (Input.GetMouseButtonDown(0))
                         {
-                            Debug.Log("합체");
-                            if (Origintower != null)
+                            if (tower.GetStep != 3)
                             {
-                                Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
-                                Destroy(Origintower);
+                                if (Origintower != null)
+                                {
+                                    Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
+                                    Destroy(Origintower);
+                                }
+
+                                tower.TowerStepUp(tower);
+                                if (buildmanager != null)
+                                    buildmanager.GettowerpreviewActive = false;
+                                Destroy(this.gameObject);
                             }
-                            tower.TowerStepUp(tower);
-                            
-                            Destroy(this.gameObject);
                         }
                     }
                 }
-                else
+                else if(!alreadytower)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                       GameObject buildedtower = Instantiate(buildTower, this.transform.position, Quaternion.identity);
-                        buildedtower.GetComponent<Tower>().SetNode = towernode;
-                        Debug.Log("설치");
-                        buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
-                        buildedtower.GetComponent<Tower>().SetUp(playerstate);
+                        //이동인지 새로 짓는건지 검사
+                        //이동의 경우 위치만 변경
+                        //설치의 경우 instantiate
+
                         if (Origintower != null)
                         {
                             Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
-                            Destroy(Origintower);
+                            Origintower.transform.position = this.transform.position;
+                            Origintower.GetComponent<Tower>().SetActiveOn();
+                            Origintower.GetComponent<Tower>().SetNode = towernode;
+                            showtowerinfo.ShowInfo(Origintower.GetComponent<Tower>());
+                            showtowerinfo.ShowRange(Origintower.transform, Origintower.GetComponent<Tower>().GetRange);
+
                         }
+
+                        else
+                        {
+                            GameObject buildedtower = Instantiate(buildTower, this.transform.position, Quaternion.identity);
+                            buildedtower.GetComponent<Tower>().SetNode = towernode;
+                            towernode.GetOnTower = true;
+                            Debug.Log("설치");
+                            buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
+                            buildedtower.GetComponent<Tower>().SetUp(playerstate);
+                            showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
+                            showtowerinfo.ShowRange(buildedtower.transform, buildedtower.GetComponent<Tower>().GetRange);
+
+                        }
+                        if (buildmanager != null)
+                            buildmanager.GettowerpreviewActive = false;
+                        showtowerinfo.SetTowerinfo();
                         Destroy(this.gameObject);
+
                     }
                 }
 
@@ -135,6 +185,16 @@ public class TowerPreview : MonoBehaviour
             yield return null;
         }
     }
+
+    public void RangeOff()
+    {
+        showtowerinfo.RangeOff();
+    }
+
+    //private void OnDestroy()
+    //{
+    //    showtowerinfo.RangeOff();
+    //}
 
     //public bool CanBuildable()
     //{
@@ -162,7 +222,7 @@ public class TowerPreview : MonoBehaviour
     //{
     //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     //    RaycastHit hit;
-       
+
     //    if (Physics.Raycast(ray,out hit, Mathf.Infinity, layermask))
     //    {
     //        if (hit.collider.CompareTag("Tile"))
@@ -171,7 +231,7 @@ public class TowerPreview : MonoBehaviour
     //            int Z = hit.collider.GetComponent<Node>().gridY;
     //            float Y = hit.collider.transform.localScale.y;
     //            this.transform.position = new Vector3(X, (Y/2), Z);
-               
+
     //            //타일 위에 있는지
     //            ontile = true;
     //            //이미 타워가 있는지
@@ -199,17 +259,17 @@ public class TowerPreview : MonoBehaviour
     //    {
     //        if (hit.collider.CompareTag("Tile"))
     //        {
-               
+
     //            int X = hit.collider.GetComponent<Node>().gridX;
     //            int Z = hit.collider.GetComponent<Node>().gridY;
     //            float Y = hit.collider.transform.localScale.y;
 
     //            this.transform.position = new Vector3(X, (Y / 2), Z);
-               
+
     //        }
     //        else
     //        {
-                
+
     //            this.transform.position = new Vector3((int)hit.point.x, 1, (int)hit.point.z);
     //        }
     //    }
@@ -228,13 +288,14 @@ public class TowerPreview : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep)
+            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3)
             { 
                 CanCombination = true;
                 tower = other.GetComponent<Tower>();
             }
             else
             {
+                Debug.Log("dddd");
                 CanCombination = false;
                 tower = null;
             }
@@ -244,7 +305,11 @@ public class TowerPreview : MonoBehaviour
         }
     }
 
-    
+    //private void OnDestroy()
+    //{
+    //    showtowerinfo.RangeOff();
+    //}
+
 
     private void OnTriggerExit(Collider other)
     {

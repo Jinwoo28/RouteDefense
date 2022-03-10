@@ -111,6 +111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1635208637264414641}
+  - {fileID: 9003823296437620558}
   m_Father: {fileID: 1635208637264414645}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -273,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 1635208637264452503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_Children:
   - {fileID: 1635208637264414645}
   m_Father: {fileID: 0}
@@ -327,15 +328,16 @@ MonoBehaviour:
   towerpreview: {fileID: 5796280766835005830, guid: 87ddd6676569e4c4ca0a6bb9d241e004, type: 3}
   Base: {fileID: 1635208637264452501}
   TowerBody: {fileID: 1635208637264414643}
-  bulletpos: {fileID: 1635208637264414641}
+  bulletpos: {fileID: 9003823296437620558}
   bullet: {fileID: 177688283286534501, guid: 4f580ab3b2322ce4ebb8005a92d4062e, type: 3}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
   upgradevalue:
+    priceincrease: 25
     upgradeprice: 50
     damagevalue: 1
-    upcriticalvalue: 5
+    upcriticalvalue: 2
   towerinfo:
     towerprice: 150
     towername: Nomal
@@ -343,3 +345,34 @@ MonoBehaviour:
     towercritical: 0
     towerrange: 1
     towerspeed: 0.7
+  showtowerinfo: {fileID: 0}
+--- !u!1 &8493797593397301007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9003823296437620558}
+  m_Layer: 9
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9003823296437620558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493797593397301007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.322, z: 0.952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1635208637264414643}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

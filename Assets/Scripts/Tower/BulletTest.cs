@@ -4,49 +4,46 @@ using UnityEngine;
 
 public class BulletTest : MonoBehaviour
 {
-    protected float bullspeed = 10.0f;
-    protected float bullDamage = 0;
+    private Transform target;
+    protected float damage = 0;
+    protected float speed = 10;
 
-    private Vector3 Target;
+    public void SetBulletTest(Transform _target, float _damage)
+    {
+        target = _target;
+        damage = _damage;
+    }
 
     private void Start()
     {
-        Destroy(this.gameObject, 0.5f);
+        MultipleSpeed.speedup += SpeedUP;
     }
+
+    private void SpeedUP(int x)
+    {
+        Time.timeScale = x;
+    }
+
 
     private void Update()
     {
-        if (Target != null)
-        {
-            Vector3 target = Target - this.transform.position;
-            this.transform.position += target.normalized * bullspeed * Time.deltaTime;
-        }
-    }
-
-    public float SetDamage
-    {
-        set
-        {
-            bullDamage = value;
-        }
-    }
-
-
- public Vector3 SetTarget
-    {
-        set
-        {
-            Target = value;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
+        if(target == null)
         {
             Destroy(this.gameObject);
-            other.GetComponent<Enemy>().EnemyAttacked(bullDamage);
         }
+        else
+        {
+            Vector3 distance = target.position - this.transform.position;
 
+            this.transform.position += distance.normalized * Time.deltaTime * speed;
+
+            if (Vector3.Magnitude(distance) < 0.1f)
+            {
+                target.GetComponent<Enemy>().EnemyAttacked(damage);
+                Destroy(this.gameObject);
+            }
+        }
     }
+
+
 }

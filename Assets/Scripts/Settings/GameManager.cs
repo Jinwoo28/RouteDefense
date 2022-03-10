@@ -6,53 +6,37 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject StartText;
-    [SerializeField] private GameObject CancelText;
+    [SerializeField] private SceneControl sceneManager = null;
+    [SerializeField] private GameObject settingPanal = null;
+    private MultipleSpeed multipleSpeed = null;
 
-
-
-    private static GameManager instance = null;
-
-    public delegate void CancleStage();
-    public static CancleStage canslestage;
-    
-    List<Enemy> EnemyCount;
-
-    public static GameManager Instance
+    private void Start()
     {
-        get
-        {
-            if (instance == null)
-            {
-                return null;
-            }
-            else return instance;
-        }
+        settingPanal.SetActive(false);
+        multipleSpeed = this.GetComponent<MultipleSpeed>();
     }
 
-    private void Awake()
+    public void SettingPanalOn()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        settingPanal.SetActive(true);
+        multipleSpeed.OnClickStart(0);
     }
 
-    /*
-     게임매니저에서 필요한 것
-    1. 플레이어 코인
-    2. 게임 시작 _ 성공, 실패
-    3. 스테이지 정보
-     */
+    public void SettingPanalOff()
+    {
+        settingPanal.SetActive(false);
+        multipleSpeed.OnClickStart(1);
+    }
 
-    public void GameReStart() { }
+    public void GotoLobby()
+    {
 
-    public void GameFail() { }
+    }
 
+    public void ReStartGame()
+    {
+
+    }
 
 
 }

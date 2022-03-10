@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6298155350762371746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8135851310593424362}
+  m_Layer: 9
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8135851310593424362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6298155350762371746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.207}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7464082370979366050}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7464082370979469440
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +140,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0028331056, y: 0.3253068, z: 0.78874433}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8135851310593424362}
   m_Father: {fileID: 7464082370979366048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 7464082370979469444}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7464082370979366054}
   m_Father: {fileID: 0}
@@ -245,20 +276,21 @@ MonoBehaviour:
   towerpreview: {fileID: 5796280766835005830, guid: 87ddd6676569e4c4ca0a6bb9d241e004, type: 3}
   Base: {fileID: 7464082370979469446}
   TowerBody: {fileID: 7464082370979366048}
-  bulletpos: {fileID: 7464082370979366050}
+  bulletpos: {fileID: 8135851310593424362}
   bullet: {fileID: 177688283286534501, guid: 4f580ab3b2322ce4ebb8005a92d4062e, type: 3}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
   upgradevalue:
+    priceincrease: 50
     upgradeprice: 100
     damagevalue: 2
     upcriticalvalue: 3
   towerinfo:
     towerprice: 0
-    towername: nomaltower
-    towerdamage: 7
-    towercritical: 10
+    towername: Nomal
+    towerdamage: 5
+    towercritical: 5
     towerrange: 1.25
     towerspeed: 0.5
   showtowerinfo: {fileID: 0}

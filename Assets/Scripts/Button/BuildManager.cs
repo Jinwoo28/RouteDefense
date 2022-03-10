@@ -57,15 +57,15 @@ public class BuildManager : MonoBehaviour
 
         playercoin = playerstate.GetSetPlayerCoin;
 
-        if (preview == null) towerpreviewActive = false;
+        // if (preview == null) towerpreviewActive = false;
 
         if (towerpreviewActive)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+               // preview.GetComponent<TowerPreview>().RangeOff();
                 towerpreviewActive = false;
                 playerstate.GetSetPlayerCoin = -towerprice;
-                showtowerinfo.RangeOff();
                 Destroy(preview);
             }
         }
@@ -83,27 +83,35 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-        
+        showtowerinfo.SetTowerinfoOff();
          towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
 
             if (playercoin >= towerprice)
             {
                 if (!towerpreviewActive)
                 {
-                     towerpreviewActive = true;
+                    towerpreviewActive = true;
                     mapmanager.GetSetTileChange = false;
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
                     preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
                     preview.GetComponent<TowerPreview>().SetUp(buildtower[_slotnum].builditem);
-                preview.GetComponent<TowerPreview>().playerstate = playerstate;
-                    //                    craft = buildtower[_slotnum].builditem;
-
+                    preview.GetComponent<TowerPreview>().playerstate = playerstate;
+                //                    craft = buildtower[_slotnum].builditem;
+                preview.GetComponent<TowerPreview>().Setbuildmanager = this;
                     playerstate.GetSetPlayerCoin = towerprice;
                 }
             }
         
+    }
+
+    public bool GettowerpreviewActive
+    {
+        set
+        {
+            towerpreviewActive = value;
+        }
     }
 
     int towerprice;

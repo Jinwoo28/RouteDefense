@@ -172,6 +172,8 @@ public class Node : MonoBehaviour
         //}
     }
 
+    
+
 
     public Vector3 ThisPos
     {

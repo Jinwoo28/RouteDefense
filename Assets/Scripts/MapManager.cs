@@ -50,6 +50,9 @@ public class MapManager : MonoBehaviour
     private int AddtileNum = 0;
     private int addtileprice = 0;
 
+    public int GetAddTileNum => AddtileNum;
+    public int GetAddtilePrice => addtileprice;
+
    // private bool TileCanAdd = false;
    // private bool AddTile = false;
     private bool AddTileActive = false;
@@ -68,11 +71,25 @@ public class MapManager : MonoBehaviour
     {
         waypointnode = new List<Node>();
         overlapcheck = new HashSet<Node>();
+        TowerPreview.makerouteoff += makerouteoff;
     }
+
+    private void makerouteoff()
+    {
+        TileCanChange = false;
+    }
+
     private void Awake()
     {
    
         Mapmake();
+        StartCoroutine(MakeHeight());
+
+        AddtileNum = Random.Range(0, 7);
+    }
+
+    private IEnumerator MakeHeight()
+    {
         int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)
@@ -94,14 +111,14 @@ public class MapManager : MonoBehaviour
                         grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].UpDownTile(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
 
                     }
+                    yield return new WaitForSeconds(0.2f);
                 }
             }
 
         }
-
-        AddtileNum = Random.Range(0, 7);
-
     }
+
+
     private void Update()
     {
         isgameing = EM.GameOnGoing;

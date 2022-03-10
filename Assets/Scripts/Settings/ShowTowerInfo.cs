@@ -22,10 +22,26 @@ public class ShowTowerInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI atkrange = null;
     [SerializeField] private TextMeshProUGUI atkspeed = null;
 
+    [SerializeField] private TextMeshProUGUI upgradeprice = null;
+
     //공격 범위 표시에 사용할 Sprite이미지
     [SerializeField] private GameObject rangePrefab = null;
 
+    [SerializeField] private EnemyManager enemymanager = null;
+
+    private int towerupgradeprice = 0;
+
     private GameObject[] rangesprite = null;
+
+    private Transform towertransform = null;
+
+    public Transform GetTowerTransform
+    {
+        set
+        {
+            towertransform = value;
+        }
+    }
 
     private void Start()
     {
@@ -41,41 +57,71 @@ public class ShowTowerInfo : MonoBehaviour
 
     private void Update()
     {
+
         ClickTower();
+
+        if (tower != null)
+        {
+            towername.text = $"{tower.Getname} {tower.GetStep}Step";
+            towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
+            atkdamage.text = "Damage : " + tower.GetDamage.ToString();
+            atkcritical.text = "Critical : " + tower.GetCritical.ToString();
+            atkspeed.text = "Speed : " + tower.GetSpeed.ToString();
+            atkrange.text = "Range : " + tower.GetRange.ToString();
+            upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+        }
     }
 
     public void ClickTower()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Transform towertransform = detectob.ReturnTransform();
+            towertransform = detectob.ReturnTransform();
             if (towertransform != null)
             {
                 if (towertransform.CompareTag("Tower"))
                 {
-                    towerinfopanel.SetActive(true);
+                    //towerinfopanel.SetActive(true);
                     tower = towertransform.GetComponent<Tower>();
                     ShowInfo(tower);
                     ShowRange(towertransform.transform, towertransform.GetComponent<Tower>().GetRange);
+                    Debug.Log("11111");
+
+                    if (tower != null)
+                    {
+                        SetTowerinfo();
+                    }
                 }
                 else
                 {
                     towerinfopanel.SetActive(false);
                     RangeOff();
                 }
+                
             }
         }
 
-        if (tower != null)
-        {
-            towername.text = $"{tower.Getname} {tower.GetStep}Step";
-            towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
-            atkdamage.text = "Damage : "+tower.GetDamage.ToString();
-            atkcritical.text = "Critical : "+tower.GetCritical.ToString();
-            atkspeed.text = "Speed : " +tower.GetSpeed.ToString();
-            atkrange.text = "Range : " + tower.GetRange.ToString();
-        }
+        //if (tower != null)
+        //{
+        //    towername.text = $"{tower.Getname} {tower.GetStep}Step";
+        //    towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
+        //    atkdamage.text = "Damage : "+tower.GetDamage.ToString();
+        //    atkcritical.text = "Critical : "+tower.GetCritical.ToString();
+        //    atkspeed.text = "Speed : " +tower.GetSpeed.ToString();
+        //    atkrange.text = "Range : " + tower.GetRange.ToString();
+        //    upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+        //}
     }
+
+    public void SetTowerinfo()
+    {
+        towerinfopanel.SetActive(true);
+    }
+    public void SetTowerinfoOff()
+    {
+        towerinfopanel.SetActive(false);
+    }
+
 
     public void ShowInfo(Tower _tower)
     {
@@ -84,12 +130,13 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void ShowRange(Transform _transform,float _range)
     {
+
+
         Transform towerpos = _transform;
         int rotation = 0;
         float range = _range;
         Vector3 DD = towerpos.forward * range;
 
-    
         for(int i = 0; i < 72; i++)
         {
             towerpos.rotation = Quaternion.Euler(0, rotation, 0);
@@ -112,12 +159,15 @@ public class ShowTowerInfo : MonoBehaviour
             rangesprite[i].SetActive(true);
             rotation += 5;
         }
+
     }
 
     public void RangeOff()
     {
+
         for (int i = 0; i < 72; i++)
         {
+
             rangesprite[i].SetActive(false);
         }
     }
@@ -136,8 +186,11 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void OnClickTowerMove()
     {
-        tower.TowerMove();
-        RangeOff();
+        if (!enemymanager.GetGameOnGoing)
+        {
+            tower.TowerMove();
+            RangeOff();
+        }
     }
 
 

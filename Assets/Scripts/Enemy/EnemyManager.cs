@@ -39,13 +39,24 @@ public class EnemyManager : MonoBehaviour
     //소환되는 적들의 정보를 담을 List
     List<Enemy> EnemyCount = null;
 
+    public int Getmaxstage => stageinfo.Length;
+    public int Getcurrentstage => StageNum + 1;
+
     private void Start()
     {
         EnemyCount = new List<Enemy>();
+    MultipleSpeed.speedup += SpeedUP;
     }
 
-    //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
-    public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
+    
+
+private void SpeedUP(int x)
+{
+    Time.timeScale = x;
+}
+
+//게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
+public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
@@ -77,20 +88,23 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
             
         }
-
         SpawnFinish = true;
-        StageNum++;
+
 
         while (true)
         {
             if (SpawnFinish && EnemyCount.Count == 0)
             {
                 gameongoing = false;
+                StageNum++;
                 break;
             }
             yield return null;
         }
     }
+
+    public bool GetGameOnGoing => gameongoing;
+
 
     //출현한 적이 체력이 다 되서 죽을 때
     public void EnemyDie(Enemy enemy,int coin)
