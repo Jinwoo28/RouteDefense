@@ -44,7 +44,6 @@ public class Node : MonoBehaviour
     private Color walkablecolorF;
 
 
-
     public void SetColor(Material[] color)
     {
         tilecolor = color;
@@ -109,6 +108,7 @@ public class Node : MonoBehaviour
 
     public void UpDownTile(List<Node> _neighbournode, float _Ydepth)
     {
+       
         //이미 높이가 변한 적이 있는지
         alreadymove = true;
 
@@ -117,6 +117,8 @@ public class Node : MonoBehaviour
 
         //현재 노드의 y값 초기화
         ydepth = _Ydepth;
+
+       
 
         //최고 높이를 기준으로 타일의 높이 정렬
         if (_Ydepth >= thislocalscale.y)
@@ -139,6 +141,8 @@ public class Node : MonoBehaviour
 
             float yhightgap = thislocalscale.y - neiYdepth;
 
+            if (_neighbournode[i].alreadymove && yhightgap <= 0.5f) continue;
+
             //타일의 크기가 바뀐적이 없고, 바뀔 높이가 0보다 클 때
             if (!_neighbournode[i].alreadymove && neighbourYscale > 0 /*&& thislocalscale.y > neighbourpos.y*/)
             {
@@ -154,6 +158,7 @@ public class Node : MonoBehaviour
                 _neighbournode[i].transform.localScale = neighbourpos;
             }
 
+            //현재 y값이 0.5f보다 크고(밑에서 2번째 이상), 현재 타일의 높이가 이웃 타일의 높이보다 클 때
             if (ydepth > 0.5f && thislocalscale.y > neighbourpos.y)
             {
                 _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, neighbourYscale);

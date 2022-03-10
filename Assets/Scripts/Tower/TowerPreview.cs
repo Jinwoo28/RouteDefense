@@ -131,10 +131,10 @@ public class TowerPreview : MonoBehaviour
                                 if (Origintower != null)
                                 {
                                     Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
+                                    tower.TowerStepUp(Origintower.GetComponent<Tower>());
                                     Destroy(Origintower);
                                 }
-
-                                tower.TowerStepUp(tower);
+                                tower.TowerStepUp(buildTower.GetComponent<Tower>());
                                 if (buildmanager != null)
                                     buildmanager.GettowerpreviewActive = false;
                                 Destroy(this.gameObject);

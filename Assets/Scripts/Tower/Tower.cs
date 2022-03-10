@@ -315,6 +315,8 @@ public void SetActiveOn()
 
     public void SetState(int _lev1, int _lev2)
     {
+        Debug.Log($"Lev1 : {_lev1} Lev2 : {_lev2}");
+
         int lev = (_lev1 + _lev2) / 2;
         Debug.Log(lev);
         towerlevel = lev;
@@ -324,11 +326,15 @@ public void SetActiveOn()
 
     public void TowerStepUp(Tower _tower)
     {
+
         GameObject buildedtower =Instantiate(uppertower, this.transform.position, Quaternion.identity);
         buildedtower.GetComponent<Tower>().SetNode = node;
+
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
+        
         buildedtower.GetComponent<Tower>().GetStep = 1;
         Debug.Log(_tower.GetTowerLevel + " : " + towerlevel);
+
         buildedtower.GetComponent<Tower>().SetUp(playerstate);
         buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
 
