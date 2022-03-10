@@ -13,6 +13,8 @@ public class StageInfo
 }
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private GameObject unituiParent = null;
+
     //스테이지 정보
     [SerializeField] private StageInfo[] stageinfo = null;
 

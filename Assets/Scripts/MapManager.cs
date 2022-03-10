@@ -83,12 +83,12 @@ public class MapManager : MonoBehaviour
     {
    
         Mapmake();
-        StartCoroutine(MakeHeight());
+        MakeHeight();
 
         AddtileNum = Random.Range(0, 7);
     }
 
-    private IEnumerator MakeHeight()
+    private void MakeHeight()
     {
         int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
@@ -111,7 +111,7 @@ public class MapManager : MonoBehaviour
                         grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].UpDownTile(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
 
                     }
-                    yield return new WaitForSeconds(0.2f);
+                   
                 }
             }
 
