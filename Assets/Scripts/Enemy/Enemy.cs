@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
    protected void StartMove()
     {
         unitspeed = unitstate.unitspeed;
-        Debug.Log(unitspeed);
+
         hpbarprefab = Instantiate(hpbar);
         hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
         hpbarprefab.transform.SetParent(canvas);
@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour
                     {
                         unitspeed *= 1.1f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
-                        Debug.Log("jump");
+
                     }
                 }
 

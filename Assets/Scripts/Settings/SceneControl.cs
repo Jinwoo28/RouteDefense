@@ -18,7 +18,10 @@ public class SceneControl : MonoBehaviour
        SceneManager.LoadScene(_SceneNum);
     }
 
-
+    public void ReStartGameScene(string _SceneName)
+    {
+        LoadSceneControler.LoadScene(_SceneName);
+    }
 
     public string GetSceneName
     {

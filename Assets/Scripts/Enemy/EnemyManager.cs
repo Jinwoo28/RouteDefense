@@ -38,6 +38,11 @@ public class EnemyManager : MonoBehaviour
     private Vector3[] waypoint;
     private Vector3 SpawnPos;
 
+    [SerializeField] private GameObject ClearPanal = null;
+    [SerializeField] private GameObject FailPanal = null;
+    private bool StageClear = false;
+    
+
     //소환되는 적들의 정보를 담을 List
     List<Enemy> EnemyCount = null;
 
@@ -47,12 +52,16 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         EnemyCount = new List<Enemy>();
-    MultipleSpeed.speedup += SpeedUP;
+         MultipleSpeed.speedup += SpeedUP;
+        ClearPanal.SetActive(false);
+        FailPanal.SetActive(false);
     }
 
-    
 
-private void SpeedUP(int x)
+
+
+
+    private void SpeedUP(int x)
 {
     Time.timeScale = x;
 }
@@ -87,7 +96,7 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
             EnemyCount.Add(enemy.GetComponent<Enemy>());
 
 
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(0.7f);
             
         }
         SpawnFinish = true;
@@ -99,6 +108,12 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
             {
                 gameongoing = false;
                 StageNum++;
+
+                if (StageNum >= stageinfo.Length)
+                {
+                    ClearPanal.SetActive(true);
+                }
+
                 break;
             }
             yield return null;
@@ -120,6 +135,11 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         playerstate.PlayerLifeDown();
         EnemyCount.Remove(enemy);
+
+        if (playerstate.PlayerLife <= 0)
+        {
+            FailPanal.SetActive(true);
+        }
     }
 
     public bool GameOnGoing

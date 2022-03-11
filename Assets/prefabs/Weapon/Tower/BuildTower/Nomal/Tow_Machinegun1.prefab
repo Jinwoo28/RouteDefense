@@ -329,7 +329,7 @@ MonoBehaviour:
   Base: {fileID: 1635208637264452501}
   TowerBody: {fileID: 1635208637264414643}
   bulletpos: {fileID: 9003823296437620558}
-  bullet: {fileID: 177688283286534501, guid: 4f580ab3b2322ce4ebb8005a92d4062e, type: 3}
+  bullet: {fileID: 3129377098345513012, guid: 538e10f07c1ebdb4ca7a528fe26c9625, type: 3}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64

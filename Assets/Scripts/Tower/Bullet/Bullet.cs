@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletTest : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    protected Transform target;
     protected float damage = 0;
-    protected float speed = 10;
+    protected float bullspeed = 0;
 
     public void SetBulletTest(Transform _target, float _damage)
     {
+        Debug.Log(_target);
         target = _target;
         damage = _damage;
     }
@@ -27,22 +28,27 @@ public class BulletTest : MonoBehaviour
 
     private void Update()
     {
-        if(target == null)
+        if (target == null)
         {
+            Debug.Log("dddd");
             Destroy(this.gameObject);
         }
         else
         {
             Vector3 distance = target.position - this.transform.position;
 
-            this.transform.position += distance.normalized * Time.deltaTime * speed;
+            this.transform.position += distance.normalized * Time.deltaTime * bullspeed;
 
-            if (Vector3.Magnitude(distance) < 0.1f)
+            if (Vector3.SqrMagnitude(distance) < 0.1f)
             {
-                target.GetComponent<Enemy>().EnemyAttacked(damage);
-                Destroy(this.gameObject);
+                AtkCharactor();
             }
         }
+    }
+
+    protected virtual void AtkCharactor()
+    {
+
     }
 
 

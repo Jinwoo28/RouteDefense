@@ -115,8 +115,6 @@ MonoBehaviour:
     unitcoin: 10
     unithp: 10
     unitamour: 0
-  hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}
-  damagenum: {fileID: 1949477120848397248, guid: b144792fec3bb2e45a0ad7dfcd3bfa83, type: 3}
 --- !u!1 &2135126106574757534
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,10 +105,13 @@ public void SetActiveOn()
     {
         if (FinalTarget == null)
         {
- 
+            atkspeed = 0;
+
+
         }
         else
         {
+            
              RotateToTarget();
         }
 
@@ -121,7 +124,7 @@ public void SetActiveOn()
                 towercollider.enabled = true;
                 Destroy(preview);
                 showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
-                Debug.Log("2222");
+
             }
         }
 
@@ -221,10 +224,10 @@ public void SetActiveOn()
                 GameObject BT = Instantiate(bullet, bulletpos.position, Quaternion.identity);
                 
                 if (critical > towerinfo.towercritical) 
-                BT.GetComponent<BulletTest>().SetBulletTest(FinalTarget, towerinfo.towerdamage);
+                BT.GetComponent<Bullet>().SetBulletTest(FinalTarget, towerinfo.towerdamage);
 
                 else if(critical<towerinfo.towercritical)
-                    BT.GetComponent<BulletTest>().SetBulletTest(FinalTarget, towerinfo.towerdamage*2);
+                    BT.GetComponent<Bullet>().SetBulletTest(FinalTarget, towerinfo.towerdamage*2);
             }
         }
 

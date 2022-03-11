@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
+    [SerializeField] private Texture2D cursorimage = null;
     [SerializeField]private PlayerState playerstate = null;
 
     //tile ÇÁ¸®Æé
@@ -135,8 +137,17 @@ public class MapManager : MonoBehaviour
                     }
                 }
             }
-        
+
+        if (TileCanChange)
+            Cursor.SetCursor(cursorimage, Vector2.zero, CursorMode.ForceSoftware);
+        else
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        }
     }
+
+
+
 
     private void Mapmake()
     {
@@ -698,8 +709,14 @@ X X 10 X
         {
             if (!AddTileActive)
                 TileCanChange = !TileCanChange;
+
+    
+
         }
     }
+
+
+
 
     public void RouteReset()
     {

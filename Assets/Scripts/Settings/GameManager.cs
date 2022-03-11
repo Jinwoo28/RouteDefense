@@ -10,33 +10,43 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject settingPanal = null;
     private MultipleSpeed multipleSpeed = null;
 
+    private bool settingpanelcheck = false;
+
     private void Start()
     {
         settingPanal.SetActive(false);
         multipleSpeed = this.GetComponent<MultipleSpeed>();
     }
 
+    private void Update()
+    {
+
+
+
+
+        if (settingpanelcheck)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SettingPanalOff();
+            }
+        }
+
+    }
     public void SettingPanalOn()
     {
+        settingpanelcheck = true;
         settingPanal.SetActive(true);
         multipleSpeed.OnClickStart(0);
     }
 
     public void SettingPanalOff()
     {
+        settingpanelcheck = false;
         settingPanal.SetActive(false);
         multipleSpeed.OnClickStart(1);
     }
 
-    public void GotoLobby()
-    {
-
-    }
-
-    public void ReStartGame()
-    {
-
-    }
 
 
 }
