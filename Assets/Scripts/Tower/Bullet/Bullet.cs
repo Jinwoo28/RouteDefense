@@ -30,7 +30,6 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.Log("dddd");
             Destroy(this.gameObject);
         }
         else

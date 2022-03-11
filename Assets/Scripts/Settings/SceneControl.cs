@@ -28,4 +28,9 @@ public class SceneControl : MonoBehaviour
         set => currentScene = value;
     }
 
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
+
 }

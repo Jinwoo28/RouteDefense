@@ -5,8 +5,8 @@ using UnityEngine;
 public class TeslaBullet : Bullet
 {
     [SerializeField] private LayerMask enemylayer;
-    private float Range = 3.0f;
-    private int Count = 3;
+    [SerializeField] private float Range = 3.0f;
+    [SerializeField] private int Count = 3;
 
     HashSet<Transform> enemylist = new HashSet<Transform>();
 
