@@ -484,10 +484,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitstate:
-    unitspeed: 1.5
-    unitcoin: 10
-    unithp: 10
+    unitspeed: 1.25
+    unitcoin: 15
+    unithp: 8
     unitamour: 2
+    avoidancerate: 5
 --- !u!1 &4629278294635405872
 GameObject:
   m_ObjectHideFlags: 0

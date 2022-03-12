@@ -62,11 +62,11 @@ public class ShowTowerInfo : MonoBehaviour
 
         if (tower != null)
         {
-            towername.text = $"{tower.Getname} {tower.GetStep}Step";
-            towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
+            towername.text = $"{tower.Getname}";
+            towerlevel.text = "Upgrade + " + tower.GetTowerLevel.ToString();
             atkdamage.text = "Damage : " + tower.GetDamage.ToString();
             atkcritical.text = "Critical : " + tower.GetCritical.ToString();
-            atkspeed.text = "Speed : " + tower.GetSpeed.ToString();
+            atkspeed.text =  "Level "+tower.GetStep.ToString();
             atkrange.text = "Range : " + tower.GetRange.ToString();
             upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
         }

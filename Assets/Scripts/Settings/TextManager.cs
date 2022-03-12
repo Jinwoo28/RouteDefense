@@ -21,6 +21,7 @@ public class TextManager : MonoBehaviour
     void Update()
     {
         SetVariable();
+
     }
 
     public void SetVariable()

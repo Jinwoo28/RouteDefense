@@ -96,7 +96,7 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
             EnemyCount.Add(enemy.GetComponent<Enemy>());
 
 
-                yield return new WaitForSeconds(0.7f);
+                yield return new WaitForSeconds(1.0f);
             
         }
         SpawnFinish = true;

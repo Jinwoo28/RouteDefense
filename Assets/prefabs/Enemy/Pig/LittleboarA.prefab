@@ -113,8 +113,9 @@ MonoBehaviour:
   unitstate:
     unitspeed: 1
     unitcoin: 10
-    unithp: 10
+    unithp: 5
     unitamour: 0
+    avoidancerate: 0
 --- !u!1 &2135126106574757534
 GameObject:
   m_ObjectHideFlags: 0

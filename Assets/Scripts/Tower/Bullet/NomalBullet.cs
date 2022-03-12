@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class NomalBullet : Bullet
 {
+    private void Start()
+    {
+        bullspeed = 10.0f;
+    }
 
     protected override void AtkCharactor()
     {

@@ -20,8 +20,12 @@ public class HpNum : MonoBehaviour
         Destroy(this.gameObject, 0.75f);
         text = this.GetComponent<TextMeshProUGUI>();
         alpha = text.color;
-        text.text = damage.ToString();
 
+        if (damage <= 0) text.text = "Miss";
+        else
+        {
+            text.text = damage.ToString();
+        }
     }
 
     // Update is called once per frame

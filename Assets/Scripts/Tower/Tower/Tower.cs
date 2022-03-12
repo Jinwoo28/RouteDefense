@@ -28,19 +28,24 @@ public class TowerInfo
 
 public class Tower : MonoBehaviour
 {
-    //진화할 상위 타워
+    //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
-    //미리보기 타워
+
+    //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
-    //타워 미리보기 프리펩
+
+    //미리보기 타워 생성
     private GameObject preview = null;
 
-    //합체할 때 잠시 사라질 오브젝트와 collider
+    //타워가 이동할 때 잠시 사라질 오브젝트와 collider
     [SerializeField] private GameObject Base = null;
     private BoxCollider towercollider = null;
 
     //적 방향으로 돌아갈 포신
+    //X축 회전
     [SerializeField] private Transform TowerBody;
+    //Y축 회전
+    [SerializeField] private Transform YTowerBody;
 
     //총알을 발사할 위치와 총알 프리펩
     [SerializeField] private Transform bulletpos;
@@ -51,7 +56,9 @@ public class Tower : MonoBehaviour
 
     private PlayerState playerstate = null;
 
+    //타워별 업그레이드 수치
     [SerializeField] UpgradeValue upgradevalue = null;
+    //타워별 수치
     [SerializeField] TowerInfo towerinfo = null;
 
     //포탄을 발사 후 공격속도 값을 구할 떄 사용할 변수
@@ -69,6 +76,7 @@ public class Tower : MonoBehaviour
     //적 타겟 Transform
     private Transform FinalTarget = null;
 
+    //타워가 현재 이동 중인지
     private bool towermove = false;
 
     private Node node = null;
@@ -111,7 +119,6 @@ public void SetActiveOn()
         }
         else
         {
-            
              RotateToTarget();
         }
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+//using System;
 using UnityEngine.UI;
 
    [System.Serializable]
@@ -11,6 +11,7 @@ using UnityEngine.UI;
     public int unitcoin = 0;
     public float unithp = 0;
     public int unitamour = 0;
+    public int avoidancerate = 0;
 }
 
 
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour
         hpbarprefab.transform.SetParent(canvas);
 
         StartCoroutine("MoveUnit");
+        
 
     }
 
@@ -80,8 +82,6 @@ public class Enemy : MonoBehaviour
         Vector3 MoveToPoint = Waypoint[waypointindex];
 
         Vector3 currentPos = this.transform.position;
-
-
 
         while (waypointindex != Waypoint.Length - 1)
         {
@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (!jump)
                     {
-                        unitspeed *= 0.9f;
+                        unitspeed *= 0.8f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
                         Debug.Log("jump");
                     }
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (!jump)
                     {
-                        unitspeed *= 1.1f;
+                        unitspeed *= 1.2f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
 
                     }
@@ -194,7 +194,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyAttacked(float _damage)
     {
-        float realdamage = _damage - unitstate.unitamour;
+        float realdamage = 0;
+        int X = Random.Range(1, 101);
+        if (X < unitstate.avoidancerate) realdamage = 0;
+        else realdamage = _damage - unitstate.unitamour;
+        
         ShowDamage(realdamage);
         if (realdamage >= unitstate.unithp)
         {
@@ -209,11 +213,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDie()
     {
+
         Destroy(hpbarprefab);
         EM.EnemyDie(this, unitstate.unitcoin);
         Destroy(this.gameObject);
     }
-
 
     IEnumerator DotDamage(float _damage,currentstate damagetype)
     {
