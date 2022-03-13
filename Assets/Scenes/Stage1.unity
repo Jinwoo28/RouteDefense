@@ -6966,7 +6966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercoin: 1000
+  playercoin: 5000
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0

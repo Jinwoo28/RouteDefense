@@ -85,7 +85,7 @@ public class ShowTowerInfo : MonoBehaviour
                     tower = towertransform.GetComponent<Tower>();
                     ShowInfo(tower);
                     ShowRange(towertransform.transform, towertransform.GetComponent<Tower>().GetRange);
-                    Debug.Log("11111");
+                    //Debug.Log("11111");
 
                     if (tower != null)
                     {

@@ -68,7 +68,7 @@ public class Tower : MonoBehaviour
     private int towerlevel = 1;
     
     //타워의 합체 단계 1,2,3단계
-    private int towerstep = 1;
+    [SerializeField] private int towerstep = 1;
 
     //포신이 회전할 속도
     private float rotationspeed = 1080;
@@ -86,6 +86,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
+        //Debug.Log("tower Level : "+towerstep);
+
         towercollider = this.GetComponent<BoxCollider>();
         atkspeed = towerinfo.towerspeed;
         StartCoroutine("AutoSearch");
@@ -111,6 +113,8 @@ public void SetActiveOn()
 
     private void Update()
     {
+   // Debug.Log(node.GetOnTower);
+
         if (FinalTarget == null)
         {
             atkspeed = 0;
@@ -311,9 +315,9 @@ public void SetActiveOn()
 
     public void TowerMove()
     {
-
         towermove = true;
         Base.SetActive(false);
+       // Debug.Log("dddd");
         towercollider.enabled = false;
         preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
         preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
@@ -325,10 +329,7 @@ public void SetActiveOn()
 
     public void SetState(int _lev1, int _lev2)
     {
-        Debug.Log($"Lev1 : {_lev1} Lev2 : {_lev2}");
-
         int lev = (_lev1 + _lev2) / 2;
-        Debug.Log(lev);
         towerlevel = lev;
         towerinfo.towerdamage += (lev * upgradevalue.damagevalue);
         towerinfo.towercritical += (lev * (float)upgradevalue.upcriticalvalue);
@@ -336,15 +337,13 @@ public void SetActiveOn()
 
     public void TowerStepUp(Tower _tower)
     {
+        Debug.Log("다음단계");
 
         GameObject buildedtower =Instantiate(uppertower, this.transform.position, Quaternion.identity);
+
         buildedtower.GetComponent<Tower>().SetNode = node;
-
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
-        
-        buildedtower.GetComponent<Tower>().GetStep = 1;
-        Debug.Log(_tower.GetTowerLevel + " : " + towerlevel);
-
+        //buildedtower.GetComponent<Tower>().GetStep = 1;
         buildedtower.GetComponent<Tower>().SetUp(playerstate);
         buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
 

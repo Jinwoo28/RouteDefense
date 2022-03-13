@@ -130,8 +130,9 @@ public class TowerPreview : MonoBehaviour
                             {
                                 if (Origintower != null)
                                 {
+                                    //여기서 문제
                                     Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
-                                    tower.TowerStepUp(Origintower.GetComponent<Tower>());
+                                    //tower.TowerStepUp(Origintower.GetComponent<Tower>());
                                     Destroy(Origintower);
                                 }
                                 tower.TowerStepUp(buildTower.GetComponent<Tower>());
@@ -156,6 +157,7 @@ public class TowerPreview : MonoBehaviour
                             Origintower.transform.position = this.transform.position;
                             Origintower.GetComponent<Tower>().SetActiveOn();
                             Origintower.GetComponent<Tower>().SetNode = towernode;
+                            Origintower.GetComponent<Tower>().SetNode.GetOnTower = true;
                             showtowerinfo.ShowInfo(Origintower.GetComponent<Tower>());
                             showtowerinfo.ShowRange(Origintower.transform, Origintower.GetComponent<Tower>().GetRange);
 
@@ -165,8 +167,9 @@ public class TowerPreview : MonoBehaviour
                         {
                             GameObject buildedtower = Instantiate(buildTower, this.transform.position, Quaternion.identity);
                             buildedtower.GetComponent<Tower>().SetNode = towernode;
-                            towernode.GetOnTower = true;
-                            Debug.Log("설치");
+                            //towernode.GetOnTower = true;
+                            buildedtower.GetComponent<Tower>().SetNode.GetOnTower = true;
+                           // Debug.Log("설치");
                             buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
                             buildedtower.GetComponent<Tower>().SetUp(playerstate);
                             showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
@@ -286,24 +289,30 @@ public class TowerPreview : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       // Debug.Log(towerstep);
         if (other.CompareTag("Tower"))
         {
-            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3)
+            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3)
             { 
                 CanCombination = true;
                 tower = other.GetComponent<Tower>();
             }
             else
             {
-                Debug.Log("dddd");
+                
                 CanCombination = false;
                 tower = null;
             }
 
-            alreadytower = true;
-            
+//         alreadytower = true;
+        }
+        else
+        {
+            CanCombination = false;
         }
     }
+
+
 
     //private void OnDestroy()
     //{
@@ -311,16 +320,16 @@ public class TowerPreview : MonoBehaviour
     //}
 
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Tower"))
-        {
-            alreadytower = false;
-            tower = null;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Tower"))
+    //    {
+    //        alreadytower = false;
+    //        tower = null;
+    //    }
+    //}
 
-    public bool AlreadyTower => alreadytower;
+   // public bool AlreadyTower => alreadytower;
     public Tower GetTower => tower;
 
     public Node GetTowerNode

@@ -44,6 +44,7 @@ public class Node : MonoBehaviour
     private Color walkablecolorF;
 
 
+
     public void SetColor(Material[] color)
     {
         tilecolor = color;
