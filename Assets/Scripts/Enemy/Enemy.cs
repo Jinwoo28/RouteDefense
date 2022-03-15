@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
                     {
                         unitspeed *= 0.8f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
-                        Debug.Log("jump");
+
                     }
                 }
 
@@ -158,10 +158,17 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    //포물선 이동
     private Vector3 parabola(Vector3 _start, Vector3 _end, float _height, float _power,float _time)
     {
+        //y축은 파워값과 높이값에 time.deltatime을 곱한다.
+        //time이 1보다 작을 때는 양수, 1보다 클 때는(음수)이기 때문에 포물선 이동이 가능
         float heightvalue = -_power * _height * _time * _time + _power * _height * _time;
-
+        
+        //Mathf.sin
+        //시작 지점의 좌표와 도착지점의 좌표 보간값
+        //x축과 z축은 보간된 값으로 업데이트
+        
         Vector3 pos = Vector3.Lerp(_start, _end, _time);
 
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);

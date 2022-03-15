@@ -21,48 +21,43 @@ public class TowerInfo
     public float towerdamage = 0;
     public float towercritical = 0;
     public float towerrange = 0;
-    public float towerspeed = 0;
+    public float atkdelay = 0;
 }
-
-
 
 public class Tower : MonoBehaviour
 {
     //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
 
+    //타워별 업그레이드 수치
+    [SerializeField] UpgradeValue upgradevalue = null;
+    //타워별 수치
+    [SerializeField] protected TowerInfo towerinfo = null;
+
+    //tower prefab에게 넘겨줄 상태 ui
+    public GameObject[] buildstate = null;
     //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
 
     //미리보기 타워 생성
     private GameObject preview = null;
 
-    //타워가 이동할 때 잠시 사라질 오브젝트와 collider
-    [SerializeField] private GameObject Base = null;
-    private BoxCollider towercollider = null;
-
     //적 방향으로 돌아갈 포신
-    //X축 회전
-    [SerializeField] private Transform TowerBody;
-    //Y축 회전
-    [SerializeField] private Transform YTowerBody;
+    //y축 회전
+    [SerializeField] protected Transform towerBody;
+    //x축 회전
+    [SerializeField] protected Transform towerTurret;
 
-    //총알을 발사할 위치와 총알 프리펩
-    [SerializeField] private Transform bulletpos;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] protected Transform shootPos = null;
 
     //적을 검사할 레이어
     [SerializeField] private LayerMask enemylayer;
 
+    //플레이어 coin값을 가져올 playstate
     private PlayerState playerstate = null;
 
-    //타워별 업그레이드 수치
-    [SerializeField] UpgradeValue upgradevalue = null;
-    //타워별 수치
-    [SerializeField] TowerInfo towerinfo = null;
-
     //포탄을 발사 후 공격속도 값을 구할 떄 사용할 변수
-    private float atkspeed = 0;
+    protected float atkspeed = 0;
 
     //타워의 업그레이드 수준
     private int towerlevel = 1;
@@ -71,73 +66,60 @@ public class Tower : MonoBehaviour
     [SerializeField] private int towerstep = 1;
 
     //포신이 회전할 속도
-    private float rotationspeed = 1080;
+    protected float rotationspeed = 720;
 
     //적 타겟 Transform
-    private Transform FinalTarget = null;
+    protected Transform FinalTarget = null;
 
-    //타워가 현재 이동 중인지
-    private bool towermove = false;
-
+    //현재 타워 아래에 있는 타일의 노드
     private Node node = null;
 
+    //타워의 공격범위
     public ShowTowerInfo showtowerinfo = null;
-   
 
-    void Start()
+    private ObjectPooling objectPooling = null;
+
+    protected virtual void Start()
     {
-        //Debug.Log("tower Level : "+towerstep);
+        Debug.Log(buildstate.Length + " : tower");
 
-        towercollider = this.GetComponent<BoxCollider>();
-        atkspeed = towerinfo.towerspeed;
-        StartCoroutine("AutoSearch");
-        node.GetComponent<Node>().GetOnTower = true;
-
-        Base.SetActive(true);
-        towercollider.enabled = true;
+        atkspeed = towerinfo.atkdelay;
+        StartCoroutine(AutoSearch());
+        node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
+        
     }
-
-    
 
 private void SpeedUP(int x)
 {
     Time.timeScale = x;
 }
-public void SetActiveOn()
+
+    protected virtual void Update()
     {
 
-        Base.SetActive(true);
-        towercollider.enabled = true;
-    }
-
-    private void Update()
-    {
-   // Debug.Log(node.GetOnTower);
 
         if (FinalTarget == null)
         {
             atkspeed = 0;
-
-
         }
         else
         {
-             RotateToTarget();
+            RotateTurret();
         }
 
-        if (towermove)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                towermove = false;
-                Base.SetActive(true);
-                towercollider.enabled = true;
-                Destroy(preview);
-                showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
+        //if (towermove)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        towermove = false;
+        //        Base.SetActive(true);
+        //        towercollider.enabled = true;
+        //        Destroy(preview);
+        //        showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
 
-            }
-        }
+        //    }
+        //}
 
 
     }
@@ -189,60 +171,91 @@ public void SetActiveOn()
                             ShortestTarget = EC.transform;
                         }
                     }
-
-
                     FinalTarget = ShortestTarget;
                     //가장 거리가 짧은 대상을 최종 타겟으로 설정.
-
                 }
             }
             yield return null;
         }
-
-
-
     }
 
     
 
-    private void RotateToTarget()
+    //공격방식을 다르게 만들 수 있는 함수
+
+    //Y축 회전 함수
+    //x축 회전 함수
+
+    //X축 Y축 동시 회전 함수
+   
+
+    //protected void RotateXY()
+    //{
+    //    Vector3 relativePos = FinalTarget.position - transform.position;
+    //    //현재 위치에서 타겟위치로의 방향값
+    //    Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
+
+    //    //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
+    //    Vector3 TowerDir = Quaternion.RotateTowards(towerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
+
+    //    //현재의 rotation값에 Vector3형태로 저장한 값 사용
+    //    towerBody.rotation = Quaternion.Euler(TowerDir.x, TowerDir.y, 0);
+
+    //    if (Quaternion.Angle(towerBody.rotation, rotationtotarget) < 3.0f)
+    //    {
+    //        atkspeed -= Time.deltaTime;
+    //        if (atkspeed <= 0)
+    //        {
+    //            atkspeed = towerinfo.atkdelay;
+    //            int critical = Random.Range(1, 101);
+
+    //            Debug.Log("Attack");
+    //            //var BT = objectPooling.GetObject(bulletpos.position);
+
+    //            //if (critical > towerinfo.towercritical)
+    //            //    BT.SetBulletTest(FinalTarget, towerinfo.towerdamage, objectPooling);
+
+    //            //else if (critical < towerinfo.towercritical)
+    //            //    BT.SetBulletTest(FinalTarget, towerinfo.towerdamage * 2, objectPooling);
+    //        }
+    //    }
+    //}
+
+    protected virtual void RotateTurret()
     {
         Vector3 relativePos = FinalTarget.position - transform.position;
         //현재 위치에서 타겟위치로의 방향값
         Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
 
-        
         //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
-        Vector3 TowerDir = Quaternion.RotateTowards(TowerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
-
-        Debug.DrawLine(this.transform.position, FinalTarget.position, Color.red);
-
+        Vector3 TowerDir = Quaternion.RotateTowards(towerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
+        Vector3 TowerDir2 = Quaternion.RotateTowards(towerTurret.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
 
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
-        TowerBody.rotation = Quaternion.Euler(TowerDir.x, TowerDir.y, 0);
+        towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
+        towerTurret.rotation = Quaternion.Euler(TowerDir2.x, TowerDir2.y, 0);
 
-
-
-
-        if (Quaternion.Angle(TowerBody.rotation, rotationtotarget) < 3.0f)
+        if (Quaternion.Angle(towerBody.rotation, rotationtotarget) < 10.0f)
         {
+
             atkspeed -= Time.deltaTime;
             if (atkspeed <= 0)
             {
-                atkspeed = towerinfo.towerspeed;
+                atkspeed = towerinfo.atkdelay;
                 int critical = Random.Range(1, 101);
-                
-                GameObject BT = Instantiate(bullet, bulletpos.position, Quaternion.identity);
-                
-                if (critical > towerinfo.towercritical) 
-                BT.GetComponent<Bullet>().SetBulletTest(FinalTarget, towerinfo.towerdamage);
 
-                else if(critical<towerinfo.towercritical)
-                    BT.GetComponent<Bullet>().SetBulletTest(FinalTarget, towerinfo.towerdamage*2);
+                Attack();
             }
         }
 
+
     }
+
+  
+
+    protected virtual void Attack() { }
+
+
 
     public void TowerUpgrade()
     {
@@ -315,15 +328,26 @@ public void SetActiveOn()
 
     public void TowerMove()
     {
-        towermove = true;
-        Base.SetActive(false);
-       // Debug.Log("dddd");
-        towercollider.enabled = false;
         preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
+        preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
         preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
         preview.GetComponent<TowerPreview>().SetUp(this.gameObject);
-        preview.GetComponent<TowerPreview>().SetOriginTower=this.gameObject;
+        preview.GetComponent<TowerPreview>().SetOriginTower = this.gameObject;
+        ActiveOff();
+    }
 
+    public void ActiveOff()
+    {
+ 
+        this.gameObject.SetActive(false);
+        node.GetOnTower = false;
+    }
+
+    public void ActiveOn()
+    {
+
+        this.gameObject.SetActive(true);
+        node.GetOnTower = true;
     }
 
 
@@ -337,13 +361,11 @@ public void SetActiveOn()
 
     public void TowerStepUp(Tower _tower)
     {
-        Debug.Log("다음단계");
-
         GameObject buildedtower =Instantiate(uppertower, this.transform.position, Quaternion.identity);
-
         buildedtower.GetComponent<Tower>().SetNode = node;
+        buildedtower.GetComponent<Tower>().buildstate = buildstate;
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
-        //buildedtower.GetComponent<Tower>().GetStep = 1;
+        buildedtower.GetComponent<Tower>().GetStep = 1;
         buildedtower.GetComponent<Tower>().SetUp(playerstate);
         buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
 
@@ -353,7 +375,15 @@ public void SetActiveOn()
         Destroy(this.gameObject);
     }
 
- 
+    public GameObject[] GetBuildState
+    {
+        set
+        {
+            buildstate = value;
+        }
+    }
+
+
 
     public Node SetNode
     {
@@ -366,12 +396,7 @@ public void SetActiveOn()
             node = value;
         }
     }
-
-    public void TowerDestroy()
-    {
-        Destroy(this.gameObject);
-    }
-        
+      
     
     //타워 이름
     public string Getname => towerinfo.towername;

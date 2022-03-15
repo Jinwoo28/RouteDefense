@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8947287018898876465}
   - component: {fileID: 8947287018897549329}
   - component: {fileID: 8947287018896583377}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8947287018898876467}
   - component: {fileID: 8947287018897549331}
   - component: {fileID: 8947287018896583379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 8947287018898876469}
   - component: {fileID: 8947287018897549333}
   - component: {fileID: 8947287018896583381}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,9 +255,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8947287018898876471}
   - component: {fileID: -8367226090981381152}
-  m_Layer: 0
+  - component: {fileID: 2576879652384913616}
+  m_Layer: 9
   m_Name: Tow_Gatling1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,14 +270,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8947287018898584599}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 8947287018898876469}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &-8367226090981381152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,24 +291,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uppertower: {fileID: 1952561914480389280, guid: 3685d5f6999cea24b90fccedde3748cd, type: 3}
+  upgradevalue:
+    priceincrease: 50
+    upgradeprice: 20
+    damagevalue: 0.5
+    upcriticalvalue: 1
+  towerinfo:
+    towerprice: 150
+    towername: 
+    towerdamage: 1
+    towercritical: 0
+    towerrange: 1.5
+    atkdelay: 0.15
+  buildstate: []
   towerpreview: {fileID: 8947287018898584599, guid: 85955a1216b9d7b48ba74a246f3ffefb, type: 3}
-  Base: {fileID: 8947287018898584597}
-  TowerBody: {fileID: 0}
-  bulletpos: {fileID: 0}
-  bullet: {fileID: 0}
+  towerBody: {fileID: 0}
+  towerTurret: {fileID: 0}
+  shootPos: {fileID: 0}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
-  upgradevalue:
-    priceincrease: 0
-    upgradeprice: 0
-    damagevalue: 0
-    upcriticalvalue: 0
-  towerinfo:
-    towerprice: 0
-    towername: 
-    towerdamage: 0
-    towercritical: 0
-    towerrange: 0
-    towerspeed: 0
+  towerstep: 1
   showtowerinfo: {fileID: 0}
+  RotateBarral: {fileID: 8947287018898876465}
+  atkNum: 3
+--- !u!65 &2576879652384913616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947287018898584599}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}

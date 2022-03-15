@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5477428455646955547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7120069093244218422}
+  m_Layer: 9
+  m_Name: SHoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7120069093244218422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5477428455646955547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.356, z: 0.334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9195844679818791054}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9195844679818826922
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,9 +40,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9195844679818791050}
   - component: {fileID: 9195844679828318062}
-  m_Layer: 0
+  - component: {fileID: 565966067381187825}
+  m_Layer: 9
   m_Name: Tow_Mortar2
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 9195844679818826922}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 9195844679818791052}
   m_Father: {fileID: 0}
@@ -51,6 +82,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &565966067381187825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195844679818826922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9affa77ed0f09aa4084fce64f530e09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uppertower: {fileID: 6636577839603563935, guid: e9dd008ebe98035409562fb1ffa8026d, type: 3}
+  upgradevalue:
+    priceincrease: 0
+    upgradeprice: 0
+    damagevalue: 0
+    upcriticalvalue: 0
+  towerinfo:
+    towerprice: 0
+    towername: 
+    towerdamage: 0
+    towercritical: 0
+    towerrange: 0
+    atkdelay: 0
+  buildstate: []
+  towerpreview: {fileID: 9195844679818826922, guid: 0f331ff44e4d40c4f95ff73ce8162010, type: 3}
+  towerBody: {fileID: 0}
+  towerTurret: {fileID: 0}
+  shootPos: {fileID: 0}
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 0
+  towerstep: 1
+  showtowerinfo: {fileID: 0}
 --- !u!1 &9195844679818826924
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +128,7 @@ GameObject:
   - component: {fileID: 9195844679818791052}
   - component: {fileID: 9195844679822182572}
   - component: {fileID: 9195844679821085292}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9195844679818826924}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9195844679818791054}
@@ -144,7 +210,7 @@ GameObject:
   - component: {fileID: 9195844679818791054}
   - component: {fileID: 9195844679822182574}
   - component: {fileID: 9195844679821085294}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +227,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.5646602, z: -0.08171186}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7120069093244218422}
   m_Father: {fileID: 9195844679818791052}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -29,6 +29,8 @@ public class ShowTowerInfo : MonoBehaviour
 
     [SerializeField] private EnemyManager enemymanager = null;
 
+    private GameObject RangeParent = null;
+
     private int towerupgradeprice = 0;
 
     private GameObject[] rangesprite = null;
@@ -45,12 +47,13 @@ public class ShowTowerInfo : MonoBehaviour
 
     private void Start()
     {
+        RangeParent = new GameObject("Range");
         detectob = this.GetComponent<DetectObject>();
         rangesprite = new GameObject[72];
         towerinfopanel.SetActive(false);
         for (int i = 0; i < 72; i++)
         {
-            rangesprite[i] = Instantiate(rangePrefab);
+            rangesprite[i] = Instantiate(rangePrefab, RangeParent.transform);
             rangesprite[i].SetActive(false);
         }
     }

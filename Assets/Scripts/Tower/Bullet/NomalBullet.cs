@@ -6,12 +6,12 @@ public class NomalBullet : Bullet
 {
     private void Start()
     {
-        bullspeed = 10.0f;
+        bullspeed = 3.0f;
     }
 
     protected override void AtkCharactor()
     {
         target.GetComponent<Enemy>().EnemyAttacked(damage);
-        Destroy(this.gameObject);
+       // Destroy(this.gameObject);
     }
 }

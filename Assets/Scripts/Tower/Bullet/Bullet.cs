@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private ObjectPooling objectpooling = null;
     protected Transform target;
     protected float damage = 0;
     protected float bullspeed = 0;
 
-    public void SetBulletTest(Transform _target, float _damage)
+    public void SetUp(Transform _target, float _damage, ObjectPooling _objpooling,float _speed)
     {
-        Debug.Log(_target);
+        bullspeed = _speed;
         target = _target;
         damage = _damage;
+        objectpooling = _objpooling;
     }
 
     private void Start()
@@ -25,30 +27,38 @@ public class Bullet : MonoBehaviour
         Time.timeScale = x;
     }
 
-
     private void Update()
     {
         if (target == null)
         {
-            Destroy(this.gameObject);
+            objectpooling.ReturnObject(this);
         }
         else
         {
-            Vector3 distance = target.position - this.transform.position;
-
-            this.transform.position += distance.normalized * Time.deltaTime * bullspeed;
-
-            if (Vector3.SqrMagnitude(distance) < 0.1f)
-            {
-                AtkCharactor();
-            }
+            Attack();
         }
     }
+
+    protected virtual void Attack()
+    {
+        Vector3 distance = target.position - this.transform.position;
+
+        this.transform.position += distance.normalized * Time.deltaTime * bullspeed;
+
+        if (Vector3.SqrMagnitude(distance) < 0.1f)
+        {
+            AtkCharactor();
+            objectpooling.ReturnObject(this);
+        }
+    }
+
 
     protected virtual void AtkCharactor()
     {
 
     }
+
+
 
 
 }

@@ -7,7 +7,7 @@ public class Preview : MonoBehaviour
     private bool canbuildable = true;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 772142591241587137}
   - component: {fileID: 772142591256792193}
   - component: {fileID: 772142591256704289}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tesla_glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4785,7 +4785,7 @@ GameObject:
   - component: {fileID: 772142591241587139}
   - component: {fileID: 772142591256792195}
   - component: {fileID: 772142591256704291}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tesla_glow_up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9559,7 +9559,7 @@ GameObject:
   - component: {fileID: 772142591241587141}
   - component: {fileID: 772142591256792199}
   - component: {fileID: 772142591256704295}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tesla_part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14391,9 +14391,10 @@ GameObject:
   - component: {fileID: 772142591241587143}
   - component: {fileID: 772142591240292835}
   - component: {fileID: 772142591239162659}
-  m_Layer: 0
+  - component: {fileID: -9158017447215690303}
+  m_Layer: 9
   m_Name: Tow_Tesla2
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14407,7 +14408,7 @@ Transform:
   m_GameObject: {fileID: 772142591241098727}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 772142591241587139}
   - {fileID: 772142591241587141}
@@ -14464,3 +14465,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-9158017447215690303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772142591241098727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feed537acbf661e4f931203d4a40aac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Particle: {fileID: 0}
+  buildstate: []
+  uppertower: {fileID: 0}
+  towerpreview: {fileID: 0}
+  Base: {fileID: 0}
+  TowerBody: {fileID: 0}
+  towerBarrel: {fileID: 0}
+  bulletpos: {fileID: 0}
+  bullet: {fileID: 0}
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 0
+  upgradevalue:
+    priceincrease: 0
+    upgradeprice: 0
+    damagevalue: 0
+    upcriticalvalue: 0
+  towerinfo:
+    towerprice: 0
+    towername: 
+    towerdamage: 0
+    towercritical: 0
+    towerrange: 0
+    towerspeed: 0
+  towerstep: 1
+  showtowerinfo: {fileID: 0}

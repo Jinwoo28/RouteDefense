@@ -63,7 +63,7 @@ public class TeslaBullet : Bullet
             
             //가장 거리가 짧은 대상을 최종 타겟으로 설정.
             
-            SetBulletTest(ShortestTarget, damage);
+            //SetBulletTest(ShortestTarget, damage);
         }
         else
         {

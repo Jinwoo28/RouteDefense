@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6057098640036875515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6031843419435706451}
+  m_Layer: 9
+  m_Name: Shoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6031843419435706451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057098640036875515}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.359, z: 0.392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8832539551386522800}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8832539551386618000
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +41,7 @@ GameObject:
   - component: {fileID: 8832539551386522800}
   - component: {fileID: 8832539551383622800}
   - component: {fileID: 8832539551384622672}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +58,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.56561095, z: -0.08595068}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6031843419435706451}
   m_Father: {fileID: 8832539551386522802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -92,7 +123,7 @@ GameObject:
   - component: {fileID: 8832539551386522802}
   - component: {fileID: 8832539551383622802}
   - component: {fileID: 8832539551384622674}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8832539551386618002}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8832539551386522800}
@@ -173,9 +204,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8832539551386522804}
   - component: {fileID: 8832539551377242960}
-  m_Layer: 0
+  - component: {fileID: 7312916166299333021}
+  - component: {fileID: -1221180500245055971}
+  - component: {fileID: 987479985351719612}
+  m_Layer: 9
   m_Name: Tow_Mortar1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 8832539551386618004}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 8832539551386522802}
   m_Father: {fileID: 0}
@@ -214,3 +248,65 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7312916166299333021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832539551386618004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9affa77ed0f09aa4084fce64f530e09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uppertower: {fileID: 9195844679818826922, guid: a160c1020dd28b946b5908625ff5d457, type: 3}
+  upgradevalue:
+    priceincrease: 0
+    upgradeprice: 0
+    damagevalue: 0
+    upcriticalvalue: 0
+  towerinfo:
+    towerprice: 0
+    towername: 
+    towerdamage: 0
+    towercritical: 0
+    towerrange: 0
+    atkdelay: 0
+  buildstate: []
+  towerpreview: {fileID: 8832539551386618004, guid: 3e2e681a788d41740adf4ecc47356763, type: 3}
+  towerBody: {fileID: 0}
+  towerTurret: {fileID: 0}
+  shootPos: {fileID: 0}
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 64
+  towerstep: 1
+  showtowerinfo: {fileID: 0}
+--- !u!114 &-1221180500245055971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832539551386618004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 8678363721812442767, guid: dc4495b7d4bd09844af9e21f068071a5, type: 3}
+  InsCount: 3
+--- !u!65 &987479985351719612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832539551386618004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
