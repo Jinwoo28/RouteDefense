@@ -98,12 +98,10 @@ public class BuildManager : MonoBehaviour
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
-                    preview.GetComponent<TowerPreview>().SetUp(playerstate,buildstate);
-                    preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
-                    preview.GetComponent<TowerPreview>().SetUp(buildtower[_slotnum].builditem);
-
-                //                    craft = buildtower[_slotnum].builditem;
-                preview.GetComponent<TowerPreview>().Setbuildmanager = this;
+                    //preview.GetComponent<TowerPreview>().SetUp(playerstate,buildstate);
+                    //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
+                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
+                    preview.GetComponent<TowerPreview>().FirstSetUp(buildtower[_slotnum].builditem,this);
                     playerstate.GetSetPlayerCoin = towerprice;
                 }
             }

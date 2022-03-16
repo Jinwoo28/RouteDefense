@@ -22,7 +22,7 @@ public class Node : MonoBehaviour
     public bool end = false;
 
     //현재 타일위에 타워가 있는지 여부
-    private bool ontower = false;
+    [SerializeField] private bool ontower = false;
 
     //이동비용
     private int gCost;

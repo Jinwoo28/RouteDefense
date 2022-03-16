@@ -60,7 +60,7 @@ public class ShowTowerInfo : MonoBehaviour
 
     private void Update()
     {
-
+        
         ClickTower();
 
         if (tower != null)
@@ -75,45 +75,42 @@ public class ShowTowerInfo : MonoBehaviour
         }
     }
 
+    
+
     public void ClickTower()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            towertransform = detectob.ReturnTransform();
-            if (towertransform != null)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                if (towertransform.CompareTag("Tower"))
+                towertransform = detectob.ReturnTransform();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
-                    //towerinfopanel.SetActive(true);
-                    tower = towertransform.GetComponent<Tower>();
-                    ShowInfo(tower);
-                    ShowRange(towertransform.transform, towertransform.GetComponent<Tower>().GetRange);
-                    //Debug.Log("11111");
 
-                    if (tower != null)
+                    if (hit.collider.CompareTag("Tower"))
                     {
-                        SetTowerinfo();
+
+                        tower = hit.collider.GetComponent<Tower>();
+                        ShowInfo(tower);
+                        Debug.Log(tower);
+
+                        if (tower != null)
+                        {
+                            SetTowerinfo();
+                        ShowRange(tower.gameObject.transform, tower.GetRange);
+                        }
                     }
-                }
-                else
-                {
-                    towerinfopanel.SetActive(false);
-                    RangeOff();
+                    else
+                    {
+                        towerinfopanel.SetActive(false);
+                        RangeOff();
+                    }
                 }
                 
             }
         }
-
-        //if (tower != null)
-        //{
-        //    towername.text = $"{tower.Getname} {tower.GetStep}Step";
-        //    towerlevel.text = "Level : " + tower.GetTowerLevel.ToString();
-        //    atkdamage.text = "Damage : "+tower.GetDamage.ToString();
-        //    atkcritical.text = "Critical : "+tower.GetCritical.ToString();
-        //    atkspeed.text = "Speed : " +tower.GetSpeed.ToString();
-        //    atkrange.text = "Range : " + tower.GetRange.ToString();
-        //    upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
-        //}
     }
 
     public void SetTowerinfo()
@@ -133,7 +130,6 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void ShowRange(Transform _transform,float _range)
     {
-
 
         Transform towerpos = _transform;
         int rotation = 0;
@@ -191,13 +187,12 @@ public class ShowTowerInfo : MonoBehaviour
     {
         if (!enemymanager.GetGameOnGoing)
         {
-            tower.TowerMove();
-            RangeOff();
+            if (tower != null)
+            {
+                tower.TowerMove();
+                RangeOff();
+            }
         }
     }
-
-
-
-
 
 }

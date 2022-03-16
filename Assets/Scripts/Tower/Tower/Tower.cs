@@ -40,7 +40,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject towerpreview = null;
 
     //미리보기 타워 생성
-    private GameObject preview = null;
+    //private GameObject preview = null;
 
     //적 방향으로 돌아갈 포신
     //y축 회전
@@ -75,19 +75,17 @@ public class Tower : MonoBehaviour
     private Node node = null;
 
     //타워의 공격범위
-    public ShowTowerInfo showtowerinfo = null;
+    private ShowTowerInfo showtowerinfo = null;
 
     private ObjectPooling objectPooling = null;
 
     protected virtual void Start()
     {
-        Debug.Log(buildstate.Length + " : tower");
 
         atkspeed = towerinfo.atkdelay;
         StartCoroutine(AutoSearch());
         node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
-        
     }
 
 private void SpeedUP(int x)
@@ -328,12 +326,25 @@ private void SpeedUP(int x)
 
     public void TowerMove()
     {
-        preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
-        preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
-        preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
-        preview.GetComponent<TowerPreview>().SetUp(this.gameObject);
-        preview.GetComponent<TowerPreview>().SetOriginTower = this.gameObject;
+        Debug.Log(towerpreview);
+        GameObject preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
+
+        //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
+        //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
+
+        preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, towerinfo.towerrange);
+
+        preview.GetComponent<TowerPreview>().TowerMoveSetUp(this.gameObject);
+
         ActiveOff();
+    }
+
+    public ShowTowerInfo SetShowTower
+    {
+        set
+        {
+            showtowerinfo = value;
+        }
     }
 
     public void ActiveOff()
@@ -361,20 +372,26 @@ private void SpeedUP(int x)
 
     public void TowerStepUp(Tower _tower)
     {
-        GameObject buildedtower =Instantiate(uppertower, this.transform.position, Quaternion.identity);
-        buildedtower.GetComponent<Tower>().SetNode = node;
-        buildedtower.GetComponent<Tower>().buildstate = buildstate;
+        GameObject buildedtower = Instantiate(uppertower, this.transform.position, Quaternion.identity);
+        buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
-        buildedtower.GetComponent<Tower>().GetStep = 1;
-        buildedtower.GetComponent<Tower>().SetUp(playerstate);
-        buildedtower.GetComponent<Tower>().showtowerinfo = showtowerinfo;
-
+        buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;
         showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
-        showtowerinfo.SetTowerinfo();
+        showtowerinfo.ClickTower();
 
         Destroy(this.gameObject);
     }
 
+
+    //프리뷰가 타워에게 넘겨줄 정보
+    //타워가 다음 타워에게 넘겨줄 정보
+    public void TowerSetUp(Node _node, ShowTowerInfo _showtowerinfo,GameObject[] _buildstate,PlayerState _playerstate)
+    {
+        node = _node;
+        showtowerinfo = _showtowerinfo;
+        buildstate = _buildstate;
+        playerstate = _playerstate;
+    }
     public GameObject[] GetBuildState
     {
         set
@@ -396,8 +413,7 @@ private void SpeedUP(int x)
             node = value;
         }
     }
-      
-    
+         
     //타워 이름
     public string Getname => towerinfo.towername;
     //타워 단계
@@ -405,10 +421,6 @@ private void SpeedUP(int x)
         get
         {
          return   towerstep;
-        }
-        set
-        {
-            towerstep += 1;
         }
     }
     

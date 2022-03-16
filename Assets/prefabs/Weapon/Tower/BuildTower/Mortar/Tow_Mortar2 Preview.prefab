@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 9195844679818791050}
   - component: {fileID: 9195844679828318062}
   - component: {fileID: 5630715645171695075}
+  - component: {fileID: -667974932052715465}
   m_Layer: 9
   m_Name: Tow_Mortar2 Preview
   m_TagString: Tower
@@ -94,11 +95,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d50139a57ec3af44aba837871992f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towername: 
   layermask:
     serializedVersion: 2
     m_Bits: 256
+  towername: 
   playerstate: {fileID: 0}
+--- !u!65 &-667974932052715465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195844679818826922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9195844679818826924
 GameObject:
   m_ObjectHideFlags: 0

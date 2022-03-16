@@ -3,40 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Mortarbullet : Bullet
-{ 
+{
     [SerializeField] private LayerMask enemylayer;
     [SerializeField] private float Range = 3.0f;
-    private Vector3 destiNation = Vector3.zero;
+    
     private float Timer = 0;
-    private void Start()
+
+    public override void Attack()
     {
-        bullspeed = 10f;
-        StartCoroutine(BulletMove(this.transform.position, destiNation));
+        StartCoroutine(BulletMove(shootPos, destiNation));
     }
 
-    public void SetUp(Vector3 _destiNantion)
-    {
-        destiNation = _destiNantion;
-    }
-
-    private Vector3 ParaBolaMove(Vector3 _start, Vector3 _end, float _height, float _power, float _time)
-    {
-        float heightvalue = -_power * _height * _time * _time + _power * _height * _time;
-
-        Vector3 pos = Vector3.Lerp(_start, _end, _time);
-
-        return new Vector3(pos.x, heightvalue + pos.y, pos.z);
-    }
 
     IEnumerator BulletMove(Vector3 _current, Vector3 _Desti)
     {
         Timer = 0;
         while (true)
         {
-            Timer += Time.deltaTime;
-            Vector3 thisMoving = ParaBolaMove(_current, _Desti, 1.5f, 1, Timer);
-            this.transform.position = thisMoving;
+            
+            Timer += Time.deltaTime/2.0f;
+            Vector3 MovePos = ParaBolaMove(_current, _Desti, 4.0f, 1, Timer);
+
+            this.transform.position = MovePos;
+
+            Vector3 distance = destiNation - this.transform.position;
+
+
             yield return null;
+        }
+    }
+    private Vector3 ParaBolaMove(Vector3 _start, Vector3 _end, float _height, float _power, float _time)
+    {
+        float heightvalue = -_power * _height * _time * _time + _power * _height * _time;
+
+        Vector3 pos = Vector3.Lerp(_start, _end, _time);
+        //Debug.Log(pos.x);
+
+        return new Vector3(pos.x, heightvalue + pos.y, pos.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") || other.CompareTag("Tile"))
+        {
+            AtkCharactor();
+            objectpooling.ReturnObject(this);
         }
     }
 
@@ -44,27 +55,29 @@ public class Mortarbullet : Bullet
     {
         Collider[] E_collider = Physics.OverlapSphere(this.transform.position, Range, enemylayer);
 
-        foreach(Collider EC in E_collider)
+        if (E_collider.Length > 0)
         {
-            if (Vector3.Magnitude(EC.transform.position - this.transform.position) < 1.0f)
+            foreach (Collider EC in E_collider)
             {
-                Debug.Log("ddd");
-                EC.GetComponent<Enemy>().EnemyAttacked(damage);
-            }
-            else if(Vector3.Magnitude(EC.transform.position - this.transform.position) < 2.0f)
-            {
-                float decrease = damage - 1;
-                if (decrease <= 0) continue;
-                EC.GetComponent<Enemy>().EnemyAttacked(decrease);
-            }
-            else
-            {
-                float decrease = damage - 2;
-                if (decrease <= 0) continue;
-                EC.GetComponent<Enemy>().EnemyAttacked(decrease);
+                if (Vector3.Magnitude(EC.transform.position - this.transform.position) < 0.5f)
+                {
+                    EC.GetComponent<Enemy>().EnemyAttacked(damage);
+                }
+                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < 0.8f)
+                {
+                    float decrease = damage - 1;
+                    if (decrease <= 0) continue;
+                    EC.GetComponent<Enemy>().EnemyAttacked(decrease);
+                }
+                else if(Vector3.Magnitude(EC.transform.position - this.transform.position) < 1.0f)
+                {
+                    float decrease = damage - 2;
+                    if (decrease <= 0) continue;
+                    EC.GetComponent<Enemy>().EnemyAttacked(decrease);
+                }
             }
         }
-        Destroy(this.gameObject);
+        
 
 
     }

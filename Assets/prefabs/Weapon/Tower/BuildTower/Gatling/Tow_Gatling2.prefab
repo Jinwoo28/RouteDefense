@@ -55,19 +55,18 @@ MonoBehaviour:
     towerprice: 0
     towername: 
     towerdamage: 0
-    towercritical: 0
-    towerrange: 0
-    atkdelay: 0
+    towercritical: 3
+    towerrange: 1.1
+    atkdelay: 0.15
   buildstate: []
-  towerpreview: {fileID: 0}
+  towerpreview: {fileID: 1952561914480389280, guid: 9eb0316cc4682c44ba06241f8cf80f43, type: 3}
   towerBody: {fileID: 0}
   towerTurret: {fileID: 0}
   shootPos: {fileID: 0}
   enemylayer:
     serializedVersion: 2
     m_Bits: 0
-  towerstep: 1
-  showtowerinfo: {fileID: 0}
+  towerstep: 2
   RotateBarral: {fileID: 0}
   atkNum: 0
 --- !u!65 &2421880578984886538

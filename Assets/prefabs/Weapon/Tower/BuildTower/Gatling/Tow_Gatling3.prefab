@@ -127,18 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802a39919aee99248ac66597e78124ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Particle: {fileID: 0}
-  buildstate: []
   uppertower: {fileID: 0}
-  towerpreview: {fileID: 0}
-  Base: {fileID: 0}
-  TowerBody: {fileID: 0}
-  towerBarrel: {fileID: 0}
-  bulletpos: {fileID: 0}
-  bullet: {fileID: 0}
-  enemylayer:
-    serializedVersion: 2
-    m_Bits: 0
   upgradevalue:
     priceincrease: 0
     upgradeprice: 0
@@ -148,11 +137,18 @@ MonoBehaviour:
     towerprice: 0
     towername: 
     towerdamage: 0
-    towercritical: 0
-    towerrange: 0
-    towerspeed: 0
-  towerstep: 1
-  showtowerinfo: {fileID: 0}
+    towercritical: 5
+    towerrange: 1.2
+    atkdelay: 0.15
+  buildstate: []
+  towerpreview: {fileID: 5600623581655944651, guid: 928812d7737fc99409ed1a446c429448, type: 3}
+  towerBody: {fileID: 0}
+  towerTurret: {fileID: 0}
+  shootPos: {fileID: 0}
+  enemylayer:
+    serializedVersion: 2
+    m_Bits: 0
+  towerstep: 3
   RotateBarral: {fileID: 0}
   atkNum: 0
 --- !u!65 &6503939379799156269

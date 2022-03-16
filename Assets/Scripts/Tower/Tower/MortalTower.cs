@@ -20,7 +20,10 @@ public class MortalTower : Tower
     {
         Debug.Log(Op);
         var obj = Op.GetObject(shootPos.position);
-        obj.SetUp(FinalTarget, 3, Op,5);
+        obj.SetUp(FinalTarget, 3, Op,3);
+        obj.MortarSetDestination(FinalTarget.position,shootPos.position);
+        obj.Attack();
+
     }
 
  

@@ -221,7 +221,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8832539551386618004}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
@@ -262,27 +262,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 9195844679818826922, guid: a160c1020dd28b946b5908625ff5d457, type: 3}
   upgradevalue:
-    priceincrease: 0
-    upgradeprice: 0
-    damagevalue: 0
-    upcriticalvalue: 0
+    priceincrease: 75
+    upgradeprice: 25
+    damagevalue: 1
+    upcriticalvalue: 2
   towerinfo:
-    towerprice: 0
-    towername: 
-    towerdamage: 0
+    towerprice: 200
+    towername: Mortar
+    towerdamage: 5
     towercritical: 0
-    towerrange: 0
-    atkdelay: 0
+    towerrange: 3
+    atkdelay: 1.5
   buildstate: []
   towerpreview: {fileID: 8832539551386618004, guid: 3e2e681a788d41740adf4ecc47356763, type: 3}
-  towerBody: {fileID: 0}
-  towerTurret: {fileID: 0}
-  shootPos: {fileID: 0}
+  towerBody: {fileID: 8832539551386522802}
+  towerTurret: {fileID: 8832539551386522800}
+  shootPos: {fileID: 6031843419435706451}
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 1
-  showtowerinfo: {fileID: 0}
 --- !u!114 &-1221180500245055971
 MonoBehaviour:
   m_ObjectHideFlags: 0
