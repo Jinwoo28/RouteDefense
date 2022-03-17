@@ -41,6 +41,14 @@ public class BuildTowerInfo : MonoBehaviour
             $"This is a chain of electric attacks.";
     }
 
+    public void ShowBuildTower_Laser()
+    {
+        buildtowerInfo.SetActive(true);
+        infoText.text = $"Laser Tower\n " +
+            "===================\n" +
+            $"Damage increases gradually when attacking the same target.";
+    }
+
     public void ShowBuildTowerOff()
     {
         buildtowerInfo.SetActive(false);

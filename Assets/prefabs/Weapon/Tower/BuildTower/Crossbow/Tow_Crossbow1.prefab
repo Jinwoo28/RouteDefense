@@ -182,7 +182,7 @@ MonoBehaviour:
     towername: CrossArrow
     towerdamage: 3
     towercritical: 0
-    towerrange: 1.5
+    towerrange: 2
     atkdelay: 0.7
   buildstate: []
   towerpreview: {fileID: 8977786347504842678, guid: 09f00cb5dbd62ce4d930d577a5a67142, type: 3}
@@ -193,7 +193,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 1
-  showtowerinfo: {fileID: 0}
 --- !u!114 &-8894788529478161516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4173884676005212747, guid: d14036eec14884048b0f0518a921029c, type: 3}
+  bullet: {fileID: 86843834051369717, guid: b5935655298648c4081429bb8634d859, type: 3}
   InsCount: 3
 --- !u!1 &8977786347504842680
 GameObject:

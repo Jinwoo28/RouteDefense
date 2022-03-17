@@ -37,6 +37,7 @@ public class ShowTowerInfo : MonoBehaviour
 
     private Transform towertransform = null;
 
+
     public Transform GetTowerTransform
     {
         set
@@ -71,7 +72,45 @@ public class ShowTowerInfo : MonoBehaviour
             atkcritical.text = "Critical : " + tower.GetCritical.ToString();
             atkspeed.text =  "Level "+tower.GetStep.ToString();
             atkrange.text = "Range : " + tower.GetRange.ToString();
-            upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+           
+
+            switch (tower.GetStep)
+            {
+                case 1:
+                    if (tower.GetTowerLevel >= 10)
+                    {
+                        upgradebutton.interactable = false;
+                        upgradeprice.fontSize = 35;
+                        upgradeprice.text = "Can't upgrade anymore";
+                    }
+                    else
+                    {
+                        upgradebutton.interactable = true;
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+
+                    }
+                    break;
+
+                case 2:
+                    if (tower.GetTowerLevel >= 15)
+                    {
+                        upgradebutton.interactable = false;
+                        upgradeprice.fontSize = 35;
+                        upgradeprice.text = "Can't upgrade anymore";
+                    }
+                    else
+                    {
+                        upgradebutton.interactable = true;
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+                    }
+                    break;
+                case 3:
+                    upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+                    upgradeprice.fontSize = 50;
+                    break;
+            }
         }
     }
 

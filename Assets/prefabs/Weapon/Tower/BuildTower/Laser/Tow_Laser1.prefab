@@ -110,7 +110,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0063142776, y: 0.3007518, z: 0.8089943}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2281000113917283791}
   m_Father: {fileID: 500732071518642065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -229,28 +230,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb386d5e3703fc4a855676ba8eae11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uppertower: {fileID: 0}
+  uppertower: {fileID: 7980187492818512454, guid: 543bb799468827744806f608932d36fd, type: 3}
   upgradevalue:
-    priceincrease: 0
-    upgradeprice: 0
-    damagevalue: 0
-    upcriticalvalue: 0
+    priceincrease: 75
+    upgradeprice: 25
+    damagevalue: 1
+    upcriticalvalue: 2
   towerinfo:
-    towerprice: 0
-    towername: 
-    towerdamage: 0
+    towerprice: 200
+    towername: Laser
+    towerdamage: 1
     towercritical: 0
-    towerrange: 0
-    atkdelay: 0
+    towerrange: 3
+    atkdelay: 1
   buildstate: []
-  towerpreview: {fileID: 0}
-  towerBody: {fileID: 0}
-  towerTurret: {fileID: 0}
-  shootPos: {fileID: 0}
+  towerpreview: {fileID: 500732071518667701, guid: a2dd3a9469624f249b3985091d41fb54, type: 3}
+  towerBody: {fileID: 500732071518642065}
+  towerTurret: {fileID: 500732071518642065}
+  shootPos: {fileID: 2281000113917283791}
   enemylayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   towerstep: 1
+  X: 0
 --- !u!120 &-7769494181586192729
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -302,7 +304,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.07678223
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -444,3 +446,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &985127434595325401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2281000113917283791}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2281000113917283791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985127434595325401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 500732071518642067}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

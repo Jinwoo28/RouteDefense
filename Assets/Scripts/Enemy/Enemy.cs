@@ -202,9 +202,10 @@ public class Enemy : MonoBehaviour
     public void EnemyAttacked(float _damage)
     {
         float realdamage = 0;
-        int X = Random.Range(1, 101);
-        if (X < unitstate.avoidancerate) realdamage = 0;
-        else realdamage = _damage - unitstate.unitamour;
+        //int X = Random.Range(1, 101);
+        //if (X < unitstate.avoidancerate) realdamage = 0;
+        
+        realdamage = _damage - unitstate.unitamour;
         
         ShowDamage(realdamage);
         if (realdamage >= unitstate.unithp)
@@ -213,8 +214,9 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-
+            Debug.Log(realdamage);
             unitstate.unithp -= realdamage;
+            Debug.Log(unitstate.unithp);
         }
     }
 

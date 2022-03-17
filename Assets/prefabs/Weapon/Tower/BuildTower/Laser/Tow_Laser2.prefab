@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb386d5e3703fc4a855676ba8eae11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uppertower: {fileID: 0}
+  uppertower: {fileID: 8817138273659128893, guid: 508e166c45418c44fb51c71644e7a0f7, type: 3}
   upgradevalue:
     priceincrease: 0
     upgradeprice: 0

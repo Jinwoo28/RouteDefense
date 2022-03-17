@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class CamControl : MonoBehaviour
 {
-
+    private bool canCamMove = true;
     float xrotation = 0;
 
     private void Update()
     {
-        CamMove();
-        xrotation = this.transform.rotation.x;
+        if (canCamMove)
+        {
+            CamMove();
+            xrotation = this.transform.rotation.x;
+        }
     }
    
 
@@ -59,6 +62,15 @@ public class CamControl : MonoBehaviour
         float zoominout = Input.GetAxisRaw("Mouse ScrollWheel") * 10f;
         this.transform.position += this.transform.forward * zoominout * Time.deltaTime * 20f;
 
+    }
+
+    public void CamMoveOn()
+    {
+        canCamMove = true;
+    }
+    public void CamMoveOff()
+    {
+        canCamMove = false;
     }
 
 }

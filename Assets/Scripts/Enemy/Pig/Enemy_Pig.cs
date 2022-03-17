@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Enemy_Pig : Enemy
 {
-    float timevalue = 0;
+    private float timevalue = 0;
+    private float originHP = 0;
 
     void Start()
     {
         StartMove();
+        originHP = GetHp;
     }
 
     // Update is called once per frame
@@ -24,7 +26,10 @@ public class Enemy_Pig : Enemy
         if (timevalue >= 3.0f)
         {
             timevalue = 0;
-            GetHp = 1;
+            if (GetHp < originHP)
+            {
+                GetHp = 1;
+            }
         }
     }
 }

@@ -84,7 +84,7 @@ public class Tower : MonoBehaviour
 
         atkspeed = towerinfo.atkdelay;
         StartCoroutine(AutoSearch());
-        node.GetOnTower = true;
+        //node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
     }
 
@@ -231,9 +231,9 @@ private void SpeedUP(int x)
 
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
         towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
-        towerTurret.rotation = Quaternion.Euler(TowerDir2.x, TowerDir2.y, 0);
+        towerTurret.rotation = Quaternion.Euler(TowerDir2.x+(FinalTarget.localScale.y/2), TowerDir2.y, 0);
 
-        if (Quaternion.Angle(towerBody.rotation, rotationtotarget) < 10.0f)
+        if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
         {
 
             atkspeed -= Time.deltaTime;

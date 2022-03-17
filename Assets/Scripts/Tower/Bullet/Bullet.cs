@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     protected float bullspeed = 0;
     protected Vector3 destiNation = Vector3.zero;
     protected Vector3 shootPos = Vector3.zero;
+
+    protected Vector3 moveDir = Vector3.zero;
     public void SetUp(Transform _target, float _damage, ObjectPooling _objpooling,float _speed)
     {
         bullspeed = _speed;
@@ -24,7 +26,15 @@ public class Bullet : MonoBehaviour
         Debug.Log("√ ±‚2");
         destiNation = _desti;
         shootPos = _shootpos;
+        Invoke("ReturnBullet", 3.0f);
     }
+
+    public void SetArrowDir(Vector3 _target)
+    {
+        Vector3 Dir = _target/*- shootPos*/;
+        moveDir =  Dir.normalized;
+    }
+
 
     private void Start()
     {
@@ -37,7 +47,7 @@ public class Bullet : MonoBehaviour
         Time.timeScale = x;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (target == null)
         {
@@ -49,6 +59,10 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    private void ReturnBullet()
+    {
+        objectpooling.ReturnObject(this);
+    }
 
     public virtual void Attack()
     {
