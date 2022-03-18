@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LaserTower : Tower
 {
-    [SerializeField] private float X = 0;
     private LineRenderer lR = null;
     private Transform OriginTarget = null;
     private float atkdamage = 0;
     private bool isAtking = false;
+
     protected override void Start()
     {
         base.Start();
@@ -38,19 +38,25 @@ public class LaserTower : Tower
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     lR.enabled = true;
-                    lR.SetPosition(0, shootPos.position);
-                    lR.SetPosition(1, hit.point + shootPos.forward*hit.collider.transform.localScale.z/2);
+
+                        lR.SetPosition(0, shootPos.position);
+                        lR.SetPosition(1, hit.point + shootPos.forward * hit.collider.transform.localScale.z / 2);
+
                     if (!isAtking)
                     {
                         Debug.Log("АјАн");
                         StartCoroutine("LaserShoot");
                     }
                 }
+                
+                AtkParticle.transform.position = hit.point;
             }
 
         }
         else
         {
+            AtkParticle.SetActive(false);
+
             StopCoroutine("LaserShoot");
             atkdamage = towerinfo.towerdamage;
             isAtking = false;
@@ -60,6 +66,7 @@ public class LaserTower : Tower
 
     private IEnumerator LaserShoot()
     {
+        AtkParticle.SetActive(true);
         isAtking = true;
         while (FinalTarget != null)
         {

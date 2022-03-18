@@ -81,8 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 3047223702295900138, guid: 3516c65fd82199847b308fcad7f6e750, type: 3}
   upgradevalue:
-    priceincrease: 75
-    upgradeprice: 15
+    priceincrease: 15
+    upgradeprice: 75
     damagevalue: 2
     upcriticalvalue: 3
   towerinfo:
@@ -90,7 +90,7 @@ MonoBehaviour:
     towername: 
     towerdamage: 5
     towercritical: 5
-    towerrange: 1.75
+    towerrange: 1.4
     atkdelay: 0.7
   buildstate: []
   towerpreview: {fileID: 405412040106067813, guid: a8140df8d7539854b860c7b49fab4fb1, type: 3}
@@ -100,8 +100,7 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
-  towerstep: 1
-  showtowerinfo: {fileID: 0}
+  towerstep: 2
 --- !u!114 &5610760902363209994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4173884676005212747, guid: d14036eec14884048b0f0518a921029c, type: 3}
+  bullet: {fileID: 86843834051369717, guid: b5935655298648c4081429bb8634d859, type: 3}
   InsCount: 3
 --- !u!1 &405412040106067817
 GameObject:

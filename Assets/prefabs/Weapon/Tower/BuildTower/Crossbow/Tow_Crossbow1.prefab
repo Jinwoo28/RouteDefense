@@ -182,7 +182,7 @@ MonoBehaviour:
     towername: CrossArrow
     towerdamage: 3
     towercritical: 0
-    towerrange: 2
+    towerrange: 1.2
     atkdelay: 0.7
   buildstate: []
   towerpreview: {fileID: 8977786347504842678, guid: 09f00cb5dbd62ce4d930d577a5a67142, type: 3}

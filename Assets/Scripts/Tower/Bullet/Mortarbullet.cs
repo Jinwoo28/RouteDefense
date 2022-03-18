@@ -21,8 +21,8 @@ public class Mortarbullet : Bullet
         while (true)
         {
             
-            Timer += Time.deltaTime/2.0f;
-            Vector3 MovePos = ParaBolaMove(_current, _Desti, 4.0f, 1, Timer);
+            Timer += Time.deltaTime*1.1f;
+            Vector3 MovePos = ParaBolaMove(_current, _Desti, 2.0f, 1, Timer);
 
             this.transform.position = MovePos;
 
@@ -53,25 +53,29 @@ public class Mortarbullet : Bullet
 
     protected override void AtkCharactor()
     {
-        Collider[] E_collider = Physics.OverlapSphere(this.transform.position, Range, enemylayer);
+        Vector3 Insight = cam.transform.position - this.transform.position;
+        var obj = particle.GetObject(this.transform.position+Insight.normalized);
+        obj.SetPool(particle);
+
+        Collider[] E_collider = Physics.OverlapSphere(this.transform.position, MortarRange, enemylayer);
 
         if (E_collider.Length > 0)
         {
             foreach (Collider EC in E_collider)
             {
-                if (Vector3.Magnitude(EC.transform.position - this.transform.position) < 0.5f)
+                if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange * 0.3f)
                 {
                     EC.GetComponent<Enemy>().EnemyAttacked(damage);
                 }
-                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < 0.8f)
+                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange*0.6f)
                 {
-                    float decrease = damage - 1;
+                    float decrease = damage - 2;
                     if (decrease <= 0) continue;
                     EC.GetComponent<Enemy>().EnemyAttacked(decrease);
                 }
-                else if(Vector3.Magnitude(EC.transform.position - this.transform.position) < 1.0f)
+                else
                 {
-                    float decrease = damage - 2;
+                    float decrease = damage - 4;
                     if (decrease <= 0) continue;
                     EC.GetComponent<Enemy>().EnemyAttacked(decrease);
                 }

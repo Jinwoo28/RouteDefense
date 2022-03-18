@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class MortalTower : Tower
 {
-    private ObjectPooling Op = null;
-
-
+    [SerializeField] private ObjectPooling bulletPool = null;
+    [SerializeField] private ObjectPooling patriclePool = null;
 
     protected override void Start()
     {
-        Op = this.GetComponent<ObjectPooling>();
         base.Start();
+        Debug.Log(AtkParticle);
     }
-    
 
+    protected override void Update()
+    {
+        base.Update();
+        Debug.Log(AtkParticle + " : 353513");
+    }
 
     protected override void Attack()
     {
-        Debug.Log(Op);
-        var obj = Op.GetObject(shootPos.position);
-        obj.SetUp(FinalTarget, 3, Op,3);
+        Debug.Log(AtkParticle);
+        AtkParticle.GetComponent<ParticleSystem>().Play();
+        
+        Debug.Log("count");
+        var obj = bulletPool.GetObject(shootPos.position);
+        obj.SetUp(FinalTarget, 3, bulletPool,5);
         obj.MortarSetDestination(FinalTarget.position,shootPos.position);
         obj.Attack();
+        obj.SetMortarRange(GetStep + 1);
+
+        obj.SetPool(patriclePool);
 
     }
 

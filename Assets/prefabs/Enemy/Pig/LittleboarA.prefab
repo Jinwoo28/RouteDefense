@@ -115,7 +115,7 @@ MonoBehaviour:
   unitstate:
     unitspeed: 0.5
     unitcoin: 10
-    unithp: 5
+    unithp: 30
     unitamour: 0
     avoidancerate: 0
 --- !u!54 &4402052285060182350

@@ -100,7 +100,7 @@ public class TowerPreview : MonoBehaviour
             }
         }
 
-       // Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
+        Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
     }
 
     IEnumerator BuildTower()
@@ -168,16 +168,19 @@ public class TowerPreview : MonoBehaviour
                                 if (Origintower != null)
                                 {
                                     tower.TowerStepUp(Origintower.GetComponent<Tower>());
+                                    Destroy(Origintower);
                                 }
                                 else if(buildTower !=null)
                                 { 
                                     tower.TowerStepUp(buildTower.GetComponent<Tower>());
+                                
                                 }
 
                                 if (buildmanager != null)
                                     buildmanager.GettowerpreviewActive = false;
 
                                 tower.GetBuildState = buildstate;
+                                
                                 Destroy(this.gameObject);
                                 UiStateOff();
                             }
@@ -270,7 +273,9 @@ public class TowerPreview : MonoBehaviour
      //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
             if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3)
             {
-
+                Debug.Log(other.GetComponent<Tower>().Getname == towername + "1");
+                Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2"); 
+                Debug.Log((other.GetComponent<Tower>().GetStep != 3 && towerstep != 3)+"3");
                 CanCombination = true;
                // Debug.Log(CanCombination + " : 합체 여부");
                 tower = other.GetComponent<Tower>();

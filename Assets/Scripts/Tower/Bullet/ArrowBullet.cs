@@ -5,13 +5,20 @@ using UnityEngine;
 public class ArrowBullet : Bullet
 {
     private Enemy enemy = null;
-
+    private bool ontile = false;
 
     protected override void Update()
     {
         base.Update();
-        this.transform.position += moveDir *bullspeed * Time.deltaTime;
-        this.transform.LookAt(this.transform.position + moveDir);
+        if (!ontile)
+        {
+            this.transform.position += moveDir * bullspeed * Time.deltaTime;
+            this.transform.LookAt(this.transform.position + moveDir);
+        }
+        else
+        {
+            this.transform.position += Vector3.zero;
+        }
     }
 
 
@@ -28,6 +35,13 @@ public class ArrowBullet : Bullet
             enemy = other.GetComponent<Enemy>();
             AtkCharactor();
             objectpooling.ReturnObject(this);
+        }
+
+        else if (other.CompareTag("Tile"))
+        {
+            ontile = true;
+            Invoke("ReturnBullet", 1.0f);
+
         }
     }
 }

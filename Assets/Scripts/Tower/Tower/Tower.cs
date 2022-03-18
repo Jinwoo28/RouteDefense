@@ -60,7 +60,7 @@ public class Tower : MonoBehaviour
     protected float atkspeed = 0;
 
     //타워의 업그레이드 수준
-    private int towerlevel = 1;
+    private int towerlevel = 0;
     
     //타워의 합체 단계 1,2,3단계
     [SerializeField] private int towerstep = 1;
@@ -79,6 +79,9 @@ public class Tower : MonoBehaviour
 
     private ObjectPooling objectPooling = null;
 
+    protected Camera cam = null;
+
+    [SerializeField] protected GameObject AtkParticle = null;
     protected virtual void Start()
     {
 
@@ -86,6 +89,7 @@ public class Tower : MonoBehaviour
         StartCoroutine(AutoSearch());
         //node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
+        cam = Camera.main;
     }
 
 private void SpeedUP(int x)
@@ -99,7 +103,7 @@ private void SpeedUP(int x)
 
         if (FinalTarget == null)
         {
-            atkspeed = 0;
+
         }
         else
         {
@@ -262,7 +266,14 @@ private void SpeedUP(int x)
         {
             towerlevel++;
             towerinfo.towerdamage += upgradevalue.damagevalue;
-            towerinfo.towercritical += upgradevalue.upcriticalvalue;
+            if (towerinfo.towercritical + upgradevalue.upcriticalvalue >= 100)
+            {
+                towerinfo.towercritical = 100;
+            }
+            else
+            {
+                towerinfo.towercritical += upgradevalue.upcriticalvalue;
+            }
             playerstate.GetSetPlayerCoin = upgradevalue.upgradeprice;
             upgradevalue.upgradeprice += upgradevalue.priceincrease;
         }
@@ -271,6 +282,7 @@ private void SpeedUP(int x)
     public void SellTower()
     {
         playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
+        node.GetOnTower = false;
         Destroy(this.gameObject);
     }
 

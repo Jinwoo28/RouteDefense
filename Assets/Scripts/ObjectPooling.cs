@@ -31,8 +31,11 @@ public class ObjectPooling : MonoBehaviour
 
     public Bullet GetObject(Vector3 _insPos)
     {
+
+        Debug.Log("dd");
         if (poolingQueue.Count > 0)
         {
+            Debug.Log("ss");
             var obj = poolingQueue.Dequeue();
             obj.gameObject.transform.position = _insPos;
             obj.gameObject.SetActive(true);
@@ -40,17 +43,16 @@ public class ObjectPooling : MonoBehaviour
         }
         else
         {
+           
             var newobj = CreateBullet();
             newobj.gameObject.transform.position = _insPos;
             newobj.gameObject.SetActive(true);
-            Debug.Log("생성");
             return newobj;
         }
     }
 
     public void ReturnObject(Bullet _object)
     {
-        Debug.Log("회수");
         _object.gameObject.SetActive(false);
         poolingQueue.Enqueue(_object);
     }

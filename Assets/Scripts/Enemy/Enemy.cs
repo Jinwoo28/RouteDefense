@@ -204,7 +204,7 @@ public class Enemy : MonoBehaviour
         float realdamage = 0;
         //int X = Random.Range(1, 101);
         //if (X < unitstate.avoidancerate) realdamage = 0;
-        
+
         realdamage = _damage - unitstate.unitamour;
         
         ShowDamage(realdamage);
@@ -214,9 +214,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log(realdamage);
             unitstate.unithp -= realdamage;
-            Debug.Log(unitstate.unithp);
         }
     }
 

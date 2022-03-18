@@ -11,6 +11,22 @@ public class Bullet : MonoBehaviour
     protected Vector3 destiNation = Vector3.zero;
     protected Vector3 shootPos = Vector3.zero;
 
+    protected float MortarRange = 0;
+
+    protected Camera cam = null;
+
+
+    protected ObjectPooling particle = null;
+
+    public void SetPool(ObjectPooling pop)
+    {
+        if (particle == null)
+        {
+            particle = pop;
+            Debug.Log(particle+"Ddddddd");
+        }
+    }
+
     protected Vector3 moveDir = Vector3.zero;
     public void SetUp(Transform _target, float _damage, ObjectPooling _objpooling,float _speed)
     {
@@ -18,15 +34,13 @@ public class Bullet : MonoBehaviour
         target = _target;
         damage = _damage;
         objectpooling = _objpooling;
-        Debug.Log("초기화");
     }
 
     public void MortarSetDestination(Vector3 _desti,Vector3 _shootpos)
     {
-        Debug.Log("초기2");
         destiNation = _desti;
         shootPos = _shootpos;
-        Invoke("ReturnBullet", 3.0f);
+        Invoke("ReturnBullet", 5.0f);
     }
 
     public void SetArrowDir(Vector3 _target)
@@ -35,11 +49,15 @@ public class Bullet : MonoBehaviour
         moveDir =  Dir.normalized;
     }
 
+    public void SetMortarRange(float _ragne)
+    {
+        MortarRange = _ragne;
+    }
 
     private void Start()
     {
         MultipleSpeed.speedup += SpeedUP;
-        
+        cam = Camera.main;
     }
 
     private void SpeedUP(int x)
@@ -51,7 +69,7 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            objectpooling.ReturnObject(this);
+            //objectpooling.ReturnObject(this);
         }
         else
         {
@@ -59,7 +77,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void ReturnBullet()
+    protected void ReturnBullet()
     {
         objectpooling.ReturnObject(this);
     }
