@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8947287018898876465}
   - component: {fileID: 8947287018897549329}
   - component: {fileID: 8947287018896583377}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8947287018898876467}
   - component: {fileID: 8947287018897549331}
   - component: {fileID: 8947287018896583379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 8947287018898876469}
   - component: {fileID: 8947287018897549333}
   - component: {fileID: 8947287018896583381}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,9 +257,9 @@ GameObject:
   - component: {fileID: 98575405925193495}
   - component: {fileID: 3087942348891455589}
   - component: {fileID: -5263434514986571743}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tow_Gatling1 Preview
-  m_TagString: Untagged
+  m_TagString: TowerPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,10 +304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d50139a57ec3af44aba837871992f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towername: 
   layermask:
     serializedVersion: 2
     m_Bits: 256
+  towername: 
   playerstate: {fileID: 0}
 --- !u!54 &-5263434514986571743
 Rigidbody:

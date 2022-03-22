@@ -69,7 +69,7 @@ public class BuildManager : MonoBehaviour
                // preview.GetComponent<TowerPreview>().RangeOff();
                 towerpreviewActive = false;
                 playerstate.GetSetPlayerCoin = -towerprice;
-                Destroy(preview);
+                preview.GetComponent<TowerPreview>().DestroyThis();
             }
         }
 
@@ -119,6 +119,7 @@ public class BuildManager : MonoBehaviour
     int towerprice;
     int upgradeprice;
 
+    
 
     //private void TowerPos()
     //{

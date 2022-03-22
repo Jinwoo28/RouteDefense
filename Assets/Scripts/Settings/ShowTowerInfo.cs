@@ -107,6 +107,7 @@ public class ShowTowerInfo : MonoBehaviour
                     }
                     break;
                 case 3:
+                    upgradebutton.interactable = true;
                     upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
                     upgradeprice.fontSize = 50;
                     break;
@@ -123,6 +124,7 @@ public class ShowTowerInfo : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 towertransform = detectob.ReturnTransform();
+                //towertransform = DetectObject.GetNodeInfo();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100f))
@@ -169,7 +171,6 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void ShowRange(Transform _transform,float _range)
     {
-
         Transform towerpos = _transform;
         int rotation = 0;
         float range = _range;

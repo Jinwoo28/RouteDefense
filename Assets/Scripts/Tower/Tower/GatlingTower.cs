@@ -26,17 +26,17 @@ public class GatlingTower : Tower
         base.Update();
 
         
-        if (FinalTarget == null)
+        if (FinalTarget != null)
         {
-            AtkParticle.SetActive(false);
-           HitEffect.SetActive(false);
+            HitEffect.SetActive(true);
+            Vector3 Insight = cam.transform.position - FinalTarget.position;
+            HitEffect.transform.position = FinalTarget.position + Insight.normalized;
+            //HitEffect.GetComponent<ParticleSystem>().Play();
         }
         else
         {
-            Vector3 Insight = cam.transform.position - FinalTarget.position;
-            HitEffect.SetActive(true);
-            HitEffect.transform.position = FinalTarget.position+ Insight.normalized;
-            //HitEffect.GetComponent<ParticleSystem>().Play();
+            HitEffect.SetActive(false);
+           AtkParticle.SetActive(false);
         }
 
     }
@@ -45,8 +45,8 @@ public class GatlingTower : Tower
     {
         if (FinalTarget != null)
         {
-            FinalTarget.GetComponent<Enemy>().EnemyAttacked(towerinfo.towerdamage);
             AtkParticle.SetActive(true);
+            FinalTarget.GetComponent<Enemy>().EnemyAttacked(towerinfo.towerdamage);
            
         }
 

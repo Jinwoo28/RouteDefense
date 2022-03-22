@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class StageInfo
 {
-    public int StageNum;
+    public float SpawnTime = 0;
     public int EnemyCount;
     public GameObject[] enemykind;
 }
@@ -28,6 +28,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject damagenum = null;
 
     private int StageNum = 0;
+    public int GetStageNum => StageNum;
 
     //스테이지가 실행중인지 판단
     private bool gameongoing = false;
@@ -41,10 +42,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject ClearPanal = null;
     [SerializeField] private GameObject FailPanal = null;
     private bool StageClear = false;
-    
+
+    [SerializeField] private Transform water = null;
 
     //소환되는 적들의 정보를 담을 List
     List<Enemy> EnemyCount = null;
+
+    [SerializeField] private WeatherSetting weather =  null;
 
     public int Getmaxstage => stageinfo.Length;
     public int Getcurrentstage => StageNum + 1;
@@ -76,7 +80,9 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
 
     IEnumerator GameStart()
     {
-        gameongoing = true;
+        weather.UpSeaLevel();
+
+       gameongoing = true;
 
         //적이 나올 개수
         int count = stageinfo[StageNum ].EnemyCount;
@@ -90,13 +96,13 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
         {
             int enemynum = Random.Range(0, enemykind);
             GameObject enemy = Instantiate(EnemyList[enemynum], SpawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas,hpbar,damagenum);
+            enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas,hpbar,damagenum, water);
 
             //소환되는 enemy를 list에 추가
             EnemyCount.Add(enemy.GetComponent<Enemy>());
 
 
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(stageinfo[StageNum].SpawnTime);
             
         }
         SpawnFinish = true;
@@ -106,13 +112,14 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
         {
             if (SpawnFinish && EnemyCount.Count == 0)
             {
-                gameongoing = false;
                 StageNum++;
-
                 if (StageNum >= stageinfo.Length)
                 {
                     ClearPanal.SetActive(true);
                 }
+
+                gameongoing = false;
+                weather.WeatherSettings();
 
                 break;
             }

@@ -55,8 +55,6 @@ public class MapManager : MonoBehaviour
     public int GetAddTileNum => AddtileNum;
     public int GetAddtilePrice => addtileprice;
 
-   // private bool TileCanAdd = false;
-   // private bool AddTile = false;
     private bool AddTileActive = false;
     private bool canaddtile = false;
 
@@ -64,8 +62,11 @@ public class MapManager : MonoBehaviour
     /// ////////////////////////////////////////////////
     /// ////////////////////////////////////////////////
     private bool isgameing = false;
+    [SerializeField] private GameObject NotFound = null;
 
     private List<Node> waypointnode = null;
+    private List<Node> activeNode = new List<Node>();
+    public List<Node> GetActiveList => activeNode;
 
     public EnemyManager EM = null;
 
@@ -92,11 +93,11 @@ public class MapManager : MonoBehaviour
 
     private void MakeHeight()
     {
-        int Count = Random.Range(20, 30);
+        int Count = Random.Range(9, 10);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)
         {
-            int RanNum = Random.Range(3, 8);
+            int RanNum = Random.Range(2, 5);
             int Near = Random.Range(0, 3);
 
             int Xnum = Random.Range(0, gridX);
@@ -237,7 +238,7 @@ public class MapManager : MonoBehaviour
             for (int j = halfgridx - widthcount; j < halfgridx + widthcount; j++)
             {
                 grid[i, j].SetActiveTile(true);
-
+                activeNode.Add(grid[i, j]);
             }
 
             //조건문을 이용해 가로타일의 개수 조절
@@ -393,7 +394,7 @@ public class MapManager : MonoBehaviour
                         if (AddtileX[0].GetComponent<Preview>().CanBuildable && AddtileX[1].GetComponent<Preview>().CanBuildable && AddtileX[2].GetComponent<Preview>().CanBuildable && AddtileX[3].GetComponent<Preview>().CanBuildable)
                         {
                             canaddtile = true;
-                            switch ((int)intmousepos.y)
+                            switch ((int)(intmousepos.y*2)-1)
                             {
                                 case 1:
                                     AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[0].color;
@@ -416,11 +417,14 @@ public class MapManager : MonoBehaviour
                                 case 7:
                                     AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[6].color;
                                     break;
+                                case 8:
+                                    AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[7].color;
+                                    break;
                             }
                         }
                         else
                         {
-                            AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[14].color;
+                            AddtileX[i].GetComponentInChildren<MeshRenderer>().material.color = Tilecolor[8].color;
                             canaddtile = false;
                         }
                     }
@@ -451,6 +455,7 @@ public class MapManager : MonoBehaviour
                                 Destroy(AddtileX[j]);
                                 grid[Y, X].GetComponent<Node>().SetActiveTile(true);
                                 AddTileActive = false;
+                                activeNode.Add(grid[Y,X]);
                             }
                             addtileprice += 50;
                             AddtileNum = Random.Range(0, 7);
@@ -709,9 +714,6 @@ X X 10 X
         {
             if (!AddTileActive)
                 TileCanChange = !TileCanChange;
-
-    
-
         }
     }
 
@@ -830,11 +832,20 @@ X X 10 X
 
             else
             {
+                StopCoroutine("ShowNotFoundRoute");
+                StartCoroutine("ShowNotFoundRoute");
+                NotFound.SetActive(true);
                 Debug.Log("길찾기 실패");
                 isgameing = false;
             }
 
         }
+    }
+
+    private IEnumerator ShowNotFoundRoute()
+    {
+        yield return new WaitForSeconds(1.5f);
+        NotFound.SetActive(false);
     }
 
     IEnumerator GameStartCheck()

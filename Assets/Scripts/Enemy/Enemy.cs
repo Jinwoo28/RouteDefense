@@ -36,6 +36,10 @@ public class Enemy : MonoBehaviour
 
     private Transform canvas = null;
 
+    private Transform Water = null;
+    private bool underTheSea = false;
+    private bool speedInit = false;
+
     private float unitspeed = 0;
     private float Timer = 0;
 
@@ -44,6 +48,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         MultipleSpeed.speedup += SpeedUP;
+
     }
 
     private void SpeedUP(int x)
@@ -51,10 +56,17 @@ public class Enemy : MonoBehaviour
         Time.timeScale = x;
     }
 
-
-
-    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum)
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            EnemyDie();
+        }
+    }
+
+    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum,Transform _water)
+    {
+        Water = _water;
         hpbar = _hpbar;
         damagenum = _damagenum;
         Waypoint = _waypoint;
@@ -83,8 +95,23 @@ public class Enemy : MonoBehaviour
 
         Vector3 currentPos = this.transform.position;
 
+       
+
         while (waypointindex != Waypoint.Length - 1)
         {
+
+
+            if (this.transform.position.y < Water.transform.position.y)
+            {
+                underTheSea = true;
+                speedInit = false;
+            }
+            else
+            {
+                if(!speedInit) unitspeed *= 1.15f;
+                speedInit = true;
+                underTheSea = false;
+            }
 
             MoveToPoint = Waypoint[waypointindex];
 
@@ -103,9 +130,9 @@ public class Enemy : MonoBehaviour
                 {
                     if (!jump)
                     {
-                        unitspeed *= 0.8f;
+                        if(underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
+                        else unitspeed *= 0.8f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
-
                     }
                 }
 
@@ -114,9 +141,9 @@ public class Enemy : MonoBehaviour
                 {
                     if (!jump)
                     {
-                        unitspeed *= 1.2f;
+                        if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
+                        else unitspeed *= 1.2f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
-
                     }
                 }
 
@@ -126,16 +153,18 @@ public class Enemy : MonoBehaviour
                     float X = unitspeed - unitstate.unitspeed;
 
                     //느린상태
-                    if (X < -0.05f) unitspeed += Time.deltaTime;
-                    else if (X > 0.05f) unitspeed -= Time.deltaTime;
-                    else unitspeed = unitstate.unitspeed;
-
-
+                    if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
+                    else
+                    {
+                        if (X < -0.05f) unitspeed += Time.deltaTime;
+                        else if (X > 0.05f) unitspeed -= Time.deltaTime;
+                        else unitspeed = unitstate.unitspeed;
+                    }
                     //다음 목적지로 이동
                     this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.deltaTime);
                 }
 
-
+                //Debug.Log("유닛 스피드 : " + unitspeed);
                 Vector3 relativePos = Waypoint[waypointindex] - this.transform.position;
                 //현재 위치에서 타겟위치로의 방향값
                 Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
@@ -170,17 +199,24 @@ public class Enemy : MonoBehaviour
         //x축과 z축은 보간된 값으로 업데이트
         
         Vector3 pos = Vector3.Lerp(_start, _end, _time);
-
+        Debug.Log(heightvalue);
+        if (heightvalue <= 0)
+        {
+            Debug.Log("dddddddddddddda5634sd6fasd564f654asd6f54as65df465sad4f");
+            heightvalue = 0;
+        }
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);
     }
 
     private IEnumerator MoveToNext(Vector3 _current, Vector3 _next)
     {
+
         jump = true;
         Timer = 0;
         while (Vector3.Magnitude(_next - this.transform.position) > 0.05f)
         {
             Timer += Time.deltaTime;
+            if (Timer >= 2) Timer = 2.0f;
             Vector3 MovePos =  parabola(_current, _next, 1.5f, 1, Timer*unitspeed);
 
             this.transform.position = MovePos;

@@ -238,6 +238,7 @@ MonoBehaviour:
     unithp: 20
     unitamour: 0
     avoidancerate: 0
+  HpUpValue: 1
 --- !u!54 &73171174482164101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,7 +253,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &4412602763616661899
 GameObject:

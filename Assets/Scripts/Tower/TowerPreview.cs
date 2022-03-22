@@ -17,6 +17,9 @@ public class TowerPreview : MonoBehaviour
     //타일 위인지 검사
     private bool ontile = false;
 
+    private bool OnWater = false;
+    public bool SetWeater { set => OnWater = value; }
+
     //이동하는 길목인지 확인
     private bool checkOnroute = false;
     
@@ -37,6 +40,8 @@ public class TowerPreview : MonoBehaviour
     public string towername = null;
 
     public PlayerState playerstate = null;
+
+    private bool thisActive = true;
 
     private void UiStateChange(int _i)
     {
@@ -95,8 +100,8 @@ public class TowerPreview : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                DestroyThis();
                 Origintower.GetComponent<Tower>().ActiveOn();
-                Destroy(this.gameObject);
             }
         }
 
@@ -120,8 +125,10 @@ public class TowerPreview : MonoBehaviour
                     float Y = hit.collider.transform.localScale.y;
                     this.transform.position = new Vector3(X, (Y / 2), Z);
 
-                    showtowerinfo.ShowRange(this.gameObject.transform, range);
-
+                    if (thisActive)
+                    {
+                        showtowerinfo.ShowRange(this.gameObject.transform, range);
+                    }
                     //타일 위에 있는지
                     ontile = true;
                     //이미 타워가 있는지
@@ -137,25 +144,31 @@ public class TowerPreview : MonoBehaviour
                 }
             }
 
-            //현재 위치의 설치가능 여부에 따라 preview 위에 ui표시
-            if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) || (CanCombination && tower.GetStep == 3)|| checkOnroute)
+            if (thisActive)
             {
-               // Debug.Log((alreadytower && !CanCombination) + " : " + (CanCombination && towerstep == 3) + " : " + (CanCombination && tower.GetStep == 3));
-                UiStateChange(2);
-            }
-            else if((alreadytower && CanCombination && towerstep != 3 && tower.GetStep != 3))
-            {
-              //  Debug.Log(alreadytower + " : " + CanCombination + " : " + (towerstep != 3 && tower.GetStep != 3));
-                UiStateChange(0);
-            }
-            else
-            {
-                UiStateChange(1);
+                //현재 위치의 설치가능 여부에 따라 preview 위에 ui표시
+                //불가능
+                if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater)
+                {
+                    // Debug.Log((alreadytower && !CanCombination) + " : " + (CanCombination && towerstep == 3) + " : " + (CanCombination && tower.GetStep == 3));
+                    UiStateChange(2);
+                }
+                //합체
+                else if ((alreadytower && CanCombination && towerstep != 3 && tower.GetStep != 3)&& !OnWater)
+                {
+                    //  Debug.Log(alreadytower + " : " + CanCombination + " : " + (towerstep != 3 && tower.GetStep != 3));
+                    UiStateChange(0);
+                }
+                //가능
+                else
+                {
+                    UiStateChange(1);
+                }
             }
 
 
             //타워 합체
-            if (ontile && !checkOnroute)
+            if (ontile && !checkOnroute || !OnWater)
             {
                 if (CanCombination && alreadytower)
                 {
@@ -326,5 +339,17 @@ public class TowerPreview : MonoBehaviour
         playerstate = _playerstate;
     }
 
+    public void DestroyThis()
+    {
+        thisActive = false;
+        Debug.Log("dddd");
+        showtowerinfo.RangeOff();
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log("ssss");
+            buildstate[i].SetActive(false);
+        }
+        Destroy(this.gameObject);
+    }
 
 }

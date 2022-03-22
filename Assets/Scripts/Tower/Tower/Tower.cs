@@ -42,6 +42,8 @@ public class Tower : MonoBehaviour
     //미리보기 타워 생성
     //private GameObject preview = null;
 
+    private bool TowerCanWork = true;
+
     //적 방향으로 돌아갈 포신
     //y축 회전
     [SerializeField] protected Transform towerBody;
@@ -87,7 +89,7 @@ public class Tower : MonoBehaviour
 
         atkspeed = towerinfo.atkdelay;
         StartCoroutine(AutoSearch());
-        //node.GetOnTower = true;
+        node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
         cam = Camera.main;
     }
@@ -99,30 +101,31 @@ private void SpeedUP(int x)
 
     protected virtual void Update()
     {
-
-
-        if (FinalTarget == null)
+        Debug.Log(TowerCanWork + "공격가능?");
+        if (TowerCanWork)
         {
+            if (FinalTarget == null)
+            {
 
+            }
+            else
+            {
+                RotateTurret();
+            }
+
+            //if (towermove)
+            //{
+            //    if (Input.GetKeyDown(KeyCode.Escape))
+            //    {
+            //        towermove = false;
+            //        Base.SetActive(true);
+            //        towercollider.enabled = true;
+            //        Destroy(preview);
+            //        showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
+
+            //    }
+            //}
         }
-        else
-        {
-            RotateTurret();
-        }
-
-        //if (towermove)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Escape))
-        //    {
-        //        towermove = false;
-        //        Base.SetActive(true);
-        //        towercollider.enabled = true;
-        //        Destroy(preview);
-        //        showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
-
-        //    }
-        //}
-
 
     }
 
@@ -338,9 +341,8 @@ private void SpeedUP(int x)
 
     public void TowerMove()
     {
-        Debug.Log(towerpreview);
         GameObject preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
-
+        showtowerinfo.SetTowerinfoOff();
         //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
         //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
 
@@ -368,7 +370,8 @@ private void SpeedUP(int x)
 
     public void ActiveOn()
     {
-
+        showtowerinfo.ShowInfo(this);
+        showtowerinfo.ShowRange(this.gameObject.transform, towerinfo.towerrange);
         this.gameObject.SetActive(true);
         node.GetOnTower = true;
     }
@@ -413,7 +416,10 @@ private void SpeedUP(int x)
     }
 
 
-
+    public bool SetTowerCanWork
+    {
+        set => TowerCanWork = value;
+    }
     public Node SetNode
     {
         get

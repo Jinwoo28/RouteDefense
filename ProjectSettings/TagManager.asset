@@ -8,6 +8,8 @@ TagManager:
   - OutSide
   - Tower
   - Enemy
+  - FxTemporaire
+  - TowerPreview
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - Floor
   - Tile
   - Tower
-  - 
+  - TowerPreview
   - 
   - 
   - 

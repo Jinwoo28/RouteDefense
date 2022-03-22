@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4565000380037727925}
   m_Layer: 9
   m_Name: Tow_Mortar1 Preview
-  m_TagString: Tower
+  m_TagString: TowerPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

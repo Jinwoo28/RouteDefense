@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: -6205057003312841810}
   m_Layer: 0
   m_Name: Tow_Laser2 Preview
-  m_TagString: Untagged
+  m_TagString: TowerPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

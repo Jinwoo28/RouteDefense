@@ -120,7 +120,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 2
-  AtkParticle: {fileID: 0}
+  AtkParticle: {fileID: 1203600140251121260}
   bulletPool: {fileID: 4996748569145679992}
   patriclePool: {fileID: 286163389577119086}
 --- !u!65 &3037106080692734369
@@ -401,6 +401,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
+--- !u!1 &1203600140251121260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9214557259449022005, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
+  m_PrefabInstance: {fileID: 8022218199446843481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1203600140250700364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9214557259448920597, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}

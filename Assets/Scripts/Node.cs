@@ -103,13 +103,10 @@ public class Node : MonoBehaviour
         neighbournode = _neighbournode;
     }
 
-    float ydepth = 0;
-
-
+    float ydepth = 1.0f;
 
     public void UpDownTile(List<Node> _neighbournode, float _Ydepth)
     {
-       
         //이미 높이가 변한 적이 있는지
         alreadymove = true;
 
@@ -253,7 +250,7 @@ public class Node : MonoBehaviour
     public void ColorChange2()
     {
         Vector3 thisscale = this.transform.localScale;
-        int x = (int)thisscale.y;
+        int x = (int)(thisscale.y*2)-1;
 
         if (!start && !end)
         {
@@ -301,6 +298,12 @@ public class Node : MonoBehaviour
                     color = tilecolor[6].color;
                     walkablecolorF = tilecolor[6].color;
    //                 walkablecolorT = tilecolor[13].color;
+                    break;
+                case 8:
+                    ChangeColor(tilecolor[7].color);
+                    color = tilecolor[7].color;
+                    walkablecolorF = tilecolor[7].color;
+                    //                 walkablecolorT = tilecolor[13].color;
                     break;
             }
         }

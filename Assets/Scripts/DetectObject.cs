@@ -25,5 +25,35 @@ public class DetectObject : MonoBehaviour
         return null;
     }
 
+    public static Node GetNodeInfo()
+    {
+        Node mousepointnode = GetNodeInfo();
+
+        if (mousepointnode != null)
+        {
+            return mousepointnode;
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    private Transform GetObjectInfo()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                returntransform = hit.collider.transform;
+            }
+
+            return returntransform;
+        }
+        return null;
+    }
 
 }

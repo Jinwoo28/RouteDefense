@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 5600623581655944651, guid: 517699ff1babbdd459dad1e113e54a97, type: 3}
   upgradevalue:
-    priceincrease: 75
-    upgradeprice: 20
+    priceincrease: 20
+    upgradeprice: 75
     damagevalue: 0.75
     upcriticalvalue: 2
   towerinfo:
@@ -68,8 +68,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 2
-  RotateBarral: {fileID: 1952561914479964294}
   AtkParticle: {fileID: 8428444402255710621}
+  RotateBarral: {fileID: 1952561914479964294}
   HitEffect: {fileID: 279747066564829931}
 --- !u!65 &2421880578984886538
 BoxCollider:
