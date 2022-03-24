@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CrossbowTower : Tower
 {
-    private ObjectPooling op = null;
+    private bulletpolling op = null;
     protected override void Start()
     {
-        op = this.GetComponent<ObjectPooling>();
+        op = this.GetComponent<bulletpolling>();
         base.Start();
     }
 
@@ -17,6 +17,7 @@ public class CrossbowTower : Tower
         if (GetStep != 3)
         {
             var obj = op.GetObject(shootPos.position);
+            obj.ResetBullet();
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f);
             obj.MortarSetDestination(FinalTarget.position + new Vector3(0, FinalTarget.transform.localPosition.y / 2, 0), shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
@@ -37,6 +38,7 @@ public class CrossbowTower : Tower
 
             Debug.Log(shootpos);
             var obj = op.GetObject(shootpos);
+            obj.ResetBullet();
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f-i*2);
             //obj.MortarSetDestination(FinalTarget.position + new Vector3(0, FinalTarget.transform.localPosition.y / 2, 0), shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);

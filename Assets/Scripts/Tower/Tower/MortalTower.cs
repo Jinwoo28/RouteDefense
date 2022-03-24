@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MortalTower : Tower
 {
-    [SerializeField] private ObjectPooling bulletPool = null;
-    [SerializeField] private ObjectPooling patriclePool = null;
+    [SerializeField] private bulletpolling bulletPool = null;
+    [SerializeField] private bulletpolling patriclePool = null;
 
     protected override void Start()
     {
@@ -16,15 +16,12 @@ public class MortalTower : Tower
     protected override void Update()
     {
         base.Update();
-        Debug.Log(AtkParticle + " : 353513");
     }
 
     protected override void Attack()
     {
-        Debug.Log(AtkParticle);
         AtkParticle.GetComponent<ParticleSystem>().Play();
         
-        Debug.Log("count");
         var obj = bulletPool.GetObject(shootPos.position);
         obj.SetUp(FinalTarget, 3, bulletPool,5);
         obj.MortarSetDestination(FinalTarget.position,shootPos.position);

@@ -14,4 +14,6 @@ public class NomalBullet : Bullet
         target.GetComponent<Enemy>().EnemyAttacked(damage);
        // Destroy(this.gameObject);
     }
+
+    
 }

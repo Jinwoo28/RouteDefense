@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    protected ObjectPooling objectpooling = null;
+    protected bulletpolling objectpooling = null;
     protected Transform target;
     protected float damage = 0;
     protected float bullspeed = 0;
@@ -16,19 +16,18 @@ public class Bullet : MonoBehaviour
     protected Camera cam = null;
 
 
-    protected ObjectPooling particle = null;
+    protected bulletpolling particle = null;
 
-    public void SetPool(ObjectPooling pop)
+    public void SetPool(bulletpolling pop)
     {
         if (particle == null)
         {
             particle = pop;
-            Debug.Log(particle+"Ddddddd");
         }
     }
 
     protected Vector3 moveDir = Vector3.zero;
-    public void SetUp(Transform _target, float _damage, ObjectPooling _objpooling,float _speed)
+    public void SetUp(Transform _target, float _damage, bulletpolling _objpooling,float _speed)
     {
         bullspeed = _speed;
         target = _target;
@@ -41,6 +40,10 @@ public class Bullet : MonoBehaviour
         destiNation = _desti;
         shootPos = _shootpos;
         Invoke("ReturnBullet", 5.0f);
+    }
+
+    public virtual void ResetBullet()
+    {
     }
 
     public void SetArrowDir(Vector3 _target)

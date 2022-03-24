@@ -23,42 +23,41 @@ public class WeatherSetting : MonoBehaviour
     //사용가능한 node리스트
     private List<Node> checkednodelist = new List<Node>();
 
+
+
     private weather weaTher = weather.spring;
 
-    [SerializeField] private GameObject[] SpringItem = null;
+    //생성된 나무 리스트
+    [SerializeField] private GameObject MakeTreeObj = null;
+    private List<TreeSc> treelist = new List<TreeSc>();
 
     [SerializeField] private GameObject water = null;
     [SerializeField] private GameObject waterTrigger = null;
-
-    [SerializeField] private GameObject[] fallItem = null;
-    [SerializeField] private GameObject[] fallFruit = null;
-
-    [SerializeField] private GameObject[] WinterItem = null;
-    [SerializeField] private GameObject[] WinterObstacle = null;
 
     [SerializeField] private ParticleSystem Rain = null;
     private bool rained = false;
     [SerializeField] private ParticleSystem Snow = null;
 
+    private bool treechanged = false;
 
     private void Update()
     {
         tilelist = mapmanager.GetActiveList;
-        WeatherChange();
+       
     }
 
 
     private void WeatherChange()
     {
-        if (stageNum <= 5)
+        if (stageNum <= 3)
         {
             weaTher = weather.spring;
         }
-        else if (stageNum <= 10)
+        else if (stageNum <= 4)
         {
             weaTher = weather.summer;
         }
-        else if (stageNum <= 15)
+        else if (stageNum <= 5)
         {
             weaTher = weather.fall;
         }
@@ -71,11 +70,14 @@ public class WeatherSetting : MonoBehaviour
     public void WeatherSettings()
     {
         stageNum++;
+        WeatherChange();
 
         if (!rained)
         {
             DryWater();
         }
+
+        TreeChange((int)weaTher);
 
         switch ((int)weaTher)
         {
@@ -86,6 +88,7 @@ public class WeatherSetting : MonoBehaviour
                 SummerAct();
                 break;
             case 2:
+                Rain.Stop();
                 FallAct();
                 break;
             case 3:
@@ -103,19 +106,20 @@ public class WeatherSetting : MonoBehaviour
             CheckEmptyNode();
             //생성될 노드의 index
             int num = Random.Range(0, checkednodelist.Count);
-            //생성할 나무
-            int InsTree = Random.Range(0, SpringItem.Length);
 
-            GameObject Tree = Instantiate(SpringItem[InsTree], new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth/2, checkednodelist[num].gridY), Quaternion.identity);
+            GameObject Tree = Instantiate(MakeTreeObj, new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth/2, checkednodelist[num].gridY), Quaternion.identity);
+            treelist.Add(Tree.GetComponent<TreeSc>());
+            Tree.GetComponent<TreeSc>().TreeChangeToSpring();
+            Tree.GetComponent<TreeSc>().SetNode = checkednodelist[num];
             checkednodelist[num].GetOnTower = true;
 
         }
     }
     private void SummerAct() 
     {
-
+        Debug.Log("여름");
         int rainprobabilty = Random.Range(0, 2);
-        if(rainprobabilty < 1)
+        if(rainprobabilty < 2)
         {
             Rain.Play();
             rained = true;
@@ -126,8 +130,36 @@ public class WeatherSetting : MonoBehaviour
             rained = false;
         }
     }
-    private void FallAct() { }
-    private void WinterAct() { }
+    private void FallAct() 
+    {
+
+        for (int i = 0; i < treelist.Count; i++)
+        {
+            treelist[i].FallAct();
+        }
+    }
+
+    int XXXX = 0;
+    private void WinterAct() 
+    {
+        XXXX++;
+        Snow.Play();
+        if (XXXX > 3)
+        {
+            water.SetActive(false);
+            waterTrigger.GetComponent<WaterTrigger_>().watericed();
+        }
+            for(int i = 0;i< treelist.Count; i++)
+        { 
+            treelist[i].DisappearFruit();
+        }
+
+
+        for (int i = 0; i < treelist.Count; i++)
+        {
+            treelist[i].WinterAct();
+        }
+    }
 
     private void CheckEmptyNode()
     {
@@ -138,13 +170,7 @@ public class WeatherSetting : MonoBehaviour
             {
                 checkednodelist.Add(tilelist[i]);
             }
-            else
-            {
-                checkednodelist.Remove(tilelist[i]);
-            }
         }
-
-
     }
 
     private void RainDown()
@@ -187,6 +213,26 @@ public class WeatherSetting : MonoBehaviour
         Snow.Stop();
     }
 
+
+    private void TreeChange(int weather)
+    {
+        for(int i = 0; i < treelist.Count; i++)
+        {
+            switch (weather)
+            {
+                case 0:
+                    treelist[i].TreeChangeToSpring();
+                    break;
+                case 2:
+                    treelist[i].TreeChangeToFall();
+                    break;
+                case 3:
+                    treelist[i].TreeChangeToWinter();
+                    break;
+
+            }
+        }
+    }
 
 
 }

@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4858606936081549200}
+  - component: {fileID: 2990093738372476755}
   m_Layer: 0
   m_Name: FallTree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4858606936081549200
 Transform:
   m_ObjectHideFlags: 0
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2990093738372476755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4858606936081549201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e231b02f62437c43ab2c4a384c21e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+  - {fileID: 6870700823012623872, guid: 4812479822cd13c4b846301cc276eb95, type: 3}
+  - {fileID: 7486377789790881055, guid: f7639d802c493be4faa91d18569df9fc, type: 3}
+  X: 0
 --- !u!1001 &4858606937180659348
 PrefabInstance:
   m_ObjectHideFlags: 0

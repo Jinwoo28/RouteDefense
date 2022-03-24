@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &98558457491155525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98558457491155527}
+  - component: {fileID: 98558457491155524}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98558457491155527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98558457491155525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &98558457491155524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98558457491155525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77670edc3f16e5540b400132d97f00ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpringTree:
+  - {fileID: 7251266987631396040, guid: 53a041c272c0fb548923dab76a788f65, type: 3}
+  - {fileID: 4648583843665769868, guid: d6ed0115ce3c602428fc904e1bc6c5da, type: 3}
+  - {fileID: 576827091310176549, guid: d9a60ad69c240ca4d999fddf8d7de5a9, type: 3}
+  FallTree:
+  - {fileID: 6156380631086937787, guid: d36e31e8f963d8d45a081bff068ca905, type: 3}
+  - {fileID: 4858606936081549201, guid: 1d04a155be276db47b6b0a2d54ea7a04, type: 3}
+  - {fileID: 8065508591359032900, guid: 69c8c892dcb0c3f4ebdbc34dc96a6d9a, type: 3}
+  WinterTree:
+  - {fileID: 8056225252617191001, guid: d4df24cdc23bcd044aa07e5544916bc5, type: 3}
+  - {fileID: 6492835034074542339, guid: 94bda546a1291e0428ac73cbcc149a4d, type: 3}
+  - {fileID: 7200124527085213254, guid: d225205b2c414a747b7326cb821aea7d, type: 3}
+  fruit:
+  - {fileID: 6870700823012623872, guid: 4812479822cd13c4b846301cc276eb95, type: 3}
+  - {fileID: 7486377789790881055, guid: f7639d802c493be4faa91d18569df9fc, type: 3}
+  branch:
+  - {fileID: 5073912178413979927, guid: b011d82b2440a0e459e0381cb2606a38, type: 3}
+  - {fileID: 7790090654088898295, guid: e25d80d801a55724a95e0be1a8c6bc88, type: 3}

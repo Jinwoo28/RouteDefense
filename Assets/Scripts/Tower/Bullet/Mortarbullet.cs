@@ -6,7 +6,7 @@ public class Mortarbullet : Bullet
 {
     [SerializeField] private LayerMask enemylayer;
     [SerializeField] private float Range = 3.0f;
-    
+
     private float Timer = 0;
 
     public override void Attack()
@@ -20,8 +20,8 @@ public class Mortarbullet : Bullet
         Timer = 0;
         while (true)
         {
-            
-            Timer += Time.deltaTime*1.1f;
+
+            Timer += Time.deltaTime * 1.1f;
             Vector3 MovePos = ParaBolaMove(_current, _Desti, 2.0f, 1, Timer);
 
             this.transform.position = MovePos;
@@ -44,6 +44,7 @@ public class Mortarbullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("d");
         if (other.CompareTag("Enemy") || other.CompareTag("Tile"))
         {
             AtkCharactor();
@@ -51,10 +52,12 @@ public class Mortarbullet : Bullet
         }
     }
 
+    
+
     protected override void AtkCharactor()
     {
         Vector3 Insight = cam.transform.position - this.transform.position;
-        var obj = particle.GetObject(this.transform.position+Insight.normalized);
+        var obj = particle.GetObject(this.transform.position + Insight.normalized);
         obj.SetPool(particle);
 
         Collider[] E_collider = Physics.OverlapSphere(this.transform.position, MortarRange, enemylayer);
@@ -67,7 +70,7 @@ public class Mortarbullet : Bullet
                 {
                     EC.GetComponent<Enemy>().EnemyAttacked(damage);
                 }
-                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange*0.6f)
+                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange * 0.6f)
                 {
                     float decrease = damage - 2;
                     if (decrease <= 0) continue;
@@ -81,7 +84,7 @@ public class Mortarbullet : Bullet
                 }
             }
         }
-        
+
 
 
     }

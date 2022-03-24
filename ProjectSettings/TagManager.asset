@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - FxTemporaire
   - TowerPreview
+  - Fruit
+  - Water
   layers:
   - Default
   - TransparentFX

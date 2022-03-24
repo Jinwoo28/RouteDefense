@@ -41,9 +41,12 @@ public class Enemy : MonoBehaviour
     private bool speedInit = false;
 
     private float unitspeed = 0;
+    public float GetUnitSpeed { get => unitspeed; }
     private float Timer = 0;
 
     bool jump = false;
+
+   
 
     private void Start()
     {
@@ -56,13 +59,7 @@ public class Enemy : MonoBehaviour
         Time.timeScale = x;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            EnemyDie();
-        }
-    }
+
 
     public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum,Transform _water)
     {
@@ -193,18 +190,21 @@ public class Enemy : MonoBehaviour
         //y축은 파워값과 높이값에 time.deltatime을 곱한다.
         //time이 1보다 작을 때는 양수, 1보다 클 때는(음수)이기 때문에 포물선 이동이 가능
         float heightvalue = -_power * _height * _time * _time + _power * _height * _time;
-        
+
         //Mathf.sin
         //시작 지점의 좌표와 도착지점의 좌표 보간값
         //x축과 z축은 보간된 값으로 업데이트
-        
+
         Vector3 pos = Vector3.Lerp(_start, _end, _time);
-        Debug.Log(heightvalue);
+
         if (heightvalue <= 0)
         {
-            Debug.Log("dddddddddddddda5634sd6fasd564f654asd6f54as65df465sad4f");
             heightvalue = 0;
         }
+
+        //Debug.Log(heightvalue+ "현재 Parabola");
+
+        //Debug.Log(heightvalue + pos.y + "현재 Y");
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);
     }
 
@@ -216,7 +216,7 @@ public class Enemy : MonoBehaviour
         while (Vector3.Magnitude(_next - this.transform.position) > 0.05f)
         {
             Timer += Time.deltaTime;
-            if (Timer >= 2) Timer = 2.0f;
+           
             Vector3 MovePos =  parabola(_current, _next, 1.5f, 1, Timer*unitspeed);
 
             this.transform.position = MovePos;
@@ -307,6 +307,14 @@ public class Enemy : MonoBehaviour
         set
         {
             unitstate.unithp += value;
+        }
+    }
+
+    public float SetOriginHp
+    {
+        set
+        {
+            unitstate.unithp = value;
         }
     }
 

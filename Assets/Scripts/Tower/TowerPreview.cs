@@ -150,7 +150,6 @@ public class TowerPreview : MonoBehaviour
                 //불가능
                 if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater)
                 {
-                    // Debug.Log((alreadytower && !CanCombination) + " : " + (CanCombination && towerstep == 3) + " : " + (CanCombination && tower.GetStep == 3));
                     UiStateChange(2);
                 }
                 //합체
@@ -168,7 +167,7 @@ public class TowerPreview : MonoBehaviour
 
 
             //타워 합체
-            if (ontile && !checkOnroute || !OnWater)
+            if (ontile && !checkOnroute && !OnWater)
             {
                 if (CanCombination && alreadytower)
                 {
@@ -215,23 +214,11 @@ public class TowerPreview : MonoBehaviour
                         if (Origintower != null)
                         {
                            
-                            //Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
-                            //Origintower.transform.position = this.transform.position;
-                            //Origintower.GetComponent<Tower>().SetNode.GetComponent<Node>().GetOnTower = false;
-                            //Origintower.GetComponent<Tower>().SetNode.GetOnTower = true;
-                            //obj.GetComponent<Tower>().ActiveOn();
                             Origintower.transform.position = this.transform.position;
                             Origintower.GetComponent<Tower>().SetNode = towernode;
                             Origintower.GetComponent<Tower>().ActiveOn();
                             showtowerinfo.ShowInfo(Origintower.GetComponent<Tower>());
-                            //GameObject obj = Instantiate(Origintower, this.transform.position, Quaternion.identity);
-                            //obj.GetComponent<Tower>().TowerSetUp(towernode, showtowerinfo, buildstate, playerstate);
-                            //obj.GetComponent<Tower>().ActiveOn();
-                            //obj.GetComponent<Tower>().SetNode = towernode;
-                            //obj.GetComponent<Tower>().SetShowTower = showtowerinfo;
-                            //showtowerinfo.ShowInfo(obj.GetComponent<Tower>());
-                            //showtowerinfo.ShowRange(obj.transform, Origintower.GetComponent<Tower>().GetRange);
-                            //                   Origintower.GetComponent<Tower>().TowerDestroy();
+
                             Destroy(this.gameObject);
                         }
 
@@ -284,7 +271,7 @@ public class TowerPreview : MonoBehaviour
         if (other.CompareTag("Tower"))
         {
      //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
-            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3)
+            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& !other.GetComponent<Tower>().GetIced)
             {
                 Debug.Log(other.GetComponent<Tower>().Getname == towername + "1");
                 Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2"); 

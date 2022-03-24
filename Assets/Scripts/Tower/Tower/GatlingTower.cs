@@ -25,18 +25,20 @@ public class GatlingTower : Tower
     {
         base.Update();
 
-        
-        if (FinalTarget != null)
+        if (SetTowerCanWork&&!GetIced)
         {
-            HitEffect.SetActive(true);
-            Vector3 Insight = cam.transform.position - FinalTarget.position;
-            HitEffect.transform.position = FinalTarget.position + Insight.normalized;
-            //HitEffect.GetComponent<ParticleSystem>().Play();
-        }
-        else
-        {
-            HitEffect.SetActive(false);
-           AtkParticle.SetActive(false);
+            if (FinalTarget != null)
+            {
+                HitEffect.SetActive(true);
+                Vector3 Insight = cam.transform.position - FinalTarget.position;
+                HitEffect.transform.position = FinalTarget.position + Insight.normalized;
+                //HitEffect.GetComponent<ParticleSystem>().Play();
+            }
+            else
+            {
+                HitEffect.SetActive(false);
+                AtkParticle.SetActive(false);
+            }
         }
 
     }

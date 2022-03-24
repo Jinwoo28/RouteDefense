@@ -157,7 +157,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 2, y: 0.5, z: 2}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &-9001943930256885863
 MonoBehaviour:
@@ -193,6 +193,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 1
+  AtkParticle: {fileID: 0}
 --- !u!114 &-8894788529478161516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8977786347504842678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
+  m_Script: {fileID: 11500000, guid: 48a36e6a454e01447bd4857679509b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 86843834051369717, guid: b5935655298648c4081429bb8634d859, type: 3}

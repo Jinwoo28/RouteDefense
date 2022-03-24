@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooling : MonoBehaviour
+public class bulletpolling : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
     [SerializeField] private int InsCount = 0;
@@ -31,11 +31,8 @@ public class ObjectPooling : MonoBehaviour
 
     public Bullet GetObject(Vector3 _insPos)
     {
-
-        Debug.Log("dd");
         if (poolingQueue.Count > 0)
         {
-            Debug.Log("ss");
             var obj = poolingQueue.Dequeue();
             obj.gameObject.transform.position = _insPos;
             obj.gameObject.SetActive(true);

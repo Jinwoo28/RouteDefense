@@ -76,19 +76,22 @@ public class Tower : MonoBehaviour
     //현재 타워 아래에 있는 타일의 노드
     private Node node = null;
 
+    //타워가 얼었는지 여부
+    private bool towericed = false;
+    public bool GetIced { get => towericed; set => towericed = value; }
+
     //타워의 공격범위
     private ShowTowerInfo showtowerinfo = null;
 
-    private ObjectPooling objectPooling = null;
+    private bulletpolling objectPooling = null;
 
     protected Camera cam = null;
 
     [SerializeField] protected GameObject AtkParticle = null;
     protected virtual void Start()
     {
-
         atkspeed = towerinfo.atkdelay;
-        StartCoroutine(AutoSearch());
+        StartCoroutine("AutoSearch");
         node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
         cam = Camera.main;
@@ -101,30 +104,12 @@ private void SpeedUP(int x)
 
     protected virtual void Update()
     {
-        Debug.Log(TowerCanWork + "공격가능?");
-        if (TowerCanWork)
+        if (TowerCanWork&&!towericed)
         {
-            if (FinalTarget == null)
-            {
-
-            }
-            else
+            if (FinalTarget != null)
             {
                 RotateTurret();
             }
-
-            //if (towermove)
-            //{
-            //    if (Input.GetKeyDown(KeyCode.Escape))
-            //    {
-            //        towermove = false;
-            //        Base.SetActive(true);
-            //        towercollider.enabled = true;
-            //        Destroy(preview);
-            //        showtowerinfo.ShowRange(this.transform,towerinfo.towerrange);
-
-            //    }
-            //}
         }
 
     }
@@ -228,6 +213,8 @@ private void SpeedUP(int x)
 
     protected virtual void RotateTurret()
     {
+
+        Debug.Log("탐색");
         Vector3 relativePos = FinalTarget.position - transform.position;
         //현재 위치에서 타겟위치로의 방향값
         Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
@@ -284,9 +271,12 @@ private void SpeedUP(int x)
 
     public void SellTower()
     {
-        playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
-        node.GetOnTower = false;
-        Destroy(this.gameObject);
+        if (!towericed)
+        {
+            playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
+            node.GetOnTower = false;
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -341,16 +331,19 @@ private void SpeedUP(int x)
 
     public void TowerMove()
     {
-        GameObject preview = Instantiate(towerpreview,this.transform.position,Quaternion.identity);
-        showtowerinfo.SetTowerinfoOff();
-        //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
-        //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
+        if (!towericed)
+        {
+            GameObject preview = Instantiate(towerpreview, this.transform.position, Quaternion.identity);
+            showtowerinfo.SetTowerinfoOff();
+            //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
+            //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
 
-        preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, towerinfo.towerrange);
+            preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, towerinfo.towerrange);
 
-        preview.GetComponent<TowerPreview>().TowerMoveSetUp(this.gameObject);
+            preview.GetComponent<TowerPreview>().TowerMoveSetUp(this.gameObject);
 
-        ActiveOff();
+            ActiveOff();
+        }
     }
 
     public ShowTowerInfo SetShowTower
@@ -374,6 +367,7 @@ private void SpeedUP(int x)
         showtowerinfo.ShowRange(this.gameObject.transform, towerinfo.towerrange);
         this.gameObject.SetActive(true);
         node.GetOnTower = true;
+        StartCoroutine("AutoSearch");
     }
 
 
@@ -418,6 +412,7 @@ private void SpeedUP(int x)
 
     public bool SetTowerCanWork
     {
+        get => TowerCanWork;
         set => TowerCanWork = value;
     }
     public Node SetNode

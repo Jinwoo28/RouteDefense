@@ -238,6 +238,7 @@ public class MapManager : MonoBehaviour
             for (int j = halfgridx - widthcount; j < halfgridx + widthcount; j++)
             {
                 grid[i, j].SetActiveTile(true);
+                grid[i, j].GetSetActive = true;
                 activeNode.Add(grid[i, j]);
             }
 
@@ -454,6 +455,7 @@ public class MapManager : MonoBehaviour
                                 int Y = (int)AddTilePos(AddtileNum, tiledir, (int)mousepos.x, (int)mousepos.z)[j].z;
                                 Destroy(AddtileX[j]);
                                 grid[Y, X].GetComponent<Node>().SetActiveTile(true);
+                                grid[Y, X].GetSetActive = true;
                                 AddTileActive = false;
                                 activeNode.Add(grid[Y,X]);
                             }

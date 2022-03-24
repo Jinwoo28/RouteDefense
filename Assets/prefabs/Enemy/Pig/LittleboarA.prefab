@@ -115,7 +115,7 @@ MonoBehaviour:
   unitstate:
     unitspeed: 2
     unitcoin: 10
-    unithp: 30
+    unithp: 50
     unitamour: 0
     avoidancerate: 0
   HpUpValue: 1

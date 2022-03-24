@@ -278,7 +278,7 @@ Transform:
   m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &22459617
 GameObject:
@@ -4023,80 +4023,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildtowerInfo: {fileID: 842939849}
   infoText: {fileID: 444161835}
---- !u!1 &406309931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 406309933}
-  - component: {fileID: 406309932}
-  m_Layer: 0
-  m_Name: Water4AdvancedReflectionMain Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!20 &406309932
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 406309931}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
-  m_projectionMatrixMode: 0
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967279
-  m_RenderingPath: 1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &406309933
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 406309931}
-  m_LocalRotation: {x: -0.38268346, y: 0, z: 0, w: 0.9238795}
-  m_LocalPosition: {x: 15, y: -9.36, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423145020
 GameObject:
   m_ObjectHideFlags: 0
@@ -6748,7 +6674,7 @@ GameObject:
   - component: {fileID: 728876262}
   m_Layer: 2
   m_Name: WaterTrigger
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6827,7 +6753,7 @@ Transform:
   m_LocalScale: {x: 30, y: 0.5, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &728876262
 MonoBehaviour:
@@ -12041,80 +11967,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278335182}
   m_CullTransparentMesh: 1
---- !u!1 &1287068961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1287068963}
-  - component: {fileID: 1287068962}
-  m_Layer: 0
-  m_Name: Water4AdvancedReflectionSceneCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!20 &1287068962
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287068961}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
-  m_projectionMatrixMode: 0
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967279
-  m_RenderingPath: 1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1287068963
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287068961}
-  m_LocalRotation: {x: -0.38268346, y: 0, z: 0, w: 0.9238795}
-  m_LocalPosition: {x: 15, y: -9.36, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299413486
 GameObject:
   m_ObjectHideFlags: 0
@@ -13142,26 +12994,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 1667784359}
   mapmanager: {fileID: 2058199560}
-  SpringItem:
-  - {fileID: 7251266987631396040, guid: 53a041c272c0fb548923dab76a788f65, type: 3}
-  - {fileID: 4648583843665769868, guid: d6ed0115ce3c602428fc904e1bc6c5da, type: 3}
-  - {fileID: 576827091310176549, guid: d9a60ad69c240ca4d999fddf8d7de5a9, type: 3}
+  MakeTreeObj: {fileID: 98558457491155525, guid: fba787dd9d842cb47a87f6e086deeae5, type: 3}
   water: {fileID: 22313948}
   waterTrigger: {fileID: 728876257}
-  fallItem:
-  - {fileID: 6156380631086937787, guid: d36e31e8f963d8d45a081bff068ca905, type: 3}
-  - {fileID: 4858606936081549201, guid: 1d04a155be276db47b6b0a2d54ea7a04, type: 3}
-  - {fileID: 8065508591359032900, guid: 69c8c892dcb0c3f4ebdbc34dc96a6d9a, type: 3}
-  fallFruit:
-  - {fileID: 6870700823012623872, guid: 4812479822cd13c4b846301cc276eb95, type: 3}
-  - {fileID: 7486377789790881055, guid: f7639d802c493be4faa91d18569df9fc, type: 3}
-  WinterItem:
-  - {fileID: 8056225252617191001, guid: d4df24cdc23bcd044aa07e5544916bc5, type: 3}
-  - {fileID: 6492835034074542339, guid: 94bda546a1291e0428ac73cbcc149a4d, type: 3}
-  - {fileID: 7200124527085213254, guid: d225205b2c414a747b7326cb821aea7d, type: 3}
-  WinterObstacle:
-  - {fileID: 5073912178413979927, guid: b011d82b2440a0e459e0381cb2606a38, type: 3}
-  - {fileID: 7790090654088898295, guid: e25d80d801a55724a95e0be1a8c6bc88, type: 3}
   Rain: {fileID: 1823660570}
   Snow: {fileID: 683671578}
 --- !u!4 &1523878243
@@ -14521,7 +14356,7 @@ MonoBehaviour:
   - SpawnTime: 1
     EnemyCount: 1
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
   - SpawnTime: 1
     EnemyCount: 1
     enemykind:
@@ -14544,6 +14379,26 @@ MonoBehaviour:
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
   - SpawnTime: 1
     EnemyCount: 1
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 10
     enemykind:
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
   - SpawnTime: 1
@@ -14871,87 +14726,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674408572}
   m_CullTransparentMesh: 1
---- !u!1001 &1674509053
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 9118928911992087627, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_Name
-      value: Water4Advanced
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992087627, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928911992125547, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928912003338661, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928912003338661, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: waterQuality
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928912003338665, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928912003338669, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9118928912003338671, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9740d9fa4a2e3b14cbf6d1d736c8bc61, type: 3}
 --- !u!1 &1682567609
 GameObject:
   m_ObjectHideFlags: 0

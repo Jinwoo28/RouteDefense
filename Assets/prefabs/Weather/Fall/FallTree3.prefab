@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8065508591359032901}
+  - component: {fileID: 1120847742498262639}
   m_Layer: 0
   m_Name: FallTree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8065508591359032901
 Transform:
   m_ObjectHideFlags: 0
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120847742498262639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8065508591359032900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e231b02f62437c43ab2c4a384c21e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+  - {fileID: 6870700823012623872, guid: 4812479822cd13c4b846301cc276eb95, type: 3}
+  - {fileID: 7486377789790881055, guid: f7639d802c493be4faa91d18569df9fc, type: 3}
+  X: 0
 --- !u!1001 &8065508590838372935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +58,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: a88f7007a2170c2488b9c67af94cddb5, type: 3}
       propertyPath: m_Name
       value: Tree_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a88f7007a2170c2488b9c67af94cddb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a88f7007a2170c2488b9c67af94cddb5, type: 3}
       propertyPath: m_RootOrder

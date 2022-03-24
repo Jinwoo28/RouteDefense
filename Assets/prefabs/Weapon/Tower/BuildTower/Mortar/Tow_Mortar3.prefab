@@ -176,7 +176,6 @@ GameObject:
   - component: {fileID: 6636577839596293723}
   - component: {fileID: 1416048711602564213}
   - component: {fileID: -7711084736878349079}
-  - component: {fileID: 4532952257276757019}
   - component: {fileID: 4097778507410582911}
   m_Layer: 9
   m_Name: Tow_Mortar3
@@ -254,7 +253,7 @@ MonoBehaviour:
     m_Bits: 64
   towerstep: 3
   AtkParticle: {fileID: 7297642288051527713}
-  bulletPool: {fileID: 4532952257276757019}
+  bulletPool: {fileID: 4097778507410582911}
   patriclePool: {fileID: 4097778507410582911}
 --- !u!65 &-7711084736878349079
 BoxCollider:
@@ -267,22 +266,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 0.5, z: 1.5}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4532952257276757019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636577839603563935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 8678363721812442767, guid: dc4495b7d4bd09844af9e21f068071a5, type: 3}
-  InsCount: 3
 --- !u!114 &4097778507410582911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,11 +277,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6636577839603563935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
+  m_Script: {fileID: 11500000, guid: 48a36e6a454e01447bd4857679509b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3048058919435168437, guid: 5417159e2d2b71e4f913080330dd08a1, type: 3}
-  InsCount: 1
+  bullet: {fileID: 8678363721812442767, guid: dc4495b7d4bd09844af9e21f068071a5, type: 3}
+  InsCount: 3
 --- !u!1 &6810337332503332722
 GameObject:
   m_ObjectHideFlags: 0

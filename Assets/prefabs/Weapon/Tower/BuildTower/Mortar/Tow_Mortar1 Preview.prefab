@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6031843419435706451}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 8832539551386522800}
   - component: {fileID: 8832539551383622800}
   - component: {fileID: 8832539551384622672}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 8832539551386522802}
   - component: {fileID: 8832539551383622802}
   - component: {fileID: 8832539551384622674}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,11 +204,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8832539551386522804}
   - component: {fileID: 8832539551377242960}
-  - component: {fileID: -1221180500245055971}
   - component: {fileID: 987479985351719612}
   - component: {fileID: 3081068272589010796}
   - component: {fileID: 4565000380037727925}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: Tow_Mortar1 Preview
   m_TagString: TowerPreview
   m_Icon: {fileID: 0}
@@ -249,20 +248,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-1221180500245055971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8832539551386618004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07bbbd021edb9c9459518f09241d1804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 8678363721812442767, guid: dc4495b7d4bd09844af9e21f068071a5, type: 3}
-  InsCount: 3
 --- !u!65 &987479985351719612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -271,7 +256,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8832539551386618004}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

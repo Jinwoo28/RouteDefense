@@ -11,6 +11,19 @@ public class Node : MonoBehaviour
     //길찾기에서 이동 가능한지 여부
     private bool walkable = false;
 
+    //타일이 활성화 되어있는지
+    private bool checkActive = false;
+    public bool GetSetActive { get => checkActive; set => checkActive = value; }
+
+    //현재 타일위에 과일이 있는지
+    private bool OnFruit = false;
+
+    //나뭇가지가 있는지
+    private bool Onbranch = false;
+    public bool SetOnBranch { set => Onbranch = value; }
+
+    public bool GetSetOnfruit { get => OnFruit; set => OnFruit = value; }
+
     //Node의 인덱스 번호
     public int gridX;
     public int gridY;
@@ -203,6 +216,13 @@ public class Node : MonoBehaviour
         }
     }
 
+    public void OnBranch()
+    {
+        Debug.Log("나뭇가지");
+        Onbranch = true;
+        walkable = false;
+        ontower = true;
+    }
 
     public void ChangeWalkableColor(bool _walkable)
     {
@@ -231,7 +251,8 @@ public class Node : MonoBehaviour
     private Color color = Color.yellow;
     public void ReturnColor()
     {
-        ChangeColor(walkablecolorT);
+        if (Onbranch) ChangeColor(walkablecolorF);
+        else ChangeColor(walkablecolorT);
     }
 
     public Color GetColor
