@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class DetectObject : MonoBehaviour
 {
+    public static DetectObject ClickObj;
+    
+
     private Transform returntransform = null;
 
     public Transform ReturnTransform()
@@ -40,7 +43,7 @@ public class DetectObject : MonoBehaviour
 
     }
 
-    private Transform GetObjectInfo()
+    public Transform GetObjectInfo()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {

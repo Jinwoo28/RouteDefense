@@ -49,15 +49,15 @@ public class WeatherSetting : MonoBehaviour
 
     private void WeatherChange()
     {
-        if (stageNum <= 3)
+        if (stageNum <= 5)
         {
             weaTher = weather.spring;
         }
-        else if (stageNum <= 4)
+        else if (stageNum <= 10)
         {
             weaTher = weather.summer;
         }
-        else if (stageNum <= 5)
+        else if (stageNum <= 15)
         {
             weaTher = weather.fall;
         }
@@ -111,7 +111,9 @@ public class WeatherSetting : MonoBehaviour
             treelist.Add(Tree.GetComponent<TreeSc>());
             Tree.GetComponent<TreeSc>().TreeChangeToSpring();
             Tree.GetComponent<TreeSc>().SetNode = checkednodelist[num];
-            checkednodelist[num].GetOnTower = true;
+            Tree.GetComponent<Obstacle>().SetNode = checkednodelist[num];
+            Tree.GetComponent<TreeSc>().SetWeather = this;
+            checkednodelist[num].SetOnObstacle = true;
 
         }
     }
@@ -140,14 +142,21 @@ public class WeatherSetting : MonoBehaviour
     }
 
     int XXXX = 0;
+    bool iced = false;
     private void WinterAct() 
     {
         XXXX++;
         Snow.Play();
         if (XXXX > 3)
         {
-            water.SetActive(false);
             waterTrigger.GetComponent<WaterTrigger_>().watericed();
+
+            if (!iced)
+            {
+                water.GetComponent<icedwater>().iced();
+                water.GetComponent<SpriteRenderer>().enabled = false;
+                iced = true;
+            }
         }
             for(int i = 0;i< treelist.Count; i++)
         { 
@@ -213,6 +222,10 @@ public class WeatherSetting : MonoBehaviour
         Snow.Stop();
     }
 
+    public void treelistRemove(TreeSc tree)
+    {
+        treelist.Remove(tree);
+    }
 
     private void TreeChange(int weather)
     {

@@ -12,6 +12,7 @@ TagManager:
   - TowerPreview
   - Fruit
   - Water
+  - Obstacle
   layers:
   - Default
   - TransparentFX

@@ -254,6 +254,19 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void firedamage(float _damage)
+    {
+        ShowDamage(_damage);
+        if (_damage >= unitstate.unithp)
+        {
+            EnemyDie();
+        }
+        else
+        {
+            unitstate.unithp -= _damage;
+        }
+    }
+
     public void EnemyDie()
     {
 
@@ -262,25 +275,7 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    IEnumerator DotDamage(float _damage,currentstate damagetype)
-    {
-        int damagecount = 5;
-        while (damagecount >= 0)
-        {
-            if (_damage < unitstate.unithp)
-            {
-                damagecount--;
-                unitstate.unithp -= _damage;
-                CS = damagetype;
-            }
-            else
-            {
-                EnemyDie();
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-        CS = currentstate.nomal;
-    }
+    
 
     public void ShowDamage(float _damage)
     {

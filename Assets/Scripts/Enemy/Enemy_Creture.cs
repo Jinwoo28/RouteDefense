@@ -91,4 +91,32 @@ public class Enemy_Creture : Enemy
             }
         }
     }
+
+    public void FireAttacked()
+    {
+        Debug.Log("불");
+        StopCoroutine("DotDamage");
+        StartCoroutine("DotDamage");
+    }
+
+    IEnumerator DotDamage()
+    {
+        int dodDamage = 2;
+        int damagecount = 5;
+        while (damagecount > 0)
+        {
+            Debug.Log("데미지");
+            damagecount--;
+            if (dodDamage < GetHp)
+            {
+                firedamage(dodDamage);
+            }
+            else
+            {
+                EnemyDie();
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+       
+    }
 }

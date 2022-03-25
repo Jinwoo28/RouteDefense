@@ -104,6 +104,8 @@ private void SpeedUP(int x)
 
     protected virtual void Update()
     {
+        Debug.Log(TowerCanWork + " : " + towericed);
+
         if (TowerCanWork&&!towericed)
         {
             if (FinalTarget != null)
@@ -333,6 +335,8 @@ private void SpeedUP(int x)
     {
         if (!towericed)
         {
+            TowerCanWork = true;
+
             GameObject preview = Instantiate(towerpreview, this.transform.position, Quaternion.identity);
             showtowerinfo.SetTowerinfoOff();
             //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
@@ -391,6 +395,18 @@ private void SpeedUP(int x)
         Destroy(this.gameObject);
     }
 
+    public void TowerUpSkill()
+    {
+        GameObject buildedtower = Instantiate(uppertower, this.transform.position, Quaternion.identity);
+        buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
+        buildedtower.GetComponent<Tower>().SetState(1, towerlevel);
+        buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;
+        showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
+        showtowerinfo.ClickTower();
+
+        Destroy(this.gameObject);
+    }
+
 
     //프리뷰가 타워에게 넘겨줄 정보
     //타워가 다음 타워에게 넘겨줄 정보
@@ -406,6 +422,14 @@ private void SpeedUP(int x)
         set
         {
             buildstate = value;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Tile"))
+        {
+            other.GetComponent<Node>().GetOnTower = true;
         }
     }
 

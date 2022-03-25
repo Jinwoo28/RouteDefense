@@ -23,6 +23,9 @@ public class TreeSc : MonoBehaviour
     [SerializeField] private GameObject[] fruit = null;
     [SerializeField] private GameObject[] branch = null;
 
+    WeatherSetting weathersettings = null;
+    public WeatherSetting SetWeather { set => weathersettings = value; }
+
 
     private bool fall;
     private bool winter;
@@ -55,7 +58,7 @@ public class TreeSc : MonoBehaviour
 
             var onj2 = Instantiate(branch[RandomNum]);
             onj2.SetActive(false);
-            onj2.transform.parent = this.transform;
+            //onj2.transform.parent = this.transform;
             obsfromtree.Enqueue(onj2);
         }
 
@@ -108,8 +111,12 @@ public class TreeSc : MonoBehaviour
             {
 
                 var obj = SetBranch();
-                obj.transform.position = new Vector3(usablenode[i].gridX, usablenode[i].GetYDepth / 2, usablenode[i].gridY);
-                usablenode[i].OnBranch();
+                if (obj != null)
+                {
+                    obj.transform.position = new Vector3(usablenode[i].gridX, usablenode[i].GetYDepth / 2, usablenode[i].gridY);
+                    obj.GetComponent<Obstacle>().SetNode = usablenode[i];
+                    usablenode[i].OnBranch();
+                }
             }
         }
     }
@@ -145,9 +152,13 @@ public class TreeSc : MonoBehaviour
 
     private GameObject SetBranch()
     {
-        var obj = obsfromtree.Dequeue();
-        obj.SetActive(true);
-        return obj;
+        if (obsfromtree.Count > 0)
+        {
+            var obj = obsfromtree.Dequeue();
+            obj.SetActive(true);
+            return obj;
+        }
+        return null;
     }
 
     public void ReturnFruit(Fruit _fruit) 
@@ -160,6 +171,11 @@ public class TreeSc : MonoBehaviour
     {
         _branch.SetActive(false);
         obsfromtree.Enqueue(_branch);
+    }
+
+    private void OnDestroy()
+    {
+        weathersettings.treelistRemove(this);
     }
 
 }

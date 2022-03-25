@@ -17,12 +17,12 @@ public class Node : MonoBehaviour
 
     //현재 타일위에 과일이 있는지
     private bool OnFruit = false;
+    public bool GetSetOnfruit { get => OnFruit; set => OnFruit = value; }
 
     //나뭇가지가 있는지
-    private bool Onbranch = false;
-    public bool SetOnBranch { set => Onbranch = value; }
+    private bool OnObstacle = false;
+    public bool SetOnObstacle { set => OnObstacle = value; }
 
-    public bool GetSetOnfruit { get => OnFruit; set => OnFruit = value; }
 
     //Node의 인덱스 번호
     public int gridX;
@@ -35,7 +35,7 @@ public class Node : MonoBehaviour
     public bool end = false;
 
     //현재 타일위에 타워가 있는지 여부
-    [SerializeField] private bool ontower = false;
+    private bool ontower = false;
 
     //이동비용
     private int gCost;
@@ -56,18 +56,18 @@ public class Node : MonoBehaviour
     private Color walkablecolorT;
     private Color walkablecolorF;
 
+    //높이에 따른 색을 담을 변수
+    private Color color = Color.yellow;
 
 
     public void SetColor(Material[] color)
     {
         tilecolor = color;
+       
     }
 
-    /// ////////////////////////////////////
-    /// ////////////////////////////////////
-
     private bool alreadymove = true;
-    //private bool DDDD = true;
+
     public List<Node> neighbournode;
 
     
@@ -83,25 +83,16 @@ public class Node : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-        //alreadymove = true;
-        //DDDD = true;
-    }
-
     private void Start()
     {
         walkablecolorT = Color.red;
-        Invoke("ColorChange2", 1.0f);
+        ColorSetting();
     }
 
-    //public bool GetAlreadymove
-    //{
-    //    get
-    //    {
-    //        return alreadymove;
-    //    }
-    //}
+    public void SetStartColor()
+    {
+
+    }
 
     public void OriginColor()
     {
@@ -174,18 +165,7 @@ public class Node : MonoBehaviour
             {
                 _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, neighbourYscale);
             }
-
         }
-
-        //for (int i = 0; i < _neighbournode.Count; i++)
-        //{
-        //    Vector3 neighboutscale = _neighbournode[i].transform.localScale;
-
-        //    if (ydepth > 0.5f && thislocalscale.y > neighboutscale.y)
-        //    {
-        //        _neighbournode[i].UpDownTile(_neighbournode[i].neighbournode, neighbourYscale);
-        //    }
-        //}
     }
 
     
@@ -219,14 +199,26 @@ public class Node : MonoBehaviour
     public void OnBranch()
     {
         Debug.Log("나뭇가지");
-        Onbranch = true;
-        walkable = false;
-        ontower = true;
+        if (!end && !start)
+        {
+            OnObstacle = true;
+            walkable = false;
+        }
     }
+
+    public void RemoveObs()
+    {
+        OnObstacle = false;
+        walkable = false;
+        ChangeColor(walkablecolorF);
+    }
+
+
+
 
     public void ChangeWalkableColor(bool _walkable)
     {
-        if (!ontower)
+        if (!ontower&&!OnObstacle)
         {
             if (!start && !end)
             {
@@ -235,32 +227,24 @@ public class Node : MonoBehaviour
                 if (walkable)
                 {
                     ChangeColor(walkablecolorT);
-                    color = walkablecolorT;
+                    //color = walkablecolorT;
                 }
 
                 else if (!walkable)
                 {
                     ChangeColor(walkablecolorF);
-                    color = walkablecolorF;
+                   // color = walkablecolorF;
                 }
 
             }
         }
     }
 
-    private Color color = Color.yellow;
+    
     public void ReturnColor()
     {
-        if (Onbranch) ChangeColor(walkablecolorF);
+        if (OnObstacle) ChangeColor(walkablecolorF);
         else ChangeColor(walkablecolorT);
-    }
-
-    public Color GetColor
-    {
-        get
-        {
-            return color;
-        }
     }
 
     public void ChangeColor(Color col)
@@ -268,10 +252,12 @@ public class Node : MonoBehaviour
         this.GetComponentInChildren<MeshRenderer>().material.color = col;
     }
 
-    public void ColorChange2()
+    public void ColorSetting()
     {
         Vector3 thisscale = this.transform.localScale;
         int x = (int)(thisscale.y*2)-1;
+
+        Debug.Log(this.transform.localScale.y);
 
         if (!start && !end)
         {
@@ -280,53 +266,54 @@ public class Node : MonoBehaviour
                 case 1:
                     ChangeColor(tilecolor[0].color);
                   //  Debug.Log("111");
-                    color = tilecolor[0].color;
+                  //  color = tilecolor[0].color;
                     walkablecolorF = tilecolor[0].color;
   //                  walkablecolorT = tilecolor[7].color;
                     break;
                 case 2:
                     ChangeColor(tilecolor[1].color);
-                    color = tilecolor[1].color;
+                  //  color = tilecolor[1].color;
                     walkablecolorF = tilecolor[1].color;
    //                 walkablecolorT = tilecolor[8].color;
                     break;
                 case 3:
                     ChangeColor(tilecolor[2].color);
-                    color = tilecolor[2].color;
+                 //   color = tilecolor[2].color;
                     walkablecolorF = tilecolor[2].color;
    //                 walkablecolorT = tilecolor[9].color;
                     break;
                 case 4:
                     ChangeColor(tilecolor[3].color);
-                    color = tilecolor[3].color;
+                  //  color = tilecolor[3].color;
                     walkablecolorF = tilecolor[3].color;
   //                  walkablecolorT = tilecolor[10].color;
                     break;
                 case 5:
                     ChangeColor(tilecolor[4].color);
-                    color = tilecolor[4].color;
+                 //   color = tilecolor[4].color;
                     walkablecolorF = tilecolor[4].color;
     //                walkablecolorT = tilecolor[11].color;
                     break;
                 case 6:
                     ChangeColor(tilecolor[5].color);
-                    color = tilecolor[5].color;
+                 //   color = tilecolor[5].color;
                     walkablecolorF = tilecolor[5].color;
      //               walkablecolorT = tilecolor[12].color;
                     break;
                 case 7:
                     ChangeColor(tilecolor[6].color);
-                    color = tilecolor[6].color;
+                 //   color = tilecolor[6].color;
                     walkablecolorF = tilecolor[6].color;
    //                 walkablecolorT = tilecolor[13].color;
                     break;
                 case 8:
                     ChangeColor(tilecolor[7].color);
-                    color = tilecolor[7].color;
+                  //  color = tilecolor[7].color;
                     walkablecolorF = tilecolor[7].color;
                     //                 walkablecolorT = tilecolor[13].color;
                     break;
             }
+           
         }
     }
 
@@ -355,11 +342,6 @@ public class Node : MonoBehaviour
         {
             return gridY;
         }
-    }
-
-    public void ChangeTF(bool tf)
-    {
-        this.gameObject.SetActive(tf);
     }
 
     public bool CheckActiveTF
@@ -427,13 +409,6 @@ public class Node : MonoBehaviour
         }
     }
 
-    public bool GetStartEnd
-    {
-        get
-        {
-            return (!end && !start);
-        }
-    }
 
 
 

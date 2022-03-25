@@ -77,6 +77,8 @@ public class MapManager : MonoBehaviour
         TowerPreview.makerouteoff += makerouteoff;
     }
 
+    
+
     private void makerouteoff()
     {
         TileCanChange = false;

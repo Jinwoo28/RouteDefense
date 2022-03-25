@@ -17,6 +17,7 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
+            Debug.Log("µé¾î¿È");
             other.GetComponent<Tower>().SetTowerCanWork = false;
             towerlist.Add(other.GetComponent<Tower>());
         }
@@ -37,15 +38,17 @@ public class WaterTrigger_ : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
     public void watericed()
     {
-        this.GetComponent<MeshRenderer>().enabled = true;
-
+        Debug.Log(nodelist.Count);
         foreach(Node node in nodelist)
         {
-            if (node.gameObject.transform.localScale.y <= this.transform.localScale.y)
+            if (node.gameObject.transform.localScale.y <= this.transform.localScale.y+0.5f)
             {
-                Debug.Log("dddd");
                 node.OnBranch();
             }
         }
@@ -61,8 +64,8 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
+            Debug.Log("Å»Ãâ");
             other.GetComponent<Tower>().SetTowerCanWork = true;
-            other.GetComponent<Tower>().GetIced = false;
             towerlist.Remove(other.GetComponent<Tower>());
         }
         if (other.CompareTag("TowerPreview"))
