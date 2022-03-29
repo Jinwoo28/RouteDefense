@@ -6,8 +6,7 @@ public class LobbySceneButton : MonoBehaviour
 {
     [SerializeField] private GameObject settingPanal = null;
 
-
-
+    [SerializeField] private GameObject ShopPanel = null;
 
     public void SettingPanalOn()
     {
@@ -16,5 +15,15 @@ public class LobbySceneButton : MonoBehaviour
     public void SettingPanalOff()
     {
         settingPanal.SetActive(false);
+    }
+
+    public void ShopOpen()
+    {
+        ShopPanel.SetActive(true);
+    }
+
+    public void ShopClose()
+    {
+        ShopPanel.SetActive(false);
     }
 }

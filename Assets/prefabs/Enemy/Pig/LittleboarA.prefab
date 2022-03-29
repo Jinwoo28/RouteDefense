@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitstate:
-    unitspeed: 0.7
-    unitcoin: 10
-    unithp: 10
+    unitspeed: 0.5
+    unitcoin: 5
+    unithp: 15
     unitamour: 0
     avoidancerate: 0
   HpUpValue: 1

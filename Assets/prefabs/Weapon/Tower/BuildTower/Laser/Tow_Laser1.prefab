@@ -242,7 +242,7 @@ MonoBehaviour:
     towername: Laser
     towerdamage: 1
     towercritical: 0
-    towerrange: 1.5
+    towerrange: 3
     atkdelay: 1
   buildstate: []
   towerpreview: {fileID: 500732071518667701, guid: a2dd3a9469624f249b3985091d41fb54, type: 3}

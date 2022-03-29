@@ -95,7 +95,7 @@ public class MapManager : MonoBehaviour
 
     private void MakeHeight()
     {
-        int Count = Random.Range(9, 10);
+        int Count = Random.Range(20, 30);
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)
         {

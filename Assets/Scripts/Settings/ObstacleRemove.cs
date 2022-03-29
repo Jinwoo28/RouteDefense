@@ -23,14 +23,14 @@ public class ObstacleRemove : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("클릭");
+              
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100f))
                 {
                     if (hit.collider.CompareTag("Obstacle"))
                     {
-                        Debug.Log("장애물");
+                    
                         sellinfo.SetActive(true);
                         sellinfo.transform.position = Camera.main.WorldToScreenPoint(hit.collider.transform.position + Vector3.up * 2);
                         obs = hit.collider.GetComponent<Obstacle>();

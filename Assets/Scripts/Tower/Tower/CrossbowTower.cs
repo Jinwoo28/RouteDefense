@@ -20,6 +20,8 @@ public class CrossbowTower : Tower
             obj.ResetBullet();
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f);
             obj.MortarSetDestination(FinalTarget.position + new Vector3(0, FinalTarget.transform.localPosition.y / 2, 0), shootPos.transform.position);
+
+            
             obj.SetArrowDir(shootPos.forward);
         }
 

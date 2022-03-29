@@ -61,10 +61,6 @@ public class EnemyManager : MonoBehaviour
         FailPanal.SetActive(false);
     }
 
-
-
-
-
     private void SpeedUP(int x)
 {
     Time.timeScale = x;

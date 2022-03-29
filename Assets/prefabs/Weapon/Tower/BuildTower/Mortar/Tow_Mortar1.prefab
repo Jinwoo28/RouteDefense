@@ -280,14 +280,14 @@ MonoBehaviour:
     priceincrease: 75
     upgradeprice: 15
     damagevalue: 1
-    upcriticalvalue: 2
+    upcriticalvalue: 1.7
   towerinfo:
     towerprice: 200
     towername: Mortar
     towerdamage: 5
     towercritical: 0
     towerrange: 2
-    atkdelay: 1
+    atkdelay: 2
   buildstate: []
   towerpreview: {fileID: 8832539551386618004, guid: 3e2e681a788d41740adf4ecc47356763, type: 3}
   towerBody: {fileID: 8832539551386522802}

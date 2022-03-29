@@ -7,7 +7,7 @@ public class PlayerState : MonoBehaviour
 {
 
     [SerializeField] private int playercoin = 500;
-    private int playerlife = 500;
+    private int playerlife = 20;
 
     public int GetSetPlayerCoin
     {

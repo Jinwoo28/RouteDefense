@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 565966067381187825}
   - component: {fileID: 3037106080692734369}
   - component: {fileID: 286163389577119086}
+  - component: {fileID: 334386406085961779}
   m_Layer: 9
   m_Name: Tow_Mortar2
   m_TagString: Tower
@@ -121,7 +122,7 @@ MonoBehaviour:
   towerstep: 2
   AtkParticle: {fileID: 1203600140251121260}
   bulletPool: {fileID: 286163389577119086}
-  patriclePool: {fileID: 286163389577119086}
+  patriclePool: {fileID: 334386406085961779}
 --- !u!65 &3037106080692734369
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -149,6 +150,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 8678363721812442767, guid: dc4495b7d4bd09844af9e21f068071a5, type: 3}
   InsCount: 3
+--- !u!114 &334386406085961779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195844679818826922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a36e6a454e01447bd4857679509b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 3048058919435168437, guid: 5417159e2d2b71e4f913080330dd08a1, type: 3}
+  InsCount: 1
 --- !u!1 &9195844679818826924
 GameObject:
   m_ObjectHideFlags: 0

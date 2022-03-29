@@ -104,8 +104,7 @@ private void SpeedUP(int x)
 
     protected virtual void Update()
     {
-        Debug.Log(TowerCanWork + " : " + towericed);
-
+       
         if (TowerCanWork&&!towericed)
         {
             if (FinalTarget != null)

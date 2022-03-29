@@ -121,7 +121,7 @@ public class WeatherSetting : MonoBehaviour
     {
         Debug.Log("¿©¸§");
         int rainprobabilty = Random.Range(0, 2);
-        if(rainprobabilty < 2)
+        if(rainprobabilty < 1)
         {
             Rain.Play();
             rained = true;

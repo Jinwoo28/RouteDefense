@@ -31,8 +31,11 @@ public class Bullet : MonoBehaviour
     {
         bullspeed = _speed;
         target = _target;
+       
         damage = _damage;
         objectpooling = _objpooling;
+
+        Debug.Log($"target : {target.transform.position} shootpos : {shootPos} finaldir : {moveDir}");
     }
 
     public void MortarSetDestination(Vector3 _desti,Vector3 _shootpos)
@@ -46,10 +49,9 @@ public class Bullet : MonoBehaviour
     {
     }
 
-    public void SetArrowDir(Vector3 _target)
+    public void SetArrowDir(Vector3 forward)
     {
-        Vector3 Dir = _target/*- shootPos*/;
-        moveDir =  Dir.normalized;
+        moveDir = forward;
     }
 
     public void SetMortarRange(float _ragne)

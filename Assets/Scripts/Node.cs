@@ -257,7 +257,6 @@ public class Node : MonoBehaviour
         Vector3 thisscale = this.transform.localScale;
         int x = (int)(thisscale.y*2)-1;
 
-        Debug.Log(this.transform.localScale.y);
 
         if (!start && !end)
         {

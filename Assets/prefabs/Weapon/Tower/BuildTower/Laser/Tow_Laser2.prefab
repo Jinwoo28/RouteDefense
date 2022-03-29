@@ -354,7 +354,7 @@ MonoBehaviour:
     towername: 
     towerdamage: 2
     towercritical: 5
-    towerrange: 1.7
+    towerrange: 3.5
     atkdelay: 0.9
   buildstate: []
   towerpreview: {fileID: 7980187492818512454, guid: 5a72c90fcdf23ff4dafa6ab400d3b241, type: 3}

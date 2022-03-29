@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 85286c4ae27e98343a8685d4a99e9bf9, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -876,6 +876,200 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28638102}
   m_CullTransparentMesh: 1
+--- !u!1 &69255757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69255762}
+  - component: {fileID: 69255761}
+  - component: {fileID: 69255760}
+  - component: {fileID: 69255759}
+  - component: {fileID: 69255758}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!96 &69255758
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69255757}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Time: 5
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
+  m_Emitting: 1
+--- !u!65 &69255759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69255757}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &69255760
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69255757}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &69255761
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69255757}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &69255762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69255757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.600959, y: 7.27, z: 20.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &72763147
 GameObject:
   m_ObjectHideFlags: 0
@@ -8728,7 +8922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercoin: 50000000
+  playercoin: 800
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0
@@ -14390,86 +14584,132 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unituiParent: {fileID: 0}
   stageinfo:
-  - SpawnTime: 1
-    EnemyCount: 1
+  - SpawnTime: 1.5
+    EnemyCount: 20
     enemykind:
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
   - SpawnTime: 1
-    EnemyCount: 10
+    EnemyCount: 25
     enemykind:
+    - {fileID: 8573811655421826803, guid: 32f04b122653af24ea6995d585762f26, type: 3}
+    - {fileID: 6983224403829662680, guid: 0d76dd59c594dbc47afe2ef3da2c7802, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 8573811655421826803, guid: 32f04b122653af24ea6995d585762f26, type: 3}
+    - {fileID: 6983224403829662680, guid: 0d76dd59c594dbc47afe2ef3da2c7802, type: 3}
+    - {fileID: 7343241063835340508, guid: 9c3c62d3cd3abf44b899d4f6936dd154, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 6983224403829662680, guid: 0d76dd59c594dbc47afe2ef3da2c7802, type: 3}
+    - {fileID: 7343241063835340508, guid: 9c3c62d3cd3abf44b899d4f6936dd154, type: 3}
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
+  - SpawnTime: 0.75
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 7343241063835340508, guid: 9c3c62d3cd3abf44b899d4f6936dd154, type: 3}
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
+    - {fileID: 7343241063835340508, guid: 9c3c62d3cd3abf44b899d4f6936dd154, type: 3}
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 0.8
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
+  - SpawnTime: 1.2
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+  - SpawnTime: 0.75
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+  - SpawnTime: 0.75
+    EnemyCount: 35
+    enemykind:
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 4629278294635405848, guid: 9c17de56fb2be844ea935a7147a796ca, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+    - {fileID: 5189191635373937444, guid: 1ff3a8eda15bf8f41901f3e85be8369d, type: 3}
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemykind:
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+    - {fileID: 5189191635373937444, guid: 1ff3a8eda15bf8f41901f3e85be8369d, type: 3}
+    - {fileID: 5605937428500773743, guid: 777556a5416b69b45a96c59e89a5d9ba, type: 3}
     - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
   - SpawnTime: 1
-    EnemyCount: 10
+    EnemyCount: 30
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 5189191635373937444, guid: 1ff3a8eda15bf8f41901f3e85be8369d, type: 3}
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+    - {fileID: 5605937428500773743, guid: 777556a5416b69b45a96c59e89a5d9ba, type: 3}
+    - {fileID: 110966413873681984, guid: 98ec0a8a7d14ded4a9cf008fa65ae9a6, type: 3}
   - SpawnTime: 1
-    EnemyCount: 10
+    EnemyCount: 30
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
+    - {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
+    - {fileID: 110966413873681984, guid: 98ec0a8a7d14ded4a9cf008fa65ae9a6, type: 3}
+    - {fileID: 5605937428500773743, guid: 777556a5416b69b45a96c59e89a5d9ba, type: 3}
+  - SpawnTime: 0.75
+    EnemyCount: 30
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
+    - {fileID: 110966413873681984, guid: 98ec0a8a7d14ded4a9cf008fa65ae9a6, type: 3}
+    - {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 4412602763616661287, guid: 02264988a10ecf047a41207d28c4d418, type: 3}
+  - SpawnTime: 0.75
+    EnemyCount: 30
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 7343241063835340508, guid: 9c3c62d3cd3abf44b899d4f6936dd154, type: 3}
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
+    - {fileID: 6857868516143576229, guid: 522e6c1fa707b15408223e9dcfeccdd2, type: 3}
+    - {fileID: 5189191635373937444, guid: 1ff3a8eda15bf8f41901f3e85be8369d, type: 3}
+  - SpawnTime: 0.5
+    EnemyCount: 40
     enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemykind:
-    - {fileID: 2135126106574756986, guid: 20ba8bb9e7583c74d80da32b40a0a03f, type: 3}
+    - {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
+    - {fileID: 110966413873681984, guid: 98ec0a8a7d14ded4a9cf008fa65ae9a6, type: 3}
+    - {fileID: 6293511829243011109, guid: 87ded06e9b5c04f46be8863da7ce09c4, type: 3}
+    - {fileID: 2447226777388587691, guid: f0fe6066af1df4043b8532b6f2a8ba54, type: 3}
+    - {fileID: 975012753349743477, guid: 989fdcd81ddd4e64da45cf233ebc95d3, type: 3}
   playerstate: {fileID: 968497605}
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}

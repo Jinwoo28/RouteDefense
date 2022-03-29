@@ -7,22 +7,18 @@ public class ArrowBullet : Bullet
     private Enemy enemy = null;
     private bool ontile = false;
     private bool Ontarget = false;
-    private Transform hitTarget = null;
+
+
 
     protected override void Update()
     {
         base.Update();
         if (!ontile)
         {
-            if (!Ontarget)
-            {
                 this.transform.position += moveDir * bullspeed * Time.deltaTime;
                 this.transform.LookAt(this.transform.position + moveDir);
-            }
-            else
-            {
-                this.transform.position += Vector3.zero;
-            }
+
+
         }
         else
         {
@@ -34,7 +30,6 @@ public class ArrowBullet : Bullet
     {
         ontile = false;
         Ontarget = false;
-
     }
 
     protected override void AtkCharactor()
@@ -46,16 +41,20 @@ public class ArrowBullet : Bullet
     {
         if (other.CompareTag("Enemy"))
         {
-            enemy = other.GetComponent<Enemy>();
-            AtkCharactor();
-            Ontarget = true;
-            Invoke("ReturnBullet", 0.1f);
+            if (!ontile)
+            {
+                enemy = other.GetComponent<Enemy>();
+                AtkCharactor();
+                Ontarget = true;
+                
+                    ReturnBullet();
+            }
         }
 
         else if (other.CompareTag("Tile"))
         {
             ontile = true;
-            Invoke("ReturnBullet", 1.0f);
+            Invoke("ReturnBullet", 0.5f);
 
         }
     }
