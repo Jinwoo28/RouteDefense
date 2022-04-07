@@ -43,28 +43,27 @@ public class WeatherSetting : MonoBehaviour
     private void Update()
     {
         tilelist = mapmanager.GetActiveList;
-       
     }
 
 
     private void WeatherChange()
     {
-        if (stageNum <= 5)
+        if (stageNum <= 10)
         {
             weaTher = weather.spring;
         }
-        else if (stageNum <= 10)
+        else if (stageNum <= 20)
         {
             weaTher = weather.summer;
         }
-        else if (stageNum <= 15)
-        {
-            weaTher = weather.fall;
-        }
-        else if (stageNum <= 20)
-        {
-            weaTher = weather.winter;
-        }
+        //else if (stageNum <= 15)
+        //{
+        //    weaTher = weather.fall;
+        //}
+        //else if (stageNum <= 20)
+        //{
+        //    weaTher = weather.winter;
+        //}
     }
 
     public void WeatherSettings()

@@ -10,10 +10,12 @@ public class MultipleSpeed : MonoBehaviour
     public delegate void SpeedUp(int x);
     public static SpeedUp speedup;
 
+
     private int speednum = 1;
 
     private void Start()
     {
+
         OnClickStart(1);
     }
     public void OnClickSpeedUp()
@@ -30,4 +32,12 @@ public class MultipleSpeed : MonoBehaviour
         multipletext.text = "X" + x.ToString();
     }
 
+    public void OnClcikCanCel()
+    {
+        speedup(speednum);
+    }
+
+
+
+ 
 }

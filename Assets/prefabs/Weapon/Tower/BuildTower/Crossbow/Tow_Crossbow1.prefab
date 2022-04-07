@@ -179,11 +179,11 @@ MonoBehaviour:
     upcriticalvalue: 2
   towerinfo:
     towerprice: 150
-    towername: CrossArrow
-    towerdamage: 3
+    towername: "\uC11D\uAD81"
+    towerdamage: 4
     towercritical: 0
     towerrange: 1.2
-    atkdelay: 0.7
+    atkdelay: 1
   buildstate: []
   towerpreview: {fileID: 8977786347504842678, guid: 09f00cb5dbd62ce4d930d577a5a67142, type: 3}
   towerBody: {fileID: 7312581385093490555}

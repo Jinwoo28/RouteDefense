@@ -66,13 +66,17 @@ public class BuildManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-               // preview.GetComponent<TowerPreview>().RangeOff();
-                towerpreviewActive = false;
-                playerstate.GetSetPlayerCoin = -towerprice;
-                preview.GetComponent<TowerPreview>().DestroyThis();
+                CancelTower();
             }
         }
 
+    }
+
+    public void CancelTower()
+    {
+        towerpreviewActive = false;
+        playerstate.GetSetPlayerCoin = -towerprice;
+        preview.GetComponent<TowerPreview>().DestroyThis();
     }
 
 
@@ -86,6 +90,14 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
+        MapManager.OffFunc();
+        if (towerpreviewActive)
+        {
+            playerstate.GetSetPlayerCoin = -towerprice;
+            preview.GetComponent<TowerPreview>().DestroyThis();
+            towerpreviewActive = false;
+        }
+
         showtowerinfo.SetTowerinfoOff();
          towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
 

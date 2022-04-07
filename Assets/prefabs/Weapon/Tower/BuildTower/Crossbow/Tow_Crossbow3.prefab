@@ -313,15 +313,15 @@ MonoBehaviour:
   upgradevalue:
     priceincrease: 20
     upgradeprice: 100
-    damagevalue: 2
+    damagevalue: 3
     upcriticalvalue: 3
   towerinfo:
     towerprice: 600
     towername: 
-    towerdamage: 5
+    towerdamage: 10
     towercritical: 10
     towerrange: 1.6
-    atkdelay: 0.7
+    atkdelay: 0.8
   buildstate: []
   towerpreview: {fileID: 3047223702295900138, guid: e332b569389f0e94b9058ad35aeddcd3, type: 3}
   towerBody: {fileID: 1538286225513994151}

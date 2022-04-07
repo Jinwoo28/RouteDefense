@@ -38,7 +38,6 @@ public class ObstacleRemove : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("พฦดิ");
                         sellinfo.SetActive(false);
                         obs = null;
                     }

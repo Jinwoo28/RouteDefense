@@ -19,9 +19,7 @@ public class ShowTowerInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI towerlevel = null;
     [SerializeField] private TextMeshProUGUI atkdamage = null;
     [SerializeField] private TextMeshProUGUI atkcritical = null;
-    [SerializeField] private TextMeshProUGUI atkrange = null;
     [SerializeField] private TextMeshProUGUI atkspeed = null;
-
     [SerializeField] private TextMeshProUGUI upgradeprice = null;
 
     //공격 범위 표시에 사용할 Sprite이미지
@@ -67,11 +65,10 @@ public class ShowTowerInfo : MonoBehaviour
         if (tower != null)
         {
             towername.text = $"{tower.Getname}";
-            towerlevel.text = "Upgrade + " + tower.GetTowerLevel.ToString();
-            atkdamage.text = "Damage : " + tower.GetDamage.ToString();
-            atkcritical.text = "Critical : " + tower.GetCritical.ToString();
-            atkspeed.text =  "Level "+tower.GetStep.ToString();
-            atkrange.text = "Range : " + tower.GetRange.ToString();
+            towerlevel.text = "업그레이드 + " + tower.GetTowerLevel.ToString();
+            atkdamage.text = "데미지 : " + tower.GetDamage.ToString();
+            atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString();
+            atkspeed.text =  "레벨 "+tower.GetStep.ToString();
            
 
             switch (tower.GetStep)
@@ -80,14 +77,14 @@ public class ShowTowerInfo : MonoBehaviour
                     if (tower.GetTowerLevel >= 10)
                     {
                         upgradebutton.interactable = false;
-                        upgradeprice.fontSize = 35;
-                        upgradeprice.text = "Can't upgrade anymore";
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "업그레이드 불가";
                     }
                     else
                     {
                         upgradebutton.interactable = true;
                         upgradeprice.fontSize = 50;
-                        upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+                        upgradeprice.text = "업그레이드 : " + tower.Gettowerupgradeprice.ToString();
 
                     }
                     break;
@@ -96,19 +93,19 @@ public class ShowTowerInfo : MonoBehaviour
                     if (tower.GetTowerLevel >= 15)
                     {
                         upgradebutton.interactable = false;
-                        upgradeprice.fontSize = 35;
-                        upgradeprice.text = "Can't upgrade anymore";
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "업그레이드 불가";
                     }
                     else
                     {
                         upgradebutton.interactable = true;
                         upgradeprice.fontSize = 50;
-                        upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+                        upgradeprice.text = "업그레이드 : " + tower.Gettowerupgradeprice.ToString();
                     }
                     break;
                 case 3:
                     upgradebutton.interactable = true;
-                    upgradeprice.text = "Upgrade : " + tower.Gettowerupgradeprice.ToString();
+                    upgradeprice.text = "업그레이드 : " + tower.Gettowerupgradeprice.ToString();
                     upgradeprice.fontSize = 50;
                     break;
             }
@@ -123,7 +120,7 @@ public class ShowTowerInfo : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                towertransform = detectob.ReturnTransform();
+                //towertransform = detectob.ReturnTransform();
                 //towertransform = DetectObject.GetNodeInfo();
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -234,5 +231,7 @@ public class ShowTowerInfo : MonoBehaviour
             }
         }
     }
+
+
 
 }

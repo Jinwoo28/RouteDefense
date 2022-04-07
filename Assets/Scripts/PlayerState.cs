@@ -7,7 +7,12 @@ public class PlayerState : MonoBehaviour
 {
 
     [SerializeField] private int playercoin = 500;
-    private int playerlife = 20;
+    private int playerlife = 30;
+
+    private void Start()
+    {
+
+    }
 
     public int GetSetPlayerCoin
     {
@@ -26,7 +31,7 @@ public class PlayerState : MonoBehaviour
         playercoin += count;
     }
 
-    public int PlayerLife
+    public int GetPlayerLife
     {
         get
         {
@@ -37,7 +42,12 @@ public class PlayerState : MonoBehaviour
 
     public void PlayerLifeDown()
     {
-        playerlife --;
+        if (playerlife >= 0)
+        {
+            playerlife--;
+        }
     }
+
+   
 
 }

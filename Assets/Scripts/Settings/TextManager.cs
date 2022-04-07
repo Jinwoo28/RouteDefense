@@ -27,7 +27,7 @@ public class TextManager : MonoBehaviour
     public void SetVariable()
     {
         int coin = playerstate.GetSetPlayerCoin;
-        int life = playerstate.PlayerLife;
+        int life = playerstate.GetPlayerLife;
 
         int maxstage = enemymanager.Getmaxstage;
         int currentstage = enemymanager.Getcurrentstage;
@@ -35,10 +35,10 @@ public class TextManager : MonoBehaviour
         int addtilenum = mapmanager.GetAddTileNum;
         int addtileprice = mapmanager.GetAddtilePrice;
 
-        playercoin.text = $"Coin : {coin}";
-        playerlife.text = $"Life : {life}";
+        playercoin.text = $"{coin}";
+        playerlife.text = $"{life}";
 
-        stageinfo.text = $"Stage : {currentstage} / {maxstage}";
+        stageinfo.text = $"{currentstage} / {maxstage}";
 
         Gettetris.sprite = Settetris[addtilenum];
         tileprice.text = addtileprice.ToString();

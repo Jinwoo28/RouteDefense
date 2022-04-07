@@ -33,9 +33,7 @@ public class Bullet : MonoBehaviour
         target = _target;
        
         damage = _damage;
-        objectpooling = _objpooling;
-
-        Debug.Log($"target : {target.transform.position} shootpos : {shootPos} finaldir : {moveDir}");
+        objectpooling = _objpooling; 
     }
 
     public void MortarSetDestination(Vector3 _desti,Vector3 _shootpos)

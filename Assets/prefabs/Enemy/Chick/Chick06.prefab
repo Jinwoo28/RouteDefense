@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 7343241063835340508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 7343241063835103802}
   - {fileID: 7343241063835057188}
@@ -227,7 +227,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7343241063835340508}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: a1d6727966712fd479eb0cd11ed4e5b7, type: 3}
   m_Controller: {fileID: 9100000, guid: f762dd657055a8e4788de6ba237b924d, type: 2}
   m_CullingMode: 1
@@ -249,7 +249,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.7, z: 0.9}
+  m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!54 &5078198553093798772
 Rigidbody:
@@ -280,9 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitstate:
-    unitspeed: 0.7
+    unitspeed: 1
     unitcoin: 5
-    unithp: 10
+    unithp: 7
     unitamour: 0
     avoidancerate: 0
   HpUpValue: 1

@@ -233,17 +233,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 0}
   upgradevalue:
-    priceincrease: 125
-    upgradeprice: 45
-    damagevalue: 2
+    priceincrease: 25
+    upgradeprice: 125
+    damagevalue: 3
     upcriticalvalue: 4
   towerinfo:
     towerprice: 800
     towername: 
-    towerdamage: 3
+    towerdamage: 4
     towercritical: 10
-    towerrange: 4
-    atkdelay: 0.8
+    towerrange: 2
+    atkdelay: 0.6
   buildstate: []
   towerpreview: {fileID: 8817138273659128893, guid: 7ecdc9c4b8c14f445b406a7429a42b87, type: 3}
   towerBody: {fileID: 1998161900100133328}

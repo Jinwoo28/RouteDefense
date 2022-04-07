@@ -280,11 +280,11 @@ MonoBehaviour:
     priceincrease: 75
     upgradeprice: 15
     damagevalue: 1
-    upcriticalvalue: 1.7
+    upcriticalvalue: 5
   towerinfo:
     towerprice: 200
     towername: Mortar
-    towerdamage: 5
+    towerdamage: 7
     towercritical: 0
     towerrange: 2
     atkdelay: 2

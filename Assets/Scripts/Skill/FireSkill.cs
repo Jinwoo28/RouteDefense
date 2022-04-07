@@ -8,11 +8,25 @@ public class FireSkill : MonoBehaviour
     private bool skillused = false;
     private bool onwater = false;
 
+
+
     private bool SetFinish = false;
 
     private void Start()
     {
         StartCoroutine("FireSkillAct");
+        Invoke("Destroythis", 10.0f);
+        MultipleSpeed.speedup += SpeedUP;
+    }
+
+    private void SpeedUP(int x)
+    {
+        Time.timeScale = x;
+    }
+
+    private void Destroythis()
+    {
+        Destroy(this.gameObject);
     }
 
     IEnumerator FireSkillAct()
@@ -65,6 +79,7 @@ public class FireSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            other.GetComponent<Enemy_Creture>().GetFireDamage = UserInformation.userDataStatic.skillSet[0].damage;
             other.GetComponent<Enemy_Creture>().FireAttacked();
         }
 

@@ -20,10 +20,6 @@ public class SettingCs : MonoBehaviour
 
     private void Update()
     {
-
-
-
-
         if (settingpanelcheck)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -44,7 +40,7 @@ public class SettingCs : MonoBehaviour
     {
         settingpanelcheck = false;
         settingPanal.SetActive(false);
-        multipleSpeed.OnClickStart(1);
+        multipleSpeed.OnClcikCanCel();
     }
 
 

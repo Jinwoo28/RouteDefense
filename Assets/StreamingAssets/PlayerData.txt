@@ -1,0 +1,11 @@
+{
+  "userCoin": 20200,
+  "stageClear": [
+    {
+      "Star1": true,
+      "Star2": false,
+      "Star3": false
+    }
+  ],
+  "skillSet": null
+}

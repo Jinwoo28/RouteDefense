@@ -130,14 +130,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 0}
   upgradevalue:
-    priceincrease: 25
+    priceincrease: 20
     upgradeprice: 100
-    damagevalue: 1
+    damagevalue: 1.5
     upcriticalvalue: 3
   towerinfo:
     towerprice: 600
     towername: 
-    towerdamage: 2
+    towerdamage: 3
     towercritical: 5
     towerrange: 1.3
     atkdelay: 0.2

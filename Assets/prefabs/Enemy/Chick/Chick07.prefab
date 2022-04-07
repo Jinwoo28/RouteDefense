@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 975012753349743477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 975012753350018271}
   - {fileID: 975012753350013979}
@@ -167,7 +167,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975012753349743477}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: a1d6727966712fd479eb0cd11ed4e5b7, type: 3}
   m_Controller: {fileID: 9100000, guid: f762dd657055a8e4788de6ba237b924d, type: 2}
   m_CullingMode: 1
@@ -220,9 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitstate:
-    unitspeed: 1.1
+    unitspeed: 1.2
     unitcoin: 6
-    unithp: 8
+    unithp: 10
     unitamour: 0
     avoidancerate: 0
   HpUpValue: 1

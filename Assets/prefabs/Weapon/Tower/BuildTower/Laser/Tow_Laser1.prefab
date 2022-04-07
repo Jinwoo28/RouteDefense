@@ -233,16 +233,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 7980187492818512454, guid: 543bb799468827744806f608932d36fd, type: 3}
   upgradevalue:
-    priceincrease: 75
-    upgradeprice: 25
+    priceincrease: 15
+    upgradeprice: 75
     damagevalue: 1
-    upcriticalvalue: 2
+    upcriticalvalue: 3
   towerinfo:
     towerprice: 200
     towername: Laser
     towerdamage: 1
     towercritical: 0
-    towerrange: 3
+    towerrange: 1.5
     atkdelay: 1
   buildstate: []
   towerpreview: {fileID: 500732071518667701, guid: a2dd3a9469624f249b3985091d41fb54, type: 3}

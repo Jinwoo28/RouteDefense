@@ -88,10 +88,10 @@ MonoBehaviour:
   towerinfo:
     towerprice: 300
     towername: 
-    towerdamage: 5
+    towerdamage: 7
     towercritical: 5
     towerrange: 1.4
-    atkdelay: 0.7
+    atkdelay: 0.9
   buildstate: []
   towerpreview: {fileID: 405412040106067813, guid: a8140df8d7539854b860c7b49fab4fb1, type: 3}
   towerBody: {fileID: 806294122649890310}

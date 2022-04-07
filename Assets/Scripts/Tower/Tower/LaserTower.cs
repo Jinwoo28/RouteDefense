@@ -40,7 +40,7 @@ public class LaserTower : Tower
                     lR.enabled = true;
 
                         lR.SetPosition(0, shootPos.position);
-                        lR.SetPosition(1, hit.point + shootPos.forward * hit.collider.transform.localScale.z / 2);
+                        lR.SetPosition(1, hit.point/* + shootPos.forward * hit.collider.transform.localScale.z / 2*/);
 
                     if (!isAtking)
                     {
@@ -71,9 +71,11 @@ public class LaserTower : Tower
         while (FinalTarget != null)
         {
             yield return new WaitForSeconds(0.7f);
-               
-            FinalTarget.GetComponent<Enemy>().EnemyAttacked(atkdamage);
-                atkdamage += 1;
+            if (FinalTarget != null)
+            {
+                FinalTarget.GetComponent<Enemy>().EnemyAttacked(atkdamage);
+                atkdamage += (GetStep+1);
+            }
 
         }
         

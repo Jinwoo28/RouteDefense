@@ -70,11 +70,17 @@ public class MapManager : MonoBehaviour
 
     public EnemyManager EM = null;
 
+    public delegate void OffMakeRoute();
+    public static OffMakeRoute OffFunc;
+
     private void Start()
     {
         waypointnode = new List<Node>();
         overlapcheck = new HashSet<Node>();
-        TowerPreview.makerouteoff += makerouteoff;
+
+
+        OffFunc += makerouteoff;
+        OffFunc += CanCelMakeTile;
     }
 
     
@@ -333,6 +339,8 @@ public class MapManager : MonoBehaviour
         StartCoroutine("MapTileAdd");
     }
 
+    GameObject[] AddtileX = null;
+
     IEnumerator MapTileAdd()
     {
         if (playerstate.GetSetPlayerCoin >= addtileprice)
@@ -347,7 +355,7 @@ public class MapManager : MonoBehaviour
             Vector3 mousepos = Vector3.zero;
             Vector3 tilepos = Vector3.zero;
 
-            GameObject[] AddtileX = new GameObject[4];
+            /*GameObject[]*/ AddtileX = new GameObject[4];
 
             //타일 4개 생성
             for (int i = 0; i < 4; i++)
@@ -469,18 +477,28 @@ public class MapManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    //AddTile = false;
-                    AddTileActive = false;
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Destroy(AddtileX[i]);
-                    }
-                    playerstate.GetSetPlayerCoin = -addtileprice;
+
+                    CanCelMakeTile();
                 }
                 yield return null;
             }
         }
     }
+
+    public void CanCelMakeTile()
+    {
+        if (AddTileActive)
+        {
+            AddTileActive = false;
+            for (int i = 0; i < 4; i++)
+            {
+                Destroy(AddtileX[i]);
+            }
+            playerstate.GetSetPlayerCoin = -addtileprice;
+        }
+    }
+
+
 
     //테트리스 모양의 블럭위치 반환
     private Vector3[] AddTilePos(int tileshapenum, int _tileDir, int Xnum, int Ynum)

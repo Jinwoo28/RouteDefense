@@ -99,17 +99,19 @@ public class Enemy_Creture : Enemy
         StartCoroutine("DotDamage");
     }
 
+    public float firedamage = 0;
+    public int GetFireDamage { set => firedamage = value; }
+
     IEnumerator DotDamage()
     {
-        int dodDamage = 2;
         int damagecount = 5;
         while (damagecount > 0)
         {
             Debug.Log("µ¥¹ÌÁö");
             damagecount--;
-            if (dodDamage < GetHp)
+            if (firedamage < GetHp)
             {
-                firedamage(dodDamage);
+                firedamage(firedamage);
             }
             else
             {

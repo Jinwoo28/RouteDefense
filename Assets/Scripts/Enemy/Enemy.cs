@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
    [System.Serializable]
-   class UnitState
+   public class  UnitState
 {
     public float unitspeed = 0;
     public int unitcoin = 0;
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     //적의 이동 경로
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
-    [SerializeField] private UnitState unitstate = null;
+    [SerializeField] protected UnitState unitstate = null;
 
     private GameObject hpbar = null;
     private GameObject damagenum = null;
@@ -46,10 +46,25 @@ public class Enemy : MonoBehaviour
 
     bool jump = false;
 
-   
+    private EnemyPooling EP = null;
+    private int enemyNum = 0;
+    float Hp = 0;
+
+    public void SetPooling(EnemyPooling  _pooling, int _num)
+    {
+        EP = _pooling;
+        enemyNum = _num;
+    }
+
+    public void ResetHp()
+    {
+        unitstate.unithp = Hp;
+    }
 
     private void Start()
     {
+
+        Hp = unitstate.unithp;
         MultipleSpeed.speedup += SpeedUP;
 
     }
@@ -181,7 +196,8 @@ public class Enemy : MonoBehaviour
         }
         EM.EnemyArriveDestination(this);
         Destroy(hpbarprefab);
-        Destroy(this.gameObject);
+        EP.ReturnEnemy(this, enemyNum);
+        //Destroy(this.gameObject);
     }
 
     //포물선 이동
@@ -235,14 +251,18 @@ public class Enemy : MonoBehaviour
 
 
 
-    public void EnemyAttacked(float _damage)
+    public virtual void EnemyAttacked(float _damage)
     {
         float realdamage = 0;
-        //int X = Random.Range(1, 101);
-        //if (X < unitstate.avoidancerate) realdamage = 0;
 
         realdamage = _damage - unitstate.unitamour;
-        
+
+        int X = Random.Range(1, 101);
+        if (X < unitstate.avoidancerate)
+        {
+            realdamage = 0;
+        }
+
         ShowDamage(realdamage);
         if (realdamage >= unitstate.unithp)
         {
@@ -272,7 +292,8 @@ public class Enemy : MonoBehaviour
 
         Destroy(hpbarprefab);
         EM.EnemyDie(this, unitstate.unitcoin);
-        Destroy(this.gameObject);
+        EP.ReturnEnemy(this, enemyNum);
+//      Destroy(this.gameObject);
     }
 
     

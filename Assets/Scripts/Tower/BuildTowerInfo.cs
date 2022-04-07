@@ -11,42 +11,45 @@ public class BuildTowerInfo : MonoBehaviour
     public void ShowBuildTower_Gatling()
     {
         buildtowerInfo.SetActive(true);
-        infoText.text = $"Gatling Tower\n " +
-            "===================\n"+
-            $"It has low damage but hight Attack speed.";
+        infoText.text = $"기관총" +
+            "==========\n" +
+            $"단일타겟을 대상으로 데미지는 낮지만 빠른 속도로 공격한다.";
     }
 
     public void ShowBuildTower_Mortar()
     {
         buildtowerInfo.SetActive(true);
-        infoText.text = $"Mortar Tower\n " +
-            "===================\n" +
-            $"It has splash damage but low Attack speed.\n"+
-            "It fires bullets with a howitzer.";
+        infoText.text = $"박격포" +
+            "==========\n" +
+            $"포물선으로 날아가는 포탄을 발사.\n"+
+            "맞은 곳을 기점으로 주위의 적에게 데미지를 준다.";
     }
 
     public void ShowBuildTower_CrossBow()
     {
         buildtowerInfo.SetActive(true);
-        infoText.text = $"CrossBow Tower\n " +
-            "===================\n" +
-            $"This is a powerful single attack.";
+        infoText.text = $"석궁" +
+            "==========\n" +
+            $"단일 타겟 화살을 발사.\n" +
+            $"준수한 공격력과 준수한 공격속도를 지님.";
     }
 
     public void ShowBuildTower_Tesla()
     {
         buildtowerInfo.SetActive(true);
-        infoText.text = $"Tesla Tower\n " +
-            "===================\n" +
-            $"This is a chain of electric attacks.";
+        infoText.text = $"레이저" +
+            "==========\n" +
+            $"단일 타겟을 대상으로 같은 적을 공격하면\n" +
+            $"점점 강한 공격을 한다.";
     }
 
     public void ShowBuildTower_Laser()
     {
         buildtowerInfo.SetActive(true);
-        infoText.text = $"Laser Tower\n " +
-            "===================\n" +
-            $"Damage increases gradually when attacking the same target.";
+        infoText.text = $"레이저" +
+            "==========\n" +
+             $"단일 타겟을 대상으로 같은 적을 공격하면\n" +
+            $"점점 강한 공격을 한다.";
     }
 
     public void ShowBuildTowerOff()

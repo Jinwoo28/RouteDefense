@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 1952561914480389280, guid: 3685d5f6999cea24b90fccedde3748cd, type: 3}
   upgradevalue:
-    priceincrease: 15
+    priceincrease: 10
     upgradeprice: 50
     damagevalue: 0.5
     upcriticalvalue: 1

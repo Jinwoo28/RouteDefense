@@ -181,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 4412602763616661287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4412602763616421825}
   - {fileID: 4412602763616436595}
@@ -235,7 +235,7 @@ MonoBehaviour:
   unitstate:
     unitspeed: 0.5
     unitcoin: 7
-    unithp: 30
+    unithp: 35
     unitamour: 0
     avoidancerate: 0
   HpUpValue: 1
