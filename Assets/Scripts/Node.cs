@@ -15,11 +15,7 @@ public class Node : MonoBehaviour
     private bool checkActive = false;
     public bool GetSetActive { get => checkActive; set => checkActive = value; }
 
-    //현재 타일위에 과일이 있는지
-    private bool OnFruit = false;
-    public bool GetSetOnfruit { get => OnFruit; set => OnFruit = value; }
-
-    //나뭇가지가 있는지
+    //node위에 장애물이 있는지
     private bool OnObstacle = false;
     public bool SetOnObstacle { set => OnObstacle = value; }
 

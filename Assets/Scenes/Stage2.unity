@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 22313950}
   - component: {fileID: 22313949}
   - component: {fileID: 22313951}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &72763148
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1829,7 +1829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &143808707
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5309,7 +5309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &487914522
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7187,11 +7187,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661825823}
   m_CullTransparentMesh: 1
---- !u!198 &683671578 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6993699110288949215, guid: 474045bcd283f764399758c43596913a, type: 3}
-  m_PrefabInstance: {fileID: 385556703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &683671579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6993699110303103647, guid: 474045bcd283f764399758c43596913a, type: 3}
@@ -13162,7 +13157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1238546931
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14605,13 +14600,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdab35585e6220b45876e35079605ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 1667784359}
   mapmanager: {fileID: 2058199560}
-  MakeTreeObj: {fileID: 98558457491155525, guid: fba787dd9d842cb47a87f6e086deeae5, type: 3}
+  MakeTreeObj: {fileID: 2276854927514085994, guid: 0eb09888b3487eb40a1a05e33e2a1d3b, type: 3}
   water: {fileID: 22313948}
   waterTrigger: {fileID: 728876257}
   Rain: {fileID: 1823660570}
-  Snow: {fileID: 683671578}
 --- !u!4 &1523878243
 Transform:
   m_ObjectHideFlags: 0
@@ -15972,11 +15965,11 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 30
+    EnemyCount: 1
   - SpawnTime: 1
-    EnemyCount: 32
+    EnemyCount: 1
   - SpawnTime: 1
-    EnemyCount: 34
+    EnemyCount: 1
   - SpawnTime: 1
     EnemyCount: 36
   - SpawnTime: 1
@@ -19219,8 +19212,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968803136}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 20, y: 0, z: 20}
-  m_LocalScale: {x: 40, y: 40, z: 1}
+  m_LocalPosition: {x: 15, y: 0, z: 15}
+  m_LocalScale: {x: 50, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 2140626054}
   m_RootOrder: 4
@@ -20553,7 +20546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2140626054
 Transform:
   m_ObjectHideFlags: 0

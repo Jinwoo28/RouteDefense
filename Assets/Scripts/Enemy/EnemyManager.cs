@@ -14,6 +14,9 @@ public class StageInfo
 public class EnemyManager : MonoBehaviour
 {
 
+    public delegate void StageClear();
+    public static StageClear stageclear;
+
     [SerializeField] private MultipleSpeed speedSet = null;
 
     [SerializeField] private GameObject[] starImage = null;
@@ -102,7 +105,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator GameStart()
     {
-        weather.UpSeaLevel();
+        weather.GameStart();
 
        gameongoing = true;
 
@@ -152,6 +155,7 @@ public class EnemyManager : MonoBehaviour
             {
                 StageNum++;
 
+                weather.StageClear();
                 //스테이지 클리어
                 if (StageNum >= stageinfo.Length)
                 {
@@ -212,7 +216,6 @@ public class EnemyManager : MonoBehaviour
                 }
 
                 gameongoing = false;
-                weather.WeatherSettings();
 
                 break;
             }

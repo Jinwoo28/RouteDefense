@@ -93,7 +93,7 @@ public class TreeSc : MonoBehaviour
                 obj.transform.position = new Vector3(usablenode[i].gridX, usablenode[i].GetYDepth / 2, usablenode[i].gridY);
                 obj.GetComponent<Fruit>().Setup(new Vector3(usablenode[i].gridX, usablenode[i].GetYDepth / 2, usablenode[i].gridY), this);
                 activefruit.Add(obj);
-                usablenode[i].GetSetOnfruit = true;
+                
             }
         }
     }
@@ -126,7 +126,7 @@ public class TreeSc : MonoBehaviour
         usablenode.Clear();
         for(int i = 0; i < node.neighbournode.Count; i++)
         {
-            if (!node.neighbournode[i].GetOnTower&&node.neighbournode[i].GetSetActive&&!node.neighbournode[i].GetSetOnfruit&& !node.neighbournode[i].start&& !node.neighbournode[i].end)
+            if (!node.neighbournode[i].GetOnTower&&node.neighbournode[i].GetSetActive&& !node.neighbournode[i].start&& !node.neighbournode[i].end)
                 usablenode.Add(node.neighbournode[i]);
         }
 
@@ -173,9 +173,5 @@ public class TreeSc : MonoBehaviour
         obsfromtree.Enqueue(_branch);
     }
 
-    private void OnDestroy()
-    {
-        weathersettings.treelistRemove(this,node);
-    }
 
 }

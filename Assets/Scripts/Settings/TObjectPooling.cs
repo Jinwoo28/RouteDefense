@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooling<T> where T : Component
+public class TObjectPooling<T> where T : Component
 {
     [SerializeField]
     private GameObject poolObject = null;

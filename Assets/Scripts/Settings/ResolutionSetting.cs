@@ -29,12 +29,12 @@ public class ResolutionSetting : MonoBehaviour
         //리스트에 가지고 있는 모니터의 출력 해상도 저장
         resolutions.AddRange(Screen.resolutions);
 
-        if (resolutionDropdown != null && fullscreenDropdown != null)
-        {
-            ResolutionInit();
-            OkBtnClick();
-        }
-        ChangeRect();
+        //if (resolutionDropdown != null && fullscreenDropdown != null)
+        //{
+        //    ResolutionInit();
+        //    OkBtnClick();
+        //}
+        //ChangeRect();
     }
     private void ResolutionInit()
     {
