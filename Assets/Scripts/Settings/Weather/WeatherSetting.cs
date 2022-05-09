@@ -48,11 +48,11 @@ public class WeatherSetting : MonoBehaviour
 
     private void WeatherChange()
     {
-        if (stageNum <= 10)
-        {
+        
             weaTher = weather.spring;
-        }
-        else if (stageNum <= 20)
+        
+        
+        if (stageNum>=10)
         {
             weaTher = weather.summer;
         }
@@ -99,7 +99,7 @@ public class WeatherSetting : MonoBehaviour
     private void SpringAct() 
     {
         //랜덤으로 몇 개가 생길지
-        int i = Random.Range(0, 4);
+        int i = Random.Range(1, 3);
         for(int j = 0; j < i; j++)
         {
             CheckEmptyNode();
@@ -113,7 +113,7 @@ public class WeatherSetting : MonoBehaviour
             Tree.GetComponent<Obstacle>().SetNode = checkednodelist[num];
             Tree.GetComponent<TreeSc>().SetWeather = this;
             checkednodelist[num].SetOnObstacle = true;
-
+            checkednodelist[num].GetOnTower = true;
         }
     }
     private void SummerAct() 
@@ -221,9 +221,11 @@ public class WeatherSetting : MonoBehaviour
         Snow.Stop();
     }
 
-    public void treelistRemove(TreeSc tree)
+    public void treelistRemove(TreeSc tree,Node node)
     {
         treelist.Remove(tree);
+        node.GetOnTower = false;
+        node.SetOnObstacle = false;
     }
 
     private void TreeChange(int weather)

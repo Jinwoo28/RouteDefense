@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9088323328271372286}
   - component: {fileID: 5182470025461617654}
   - component: {fileID: -4904425963694452321}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 38.4}
+  m_SizeDelta: {x: 75, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5182470025461617654
 MonoBehaviour:
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3185518010242059898}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 1098676481306855938}
   - component: {fileID: 8637313756246047456}
   - component: {fileID: 4263298664091502065}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 5387711813211196901}
   - component: {fileID: 1125273466822152555}
   - component: {fileID: 8955489389296008815}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -55,6 +55,9 @@ public class UserData
 
 }
 
+
+
+
 //Dictionary는 시리얼라이즈화 시킬 수 없기 때문에 따로 class를 만들어서 list로 묶어서 저장
 [System.Serializable]
 public class SkillSet
@@ -124,6 +127,8 @@ public class UserInformation : MonoBehaviour
             LoadUserInfo();
             SetData = true;
             userDataStatic = userData;
+
+          //  Debug.Log(userDataStatic.skillSet[0].skillUnLock);
         }
 
         userData.userCoin = userDataStatic.userCoin;

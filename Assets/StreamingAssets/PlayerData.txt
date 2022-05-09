@@ -1,11 +1,51 @@
 {
-  "userCoin": 20200,
+  "userCoin": 0,
   "stageClear": [
     {
-      "Star1": true,
+      "Star1": false,
       "Star2": false,
       "Star3": false
     }
   ],
-  "skillSet": null
+  "skillSet": [
+    {
+      "skilltype": 0,
+      "skillName": "Fire",
+      "skillprice": 500,
+      "skillUnLock": false,
+      "skillcooltime": 10,
+      "cooltimeDecrease": 0,
+      "damage": 2,
+      "damageIncrease": 1,
+      "skillLevel": 0,
+      "upgradeprice": 0,
+      "OriginUpgradePrice": 0
+    },
+    {
+      "skilltype": 0,
+      "skillName": "Meteor",
+      "skillprice": 700,
+      "skillUnLock": false,
+      "skillcooltime": 0,
+      "cooltimeDecrease": 0,
+      "damage": 0,
+      "damageIncrease": 0,
+      "skillLevel": 0,
+      "upgradeprice": 0,
+      "OriginUpgradePrice": 0
+    },
+    {
+      "skilltype": 0,
+      "skillName": "Money",
+      "skillprice": 1000,
+      "skillUnLock": false,
+      "skillcooltime": 0,
+      "cooltimeDecrease": 0,
+      "damage": 0,
+      "damageIncrease": 0,
+      "skillLevel": 0,
+      "upgradeprice": 0,
+      "OriginUpgradePrice": 0
+    }
+  ]
 }

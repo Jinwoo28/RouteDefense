@@ -34,6 +34,11 @@ public class SkillFunc : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fireCooltime = null;
     [SerializeField] private TextMeshProUGUI meteorCooltime = null;
 
+
+
+    public delegate void OffSkill();
+    public static OffSkill offSkill;
+
     public enum skill
     {
         Fire =1,
@@ -50,29 +55,46 @@ public class SkillFunc : MonoBehaviour
 
     private void Start()
     {
+        offSkill = OffSkillSet;
+
         MultipleSpeed.speedup += SpeedUP;
 
         fireCooltime.enabled = false;
         meteorCooltime.enabled = false;
 
-        if (UserInformation.userDataStatic.skillSet[0].skillUnLock)
-        {
-            skillButtonObject[0].SetActive(true);
-        }
-        if (UserInformation.userDataStatic.skillSet[1].skillUnLock)
-        {
-            skillButtonObject[1].SetActive(true);
-        }
+
+            //if (UserInformation.userDataStatic.skillSet[0].skillUnLock)
+            //{
+            //    skillButtonObject[0].SetActive(true);
+            //}
+            //if (UserInformation.userDataStatic.skillSet[1].skillUnLock)
+            //{
+            //    skillButtonObject[1].SetActive(true);
+            //}
+        
 
 
     }
+
+    public void OffSkillSet()
+    {
+        if (setskillpos != null)
+        {
+            Destroy(setskillpos);
+            skillActive = false;
+        }
+    }
+
     private void SpeedUP(int x)
     {
         Time.timeScale = x;
     }
 
+    bool canSetSkill = false;
+
     private void Update()
     {
+
 
         if (skillActive)
         {
@@ -82,10 +104,18 @@ public class SkillFunc : MonoBehaviour
                detectObject.ReturnTransform(layermask).GetComponent<Node>().GetYDepth / 2,
                (int)detectObject.ReturnTransform(layermask).position.z);
 
-                setskillpos.transform.position = targetpos;
+
+                if (!detectObject.ReturnTransform(layermask).GetComponent<Node>().GetOnTower)
+                {
+                    setskillpos.transform.position = targetpos;
+                }
                
+                
+
             }
-           
+
+
+
         
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -121,6 +151,11 @@ public class SkillFunc : MonoBehaviour
 
     public void ClickSkill(int _skilltype)
     {
+        if (setskillpos != null)
+        {
+            Destroy(setskillpos);
+        }
+
         MapManager.OffFunc();
         switch (_skilltype)
         {
@@ -128,7 +163,7 @@ public class SkillFunc : MonoBehaviour
                 if (skillKind[0].CanUse)
                 {
                     skillnum = skill.Fire;
-                    setskillpos = Instantiate(SetSkillPos);
+                    setskillpos = Instantiate(SetSkillPos,Vector3.zero,Quaternion.Euler(90,0,0));
                     skillActive = true;
                 }
                 break;
@@ -136,7 +171,7 @@ public class SkillFunc : MonoBehaviour
                 if (skillKind[1].CanUse)
                 {
                     skillnum = skill.Meteor;
-                    setskillpos = Instantiate(SetSkillPos);
+                    setskillpos = Instantiate(SetSkillPos, Vector3.zero, Quaternion.Euler(90, 0, 0));
                     skillActive = true;
                 }
                 break;

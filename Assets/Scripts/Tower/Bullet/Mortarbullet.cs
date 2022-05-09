@@ -44,9 +44,9 @@ public class Mortarbullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("d");
         if (other.CompareTag("Enemy") || other.CompareTag("Tile"))
         {
+            
             AtkCharactor();
             objectpooling.ReturnObject(this);
         }
@@ -56,6 +56,7 @@ public class Mortarbullet : Bullet
 
     protected override void AtkCharactor()
     {
+        Debug.Log("¿Ã∆Â∆Æ");
         Vector3 Insight = cam.transform.position - this.transform.position;
         var obj = particle.GetObject(this.transform.position + Insight.normalized);
         obj.SetPool(particle);
@@ -72,13 +73,13 @@ public class Mortarbullet : Bullet
                 }
                 else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange * 0.6f)
                 {
-                    float decrease = damage - 2;
+                    float decrease = damage - (int)(damage*0.6f);
                     if (decrease <= 0) continue;
                     EC.GetComponent<Enemy>().EnemyAttacked(decrease);
                 }
                 else
                 {
-                    float decrease = damage - 4;
+                    float decrease = damage - (int)(damage * 0.6f);
                     if (decrease <= 0) continue;
                     EC.GetComponent<Enemy>().EnemyAttacked(decrease);
                 }

@@ -23,13 +23,13 @@ public class MortalTower : Tower
         AtkParticle.GetComponent<ParticleSystem>().Play();
         
         var obj = bulletPool.GetObject(shootPos.position);
-        obj.SetUp(FinalTarget, 3, bulletPool,5);
+        obj.SetUp(FinalTarget, towerinfo.towerdamage, bulletPool,5);
         obj.MortarSetDestination(FinalTarget.position,shootPos.position);
         obj.Attack();
         obj.SetMortarRange(GetStep + 1);
 
         obj.SetPool(patriclePool);
-
+        AS.Play();
     }
 
  

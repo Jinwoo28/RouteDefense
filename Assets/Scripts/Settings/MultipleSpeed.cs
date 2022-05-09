@@ -18,6 +18,14 @@ public class MultipleSpeed : MonoBehaviour
 
         OnClickStart(1);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+ 
+        }
+    }
     public void OnClickSpeedUp()
     {
         speednum++;
@@ -35,6 +43,12 @@ public class MultipleSpeed : MonoBehaviour
     public void OnClcikCanCel()
     {
         speedup(speednum);
+        multipletext.text = "X" + speednum.ToString();
+    }
+
+    public void StopGame()
+    {
+        speedup(0);
     }
 
 

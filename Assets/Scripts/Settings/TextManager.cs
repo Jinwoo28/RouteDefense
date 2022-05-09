@@ -38,8 +38,10 @@ public class TextManager : MonoBehaviour
         playercoin.text = $"{coin}";
         playerlife.text = $"{life}";
 
-        stageinfo.text = $"{currentstage} / {maxstage}";
-
+        if (currentstage <= 20)
+        {
+            stageinfo.text = $"스테이지 {currentstage} / {maxstage}";
+        }
         Gettetris.sprite = Settetris[addtilenum];
         tileprice.text = addtileprice.ToString();
     }

@@ -453,11 +453,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitstate:
     unitspeed: 0.65
-    unitcoin: 10
+    unitcoin: 12
     unithp: 40
     unitamour: 3
     avoidancerate: 10
   HpUpValue: 1
+  firedamage: 0
 --- !u!54 &4798528356425525016
 Rigidbody:
   m_ObjectHideFlags: 0

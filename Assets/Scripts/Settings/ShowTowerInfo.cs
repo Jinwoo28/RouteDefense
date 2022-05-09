@@ -74,7 +74,7 @@ public class ShowTowerInfo : MonoBehaviour
             switch (tower.GetStep)
             {
                 case 1:
-                    if (tower.GetTowerLevel >= 10)
+                    if (tower.GetTowerLevel >= 5)
                     {
                         upgradebutton.interactable = false;
                         upgradeprice.fontSize = 50;
@@ -90,7 +90,7 @@ public class ShowTowerInfo : MonoBehaviour
                     break;
 
                 case 2:
-                    if (tower.GetTowerLevel >= 15)
+                    if (tower.GetTowerLevel >= 7)
                     {
                         upgradebutton.interactable = false;
                         upgradeprice.fontSize = 50;
@@ -104,10 +104,20 @@ public class ShowTowerInfo : MonoBehaviour
                     }
                     break;
                 case 3:
-                    upgradebutton.interactable = true;
-                    upgradeprice.text = "업그레이드 : " + tower.Gettowerupgradeprice.ToString();
-                    upgradeprice.fontSize = 50;
+                    if (tower.GetTowerLevel >= 10)
+                    {
+                        upgradebutton.interactable = false;
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "업그레이드 불가";
+                    }
+                    else
+                    {
+                        upgradebutton.interactable = true;
+                        upgradeprice.fontSize = 50;
+                        upgradeprice.text = "업그레이드 : " + tower.Gettowerupgradeprice.ToString();
+                    }
                     break;
+
             }
         }
     }
@@ -176,11 +186,11 @@ public class ShowTowerInfo : MonoBehaviour
         for(int i = 0; i < 72; i++)
         {
             towerpos.rotation = Quaternion.Euler(0, rotation, 0);
-            Ray ray;
+            
             RaycastHit hit;
             if (Physics.Raycast(towerpos.position + towerpos.forward* range + new Vector3(0, 10, 0), Vector3.down, out hit))
             {
-               
+                Debug.DrawLine(towerpos.position + towerpos.forward * range + new Vector3(0, 10, 0), towerpos.position + towerpos.forward + new Vector3(0,-10,0));
                 if (hit.collider.CompareTag("Tile"))
                 {
                     rangesprite[i].transform.position = hit.point;
@@ -209,6 +219,7 @@ public class ShowTowerInfo : MonoBehaviour
     }
     public void OnClickSellTower()
     {
+        MapManager.OffFunc();
         RangeOff();
         tower.SellTower();
         towerinfopanel.SetActive(false);
@@ -217,11 +228,13 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void OnClickUpgradeTower()
     {
+        MapManager.OffFunc();
         tower.TowerUpgrade();
     }
 
     public void OnClickTowerMove()
     {
+        MapManager.OffFunc();
         if (!enemymanager.GetGameOnGoing)
         {
             if (tower != null)

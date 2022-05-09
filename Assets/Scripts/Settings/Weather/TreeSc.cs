@@ -175,7 +175,7 @@ public class TreeSc : MonoBehaviour
 
     private void OnDestroy()
     {
-        weathersettings.treelistRemove(this);
+        weathersettings.treelistRemove(this,node);
     }
 
 }

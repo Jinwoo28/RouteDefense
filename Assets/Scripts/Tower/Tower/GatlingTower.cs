@@ -7,14 +7,17 @@ public class GatlingTower : Tower
     [SerializeField] Transform RotateBarral = null;
 
     [SerializeField] GameObject HitEffect = null;
-  
+
+    bool isatk = false;
+    bool soundPlay = false;
 
     protected override void Start()
     {
         base.Start();
         Debug.Log(AtkParticle);
-        
+        AS.Play();
     }
+
     protected override void RotateTurret()
     {
         base.RotateTurret();
@@ -43,8 +46,15 @@ public class GatlingTower : Tower
 
     }
 
+    Transform target = null;
     protected override void Attack()
     {
+        if (target != FinalTarget)
+        {
+            AS.Play();
+            target = FinalTarget;
+        }
+
         if (FinalTarget != null)
         {
             AtkParticle.SetActive(true);

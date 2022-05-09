@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 7312916166299333021}
   - component: {fileID: 9023076012954905427}
   - component: {fileID: -6001656686809835563}
+  - component: {fileID: -8896121476611660490}
   m_Layer: 9
   m_Name: Tow_Mortar1
   m_TagString: Tower
@@ -277,14 +278,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 9195844679818826922, guid: a160c1020dd28b946b5908625ff5d457, type: 3}
   upgradevalue:
-    priceincrease: 75
-    upgradeprice: 15
-    damagevalue: 1
-    upcriticalvalue: 5
+    priceUprate: 15
+    upgradeprice: 75
+    UpdamageValue: 0
+    UpcriticalValue: 0
   towerinfo:
     towerprice: 200
-    towername: Mortar
-    towerdamage: 7
+    towername: "\uBC15\uACA9\uD3EC"
+    towerdamage: 5
     towercritical: 0
     towerrange: 2
     atkdelay: 2
@@ -293,7 +294,7 @@ MonoBehaviour:
   towerBody: {fileID: 8832539551386522802}
   towerTurret: {fileID: 8832539551386522800}
   shootPos: {fileID: 6031843419435706451}
-  enemylayer:
+  layer:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 1
@@ -327,7 +328,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3048058919435168437, guid: 5417159e2d2b71e4f913080330dd08a1, type: 3}
-  InsCount: 1
+  InsCount: 3
+--- !u!82 &-8896121476611660490
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832539551386618004}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b44204925a297cf4b874bbd5214cb6f4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &3986051889936764384
 PrefabInstance:
   m_ObjectHideFlags: 0

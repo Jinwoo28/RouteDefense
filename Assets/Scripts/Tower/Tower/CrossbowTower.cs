@@ -17,11 +17,9 @@ public class CrossbowTower : Tower
         if (GetStep != 3)
         {
             var obj = op.GetObject(shootPos.position);
-            obj.ResetBullet();
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f);
-            obj.MortarSetDestination(FinalTarget.position + new Vector3(0, FinalTarget.transform.localPosition.y / 2, 0), shootPos.transform.position);
 
-            
+            obj.MortarSetDestination(FinalTarget.position, shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
         }
 
@@ -29,6 +27,7 @@ public class CrossbowTower : Tower
         {
             StartCoroutine("Level3Attack");
         }
+            AS.Play();
     }
 
     IEnumerator Level3Attack()

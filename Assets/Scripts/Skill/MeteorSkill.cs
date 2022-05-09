@@ -13,8 +13,10 @@ public class MeteorSkill : MonoBehaviour
     private Vector3 target = Vector3.zero;
     public Vector3 SetTarget{ set { target = value; } }
 
+    private AudioSource As = null;
     private void Start()
     {
+        As = this.GetComponent<AudioSource>();
         Damage = UserInformation.userDataStatic.skillSet[1].damage;
         MultipleSpeed.speedup += SpeedUP;
     }
@@ -26,8 +28,8 @@ public class MeteorSkill : MonoBehaviour
 
     private void Update()
     {
+        //As.volume = SoundSettings.currentsound;
         Vector3 Dir = target - this.transform.position;
-
         this.transform.position += Dir.normalized * Time.deltaTime * 5f;
 
     }

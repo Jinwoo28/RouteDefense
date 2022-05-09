@@ -8,15 +8,22 @@ public class FireSkill : MonoBehaviour
     private bool skillused = false;
     private bool onwater = false;
 
+    private AudioSource As = null;
 
 
     private bool SetFinish = false;
 
     private void Start()
     {
+        As = this.GetComponent<AudioSource>();
         StartCoroutine("FireSkillAct");
         Invoke("Destroythis", 10.0f);
         MultipleSpeed.speedup += SpeedUP;
+    }
+
+    private void Update()
+    {
+        //As.volume = SoundSettings.currentsound;
     }
 
     private void SpeedUP(int x)

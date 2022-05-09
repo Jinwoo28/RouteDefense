@@ -12,13 +12,18 @@ public class ArrowBullet : Bullet
 
     protected override void Update()
     {
-        base.Update();
+        DestroyTimer += Time.deltaTime;
+
+        if(DestroyTimer >= 2.0f)
+        {
+            ReturnBullet();
+        }
+
+
         if (!ontile)
         {
                 this.transform.position += moveDir * bullspeed * Time.deltaTime;
                 this.transform.LookAt(this.transform.position + moveDir);
-
-
         }
         else
         {
@@ -47,7 +52,7 @@ public class ArrowBullet : Bullet
                 AtkCharactor();
                 Ontarget = true;
                 
-                    ReturnBullet();
+                ReturnBullet();
             }
         }
 

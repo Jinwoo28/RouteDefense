@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] StartEnd = null;
+    private int startX = 0;
+    private int startY = 0;
+    private int endX = 0;
+    private int endY = 0;
+
+
+
+
     [SerializeField] private Texture2D cursorimage = null;
     [SerializeField]private PlayerState playerstate = null;
 
@@ -73,6 +82,8 @@ public class MapManager : MonoBehaviour
     public delegate void OffMakeRoute();
     public static OffMakeRoute OffFunc;
 
+    private DetectObject detector = new DetectObject();
+
     private void Start()
     {
         waypointnode = new List<Node>();
@@ -132,23 +143,29 @@ public class MapManager : MonoBehaviour
 
     private void Update()
     {
+        StartEnd[0].transform.position = Camera.main.WorldToScreenPoint(new Vector3(startY, grid[startX,startY].GetYDepth/2+0.2f, startX));
+        StartEnd[1].transform.position = Camera.main.WorldToScreenPoint(new Vector3(endY, grid[endX, endY].GetYDepth/2+0.2f, endX));
+
+
         isgameing = EM.GameOnGoing;
 
         if (TileCanChange)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Node node = ReturnNode();
+                    Node node = detector.ReturnNode();
 
                     if (node != null)
-                    {
-                       StartCoroutine(NodeWalkableChange(node));
+                    { 
+                        StartCoroutine(NodeWalkableChange(node));
                     }
                 }
             }
 
         if (TileCanChange)
+        {
             Cursor.SetCursor(cursorimage, Vector2.zero, CursorMode.ForceSoftware);
+        }
         else
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
@@ -328,6 +345,10 @@ public class MapManager : MonoBehaviour
 
         grid[SYnum, SXnum].ChangeColor(Color.red);
         grid[EYnum, EXnum].ChangeColor(Color.blue);
+        startX = SYnum;
+        startY = SXnum;
+        endX = EYnum;
+        endY = EXnum;
 
     }
 
@@ -336,6 +357,7 @@ public class MapManager : MonoBehaviour
     //타일추가 함수
     public void OnClickMapAdd()
     {
+        SkillFunc.offSkill();
         StartCoroutine("MapTileAdd");
     }
 
@@ -715,11 +737,11 @@ X X 10 X
 
         while (Input.GetMouseButton(0))
         {
-            Node changenode = ReturnNode();
+            Node changenode = detector.ReturnNode();
 
             if (changenode != null)
             {
-                ReturnNode().ChangeWalkableColor(walkable);
+                changenode.ChangeWalkableColor(walkable);
 
                 if (walkable)
                 {
@@ -732,6 +754,7 @@ X X 10 X
     //버튼으로 길만들기 활성화, 비활성화 시킬 버튼함수
     public void OnClickWalkableChange()
     {
+        SkillFunc.offSkill();
         if (!isgameing)
         {
             if (!AddTileActive)
@@ -739,11 +762,9 @@ X X 10 X
         }
     }
 
-
-
-
     public void RouteReset()
     {
+        SkillFunc.offSkill();
         if (!isgameing)
         {
             foreach (Node i in overlapcheck)
@@ -754,16 +775,15 @@ X X 10 X
         
     }
 
-
-
-
     ///////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //길찾기 함수
     public void FindPath()
     {
+        SkillFunc.offSkill();
         if (!isgameing)
         {
+            
             isgameing = true;
             bool findpath = false;
 
@@ -835,7 +855,7 @@ X X 10 X
                 {
 
                     findpath = true;
-                    Debug.Log("길찾기 성공");
+                    //Debug.Log("길찾기 성공");
                     break;
                 }
 
@@ -985,21 +1005,7 @@ X X 10 X
         return neighbours;
     }
 
-
-
-    //마우스 위치의 노드 반환
-    public Node ReturnNode()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            return hit.collider.GetComponent<Node>();
-        }
-        return null;
-    }
-
-
+    #region Properties
     //////////////////////////////////////////////////////////
     ///    //////////////////////////////////////////////////////////
     ///    
@@ -1065,5 +1071,6 @@ X X 10 X
             return AddTileActive;
         }
     }
+    #endregion
 }
 

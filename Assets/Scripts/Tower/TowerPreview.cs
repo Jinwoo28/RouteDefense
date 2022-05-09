@@ -88,7 +88,7 @@ public class TowerPreview : MonoBehaviour
     {
         Camera cam = Camera.main;
         Vector3 thisPos = this.transform.position;
-        thisPos.y += 1.0f;
+        thisPos.y += 2.0f;
         for (int i = 0; i < 3; i++)
         {
             buildstate[i].transform.position = cam.WorldToScreenPoint(thisPos);
@@ -103,7 +103,7 @@ public class TowerPreview : MonoBehaviour
             }
         }
 
-        Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
+       // Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
     }
 
     IEnumerator BuildTower()

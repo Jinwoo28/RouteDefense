@@ -90,6 +90,7 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
+        SkillFunc.offSkill();
         MapManager.OffFunc();
         if (towerpreviewActive)
         {

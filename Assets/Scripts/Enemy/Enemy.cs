@@ -59,14 +59,13 @@ public class Enemy : MonoBehaviour
     public void ResetHp()
     {
         unitstate.unithp = Hp;
+
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-
         Hp = unitstate.unithp;
         MultipleSpeed.speedup += SpeedUP;
-
     }
 
     private void SpeedUP(int x)
@@ -86,17 +85,19 @@ public class Enemy : MonoBehaviour
         canvas = _canvas;
     }
 
-   protected void StartMove()
+   public void StartMove()
     {
+
         unitspeed = unitstate.unitspeed;
 
-        hpbarprefab = Instantiate(hpbar);
-        hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
-        hpbarprefab.transform.SetParent(canvas);
+        if (hpbarprefab == null)
+        {
+            hpbarprefab = Instantiate(hpbar);
+            hpbarprefab.transform.SetParent(canvas);
+            hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
+        }
 
         StartCoroutine("MoveUnit");
-        
-
     }
 
     public IEnumerator MoveUnit()
@@ -107,11 +108,8 @@ public class Enemy : MonoBehaviour
 
         Vector3 currentPos = this.transform.position;
 
-       
-
         while (waypointindex != Waypoint.Length - 1)
         {
-
 
             if (this.transform.position.y < Water.transform.position.y)
             {
@@ -134,7 +132,7 @@ public class Enemy : MonoBehaviour
                 {
                     currentPos = Waypoint[waypointindex];
                     waypointindex++;
-
+                    
                 }
 
                 //오르막길
@@ -151,6 +149,7 @@ public class Enemy : MonoBehaviour
                 //내리막길
                 else if (Waypoint[waypointindex].y < currentPos.y)
                 {
+                    
                     if (!jump)
                     {
                         if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
@@ -162,6 +161,7 @@ public class Enemy : MonoBehaviour
                 //평지
                 else
                 {
+                    
                     float X = unitspeed - unitstate.unitspeed;
 
                     //느린상태
@@ -191,13 +191,13 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                
                 yield break;
             }
         }
         EM.EnemyArriveDestination(this);
         Destroy(hpbarprefab);
         EP.ReturnEnemy(this, enemyNum);
-        //Destroy(this.gameObject);
     }
 
     //포물선 이동
@@ -224,9 +224,10 @@ public class Enemy : MonoBehaviour
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);
     }
 
+    
+
     private IEnumerator MoveToNext(Vector3 _current, Vector3 _next)
     {
-
         jump = true;
         Timer = 0;
         while (Vector3.Magnitude(_next - this.transform.position) > 0.05f)
@@ -289,11 +290,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDie()
     {
+        jump = false;
 
         Destroy(hpbarprefab);
         EM.EnemyDie(this, unitstate.unitcoin);
         EP.ReturnEnemy(this, enemyNum);
-//      Destroy(this.gameObject);
     }
 
     

@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
 
     protected bulletpolling particle = null;
 
+    protected float DestroyTimer = 0;
+
     public void SetPool(bulletpolling pop)
     {
         if (particle == null)
@@ -36,11 +38,13 @@ public class Bullet : MonoBehaviour
         objectpooling = _objpooling; 
     }
 
+
     public void MortarSetDestination(Vector3 _desti,Vector3 _shootpos)
     {
+
         destiNation = _desti;
         shootPos = _shootpos;
-        Invoke("ReturnBullet", 5.0f);
+        
     }
 
     public virtual void ResetBullet()
@@ -57,7 +61,7 @@ public class Bullet : MonoBehaviour
         MortarRange = _ragne;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         MultipleSpeed.speedup += SpeedUP;
         cam = Camera.main;
@@ -70,18 +74,12 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (target == null)
-        {
-            //objectpooling.ReturnObject(this);
-        }
-        else
-        {
-
-        }
+       
     }
 
     protected void ReturnBullet()
     {
+        DestroyTimer = 0;
         objectpooling.ReturnObject(this);
     }
 

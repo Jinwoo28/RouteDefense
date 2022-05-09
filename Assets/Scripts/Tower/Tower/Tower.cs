@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//타워의 업그레이드 정보
 [System.Serializable]
 public class UpgradeValue
 {
     //타워 업그레이드 비용
-    public int priceincrease = 0;
+    public int priceUprate = 0;
     public int upgradeprice = 0;
-    public float damagevalue = 0;
-    public float upcriticalvalue = 0;
+    public float UpdamageValue = 0;
+    public float UpcriticalValue = 0;
 }
 
+
+//타워의 정보
 [System.Serializable]
 public class TowerInfo
 {
@@ -26,16 +29,27 @@ public class TowerInfo
 
 public class Tower : MonoBehaviour
 {
+    public enum TowerType
+    {
+        Unknown,
+        offense,
+        support
+    }
+
+    protected AudioSource AS = null;
+
     //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
 
     //타워별 업그레이드 수치
     [SerializeField] UpgradeValue upgradevalue = null;
+
     //타워별 수치
     [SerializeField] protected TowerInfo towerinfo = null;
 
-    //tower prefab에게 넘겨줄 상태 ui
+    //tower prefab에게 넘겨줄 상태 Ui
     public GameObject[] buildstate = null;
+
     //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
 
@@ -52,8 +66,8 @@ public class Tower : MonoBehaviour
 
     [SerializeField] protected Transform shootPos = null;
 
-    //적을 검사할 레이어
-    [SerializeField] private LayerMask enemylayer;
+    //주위를 검사할 레이어
+    [SerializeField] private LayerMask layer;
 
     //플레이어 coin값을 가져올 playstate
     private PlayerState playerstate = null;
@@ -87,32 +101,45 @@ public class Tower : MonoBehaviour
 
     protected Camera cam = null;
 
-    [SerializeField] protected GameObject AtkParticle = null;
+    [SerializeField] 
+    protected GameObject AtkParticle = null;
+
     protected virtual void Start()
     {
+        AS = this.GetComponent<AudioSource>();
         atkspeed = towerinfo.atkdelay;
         StartCoroutine("AutoSearch");
         node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
         cam = Camera.main;
+        AS.volume = PlayerPrefs.GetFloat("ESound");
+        SoundSettings.effectsound += SoundChange;
     }
 
-private void SpeedUP(int x)
-{
-    Time.timeScale = x;
-}
+    private void SpeedUP(int x)
+    {
+        Time.timeScale = x;
+    }
+
+    private void SoundChange(float x)
+    {
+        AS.volume = x;
+    }
 
     protected virtual void Update()
     {
-       
+       // AS.volume = SoundSettings.currentsound;
         if (TowerCanWork&&!towericed)
         {
             if (FinalTarget != null)
             {
                 RotateTurret();
             }
+            else
+            {
+                AS.Stop();
+            }
         }
-
     }
 
     public void SetUp(PlayerState _playerstate)
@@ -137,7 +164,7 @@ private void SpeedUP(int x)
 
             //OverlapSphere : 객체 주변의 Collider를 검출
             //검출한 collider를 배열형 변수에 저장
-            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, enemylayer);
+            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, layer);
 
             //가장 짧은 거리의 오브젝트 위치를 담을 변수
             Transform ShortestTarget = null;
@@ -170,7 +197,7 @@ private void SpeedUP(int x)
         }
     }
 
-    
+
 
     //공격방식을 다르게 만들 수 있는 함수
 
@@ -178,7 +205,7 @@ private void SpeedUP(int x)
     //x축 회전 함수
 
     //X축 Y축 동시 회전 함수
-   
+
 
     //protected void RotateXY()
     //{
@@ -212,10 +239,11 @@ private void SpeedUP(int x)
     //    }
     //}
 
+    protected bool Atking = false;
+
     protected virtual void RotateTurret()
     {
-
-        Debug.Log("탐색");
+        
         Vector3 relativePos = FinalTarget.position - transform.position;
         //현재 위치에서 타겟위치로의 방향값
         Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
@@ -226,52 +254,59 @@ private void SpeedUP(int x)
 
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
         towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
-        towerTurret.rotation = Quaternion.Euler(TowerDir2.x+(FinalTarget.localScale.y/2), TowerDir2.y, 0);
-
+        towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
+        
+        
         if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
         {
-
+            Atking = true;
             atkspeed -= Time.deltaTime;
             if (atkspeed <= 0)
             {
                 atkspeed = towerinfo.atkdelay;
                 int critical = Random.Range(1, 101);
-
                 Attack();
             }
+        }
+        else
+        {
+            Atking = false;
         }
 
 
     }
 
-  
 
-    protected virtual void Attack() { }
+    protected virtual void Attack() 
+    {
+
+    }
 
 
 
     public void TowerUpgrade()
     {
-        
+        SkillFunc.offSkill();
         if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
         {
             towerlevel++;
-            towerinfo.towerdamage += upgradevalue.damagevalue;
-            if (towerinfo.towercritical + upgradevalue.upcriticalvalue >= 100)
+            towerinfo.towerdamage += upgradevalue.UpdamageValue;
+            if (towerinfo.towercritical + upgradevalue.UpcriticalValue >= 100)
             {
                 towerinfo.towercritical = 100;
             }
             else
             {
-                towerinfo.towercritical += upgradevalue.upcriticalvalue;
+                towerinfo.towercritical += upgradevalue.UpcriticalValue;
             }
             playerstate.GetSetPlayerCoin = upgradevalue.upgradeprice;
-            upgradevalue.upgradeprice += upgradevalue.priceincrease;
+            upgradevalue.upgradeprice += upgradevalue.priceUprate;
         }
     }
 
     public void SellTower()
     {
+        SkillFunc.offSkill();
         if (!towericed)
         {
             playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
@@ -280,58 +315,9 @@ private void SpeedUP(int x)
         }
     }
 
-
-
-    //public void Combine()
-    //{
-    //    StartCoroutine("TowerCombination");
-    //}
-
-    //IEnumerator TowerCombination()
-    //{
-    //    Base.SetActive(false);
-    //    towercollider.enabled = false;
-    //    GameObject preview = Instantiate(towerpreview);
-    //    preview.GetComponent<TowerPreview>().SetUp(this.gameObject);
-
-    //    while (true)
-    //    {
-
-    //        if (preview.GetComponent<TowerPreview>().GetCanCombine && preview.GetComponent<TowerPreview>().AlreadyTower)
-    //        {
-    //            Debug.Log(preview.GetComponent<TowerPreview>().GetCanCombine);
-    //            Debug.Log(preview.GetComponent<TowerPreview>().AlreadyTower);
-    //            if (Input.GetMouseButtonDown(0))
-    //            {
-    //                GameObject UpperTower = Instantiate(uppertower, preview.transform.position, Quaternion.identity);
-    //                if (preview.GetComponent<TowerPreview>().GetTower != null)
-    //                {
-    //                    Tower tower = preview.GetComponent<TowerPreview>().GetTower;
-    //                    Destroy(tower.gameObject);
-    //                    UpperTower.GetComponent<Tower>().SetState(towerlevel, tower.GetTowerLevel);
-    //                    UpperTower.GetComponent<Tower>().SetUp(playerstate);
-    //                }
-
-    //                Destroy(preview);
-    //                Destroy(this.gameObject);
-    //            }
-    //        }
-
-    //        if (Input.GetKeyDown(KeyCode.Escape))
-    //        {
-    //            Destroy(preview);
-    //            Base.SetActive(true);
-    //            towercollider.enabled = true;
-    //            break;
-    //        }
-
-    //        yield return null;
-    //    }
-
-    //}
-
     public void TowerMove()
     {
+        SkillFunc.offSkill();
         if (!towericed)
         {
             TowerCanWork = true;
@@ -378,8 +364,10 @@ private void SpeedUP(int x)
     {
         int lev = (_lev1 + _lev2) / 2;
         towerlevel = lev;
-        towerinfo.towerdamage += (lev * upgradevalue.damagevalue);
-        towerinfo.towercritical += (lev * (float)upgradevalue.upcriticalvalue);
+        towerinfo.towerdamage += (lev * upgradevalue.UpdamageValue);
+        towerinfo.towercritical += (lev * (float)upgradevalue.UpcriticalValue);
+        upgradevalue.upgradeprice += towerlevel * upgradevalue.priceUprate;
+       
     }
 
     public void TowerStepUp(Tower _tower)
@@ -432,6 +420,7 @@ private void SpeedUP(int x)
         }
     }
 
+    #region TowerProperties
 
     public bool SetTowerCanWork
     {
@@ -450,16 +439,11 @@ private void SpeedUP(int x)
         }
     }
          
+    
     //타워 이름
     public string Getname => towerinfo.towername;
     //타워 단계
-    public int GetStep {
-        get
-        {
-         return   towerstep;
-        }
-    }
-    
+    public int GetStep { get => towerstep; }
     //타워레벨
     public int GetTowerLevel => towerlevel;
     //타워 데미지
@@ -475,4 +459,5 @@ private void SpeedUP(int x)
 
     public int Gettowerupgradeprice => upgradevalue.upgradeprice;
 
+    #endregion
 }

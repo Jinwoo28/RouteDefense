@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939833765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939840223}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939880661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939810967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939875721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 2620881806939828403}
   - component: {fileID: 2620881806932137825}
   - component: {fileID: 2620881806933355787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SnakeFOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939879861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939855091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939784289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: snake 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939808137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939820093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939859265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939816103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:ikHandle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939902831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:ikHandle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2620881806939826857}
   - component: {fileID: 2620881806927965411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939861885}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:nurbsCircle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939901033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620881806939875391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}

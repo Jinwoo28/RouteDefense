@@ -10,10 +10,12 @@ public class StageInfo
 {
     public float SpawnTime = 0;
     public int EnemyCount;
-    public GameObject[] enemykind;
 }
 public class EnemyManager : MonoBehaviour
 {
+
+    [SerializeField] private MultipleSpeed speedSet = null;
+
     [SerializeField] private GameObject[] starImage = null;
 
     private float EnemyCoinRate = 0;
@@ -55,6 +57,8 @@ public class EnemyManager : MonoBehaviour
     //소환되는 적들의 정보를 담을 List
     List<Enemy> EnemyCount = null;
 
+     int EnemyRemainCount = 0;
+
     [SerializeField] private WeatherSetting weather =  null;
 
     private EnemyPooling Pooling = null;
@@ -66,10 +70,11 @@ public class EnemyManager : MonoBehaviour
     {
         Pooling = this.GetComponent<EnemyPooling>();
 
-        if (UserInformation.userDataStatic.skillSet[2].skillUnLock)
-        {
-            EnemyCoinRate = (UserInformation.userDataStatic.skillSet[2].damage/100);
-        }
+
+        //if (UserInformation.userDataStatic.skillSet[2].skillUnLock)
+        //{
+        //    EnemyCoinRate = (UserInformation.userDataStatic.skillSet[2].damage/100);
+        //}
 
         EnemyCount = new List<Enemy>();
         MultipleSpeed.speedup += SpeedUP;
@@ -82,13 +87,18 @@ public class EnemyManager : MonoBehaviour
         Time.timeScale = x;
     }
 
-//게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
-public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
+ 
+
+
+    //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
+    public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
         StartCoroutine("GameStart");
     }
+
+    int X = 0;
 
     IEnumerator GameStart()
     {
@@ -99,36 +109,46 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
         //적이 나올 개수
         int count = stageinfo[StageNum ].EnemyCount;
         int stagenum = StageNum;
+        
         //적 종류
-        GameObject[] EnemyList = stageinfo[StageNum].enemykind;
-
-        int enemykind = EnemyList.Length;
-
-        Debug.Log(count);
-
         for (int i = 0; i < count; i++)
         {
-            //int enemynum = Random.Range(0, enemykind);
-            //GameObject enemy = Instantiate(EnemyList[enemynum], SpawnPos, Quaternion.identity);
-            //enemy.GetComponent<Enemy>().SetUpEnemy(this,waypoint,canvas,hpbar,damagenum, water);
+            X++;
+            int enemynum = 0;
+            if (StageNum == 0)
+            {
+                enemynum = 0;
+            }
+            else if (StageNum == 1)
+            {
+                enemynum = Random.Range(StageNum - 1, StageNum + 1);
+            }
+            else if (StageNum == 2)
+            {
+                enemynum = Random.Range(StageNum - 2, StageNum + 1);
+            }
+            else
+            {
+                enemynum = Random.Range(StageNum - 3, StageNum + 1);
+            }
 
-            var enemy = Pooling.GetEnemy(1, SpawnPos);
+            var enemy = Pooling.GetEnemy(enemynum, SpawnPos);
             enemy.SetUpEnemy(this,waypoint,canvas,hpbar,damagenum, water);
-            enemy.SetPooling(Pooling, 1);
+            enemy.SetPooling(Pooling, enemynum);
+            enemy.StartMove();
 
             //소환되는 enemy를 list에 추가
             EnemyCount.Add(enemy.GetComponent<Enemy>());
+            EnemyRemainCount++;
 
-
-                yield return new WaitForSeconds(stageinfo[StageNum].SpawnTime);
-            
+            yield return new WaitForSeconds(stageinfo[StageNum].SpawnTime);
         }
         SpawnFinish = true;
 
 
         while (true)
         {
-            if (SpawnFinish && EnemyCount.Count == 0)
+            if (SpawnFinish && EnemyRemainCount == 0)
             {
                 StageNum++;
 
@@ -139,14 +159,13 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
 
                     int sumCoin = 0;
 
+                    speedSet.StopGame();
+
                     UserInformation.userDataStatic.userCoin += (stagenum+1 * 20);
                     sumCoin += stagenum+1 * 20;
 
 
                     //성공에 따른 별 얻기
-
-                    Debug.Log(UserInformation.userDataStatic.stageClear[0].Star1);
-
 
                     if (!UserInformation.userDataStatic.stageClear[0].Star1)
                     {
@@ -209,6 +228,7 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         playerstate.PlayerCoinUp(coin + Mathf.CeilToInt(coin * EnemyCoinRate));
         EnemyCount.Remove(enemy);
+        EnemyRemainCount--;
     }
 
     //출현한 적이 도착지에 도착했을 때
@@ -216,9 +236,11 @@ public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
         playerstate.PlayerLifeDown();
         EnemyCount.Remove(enemy);
+        EnemyRemainCount--;
 
         if (playerstate.GetPlayerLife <= 0)
         {
+            speedSet.StopGame();
             FailPanal.SetActive(true);
 
             UserInformation.userDataStatic.userCoin += (StageNum * 50);

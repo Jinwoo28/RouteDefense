@@ -24,28 +24,18 @@ public class LoadSceneControler : MonoBehaviour
     IEnumerator LoadProcess()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene);
-        operation.allowSceneActivation = true;
+        operation.allowSceneActivation = false;
 
-        float timer = 0f;
         while (!operation.isDone)
         {
             yield return null;
 
-            
-
                 prograssbar.text = "Loading progress: " + (operation.progress * 100) + "%";
-            if (operation.progress >= 1.0f)
+            if (operation.progress >= 0.9f)
             {
                 operation.allowSceneActivation = true;
             }
-            //else
-            //{
-            //timer += Time.deltaTime;
-            //    Debug.Log(timer);
-            //    prograssbar.value = Mathf.Lerp(prograssbar.value, 1f, timer);
-            //    if (prograssbar.value >= 1.0f)
-                   
-            //}
+
         }
     }
 

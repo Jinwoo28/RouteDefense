@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098163594}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098187414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098279240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098254398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098218750}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:nurbsCircle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098211626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098271878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:ikHandle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098216788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098277228}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098274452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098275636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: snake 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098256658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098281220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 5804318799098206230}
   - component: {fileID: 5804318799105150396}
   - component: {fileID: 5804318799095816506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SnakeCYello
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804318799098251064}
   - component: {fileID: 5804318799100938476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098196644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:ikHandle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098275932}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:joint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,7 +632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5804318799098199188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: s:nurbsCircle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

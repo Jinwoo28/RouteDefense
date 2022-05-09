@@ -128,11 +128,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitstate:
     unitspeed: 1.15
-    unitcoin: 12
+    unitcoin: 20
     unithp: 40
     unitamour: 2
     avoidancerate: 0
   HpUpValue: 3
+  firedamage: 0
 --- !u!1 &110966413873685298
 GameObject:
   m_ObjectHideFlags: 0

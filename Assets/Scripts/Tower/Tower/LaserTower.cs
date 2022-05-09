@@ -22,7 +22,6 @@ public class LaserTower : Tower
 
         if (OriginTarget != FinalTarget)
         {
-            Debug.Log("dd");
             StopCoroutine("LaserShoot");
             OriginTarget = FinalTarget;
             atkdamage = towerinfo.towerdamage;
@@ -32,24 +31,34 @@ public class LaserTower : Tower
 
         if (FinalTarget != null)
         {
-            RaycastHit hit;
-            if(Physics.Raycast(shootPos.position, shootPos.forward,out hit))
+            Debug.Log("타겟있음");
+            //RaycastHit hit;
+            //if(Physics.Raycast(shootPos.position, shootPos.forward,out hit))
+            //{
+            //    if (hit.collider.CompareTag("Enemy"))
+            //    {
+            if (Atking)
             {
-                if (hit.collider.CompareTag("Enemy"))
+
+                Debug.Log("ddddd");
+                lR.enabled = true;
+
+                lR.SetPosition(0, shootPos.position);
+                lR.SetPosition(1, FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0));
+                /* + shootPos.forward * hit.collider.transform.localScale.z / 2*/
+
+                if (!isAtking)
                 {
-                    lR.enabled = true;
-
-                        lR.SetPosition(0, shootPos.position);
-                        lR.SetPosition(1, hit.point/* + shootPos.forward * hit.collider.transform.localScale.z / 2*/);
-
-                    if (!isAtking)
-                    {
-                        Debug.Log("공격");
-                        StartCoroutine("LaserShoot");
-                    }
+                    StartCoroutine("LaserShoot");
                 }
-                
-                AtkParticle.transform.position = hit.point;
+                // }
+
+                AtkParticle.transform.position = FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0);
+                //  }
+            }
+            else
+            {
+                lR.enabled = false;
             }
 
         }
@@ -63,11 +72,17 @@ public class LaserTower : Tower
             lR.enabled = false;
         }
     }
-
+    Transform target = null;
     private IEnumerator LaserShoot()
     {
         AtkParticle.SetActive(true);
         isAtking = true;
+        if (target != FinalTarget)
+        {
+            AS.Play();
+            target = FinalTarget;
+        }
+
         while (FinalTarget != null)
         {
             yield return new WaitForSeconds(0.7f);
