@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private Node node = null;
+    protected Node node = null;
     public Node SetNode { set => node = value; }
 
-    [SerializeField] private int removePrice = 0;
+    protected int removePrice = 0;
     public int GetPrice { get => removePrice; }
 
     public void RemoveThis()

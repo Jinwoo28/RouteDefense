@@ -13,7 +13,7 @@ public class WeatherSetting : MonoBehaviour
     private List<Node> checkednodelist = new List<Node>();
 
     //积己等 唱公 府胶飘
-    [SerializeField] private GameObject MakeTreeObj = null;
+    [SerializeField] private GameObject[] MakeTreeObj = null;
     private List<TreeSc> treelist = new List<TreeSc>();
 
     private List<Tree> treelistN = new List<Tree>();
@@ -50,7 +50,7 @@ public class WeatherSetting : MonoBehaviour
         //唱公 积己
         for (int i = 0; i < treelistN.Count; i++)
         {
-            if (rained)
+            if (!rained)
             {
                 treelistN[i].EvolveTree(1);
             }
@@ -85,8 +85,9 @@ public class WeatherSetting : MonoBehaviour
         {
             CheckEmptyNode();
             int num = Random.Range(0, checkednodelist.Count);
+            int treeNum = Random.Range(0, MakeTreeObj.Length);
 
-            var newTree = Instantiate(MakeTreeObj, new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth / 2, checkednodelist[num].gridY), Quaternion.identity);
+            var newTree = Instantiate(MakeTreeObj[treeNum], new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth / 2, checkednodelist[num].gridY), Quaternion.identity);
             newTree.GetComponent<Tree>().SetNode = checkednodelist[num];
             treelistN.Add(newTree.GetComponent<Tree>());
             newTree.GetComponent<Tree>().SetWs = this;

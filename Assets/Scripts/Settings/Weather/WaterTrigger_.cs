@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterTrigger_ : MonoBehaviour
 {
-    private List<Fruit> fruit = new List<Fruit>();
+    //private List<Fruit> fruit = new List<Fruit>();
 
     private HashSet<Tower> towerlist = new HashSet<Tower>();
     private HashSet<Node> nodelist = new HashSet<Node>();
@@ -34,7 +34,7 @@ public class WaterTrigger_ : MonoBehaviour
 
         if (other.CompareTag("Fruit"))
         {
-            fruit.Add(other.GetComponent<Fruit>());
+          //  fruit.Add(other.GetComponent<Fruit>());
         }
     }
 
