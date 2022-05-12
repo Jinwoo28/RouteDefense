@@ -19,8 +19,6 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private MultipleSpeed speedSet = null;
 
-    [SerializeField] private GameObject[] starImage = null;
-
     private float EnemyCoinRate = 0;
 
     [SerializeField] private GameObject unituiParent = null;
@@ -168,45 +166,6 @@ public class EnemyManager : MonoBehaviour
                     UserInformation.userDataStatic.userCoin += (stagenum+1 * 20);
                     sumCoin += stagenum+1 * 20;
 
-
-                    //성공에 따른 별 얻기
-
-                    if (!UserInformation.userDataStatic.stageClear[0].Star1)
-                    {
-                        UserInformation.userDataStatic.stageClear[0].Star1 = true;
-                        UserInformation.userDataStatic.userCoin += 200;
-                        sumCoin += 200;
-                    }
-
-                    if (!UserInformation.userDataStatic.stageClear[0].Star2)
-                    {
-                        if (playerstate.GetPlayerLife >= 15)
-                        {
-                            starImage[0].SetActive(true);
-                            UserInformation.userDataStatic.stageClear[0].Star2 = true;
-                            UserInformation.userDataStatic.userCoin += 200;
-                            sumCoin += 200;
-                        }
-                    }
-                    else if (UserInformation.userDataStatic.stageClear[0].Star2)
-                    {
-                        starImage[0].SetActive(true);
-                    }
-
-                    if (!UserInformation.userDataStatic.stageClear[0].Star3)
-                    {
-                        if (playerstate.GetPlayerLife >= 25)
-                        {
-                            starImage[1].SetActive(true);
-                            UserInformation.userDataStatic.stageClear[0].Star3 = true;
-                            UserInformation.userDataStatic.userCoin += 200;
-                            sumCoin += 200;
-                        }
-                    }
-                    else if (UserInformation.userDataStatic.stageClear[0].Star3)
-                    {
-                        starImage[1].SetActive(true);
-                    }
 
                     PlusCoin1.text = "획득코인 : " +sumCoin;
 

@@ -35,6 +35,15 @@ public class ShowTowerInfo : MonoBehaviour
 
     private Transform towertransform = null;
 
+    [SerializeField] private GameObject SellPanel = null;
+    [SerializeField] private TextMeshProUGUI SellPrice = null;
+
+    private bool ShowUpgradeInfo = false;
+
+    public void ShowUPInfo()
+    {
+        ShowUpgradeInfo = !ShowUpgradeInfo;
+    }
 
     public Transform GetTowerTransform
     {
@@ -65,11 +74,26 @@ public class ShowTowerInfo : MonoBehaviour
         if (tower != null)
         {
             towername.text = $"{tower.Getname}";
-            towerlevel.text = "업그레이드 + " + tower.GetTowerLevel.ToString();
-            atkdamage.text = "데미지 : " + tower.GetDamage.ToString();
-            atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString();
             atkspeed.text =  "레벨 "+tower.GetStep.ToString();
-           
+
+            if (!ShowUpgradeInfo)
+            {
+                towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString();
+                towerlevel.color = Color.black;
+                atkdamage.text = "데미지 : " + tower.GetDamage.ToString();
+                atkdamage.color = Color.black;
+                atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString();
+                atkcritical.color = Color.black;
+            }
+            else
+            {
+                towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString() + " -> " + (tower.GetTowerLevel + 1).ToString();
+                towerlevel.color = Color.red;
+                atkdamage.text = "데미지 : " + tower.GetDamage.ToString() + " -> " + (tower.GetDamage + tower.GetTowerUPDamage);
+                atkdamage.color = Color.red;
+                atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString() + " -> " + (tower.GetCritical + tower.GetTowerUpCri);
+                atkcritical.color = Color.red;
+            }
 
             switch (tower.GetStep)
             {
@@ -245,6 +269,16 @@ public class ShowTowerInfo : MonoBehaviour
         }
     }
 
+    public void ShowSellPrice()
+    {
+        SellPrice.text = "판매 금액 : " + ((int)(tower.GetSetSellPrice*0.7f)).ToString();
+        SellPanel.SetActive(true);
+    }
+
+    public void OffSellPrice()
+    {
+        SellPanel.SetActive(false);
+    }
 
 
 }

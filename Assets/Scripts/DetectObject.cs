@@ -38,9 +38,9 @@ public class DetectObject : MonoBehaviour
             {
                 Debug.DrawLine(new Vector3(15,10,15), hit.point);
                 returntransform = hit.collider.transform;
+            return returntransform;
             }
 
-            return returntransform;
         }
         return null;
     }

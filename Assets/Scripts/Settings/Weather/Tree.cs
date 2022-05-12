@@ -22,7 +22,7 @@ public class Tree : Obstacle
     public void EvolveTree(int _age)
     {
         age+=_age;
-        removePrice += age * 20;
+        removePrice += _age * 10;
 
 
 
@@ -32,8 +32,7 @@ public class Tree : Obstacle
                 UpRate++;
 
             this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-            removePrice += 25;
-
+            removePrice += 10;
             }
 
         Debug.Log("age" + age);

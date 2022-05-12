@@ -280,8 +280,8 @@ MonoBehaviour:
   upgradevalue:
     priceUprate: 15
     upgradeprice: 75
-    UpdamageValue: 0
-    UpcriticalValue: 0
+    UpdamageValue: 2
+    UpcriticalValue: 5
   towerinfo:
     towerprice: 200
     towername: "\uBC15\uACA9\uD3EC"

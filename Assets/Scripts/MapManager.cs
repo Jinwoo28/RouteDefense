@@ -12,9 +12,6 @@ public class MapManager : MonoBehaviour
     private int endX = 0;
     private int endY = 0;
 
-
-
-
     [SerializeField] private Texture2D cursorimage = null;
     [SerializeField]private PlayerState playerstate = null;
 
@@ -108,6 +105,11 @@ public class MapManager : MonoBehaviour
         MakeHeight();
 
         AddtileNum = Random.Range(0, 7);
+    }
+
+    private void AddTileChange()
+    {
+
     }
 
     private void MakeHeight()
@@ -241,7 +243,6 @@ public class MapManager : MonoBehaviour
                             node2.Add(grid[checkY, checkX]);
                         }
                     }
-
                     grid[Y, X].GetNeighbournode(node2);
                 }
             }

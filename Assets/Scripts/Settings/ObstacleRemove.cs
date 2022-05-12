@@ -14,36 +14,39 @@ public class ObstacleRemove : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI price = null;
 
+    private DetectObject detect = new DetectObject();
+
     private Obstacle obs = null;
 
     private void Update()
     {
+        LayerMask layer = 1 << LayerMask.NameToLayer("Obstacle");
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
+            obs = null;
+            if (detect.ReturnTransform(layer) != null)
             {
-              
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100f))
-                {
-                    if (hit.collider.CompareTag("Obstacle"))
-                    {
-                    
-                        sellinfo.SetActive(true);
-                        sellinfo.transform.position = Camera.main.WorldToScreenPoint(hit.collider.transform.position + Vector3.up * 2);
-                        obs = hit.collider.GetComponent<Obstacle>();
-                        price.text = obs.GetPrice.ToString();
-                    }
-                    else
-                    {
-                        sellinfo.SetActive(false);
-                        obs = null;
-                    }
-                }
+                obs = detect.ReturnTransform(layer).GetComponent<Obstacle>();
             }
 
+            if (obs != null)
+            {
+                sellinfo.SetActive(true);
+                
+                
+                price.text = "제거비용 : " + obs.GetPrice.ToString();
+            }
+            else
+            {
+                Debug.Log("다른 곳 클릭");
+                sellinfo.SetActive(false);
+            }
+        }
+        if (obs != null)
+        {
+            Vector3 pos = obs.gameObject.transform.position;
+            sellinfo.transform.position = Camera.main.WorldToScreenPoint(new Vector3(pos.x + 1, pos.y + 2, pos.z));
         }
     }
 

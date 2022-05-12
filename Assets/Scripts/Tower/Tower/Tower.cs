@@ -114,6 +114,7 @@ public class Tower : MonoBehaviour
         cam = Camera.main;
         AS.volume = PlayerPrefs.GetFloat("ESound");
         SoundSettings.effectsound += SoundChange;
+        sellprice += towerinfo.towerprice;
     }
 
     private void SpeedUP(int x)
@@ -289,6 +290,8 @@ public class Tower : MonoBehaviour
         SkillFunc.offSkill();
         if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
         {
+            sellprice += upgradevalue.upgradeprice;
+
             towerlevel++;
             towerinfo.towerdamage += upgradevalue.UpdamageValue;
             if (towerinfo.towercritical + upgradevalue.UpcriticalValue >= 100)
@@ -309,11 +312,14 @@ public class Tower : MonoBehaviour
         SkillFunc.offSkill();
         if (!towericed)
         {
-            playerstate.GetSetPlayerCoin = -(int)((towerinfo.towerprice + upgradevalue.upgradeprice * towerstep) * 0.7f);
+            playerstate.GetSetPlayerCoin = -(int)(sellprice * 0.7f);
             node.GetOnTower = false;
             Destroy(this.gameObject);
         }
     }
+
+    private int sellprice = 0;
+    public int GetSetSellPrice { get => sellprice; set => sellprice = value; }
 
     public void TowerMove()
     {
@@ -376,6 +382,12 @@ public class Tower : MonoBehaviour
         buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
         buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;
+
+        buildedtower.GetComponent<Tower>().GetSetSellPrice += 
+            ((sellprice - towerinfo.towerprice) + (_tower.sellprice-_tower.towerinfo.towerprice));
+
+
+
         showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
         showtowerinfo.ClickTower();
 
@@ -458,6 +470,9 @@ public class Tower : MonoBehaviour
     public int Gettowerprice => towerinfo.towerprice;
 
     public int Gettowerupgradeprice => upgradevalue.upgradeprice;
+
+    public float GetTowerUPDamage => upgradevalue.UpdamageValue;
+    public float GetTowerUpCri => upgradevalue.UpcriticalValue;
 
     #endregion
 }

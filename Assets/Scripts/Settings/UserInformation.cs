@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class UserData
 {
     public int userCoin = 0;
-    public List<StageClearInfo> stageClear;
 
     public List<SkillSet> skillSet;
 
@@ -96,14 +95,6 @@ public class SkillSet
 
 }
 
-[System.Serializable]
-public class StageClearInfo
-{
-    public bool Star1;
-    public bool Star2;
-    public bool Star3;
-}
-
 public class UserInformation : MonoBehaviour
 {
 
@@ -132,7 +123,6 @@ public class UserInformation : MonoBehaviour
         }
 
         userData.userCoin = userDataStatic.userCoin;
-        userData.stageClear = userDataStatic.stageClear;
 
     }
 
