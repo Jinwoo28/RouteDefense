@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] private MapManager mapmanager = null;
+    [SerializeField] private AddTile mapmanager = null;
     [SerializeField] private PlayerState playerstate = null;
     [SerializeField] private EnemyManager enemymanager = null;
     [SerializeField] private Image Gettetris = null;

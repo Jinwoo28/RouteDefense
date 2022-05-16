@@ -94,6 +94,7 @@ public class EnemyManager : MonoBehaviour
     //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
     public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
+        Debug.Log("스폰 시작");
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
         StartCoroutine("GameStart");
@@ -155,6 +156,9 @@ public class EnemyManager : MonoBehaviour
 
                 weather.StageClear();
                 //스테이지 클리어
+
+                stageclear();
+
                 if (StageNum >= stageinfo.Length)
                 {
                     ClearPanal.SetActive(true);

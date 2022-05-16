@@ -199,8 +199,6 @@ public class MapManager : MonoBehaviour
                 tile.transform.parent = parentgrid.transform;
                 //생성된 타일을 ParentGrid의 자식으로 넣어서 관리
 
-
-
                 //생성과 동시에 인덱스 번호 부여
                 //grid[i, j] = new Node(tile,false, i, j, 0,false);
 
@@ -226,7 +224,6 @@ public class MapManager : MonoBehaviour
             /////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////
         
-
             for (int Y = 0; Y < gridY; Y++)
             {
                 for (int X = 0; X < gridX; X++)
@@ -350,7 +347,6 @@ public class MapManager : MonoBehaviour
         startY = SXnum;
         endX = EYnum;
         endY = EXnum;
-
     }
 
     ///////////////////////////////////////////////////////////
@@ -727,11 +723,11 @@ X X 10 X
 
     }
 
-
     ///////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //길 만들기 함수
     //타일 클릭시 해당 노드의 색과 walkable 바꾸기
+
     IEnumerator NodeWalkableChange(Node _changenode)
     {
         bool walkable = !_changenode.Getwalkable;
@@ -776,7 +772,7 @@ X X 10 X
         
     }
 
-    ///////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     //길찾기 함수
     public void FindPath()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeatherSetting : MonoBehaviour
 {
-    [SerializeField] private MapManager mapmanager = null;
+    [SerializeField] private AddTile mapmanager = null;
 
     //받아온 활성화 리스트
     private List<Node> tilelist = new List<Node>();
@@ -44,7 +44,7 @@ public class WeatherSetting : MonoBehaviour
     //게임준비 화면에 작동할 메서드
     public void StageClear()
     {
-        tilelist = mapmanager.GetActiveList;
+        tilelist = mapmanager.GetActiveNode;
 
         //나무들의 나이 변경
         //나무 생성
@@ -78,8 +78,7 @@ public class WeatherSetting : MonoBehaviour
     //나무 생성
     private void InsTree()
     {
-        int Count = Random.Range(1, 4);
-        Debug.Log(Count);
+        int Count = Random.Range(0, 3);
 
         for(int i = 0; i < Count; i++)
         {

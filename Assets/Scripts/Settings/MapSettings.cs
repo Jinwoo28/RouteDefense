@@ -73,12 +73,6 @@ public class MapSettings : MonoBehaviour
 
             }
         }
-
-        for(int i = 0; i < tileshpaes.Count; i++)
-        {
-            Debug.Log($"{tileshpaes[i].x} : {tileshpaes[i].y}");
-        }
-
     }
 
 

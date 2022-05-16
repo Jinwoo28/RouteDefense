@@ -47,16 +47,16 @@ public class BuildManager : MonoBehaviour
     public GameObject Testtile = null;
 
     private MapManager mapmanager = null;
-    private bool addtileactive = false;
+    //private bool addtileactive = false;
 
     private void Start()
     {
-        mapmanager = this.GetComponent<MapManager>();
+      //  mapmanager = this.GetComponent<MapManager>();
     }
 
     private void Update()
     {
-        addtileactive = mapmanager.GetSetAddTile;
+       // addtileactive = mapmanager.GetSetAddTile;
 
         playercoin = playerstate.GetSetPlayerCoin;
 
