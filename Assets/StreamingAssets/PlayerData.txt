@@ -1,12 +1,5 @@
 {
   "userCoin": 0,
-  "stageClear": [
-    {
-      "Star1": false,
-      "Star2": false,
-      "Star3": false
-    }
-  ],
   "skillSet": [
     {
       "skilltype": 0,

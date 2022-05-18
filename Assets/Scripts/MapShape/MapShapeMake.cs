@@ -4,22 +4,31 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using TMPro;
 
 public class MapShapeSettings
 {
-    public List<NewShape> newshapes = new List<NewShape>();
-    public NewShape newshape;
-    public string Fuck = "Fuck";
+    public List<NewShape> newshapes;
 
-    public void AddShape(bool[,] value, string name)
+    public List<int> numlist = new List<int>();
+
+    public MapShapeSettings()
     {
-        if (!CheckOverlab(name))
+        newshapes = new List<NewShape>();
+    }
+
+
+    //맵 추가
+    public void AddShape(NewShape newshape)
+    {
+        if (!CheckOverlab(newshape.name))
         {
-            newshape = new NewShape(value);
             newshapes.Add(newshape);
+            Debug.Log("저장완료");
         }
     }
 
+    //중복이름 체크
     public bool CheckOverlab(string _name)
     {
         for (int i = 0; i < newshapes.Count; i++)
@@ -33,6 +42,7 @@ public class MapShapeSettings
         return false;
     }
 
+    //이름으로 삭제
     public void RemoveShape(string _name)
     {
         for(int i = 0; i < newshapes.Count; i++)
@@ -46,25 +56,32 @@ public class MapShapeSettings
         }
     }
 
+    //맵을 이름으로 출력
+    public bool[,] PrintFunc(string _name)
+    {
+        for(int i = 0; i < newshapes.Count; i++)
+        {
+            if(_name == newshapes[i].name)
+            {
+                return newshapes[i].tilelist;
+            }
+        }
+
+        return null;        
+    }
+
+    
+
+    //맵의 이름과 인덱스를 가진 노드
     public class NewShape
     {
         public string name;
         public bool[,] tilelist = new bool[10, 10];
 
-        public NewShape(bool[,] value)
+        public NewShape(bool[,] value, string _name)
         {
+            name = _name;
             tilelist = value;
-        }
-
-    }
-
-    public void printFunc()
-    {
-        Debug.Log(newshapes.Count);
-        for (int i = 0; i < newshapes.Count; i++)
-        {
-            Debug.Log("asdfas");
-            Debug.Log(newshapes[i].name);
         }
     }
 }
@@ -73,11 +90,14 @@ public class MapShapeSettings
 
 public class MapShapeMake : MonoBehaviour
 {
-    public MapShapeSettings mapsettings;
+    public static MapShapeSettings mapsettings = new MapShapeSettings();
+
+    [SerializeField] private TMP_Dropdown maplist = null;
 
     [SerializeField] private GameObject Tile;
 
     [SerializeField] private GameObject OKPanal = null;
+    [SerializeField] private GameObject Remove = null;
 
     DetectObject detector = new DetectObject();
 
@@ -87,9 +107,13 @@ public class MapShapeMake : MonoBehaviour
 
     IEnumerator co = null;
 
-    TileInfo[] tilelist;
+    TileInfo[,] tilelist;
 
     public bool[,] tilevalue;
+
+    private int MapNumber = 0;
+
+    
 
     void Start()
     {
@@ -101,9 +125,8 @@ public class MapShapeMake : MonoBehaviour
         //    SaveInfo();
         //}
 
-        mapsettings = new MapShapeSettings();
-
-        mapname = "NULL";
+        mapname = "asdf";
+       // SaveInfo();
         LoadInfo();
         //if (GetSettings == 0)
         //{
@@ -116,11 +139,7 @@ public class MapShapeMake : MonoBehaviour
         //    GetSettings = 2;
         //}
 
-        mapsettings.printFunc();
-
-        Debug.Log(mapsettings.Fuck);
-
-        tilelist = new TileInfo[100];
+        tilelist = new TileInfo[10,10];
 
         layerNum = 1 << LayerMask.NameToLayer("Shape");
         for (int i = 0; i < 10;i++)
@@ -130,13 +149,17 @@ public class MapShapeMake : MonoBehaviour
                 var tile = Instantiate(Tile, new Vector3(j, 0, i), Quaternion.Euler(90,0,0));
                 tile.transform.parent = this.transform;
                 tile.GetComponent<TileInfo>().SetUp(j, i, false);
-                tilelist[i*10 + j] = tile.GetComponent<TileInfo>();
+                tilelist[j,i] = tile.GetComponent<TileInfo>();
             }
-        } 
+        }
+
+        InitDropBox();
+        DropBoxChage(0);
     }
 
     private void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             Transform pos = detector.ReturnTransform(layerNum);
@@ -178,9 +201,12 @@ public class MapShapeMake : MonoBehaviour
 
     public void ResetBtn()
     {
-        for(int i = 0; i < tilelist.Length; i++)
+        for(int i = 0; i < 10; i++)
         {
-            tilelist[i].Change(false);
+            for (int j = 0; j < 10; j++)
+            {
+                tilelist[j,i].Change(false);
+            }
         }
     }
 
@@ -194,64 +220,113 @@ public class MapShapeMake : MonoBehaviour
 
     public void ShowPanal()
     {
+        Debug.Log("asdf");
         OKPanal.SetActive(true);
     }
     public void OffPanal()
     {
         OKPanal.SetActive(false);
     }
+    public void ShowRemove()
+    {
+        Remove.SetActive(true);
+    }
+    public void OffRemove()
+    {
+        Remove.SetActive(false);
+    }
 
+    public void InitDropBox()
+    {
+        maplist.ClearOptions();
+
+        for(int i = 0; i < mapsettings.newshapes.Count; i++)
+        {
+            TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
+            option.text = mapsettings.newshapes[i].name;
+            maplist.options.Add(option);
+        }
+    }
+    public void DropBoxChage(int num)
+    {
+        maplist.value = num;
+
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 10; j++)
+            {
+                tilelist[j, i].Change(mapsettings.newshapes[num].tilelist[j,i]);
+            }
+        }
+
+    }
 
     public void SaveInfo()
     {
-        //if (mapname.Length <= 3)
-        //{
-        //    return;
-        //}
+        if (mapname.Length <= 3)
+        {
+            return;
+        }
 
-        //for (int i = 0; i < mapsettings.newshape.Count; i++)
-        //{
-        //    if (mapname == mapsettings.newshape[i].name)
-        //    {
-        //        return;
-        //    }
-        //}
+        if (mapsettings.CheckOverlab(mapname))
+        {
+            return;
+        }
 
-        mapsettings.AddShape(tilevalue, mapname);
+        Debug.Log(mapname);
 
-        FileStream stream = new FileStream(Application.dataPath + "/test.json", FileMode.OpenOrCreate);
-        string jsonData = JsonConvert.SerializeObject(mapsettings);
+        MapShapeSettings.NewShape newshape = new MapShapeSettings.NewShape(tilevalue,mapname);
+
+        mapsettings.AddShape(newshape);
+        
+        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
+        string jsonData = JsonConvert.SerializeObject(mapsettings,Formatting.Indented);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
         stream.Close();
 
         Debug.Log(mapsettings.newshapes.Count + "저장 개수");
 
-        mapname = null;
         OKPanal.SetActive(false);
         GetSettings = 1;
+        InitDropBox();
+        Debug.Log("맵 저장");
+        LoadInfo();
+    }
+
+    public void Save2()
+    {
+        MapShapeSettings.NewShape newshape = new MapShapeSettings.NewShape(tilevalue, mapname);
+
+        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
+        string jsonData = JsonConvert.SerializeObject(mapsettings, Formatting.Indented);
+        byte[] data = Encoding.UTF8.GetBytes(jsonData);
+        stream.Write(data, 0, data.Length);
+        stream.Close();
     }
 
     public void LoadInfo()
     {
-        FileStream stream = new FileStream(Application.dataPath + "/test.json", FileMode.Open);
+        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.Open);
         byte[] data = new byte[stream.Length];
         stream.Read(data, 0, data.Length);
         stream.Close();
 
         string jsonData = Encoding.UTF8.GetString(data);
-        MapShapeSettings test = JsonConvert.DeserializeObject<MapShapeSettings>(jsonData);
+        mapsettings = JsonConvert.DeserializeObject<MapShapeSettings>(jsonData);
     }
 
-    public void RemoveData(string name)
+    public void RemoveMap()
     {
-        //for(int i = 0; i < mapsettings.newshape.Count; i++)
-        //{
-        //    if(mapsettings.newshape[i].name == name)
-        //    {
-        //        mapsettings.newshape.Remove(mapsettings.newshape[i]);
-        //    }
-        //}
+        Debug.Log(mapsettings.newshapes.Count + "남은 맵 개수");
+
+        mapsettings.RemoveShape(mapname);
+        //Save2();
+        //LoadInfo();
+        InitDropBox();
     }
 
+
+    
+    
 }

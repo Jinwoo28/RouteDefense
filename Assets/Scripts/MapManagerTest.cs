@@ -44,7 +44,9 @@ public class MapManagerTest : MonoBehaviour
 
     private List<Node> useableNode = new List<Node>();
 
-//    public EnemyManager EM = null;
+    //    public EnemyManager EM = null;
+
+    MapShapeMake mapshape = new MapShapeMake();
 
     private void Awake()
     {
@@ -56,6 +58,8 @@ public class MapManagerTest : MonoBehaviour
 
         this.GetComponent<Route>().Settings(gridX, gridY, grid, StartNode,StartNode2, EndNode);
     }
+
+    
 
 
     private void MakeHeight()
@@ -178,33 +182,60 @@ public class MapManagerTest : MonoBehaviour
         int xcount = initialGridX - 1;
 
 
-
+        #region MapShape
         //모양대로 타일 활성화
-        for (int i = halfgridy - initialGridY; i < halfgridy + initialGridY; i++)
+
+        int RanX = Random.Range(10, gridX - 10);
+        int RanY = Random.Range(10, gridY - 10);
+
+        bool[,] activeTileList = new bool[10, 10];
+
+        for(int i = 0; i<LoadMap.map.newshapes.Count; i++)
         {
-            for (int j = halfgridx - widthcount; j < halfgridx + widthcount; j++)
+            if(GameManager.SetStageShape == LoadMap.map.newshapes[i].name)
             {
-                grid[i, j].SetActiveTile(true);
-                grid[i, j].GetSetActive = true;
-                useableNode.Add(grid[i, j]);
-            }
-
-            //조건문을 이용해 가로타일의 개수 조절
-            //ycount로 Y축 개수의 중간까지는 추가, 이후 다시 감소
-            ycount++;
-
-            if (ycount < initialGridY - xcount)
-            {
-                widthcount++;
-            }
-
-            //X축 시작 개수만큼 가운데 Y의 개수 설정(모양을 잡기위해)
-            else if (ycount >= initialGridY - xcount && ycount <= initialGridY + xcount) { }
-            else
-            {
-                widthcount--;
+                activeTileList = LoadMap.map.newshapes[i].tilelist;
+                break;
             }
         }
+
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < 10; j++)
+            {
+                grid[i + RanX, j + RanY].gameObject.SetActive(activeTileList[j, i]);
+                useableNode.Add(grid[i+RanX, j+RanY]);
+            }
+        }
+
+        //for (int i = halfgridy - initialGridY; i < halfgridy + initialGridY; i++)
+        //{
+        //    for (int j = halfgridx - widthcount; j < halfgridx + widthcount; j++)
+        //    {
+        //        grid[i, j].SetActiveTile(true);
+        //        grid[i, j].GetSetActive = true;
+        //        useableNode.Add(grid[i, j]);
+        //    }
+
+        //    //조건문을 이용해 가로타일의 개수 조절
+        //    //ycount로 Y축 개수의 중간까지는 추가, 이후 다시 감소
+        //    ycount++;
+
+        //    if (ycount < initialGridY - xcount)
+        //    {
+        //        widthcount++;
+        //    }
+
+        //    //X축 시작 개수만큼 가운데 Y의 개수 설정(모양을 잡기위해)
+        //    else if (ycount >= initialGridY - xcount && ycount <= initialGridY + xcount) { }
+        //    else
+        //    {
+        //        widthcount--;
+        //    }
+        //}
+
+        #endregion
+
 
         //https://kinanadel.blogspot.com/2018/09/c.html
         //    int RandomNum;

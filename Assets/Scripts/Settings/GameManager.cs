@@ -16,8 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-       // Debug.Log(GameLevel);
-       // Debug.Log(StageShape);
+
     }
 
     public static void OffFunc()

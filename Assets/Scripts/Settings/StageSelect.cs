@@ -19,11 +19,12 @@ public class StageSelect : MonoBehaviour
         stageShape = _shape;
     }
 
+
     public void SelectStage(int level)
     {
         GameManager.SetStageShape = stageShape;
         GameManager.SetGameLevel = level;
-        LoadSceneControler.LoadScene("Stage2");
+        LoadSceneControler.LoadScene("StageTest");
     }
 
     public void OnLevelChoice()

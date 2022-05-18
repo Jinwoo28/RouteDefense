@@ -9951,7 +9951,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c9c4a628ad3f04a8f746c9fadcd5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setStageStar: []
+  levelChoice: {fileID: 0}
+  easyMoney: {fileID: 0}
+  namalMoney: {fileID: 0}
+  hardMoney: {fileID: 0}
 --- !u!4 &1111289998
 Transform:
   m_ObjectHideFlags: 0
@@ -11774,10 +11777,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userData:
     userCoin: 0
-    stageClear:
-    - Star1: 0
-      Star2: 0
-      Star3: 0
     skillSet:
     - skilltype: 0
       skillName: Fire
@@ -13512,6 +13511,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526265347}
   m_CullTransparentMesh: 1
+--- !u!1 &1530973840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530973842}
+  - component: {fileID: 1530973841}
+  m_Layer: 0
+  m_Name: MapLoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1530973841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530973840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a54f9802a86f58498ace66e9393ea25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1530973842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530973840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6629417, y: 0.00012874603, z: 2.2874012}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540204595
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,10 +14,11 @@ public class TileInfo : MonoBehaviour
 
     private SpriteRenderer SR = null;
 
-    private void Start()
+    private void Awake()
     {
         SR = this.GetComponent<SpriteRenderer>();
     }
+
 
     public void SetUp(int x, int y, bool tf)
     {
