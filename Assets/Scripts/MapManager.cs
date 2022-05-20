@@ -354,7 +354,6 @@ public class MapManager : MonoBehaviour
     //타일추가 함수
     public void OnClickMapAdd()
     {
-        SkillFunc.offSkill();
         StartCoroutine("MapTileAdd");
     }
 
@@ -751,7 +750,6 @@ X X 10 X
     //버튼으로 길만들기 활성화, 비활성화 시킬 버튼함수
     public void OnClickWalkableChange()
     {
-        SkillFunc.offSkill();
         if (!isgameing)
         {
             if (!AddTileActive)
@@ -761,7 +759,6 @@ X X 10 X
 
     public void RouteReset()
     {
-        SkillFunc.offSkill();
         if (!isgameing)
         {
             foreach (Node i in overlapcheck)
@@ -777,7 +774,6 @@ X X 10 X
     //길찾기 함수
     public void FindPath()
     {
-        SkillFunc.offSkill();
         if (!isgameing)
         {
             

@@ -46,17 +46,12 @@ public class BuildManager : MonoBehaviour
 
     public GameObject Testtile = null;
 
-    private MapManager mapmanager = null;
-    //private bool addtileactive = false;
-
     private void Start()
     {
-      //  mapmanager = this.GetComponent<MapManager>();
     }
 
     private void Update()
     {
-       // addtileactive = mapmanager.GetSetAddTile;
 
         playercoin = playerstate.GetSetPlayerCoin;
 
@@ -90,8 +85,9 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-        SkillFunc.offSkill();
-        MapManager.OffFunc();
+        Debug.Log("asdf");
+        GameManager.buttonOff();
+
         if (towerpreviewActive)
         {
             playerstate.GetSetPlayerCoin = -towerprice;
@@ -107,7 +103,6 @@ public class BuildManager : MonoBehaviour
                 if (!towerpreviewActive)
                 {
                     towerpreviewActive = true;
-                    mapmanager.GetSetTileChange = false;
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 

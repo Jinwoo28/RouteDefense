@@ -287,7 +287,7 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
         if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
         {
             sellprice += upgradevalue.upgradeprice;
@@ -309,7 +309,7 @@ public class Tower : MonoBehaviour
 
     public void SellTower()
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
         if (!towericed)
         {
             playerstate.GetSetPlayerCoin = -(int)(sellprice * 0.7f);
@@ -323,7 +323,7 @@ public class Tower : MonoBehaviour
 
     public void TowerMove()
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
         if (!towericed)
         {
             TowerCanWork = true;

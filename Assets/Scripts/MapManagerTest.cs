@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MapManagerTest : MonoBehaviour
 {
     [SerializeField] private GameObject[] StartEnd = null;
+    [SerializeField] private GameObject CamPos = null;
     private int startX = 0;
     private int startY = 0;
 
@@ -57,6 +58,14 @@ public class MapManagerTest : MonoBehaviour
         this.GetComponent<AddTile>().Settings(gridX, gridY, grid, Tilecolor, useableNode);
 
         this.GetComponent<Route>().Settings(gridX, gridY, grid, StartNode,StartNode2, EndNode);
+
+        Instantiate(StartEnd[0], new Vector3(StartNode.GetX, StartNode.GetYDepth/2, StartNode.GetY), Quaternion.Euler(0, 90, 0));
+        Instantiate(StartEnd[1], new Vector3(EndNode.GetX, EndNode.GetYDepth/2, EndNode.GetY), Quaternion.Euler(0, 90, 0));
+
+        if (GameManager.SetGameLevel == 3)
+        {
+            Instantiate(StartEnd[0], new Vector3(StartNode2.GetX, StartNode2.GetYDepth/2, StartNode2.GetY), Quaternion.Euler(0, 90, 0));
+        }
     }
 
     
@@ -94,13 +103,13 @@ public class MapManagerTest : MonoBehaviour
 
     private void Update()
     {
-        StartEnd[0].transform.position = Camera.main.WorldToScreenPoint(new Vector3(startY, StartNode.GetYDepth/2+0.2f, startX));
-        StartEnd[1].transform.position = Camera.main.WorldToScreenPoint(new Vector3(endY, EndNode.GetYDepth/2+0.2f, endX));
-
-        if (GameManager.SetGameLevel == 3)
-        {
-            StartEnd[2].transform.position = Camera.main.WorldToScreenPoint(new Vector3(StartNode2.GetX, StartNode.GetYDepth / 2 + 1.2f, StartNode2.GetY));
-        }
+        //StartEnd[0].transform.position = Camera.main.WorldToScreenPoint(new Vector3(startY, StartNode.GetYDepth/2+0.2f, startX));
+        //StartEnd[1].transform.position = Camera.main.WorldToScreenPoint(new Vector3(endY, EndNode.GetYDepth/2+0.2f, endX));
+        //
+        //if (GameManager.SetGameLevel == 3)
+        //{
+        //    StartEnd[2].transform.position = Camera.main.WorldToScreenPoint(new Vector3(StartNode2.GetX, StartNode.GetYDepth / 2 + 1.2f, StartNode2.GetY));
+        //}
 
     }
 
@@ -178,7 +187,6 @@ public class MapManagerTest : MonoBehaviour
 
         int widthcount = initialGridX;
 
-        int ycount = 0;
         int xcount = initialGridX - 1;
 
 
@@ -203,36 +211,18 @@ public class MapManagerTest : MonoBehaviour
         {
             for(int j = 0; j < 10; j++)
             {
-                grid[i + RanX, j + RanY].gameObject.SetActive(activeTileList[j, i]);
-                useableNode.Add(grid[i+RanX, j+RanY]);
+                grid[i + RanY, j + RanX].gameObject.SetActive(activeTileList[j, i]);
+
+                if (activeTileList[j, i])
+                {
+                    useableNode.Add(grid[i + RanY, j + RanX]);
+                }
             }
         }
 
-        //for (int i = halfgridy - initialGridY; i < halfgridy + initialGridY; i++)
-        //{
-        //    for (int j = halfgridx - widthcount; j < halfgridx + widthcount; j++)
-        //    {
-        //        grid[i, j].SetActiveTile(true);
-        //        grid[i, j].GetSetActive = true;
-        //        useableNode.Add(grid[i, j]);
-        //    }
+        CamPos.transform.position = new Vector3(RanX+5f, CamPos.transform.position.y, RanY+2.5f);
 
-        //    //조건문을 이용해 가로타일의 개수 조절
-        //    //ycount로 Y축 개수의 중간까지는 추가, 이후 다시 감소
-        //    ycount++;
-
-        //    if (ycount < initialGridY - xcount)
-        //    {
-        //        widthcount++;
-        //    }
-
-        //    //X축 시작 개수만큼 가운데 Y의 개수 설정(모양을 잡기위해)
-        //    else if (ycount >= initialGridY - xcount && ycount <= initialGridY + xcount) { }
-        //    else
-        //    {
-        //        widthcount--;
-        //    }
-        //}
+       
 
         #endregion
 
@@ -246,6 +236,8 @@ public class MapManagerTest : MonoBehaviour
         StartNode.SetStartNode();
         StartNode.Getwalkable = true;
         useableNode.Remove(StartNode);
+
+        
 
         while (true)
         {
@@ -272,6 +264,8 @@ public class MapManagerTest : MonoBehaviour
         EndNode.SetEndNode();
         EndNode.Getwalkable = true;
 
+        Debug.Log(EndNode.GetX + " : " + EndNode.GetY);
+
         StartNode.ChangeColor(Color.red);
         EndNode.ChangeColor(Color.blue);
 
@@ -280,9 +274,10 @@ public class MapManagerTest : MonoBehaviour
         endX = EndNode.GetY;
         endY = EndNode.GetX;
 
+       
 
         //난이도가 상 일때, 시작 지점 추가 생성
-        if(GameManager.SetGameLevel == 3)
+        if (GameManager.SetGameLevel == 3)
         {
             while (true)
             {
@@ -328,6 +323,7 @@ public class MapManagerTest : MonoBehaviour
             StartNode2.ChangeColor(Color.red);
             useableNode.Remove(StartNode2);
             StartNode2.Getwalkable = true;
+            
         }
 
     }

@@ -26,6 +26,17 @@ public class MapShapeSettings
             newshapes.Add(newshape);
             Debug.Log("저장완료");
         }
+        else
+        {
+            for (int i = 0; i < newshapes.Count; i++)
+            {
+                string shapename = newshapes[i].name;
+                if (shapename == newshape.name)
+                {
+                    newshapes[i] = newshape;
+                }
+            }
+        }
     }
 
     //중복이름 체크
@@ -47,9 +58,9 @@ public class MapShapeSettings
     {
         for(int i = 0; i < newshapes.Count; i++)
         {
-            string shapename = newshapes[i].name;
-            if(shapename == _name)
+            if(newshapes[i].name == _name)
             {
+                Debug.Log(newshapes[i].name);
                 newshapes.Remove(newshapes[i]);
                 return;
             }
@@ -57,13 +68,13 @@ public class MapShapeSettings
     }
 
     //맵을 이름으로 출력
-    public bool[,] PrintFunc(string _name)
+    public NewShape PrintFunc(string _name)
     {
         for(int i = 0; i < newshapes.Count; i++)
         {
             if(_name == newshapes[i].name)
             {
-                return newshapes[i].tilelist;
+                return newshapes[i];
             }
         }
 
@@ -119,25 +130,10 @@ public class MapShapeMake : MonoBehaviour
     {
         tilevalue = new bool[10, 10];
 
-        //FileStream stream = new FileStream(Application.dataPath + "/test.json", FileMode.OpenOrCreate);
-        //if (stream == null)
-        //{
-        //    SaveInfo();
-        //}
+        mapname = "NULL";
 
-        mapname = "asdf";
-       // SaveInfo();
         LoadInfo();
-        //if (GetSettings == 0)
-        //{
-        //    SaveInfo();
-        //    GetSettings = 1;
-        //}
-        //else if (GetSettings == 1)
-        //{
-        //    LoadInfo();
-        //    GetSettings = 2;
-        //}
+
 
         tilelist = new TileInfo[10,10];
 
@@ -157,8 +153,22 @@ public class MapShapeMake : MonoBehaviour
         DropBoxChage(0);
     }
 
+    int num = 100;
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if (tilevalue[j, i]) Debug.Log("true");
+                    else Debug.Log("false");
+                }
+            }
+
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -193,6 +203,8 @@ public class MapShapeMake : MonoBehaviour
                     tile.Change(_tf);
 
                     tilevalue[tile.GetX, tile.GetY] = tile.GetTf;
+
+             
                 }
             }
             yield return null;
@@ -206,6 +218,7 @@ public class MapShapeMake : MonoBehaviour
             for (int j = 0; j < 10; j++)
             {
                 tilelist[j,i].Change(false);
+                tilevalue[j, i] = false;
             }
         }
     }
@@ -220,7 +233,6 @@ public class MapShapeMake : MonoBehaviour
 
     public void ShowPanal()
     {
-        Debug.Log("asdf");
         OKPanal.SetActive(true);
     }
     public void OffPanal()
@@ -256,48 +268,51 @@ public class MapShapeMake : MonoBehaviour
             for(int j = 0; j < 10; j++)
             {
                 tilelist[j, i].Change(mapsettings.newshapes[num].tilelist[j,i]);
+                tilevalue[j, i] = tilelist[j, i].GetTf;
+
+                Debug.Log(tilevalue[j, i]);
             }
         }
-
     }
 
-    public void SaveInfo()
+    public void SaveInfo(int tf)
     {
-        if (mapname.Length <= 3)
+        if (tf == 1)
         {
-            return;
+            if (mapname.Length <= 3)
+            {
+                return;
+            }
+
+            if (mapsettings.CheckOverlab(mapname))
+            {
+                return;
+            }
+
+            MapShapeSettings.NewShape newshape = new MapShapeSettings.NewShape(tilevalue, mapname);
+
+            mapsettings.AddShape(newshape);
         }
 
-        if (mapsettings.CheckOverlab(mapname))
-        {
-            return;
-        }
 
-        Debug.Log(mapname);
-
-        MapShapeSettings.NewShape newshape = new MapShapeSettings.NewShape(tilevalue,mapname);
-
-        mapsettings.AddShape(newshape);
-        
         FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
-        string jsonData = JsonConvert.SerializeObject(mapsettings,Formatting.Indented);
+        string jsonData = JsonConvert.SerializeObject(mapsettings, Formatting.Indented);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
         stream.Close();
 
-        Debug.Log(mapsettings.newshapes.Count + "저장 개수");
+        //Save2();
 
         OKPanal.SetActive(false);
-        GetSettings = 1;
+
         InitDropBox();
         Debug.Log("맵 저장");
-        LoadInfo();
+        ResetBtn();
+        mapname = "";
     }
 
     public void Save2()
     {
-        MapShapeSettings.NewShape newshape = new MapShapeSettings.NewShape(tilevalue, mapname);
-
         FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
         string jsonData = JsonConvert.SerializeObject(mapsettings, Formatting.Indented);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
@@ -318,15 +333,18 @@ public class MapShapeMake : MonoBehaviour
 
     public void RemoveMap()
     {
-        Debug.Log(mapsettings.newshapes.Count + "남은 맵 개수");
 
-        mapsettings.RemoveShape(mapname);
-        //Save2();
-        //LoadInfo();
+
+            mapsettings.RemoveShape(mapname);
+        
+
         InitDropBox();
+
+        Remove.SetActive(false);
+        mapname = "";
     }
 
 
-    
-    
+
+
 }

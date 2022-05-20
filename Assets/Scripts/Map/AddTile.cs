@@ -46,6 +46,8 @@ public class AddTile : MonoBehaviour
     private void Start()
     {
         AddtileNum = Random.Range(0, 7);
+        GameManager.buttonOff+= CanCelMakeTile;
+        EnemyManager.stageclear+= TileChange;
     }
 
     //테트리스 모양의 블럭위치 반환
@@ -254,7 +256,7 @@ X X 10 X
 
     public void OnClickAddTile()
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
         StartCoroutine("MapTileAdd");
     }
 
@@ -413,6 +415,11 @@ X X 10 X
             }
             playerstate.GetSetPlayerCoin = -addtileprice;
         }
+    }
+
+    public void TileChange()
+    {
+        AddtileNum = Random.Range(0, 7);
     }
 
     public int GetAddTileNum => AddtileNum;

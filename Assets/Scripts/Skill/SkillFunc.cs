@@ -34,11 +34,6 @@ public class SkillFunc : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fireCooltime = null;
     [SerializeField] private TextMeshProUGUI meteorCooltime = null;
 
-
-
-    public delegate void OffSkill();
-    public static OffSkill offSkill;
-
     public enum skill
     {
         Fire =1,
@@ -55,7 +50,8 @@ public class SkillFunc : MonoBehaviour
 
     private void Start()
     {
-        offSkill = OffSkillSet;
+        GameManager.buttonOff += OffSkillSet;
+
 
         MultipleSpeed.speedup += SpeedUP;
 

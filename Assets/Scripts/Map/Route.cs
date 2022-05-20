@@ -38,6 +38,7 @@ public class Route : MonoBehaviour
     private void Start()
     {
         EnemyManager.stageclear += StageClear;
+        GameManager.buttonOff += MouseChage;
     }
 
     public void Settings(int _gridX, int _gridY,Node[,] _grid, Node _start,Node _start2, Node _end)
@@ -98,17 +99,24 @@ public class Route : MonoBehaviour
     //버튼으로 길만들기 활성화, 비활성화 시킬 버튼함수
     public void OnClickWalkableChange()
     {
-        SkillFunc.offSkill();
+        bool can = !TileCanChange;
+
+        GameManager.buttonOff();
         if (!isgameing)
         {
            // if (!AddTileActive)
-                TileCanChange = !TileCanChange;
+           TileCanChange = can;
         }
+    }
+
+    public void MouseChage()
+    {
+        TileCanChange = false;
     }
 
     public void RouteReset()
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
         if (!isgameing)
         {
             foreach (Node i in overlapcheck)
@@ -176,9 +184,9 @@ public class Route : MonoBehaviour
     //길찾기 함수
     public bool FindPath(Node _Start)
     {
-        SkillFunc.offSkill();
+        GameManager.buttonOff();
 
-            bool findpath = false;
+        bool findpath = false;
 
             List<Node> OpenList = new List<Node>();
 

@@ -103,7 +103,7 @@ public class Node : MonoBehaviour
         neighbournode = _neighbournode;
     }
 
-    float ydepth = 1.0f;
+    [SerializeField] float ydepth = 1.0f;
 
     public void UpDownTile(List<Node> _neighbournode, float _Ydepth)
     {

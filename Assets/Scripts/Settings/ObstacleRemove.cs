@@ -39,7 +39,6 @@ public class ObstacleRemove : MonoBehaviour
             }
             else
             {
-                Debug.Log("다른 곳 클릭");
                 sellinfo.SetActive(false);
             }
         }

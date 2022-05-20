@@ -38,7 +38,10 @@ public class WeatherSetting : MonoBehaviour
 
     // 스테이지가 변화하는지 알 수 있어야 함
 
-
+    private void Start()
+    {
+        EnemyManager.stageclear += StageClear; 
+    }
 
 
     //게임준비 화면에 작동할 메서드
@@ -121,9 +124,19 @@ public class WeatherSetting : MonoBehaviour
         checkednodelist.Clear();
         for(int i = 0; i < tilelist.Count; i++)
         {
-            if (!tilelist[i].GetOnTower && !tilelist[i].Getwalkable)
+            if (GameManager.SetGameLevel == 1)
             {
-                checkednodelist.Add(tilelist[i]);
+                if (!tilelist[i].GetOnTower && !tilelist[i].Getwalkable)
+                {
+                    checkednodelist.Add(tilelist[i]);
+                }
+            }
+            else
+            {
+                if (!tilelist[i].GetOnTower)
+                {
+                    checkednodelist.Add(tilelist[i]);
+                }
             }
         }
     }

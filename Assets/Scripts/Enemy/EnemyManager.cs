@@ -104,6 +104,8 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator GameStart()
     {
+        GameManager.buttonOff();
+
         weather.GameStart();
 
        gameongoing = true;
@@ -154,9 +156,6 @@ public class EnemyManager : MonoBehaviour
             {
                 StageNum++;
 
-                weather.StageClear();
-                //스테이지 클리어
-
                 stageclear();
 
                 if (StageNum >= stageinfo.Length)
@@ -167,6 +166,9 @@ public class EnemyManager : MonoBehaviour
 
                     speedSet.StopGame();
 
+
+
+
                     UserInformation.userDataStatic.userCoin += (stagenum+1 * 20);
                     sumCoin += stagenum+1 * 20;
 
@@ -174,8 +176,6 @@ public class EnemyManager : MonoBehaviour
                     PlusCoin1.text = "획득코인 : " +sumCoin;
 
                     //별 개수에 따른 상금 얻기
-
-
                 }
 
                 gameongoing = false;

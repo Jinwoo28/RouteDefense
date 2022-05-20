@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 52359294}
   - component: {fileID: 52359297}
   m_Layer: 5
-  m_Name: Stage1
+  m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Test3
+          m_StringArgument: Diamond
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 391279499}
   - component: {fileID: 391279498}
   m_Layer: 5
-  m_Name: Stage1 (6)
+  m_Name: Dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1129,7 +1129,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage2
+          m_StringArgument: DotMap
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -2219,7 +2219,7 @@ GameObject:
   - component: {fileID: 989748443}
   - component: {fileID: 989748442}
   m_Layer: 5
-  m_Name: Stage1 (2)
+  m_Name: Xshape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2318,7 +2318,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Window
+          m_StringArgument: Xshape
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -2610,7 +2610,7 @@ GameObject:
   - component: {fileID: 1114182279}
   - component: {fileID: 1114182278}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2822,7 +2822,7 @@ GameObject:
   - component: {fileID: 1270721241}
   - component: {fileID: 1270721240}
   m_Layer: 5
-  m_Name: Stage1 (4)
+  m_Name: Well
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2921,7 +2921,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage2
+          m_StringArgument: WellMap
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -3806,7 +3806,7 @@ GameObject:
   - component: {fileID: 1553733063}
   - component: {fileID: 1553733062}
   m_Layer: 5
-  m_Name: Stage1 (5)
+  m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3905,7 +3905,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage2
+          m_StringArgument: Center
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -4106,7 +4106,7 @@ GameObject:
   - component: {fileID: 1637734853}
   - component: {fileID: 1637734852}
   m_Layer: 5
-  m_Name: Stage1 (3)
+  m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4205,7 +4205,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage2
+          m_StringArgument: WindowMap
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -4315,7 +4315,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB09C\uC774\uB3C4 \uC911"
+  m_text: "\uB09C\uC774\uB3C4 \uC0C1"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10a4d520c7d7e274eb054d4918f75dbb, type: 2}
   m_sharedMaterial: {fileID: -7655361482761239162, guid: 10a4d520c7d7e274eb054d4918f75dbb, type: 2}
@@ -4893,7 +4893,7 @@ GameObject:
   - component: {fileID: 1980144701}
   - component: {fileID: 1980144700}
   m_Layer: 5
-  m_Name: Stage1 (1)
+  m_Name: Plus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4992,7 +4992,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage2
+          m_StringArgument: PlusMap
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 216082915}
@@ -5236,7 +5236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB09C\uC774\uB3C4 \uC911"
+  m_text: "\uB09C\uC774\uB3C4 \uD558"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10a4d520c7d7e274eb054d4918f75dbb, type: 2}
   m_sharedMaterial: {fileID: -7655361482761239162, guid: 10a4d520c7d7e274eb054d4918f75dbb, type: 2}
