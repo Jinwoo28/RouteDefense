@@ -146,10 +146,10 @@ MonoBehaviour:
   towerpreview: {fileID: 5600623581655944651, guid: 928812d7737fc99409ed1a446c429448, type: 3}
   towerBody: {fileID: 5600623581655519727}
   towerTurret: {fileID: 5600623581655519727}
-  shootPos: {fileID: 0}
+  shootPos: {fileID: 5600623581655519725}
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   towerstep: 3
   AtkParticle: {fileID: 5712709286908844385}
   RotateBarral: {fileID: 5600623581655519725}

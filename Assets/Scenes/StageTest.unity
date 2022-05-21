@@ -4515,8 +4515,8 @@ RectTransform:
   - {fileID: 477512802}
   - {fileID: 488221031}
   - {fileID: 811407894}
-  - {fileID: 7217829235735812301}
   - {fileID: 752925253}
+  - {fileID: 7217829235735812301}
   - {fileID: 967896493694062562}
   - {fileID: 1208377128462817695}
   m_Father: {fileID: 0}
@@ -7933,7 +7933,7 @@ RectTransform:
   m_Children:
   - {fileID: 1695120374}
   m_Father: {fileID: 464804941}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10119,7 +10119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercoin: 12000
+  playercoin: 750
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0
@@ -16116,19 +16116,19 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 20
   - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 25
   - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 25
   - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 30
   - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 30
   - SpawnTime: 0.9
-    EnemyCount: 1
+    EnemyCount: 35
   - SpawnTime: 0.9
-    EnemyCount: 1
+    EnemyCount: 35
   - SpawnTime: 0.9
     EnemyCount: 40
   - SpawnTime: 0.9
@@ -20866,7 +20866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2251012630797018797, guid: 55605f9e7b15d8a419506fa60cb3925f, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2251012630797018797, guid: 55605f9e7b15d8a419506fa60cb3925f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -20993,7 +20993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2345902042922406904, guid: 7ee03c4c91e22d840bf84e8fd025d6e6, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2345902042922406904, guid: 7ee03c4c91e22d840bf84e8fd025d6e6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -21132,7 +21132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553808239846752077, guid: 3029b7bd9c3d1654089cbcbfc827a010, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8553808239846752077, guid: 3029b7bd9c3d1654089cbcbfc827a010, type: 3}
       propertyPath: m_AnchorMax.x

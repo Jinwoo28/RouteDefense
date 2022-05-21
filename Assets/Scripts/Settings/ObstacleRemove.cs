@@ -37,7 +37,7 @@ public class ObstacleRemove : MonoBehaviour
                 
                 price.text = "제거비용 : " + obs.GetPrice.ToString();
             }
-            else
+            else if(obs == null)
             {
                 sellinfo.SetActive(false);
             }
@@ -55,9 +55,10 @@ public class ObstacleRemove : MonoBehaviour
         {
             if(obs.GetPrice <= playerstate.GetSetPlayerCoin)
             {
-                sellinfo.SetActive(false);
+                Debug.Log("ssd123d");
                 playerstate.GetSetPlayerCoin = obs.GetPrice;
                 obs.RemoveThis();
+                sellinfo.SetActive(false);
             }
         }
     }

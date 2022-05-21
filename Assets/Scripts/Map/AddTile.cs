@@ -15,7 +15,7 @@ public class AddTile : MonoBehaviour
     private bool AddTileActive = false;
     private bool canaddtile = false;
 
-    private int addtileprice = 0;
+    private int addtileprice = 10;
 
     [SerializeField] private PlayerState playerstate = null;
 
@@ -389,7 +389,7 @@ X X 10 X
                                 AddTileActive = false;
                                 activeNode.Add(grid[Y, X]);
                             }
-                            addtileprice += 50;
+                            addtileprice += 10;
                             AddtileNum = Random.Range(0, 7);
                         }
                     }

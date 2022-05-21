@@ -287,6 +287,8 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
+
+        Debug.Log("ss");
         GameManager.buttonOff();
         if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
         {

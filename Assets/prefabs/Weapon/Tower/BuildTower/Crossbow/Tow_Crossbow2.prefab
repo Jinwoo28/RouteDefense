@@ -82,10 +82,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uppertower: {fileID: 3047223702295900138, guid: 3516c65fd82199847b308fcad7f6e750, type: 3}
   upgradevalue:
-    priceincrease: 15
+    priceUprate: 75
     upgradeprice: 75
-    damagevalue: 2
-    upcriticalvalue: 3
+    UpdamageValue: 3.5
+    UpcriticalValue: 7
   towerinfo:
     towerprice: 300
     towername: 
@@ -98,7 +98,7 @@ MonoBehaviour:
   towerBody: {fileID: 806294122649890310}
   towerTurret: {fileID: 453015299945163850}
   shootPos: {fileID: 7639780322472745028}
-  enemylayer:
+  layer:
     serializedVersion: 2
     m_Bits: 64
   towerstep: 2

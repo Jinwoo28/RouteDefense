@@ -15,7 +15,7 @@ public class Tree : Obstacle
 
     private void Start()
     {
-        removePrice = 50;
+        removePrice = 30;
         node.SetOnObstacle = true;
     }
 

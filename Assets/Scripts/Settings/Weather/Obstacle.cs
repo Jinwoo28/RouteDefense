@@ -12,6 +12,8 @@ public class Obstacle : MonoBehaviour
 
     public void RemoveThis()
     {
+        Debug.Log("ssdd");
+
         node.RemoveObs();
         Destroy(this.gameObject);
     }

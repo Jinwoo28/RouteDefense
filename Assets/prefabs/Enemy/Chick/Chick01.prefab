@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitstate:
-    unitspeed: 5
+    unitspeed: 1
     unitcoin: 3
     unithp: 3
     unitamour: 0

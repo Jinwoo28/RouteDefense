@@ -1,5 +1,5 @@
 {
-  "userCoin": 0,
+  "userCoin": 78,
   "skillSet": [
     {
       "skilltype": 0,

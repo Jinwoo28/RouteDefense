@@ -91,6 +91,9 @@ public class WeatherSetting : MonoBehaviour
 
             var newTree = Instantiate(MakeTreeObj[treeNum], new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth / 2, checkednodelist[num].gridY), Quaternion.identity);
             newTree.GetComponent<Tree>().SetNode = checkednodelist[num];
+
+            checkednodelist[num].OnBranch();
+
             treelistN.Add(newTree.GetComponent<Tree>());
             newTree.GetComponent<Tree>().SetWs = this;
         }

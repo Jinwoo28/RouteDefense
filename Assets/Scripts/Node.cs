@@ -199,6 +199,7 @@ public class Node : MonoBehaviour
         {
             OnObstacle = true;
             walkable = false;
+            ChangeColor(walkablecolorF);
         }
     }
 

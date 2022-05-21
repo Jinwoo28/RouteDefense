@@ -243,7 +243,7 @@ public class ShowTowerInfo : MonoBehaviour
     }
     public void OnClickSellTower()
     {
-        MapManager.OffFunc();
+      // MapManager.OffFunc();
         RangeOff();
         tower.SellTower();
         towerinfopanel.SetActive(false);
@@ -252,13 +252,14 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void OnClickUpgradeTower()
     {
-        MapManager.OffFunc();
+        Debug.Log("DD");
+       // MapManager.OffFunc();
         tower.TowerUpgrade();
     }
 
     public void OnClickTowerMove()
     {
-        MapManager.OffFunc();
+       // MapManager.OffFunc();
         if (!enemymanager.GetGameOnGoing)
         {
             if (tower != null)
