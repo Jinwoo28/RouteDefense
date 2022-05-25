@@ -31,7 +31,7 @@ public class Tree : Obstacle
                 NextLevel += UpRate;
                 UpRate++;
 
-            this.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+            this.transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
             removePrice += 10;
             }
 
@@ -39,9 +39,9 @@ public class Tree : Obstacle
         Debug.Log("nextLevel" + NextLevel);
     }
 
-    public void ReturnNode()
+    public override void RemoveThis()
     {
-        node.SetOnObstacle = false;
+        base.RemoveThis();
         WS.RemoveTree(this);
     }
 }

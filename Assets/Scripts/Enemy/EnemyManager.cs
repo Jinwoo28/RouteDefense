@@ -97,12 +97,12 @@ public class EnemyManager : MonoBehaviour
         Debug.Log("스폰 시작");
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
-        StartCoroutine("GameStart");
+        StartCoroutine(GameStart(_waypoint, _SpawnPos));
     }
 
     int X = 0;
 
-    IEnumerator GameStart()
+    IEnumerator GameStart(Vector3[] _wayPoint, Vector3 _spawnPos)
     {
         GameManager.buttonOff();
 
@@ -136,8 +136,8 @@ public class EnemyManager : MonoBehaviour
                 enemynum = Random.Range(StageNum - 3, StageNum + 1);
             }
 
-            var enemy = Pooling.GetEnemy(enemynum, SpawnPos);
-            enemy.SetUpEnemy(this,waypoint,canvas,hpbar,damagenum, water);
+            var enemy = Pooling.GetEnemy(enemynum, _spawnPos);
+            enemy.SetUpEnemy(this, _wayPoint, canvas,hpbar,damagenum, water);
             enemy.SetPooling(Pooling, enemynum);
             enemy.StartMove();
 

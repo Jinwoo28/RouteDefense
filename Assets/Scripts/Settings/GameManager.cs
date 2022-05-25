@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public static string SetStageShape { get => StageShape; set => StageShape = value; }
 
+    private static int GetMoney;
+    public static int SetMoney { get => GetMoney; set => GetMoney = value; }
+
     public delegate void ButtonOff();
     public static ButtonOff buttonOff;
 

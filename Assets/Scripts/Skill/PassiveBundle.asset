@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1144ed85b1210054cbc92d7f60f67bfc, type: 3}
+  m_Name: PassiveBundle
+  m_EditorClassIdentifier: 
+  PassiveSkill:
+  - SkillName: StartMoney
+    Value: 10
+    Price: 100
+    CurrentLevel: 0
+    MaxLevel: 5
+    PreSkill: NULL
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Money
+  - SkillName: SetTowerDown
+    Value: 10
+    Price: 120
+    CurrentLevel: 0
+    MaxLevel: 5
+    PreSkill: StartMoney
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Money
+  - SkillName: UpTowerDown
+    Value: 10
+    Price: 200
+    CurrentLevel: 0
+    MaxLevel: 3
+    PreSkill: SetTowerDown
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Money
+  - SkillName: GetCoinUp
+    Value: 10
+    Price: 150
+    CurrentLevel: 0
+    MaxLevel: 5
+    PreSkill: StartMoney
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Money
+  - SkillName: SellTowerUp
+    Value: 10
+    Price: 150
+    CurrentLevel: 0
+    MaxLevel: 3
+    PreSkill: GetCoinUp
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Money

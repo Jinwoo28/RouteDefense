@@ -11,20 +11,24 @@ public class UserData
 {
     public int userCoin = 0;
 
-    public List<SkillSet> skillSet;
+    public List<SkillInfo> skillSet;
+
+    public List<SkillSet> PassiveSkill;
+
+    public List<SkillSet> ActiveSkill;
 
     public void UnLockSkill(string skillname)
     {
         foreach (var skill in skillSet)
         {
-            if (skill.skillName == skillname)
+            if (skill.GetName == skillname)
             {
-                if (skill.skillUnLock == false)
+                if (skill.SetUnLock == false)
                 {
-                    if (skill.skillprice <= userCoin)
+                    if (skill.GetPrice <= userCoin)
                     {
-                        skill.skillUnLock = true;
-                        userCoin -= skill.skillprice;
+                        skill.SetUnLock = true;
+                        userCoin -= skill.GetPrice;
                     }
                 }
             }
@@ -35,13 +39,13 @@ public class UserData
     {
         foreach (var skill in skillSet)
         {
-            if (skill.skillName == skillname)
+            if (skill.GetName == skillname)
             {
-                if (skill.skillUnLock == true)
+                if (skill.SetUnLock == true)
                 {
-                    if (skill.upgradeprice <= userCoin)
+                    if (skill.GetPrice <= userCoin)
                     {
-                        userCoin -= skill.upgradeprice;
+                        userCoin -= skill.GetPrice;
 
                         skill.SkillLevelUp();
 
@@ -50,16 +54,18 @@ public class UserData
             }
         }
     }
-
-
 }
 
-
-
+[System.Serializable]
+public class SkillSet
+{
+    public string BundleName;
+    public List<SkillInfo> skillInfoList;
+}
 
 //Dictionary는 시리얼라이즈화 시킬 수 없기 때문에 따로 class를 만들어서 list로 묶어서 저장
 [System.Serializable]
-public class SkillSet
+public class SkillInfo
 {
     public enum skillType
     {
@@ -67,23 +73,57 @@ public class SkillSet
         Passive
     }
 
-    public skillType skilltype;
+    //스킬 타입
+    [SerializeField]
+    private skillType skilltype;
 
-    public string skillName;
+    public skillType GetType => skilltype;
 
-    public int skillprice;
-    
-    public bool skillUnLock;
-    
-    public int skillcooltime;
-    public int cooltimeDecrease;
+    //스킬 이름
+    [SerializeField]
+    private string skillName;
 
-    public int damage;
-    public int damageIncrease;
+    public string GetName => skillName;
 
-    public int skillLevel;
-    public int upgradeprice;
-    public int OriginUpgradePrice;
+    [SerializeField]
+    private int skillprice;
+    public int GetPrice => skillprice;
+
+    //스킬의 해제 여부
+    [SerializeField]
+    private bool skillUnLock;
+
+    public bool SetUnLock { get => skillUnLock; set => skillUnLock = value; }
+
+    [SerializeField]
+    private string preskill;
+
+    [SerializeField]
+    private int skillcooltime;
+    public int GetCoolTime => skillcooltime;
+
+    [SerializeField]
+    private int cooltimeDecrease;
+
+    [SerializeField]
+    private int damage;
+    public int GetDamage => damage;
+
+    [SerializeField]
+    private int damageIncrease;
+
+    [SerializeField]
+    private int skillLevel;
+    public int GetLevel => skillLevel;
+
+    [SerializeField]
+    private int MaxSkillLevel;
+    public int GetMaxLevel => MaxSkillLevel;
+
+    [SerializeField]
+    private int upgradeprice;
+    [SerializeField]
+    private int OriginUpgradePrice;
 
     public void SkillLevelUp()
     {
@@ -92,7 +132,6 @@ public class SkillSet
         skillcooltime -= cooltimeDecrease;
         damage += damageIncrease;
     }
-
 }
 
 public class UserInformation : MonoBehaviour
@@ -109,17 +148,18 @@ public class UserInformation : MonoBehaviour
 
     private static bool SetData = false;
 
+    private SkillSettings skill = null;
+
     private void Start()
     {
-
+        skill = this.GetComponent<SkillSettings>();
 
         if (!SetData)
         {
             LoadUserInfo();
             SetData = true;
             userDataStatic = userData;
-
-          //  Debug.Log(userDataStatic.skillSet[0].skillUnLock);
+          //Debug.Log(userDataStatic.skillSet[0].skillUnLock);
         }
 
         userData.userCoin = userDataStatic.userCoin;

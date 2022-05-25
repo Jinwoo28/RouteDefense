@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour
             hpbarprefab = Instantiate(hpbar);
             hpbarprefab.transform.SetParent(canvas);
             hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
+            hpbar.GetComponentInChildren<RectTransform>().localScale = new Vector3(1+ 0.03f * (1+unitstate.unithp*0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
         }
 
         StartCoroutine("MoveUnit");

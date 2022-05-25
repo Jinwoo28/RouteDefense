@@ -24,24 +24,20 @@ public class ObstacleRemove : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            obs = null;
             if (detect.ReturnTransform(layer) != null)
             {
                 obs = detect.ReturnTransform(layer).GetComponent<Obstacle>();
-            }
-
-            if (obs != null)
-            {
                 sellinfo.SetActive(true);
-                
-                
                 price.text = "제거비용 : " + obs.GetPrice.ToString();
             }
+
             else if(obs == null)
             {
                 sellinfo.SetActive(false);
+                obs = null;
             }
         }
+
         if (obs != null)
         {
             Vector3 pos = obs.gameObject.transform.position;
@@ -51,16 +47,12 @@ public class ObstacleRemove : MonoBehaviour
 
     public void ObsRemove()
     {
-        if(obs != null)
-        {
-            if(obs.GetPrice <= playerstate.GetSetPlayerCoin)
-            {
-                Debug.Log("ssd123d");
-                playerstate.GetSetPlayerCoin = obs.GetPrice;
-                obs.RemoveThis();
-                sellinfo.SetActive(false);
-            }
-        }
+       if(obs.GetPrice <= playerstate.GetSetPlayerCoin)
+       {
+           playerstate.GetSetPlayerCoin = obs.GetPrice;
+           obs.RemoveThis();
+           sellinfo.SetActive(false);
+       }
     }
 
 }

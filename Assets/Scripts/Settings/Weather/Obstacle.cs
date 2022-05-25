@@ -10,10 +10,8 @@ public class Obstacle : MonoBehaviour
     protected int removePrice = 0;
     public int GetPrice { get => removePrice; }
 
-    public void RemoveThis()
+    public virtual void RemoveThis()
     {
-        Debug.Log("ssdd");
-
         node.RemoveObs();
         Destroy(this.gameObject);
     }

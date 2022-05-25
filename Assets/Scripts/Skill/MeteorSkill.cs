@@ -17,7 +17,7 @@ public class MeteorSkill : MonoBehaviour
     private void Start()
     {
         As = this.GetComponent<AudioSource>();
-        Damage = UserInformation.userDataStatic.skillSet[1].damage;
+        Damage = UserInformation.userDataStatic.skillSet[1].GetDamage;
         MultipleSpeed.speedup += SpeedUP;
     }
 
