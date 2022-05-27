@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f44126771b62440b741355cd4ab7fa, type: 3}
+  m_Name: ActiveBundle
+  m_EditorClassIdentifier: 
+  ActiveSkill:
+  - SkillName: Meteor
+    Value: 20
+    Price: 150
+    CurrentLevel: 0
+    MaxLevel: 5
+    PreSkill: Fire
+    UpValueRate: 10
+    UnLock: 0
+    BundleName: Fire
+    SkillInformation: "\uD558\uB298\uC5D0\uC11C \uAC70\uB300\uD55C \uC6B4\uC11D\uC744
+      \uB5A8\uC5B4\uD2B8\uB824 \uC778\uADFC \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C
+      \uC785\uD799\uB2C8\uB2E4."
+    Slot: 0
+    CoolTime: 10
+    CoolTimeDown: 0.5
+  - SkillName: Fire
+    Value: 0
+    Price: 100
+    CurrentLevel: 0
+    MaxLevel: 5
+    PreSkill: NULL
+    UpValueRate: 1
+    UnLock: 0
+    BundleName: Fire
+    SkillInformation: "\uC9C0\uC815 \uC9C0\uC810\uC5D0 \uBD88\uC744 \uC0DD\uC131\uD558\uC5EC
+      \uC9C0\uB098\uAC00\uB294 \uC801\uC5D0\uAC8C \uC9C0\uC18D\uC801\uC778 \uB370\uBBF8\uC9C0\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Slot: 0
+    CoolTime: 10
+    CoolTimeDown: 0.5

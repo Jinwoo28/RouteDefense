@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
 
-    [SerializeField] private int playercoin = 500;
+    private int playercoin = 500;
+    public int SetPlayerCoin { get => playercoin; set => playercoin = value; }
+
     private int playerlife = 30;
 
     private void Start()
     {
-
+        playercoin = (int)(playercoin*SkillSettings.PassiveValue("StartMoney"));
     }
 
     public int GetSetPlayerCoin
@@ -28,7 +30,7 @@ public class PlayerState : MonoBehaviour
 
     public void PlayerCoinUp(int count)
     {
-        playercoin += count;
+        playercoin += (int)(count*SkillSettings.PassiveValue("GetCoinUp"));
     }
 
     public int GetPlayerLife

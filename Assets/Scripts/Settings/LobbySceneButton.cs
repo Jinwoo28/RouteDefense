@@ -10,6 +10,9 @@ public class LobbySceneButton : MonoBehaviour
 
     [SerializeField] private GameObject ShopPanel = null;
 
+    [SerializeField] private GameObject[] ShopContents = null;
+    [SerializeField] private Image[] image;
+
     [SerializeField] private GameObject BooksPanel = null;
 
     [SerializeField] private GameObject Information = null;
@@ -35,6 +38,37 @@ public class LobbySceneButton : MonoBehaviour
     public void ShopClose()
     {
         ShopPanel.SetActive(false);
+    }
+
+    public void ShopContentsChange(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                ShopContents[0].SetActive(true);
+                ShopContents[1].SetActive(false);
+                ShopContents[2].SetActive(false);
+                image[0].color = Color.black;
+                image[1].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                image[2].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                break;
+            case 1:
+                ShopContents[0].SetActive(false);
+                ShopContents[1].SetActive(true);
+                ShopContents[2].SetActive(false);
+                image[0].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                image[1].color = Color.black;
+                image[2].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                break;
+            case 2:
+                ShopContents[0].SetActive(false);
+                ShopContents[1].SetActive(false);
+                ShopContents[2].SetActive(true);
+                image[0].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                image[1].color = new Color(0.6117647f, 0.6117647f, 0.6117647f);
+                image[2].color = Color.black;
+                break;
+        }
     }
 
     public void ShowBooks()

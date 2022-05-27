@@ -24,18 +24,27 @@ public class ObstacleRemove : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (detect.ReturnTransform(layer) != null)
+            if (detect.ReturnTransform(-1) != null)
             {
-                obs = detect.ReturnTransform(layer).GetComponent<Obstacle>();
-                sellinfo.SetActive(true);
-                price.text = "제거비용 : " + obs.GetPrice.ToString();
+                if (detect.ReturnTransform(-1).GetComponent<Obstacle>() != null)
+                {
+                    obs = detect.ReturnTransform(-1).GetComponent<Obstacle>();
+                    sellinfo.SetActive(true);
+                    price.text = "제거비용 : " + obs.GetPrice.ToString();
+                }
+
+                else
+                {
+                    sellinfo.SetActive(false);
+                    obs = null;
+                }
             }
 
-            else if(obs == null)
-            {
-                sellinfo.SetActive(false);
-                obs = null;
-            }
+            //else if(obs == null)
+            //{
+               
+            //    obs = null;
+            //}
         }
 
         if (obs != null)

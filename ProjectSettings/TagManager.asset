@@ -13,6 +13,7 @@ TagManager:
   - Fruit
   - Water
   - Obstacle
+  - SkillUi
   layers:
   - Default
   - TransparentFX

@@ -4612,8 +4612,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
-        m_MethodName: SelectStage
-        m_Mode: 5
+        m_MethodName: ToLobby
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

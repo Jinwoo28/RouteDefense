@@ -114,6 +114,10 @@ public class Tower : MonoBehaviour
         cam = Camera.main;
         AS.volume = PlayerPrefs.GetFloat("ESound");
         SoundSettings.effectsound += SoundChange;
+
+        upgradevalue.upgradeprice = (int)(upgradevalue.upgradeprice*SkillSettings.PassiveValue("UpTowerDown"));
+        towerinfo.towerprice = (int)(towerinfo.towerprice * SkillSettings.PassiveValue("SetTowerDown"));
+
         sellprice += towerinfo.towerprice;
     }
 
@@ -124,7 +128,10 @@ public class Tower : MonoBehaviour
 
     private void SoundChange(float x)
     {
-        AS.volume = x;
+        if (AS != null)
+        {
+            AS.volume = x;
+        }
     }
 
     protected virtual void Update()
@@ -287,12 +294,9 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
-
-        Debug.Log("ss");
-        GameManager.buttonOff();
-        if (playerstate.GetSetPlayerCoin >= upgradevalue.upgradeprice)
+        if (playerstate.GetSetPlayerCoin >= (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown")))
         {
-            sellprice += upgradevalue.upgradeprice;
+            sellprice += (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
 
             towerlevel++;
             towerinfo.towerdamage += upgradevalue.UpdamageValue;
@@ -304,9 +308,11 @@ public class Tower : MonoBehaviour
             {
                 towerinfo.towercritical += upgradevalue.UpcriticalValue;
             }
-            playerstate.GetSetPlayerCoin = upgradevalue.upgradeprice;
-            upgradevalue.upgradeprice += upgradevalue.priceUprate;
+
+            playerstate.GetSetPlayerCoin = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+            upgradevalue.upgradeprice += (int)(upgradevalue.priceUprate * SkillSettings.PassiveValue("UpTowerDown"));
         }
+
     }
 
     public void SellTower()
@@ -314,7 +320,7 @@ public class Tower : MonoBehaviour
         GameManager.buttonOff();
         if (!towericed)
         {
-            playerstate.GetSetPlayerCoin = -(int)(sellprice * 0.7f);
+            playerstate.GetSetPlayerCoin = (-sellprice);
             node.GetOnTower = false;
             Destroy(this.gameObject);
         }
@@ -471,7 +477,7 @@ public class Tower : MonoBehaviour
     //타워가격
     public int Gettowerprice => towerinfo.towerprice;
 
-    public int Gettowerupgradeprice => upgradevalue.upgradeprice;
+    public int Gettowerupgradeprice => (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
 
     public float GetTowerUPDamage => upgradevalue.UpdamageValue;
     public float GetTowerUpCri => upgradevalue.UpcriticalValue;

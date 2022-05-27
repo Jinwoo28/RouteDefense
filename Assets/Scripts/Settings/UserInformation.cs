@@ -13,9 +13,9 @@ public class UserData
 
     public List<SkillInfo> skillSet;
 
-    public List<SkillSet> PassiveSkill;
+    public List<PassiveSkillSet> PassiveSkill;
 
-    public List<SkillSet> ActiveSkill;
+    public List<PassiveSkillSet> ActiveSkill;
 
     public void UnLockSkill(string skillname)
     {
@@ -56,12 +56,19 @@ public class UserData
     }
 }
 
-[System.Serializable]
-public class SkillSet
-{
-    public string BundleName;
-    public List<SkillInfo> skillInfoList;
-}
+//[System.Serializable]
+//public class SkillSet
+//{
+//    private string BundleName;
+//    public string GetName => BundleName;
+
+//    public List<PassiveForm> skillInfoList = new List<PassiveForm>();
+
+//    public SkillSet(string name)
+//    {
+//        BundleName = name;
+//    }
+//}
 
 //Dictionary는 시리얼라이즈화 시킬 수 없기 때문에 따로 class를 만들어서 list로 묶어서 저장
 [System.Serializable]
@@ -136,11 +143,8 @@ public class SkillInfo
 
 public class UserInformation : MonoBehaviour
 {
-
     //inspector창에서 쉽게 수정할 수 있도록 변수 생성
     public UserData userData;
-
-
 
     //userData를 전역에서 사용하기 위해 static으로 만들고 저장, 불러오기 할 때 userData를 주고 받음
     //씬에서 데이터를 저장할 static변수
@@ -150,21 +154,39 @@ public class UserInformation : MonoBehaviour
 
     private SkillSettings skill = null;
 
+    //[SerializeField] private PassiveBundle passiveBundle = null;
+    
+    private PassiveSkillSet P1skillBundle = new PassiveSkillSet("Money");
+    
+
     private void Start()
     {
         skill = this.GetComponent<SkillSettings>();
+
+       // PSkillSetUp();
 
         if (!SetData)
         {
             LoadUserInfo();
             SetData = true;
             userDataStatic = userData;
-          //Debug.Log(userDataStatic.skillSet[0].skillUnLock);
         }
 
+       // userDataStatic.PassiveSkill.Add(P1skillBundle);
         userData.userCoin = userDataStatic.userCoin;
 
     }
+
+    //public void PSkillSetUp()
+    //{
+    //    for(int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
+    //    {
+    //        if(passiveBundle.PassiveSkill[i].BundleName == "Money")
+    //        {
+    //            P1skillBundle.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
+    //        }
+    //    }
+    //}
 
     private void OnDestroy()
     {

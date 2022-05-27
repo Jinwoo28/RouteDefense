@@ -264,7 +264,6 @@ public class MapManagerTest : MonoBehaviour
         EndNode.SetEndNode();
         EndNode.Getwalkable = true;
 
-        Debug.Log(EndNode.GetX + " : " + EndNode.GetY);
 
         StartNode.ChangeColor(Color.red);
         EndNode.ChangeColor(Color.blue);

@@ -18,8 +18,6 @@ public class LoadMap : MonoBehaviour
             LoadInfo();
             MapSuccess = true;
         }
-
-        Debug.Log(map.newshapes.Count);
     }
 
 

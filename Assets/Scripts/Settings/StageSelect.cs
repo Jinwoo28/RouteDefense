@@ -41,6 +41,13 @@ public class StageSelect : MonoBehaviour
                 GameManager.SetMoney = hardmoney;
                 break;
         }
+
+        LoadSceneControler.LoadScene("StageTest");
+    }
+
+    public void ToLobby()
+    {
+        LoadSceneControler.LoadScene("Lobby");
     }
 
     public void OnLevelChoice()
@@ -85,12 +92,11 @@ public class StageSelect : MonoBehaviour
 
     private void PrintMoney(int money)
     {
-        Debug.Log("money");
         easymoney = money;
         nomalmoney = (money + (money / 2) + (money / 4));
         hardmoney = money * 3;
 
-        easyMoney.text = "보상 : "+ money+"원";
+        easyMoney.text = "보상 : "+ money + "원";
         namalMoney.text = "보상 : " + nomalmoney + "원";
         hardMoney.text = "보상 : " + hardmoney + "원";   
     }

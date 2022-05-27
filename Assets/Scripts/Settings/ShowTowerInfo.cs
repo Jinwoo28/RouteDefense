@@ -22,6 +22,13 @@ public class ShowTowerInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI atkspeed = null;
     [SerializeField] private TextMeshProUGUI upgradeprice = null;
 
+
+    [SerializeField] private TextMeshProUGUI TowerPriceGatling = null;
+    [SerializeField] private TextMeshProUGUI TowerPriceArrow = null;
+    [SerializeField] private TextMeshProUGUI TowerPriceMortar = null;
+    [SerializeField] private TextMeshProUGUI TowerPriceLazer = null;
+
+
     //공격 범위 표시에 사용할 Sprite이미지
     [SerializeField] private GameObject rangePrefab = null;
 
@@ -64,6 +71,12 @@ public class ShowTowerInfo : MonoBehaviour
             rangesprite[i] = Instantiate(rangePrefab, RangeParent.transform);
             rangesprite[i].SetActive(false);
         }
+
+        TowerPriceGatling.text = "석궁\n" + 150 * SkillSettings.PassiveValue("SetTowerDown");
+        TowerPriceArrow.text = "기관총\n" + 150 * SkillSettings.PassiveValue("SetTowerDown");
+        TowerPriceMortar.text = "박격포\n" + 200 * SkillSettings.PassiveValue("SetTowerDown");
+        TowerPriceLazer.text = "레이저\n" + 200 * SkillSettings.PassiveValue("SetTowerDown");
+
     }
 
     private void Update()
@@ -243,8 +256,7 @@ public class ShowTowerInfo : MonoBehaviour
     }
     public void OnClickSellTower()
     {
-      // MapManager.OffFunc();
-        RangeOff();
+        GameManager.buttonOff(); RangeOff();
         tower.SellTower();
         towerinfopanel.SetActive(false);
 
@@ -252,14 +264,13 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void OnClickUpgradeTower()
     {
-        Debug.Log("DD");
-       // MapManager.OffFunc();
+        GameManager.buttonOff();
         tower.TowerUpgrade();
     }
 
     public void OnClickTowerMove()
     {
-       // MapManager.OffFunc();
+        GameManager.buttonOff();
         if (!enemymanager.GetGameOnGoing)
         {
             if (tower != null)

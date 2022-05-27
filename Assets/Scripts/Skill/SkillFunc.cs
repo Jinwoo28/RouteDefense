@@ -17,10 +17,13 @@ public class SkillKind
 public class SkillFunc : MonoBehaviour
 {
 
+    [SerializeField] private Transform[] Slot = null;
+
+    [SerializeField] private GameObject[] SkillUi = null;
+
     [SerializeField] private LayerMask layermask;
 
     [SerializeField] private Button[] skillButton = null;
-    [SerializeField] private GameObject[] skillButtonObject = null;
 
     //스킬 사용시 범위를 나타낼 오브젝트
     [SerializeField] private GameObject SetSkillPos = null;
@@ -30,9 +33,6 @@ public class SkillFunc : MonoBehaviour
 
     [SerializeField] private SkillKind[] skillKind = null;
 
-
-    [SerializeField] private TextMeshProUGUI fireCooltime = null;
-    [SerializeField] private TextMeshProUGUI meteorCooltime = null;
 
     public enum skill
     {
@@ -52,25 +52,56 @@ public class SkillFunc : MonoBehaviour
     {
         GameManager.buttonOff += OffSkillSet;
 
-
         MultipleSpeed.speedup += SpeedUP;
 
-        fireCooltime.enabled = false;
-        meteorCooltime.enabled = false;
 
+        Debug.Log(SkillUi[0].name);
+        Debug.Log(SkillUi[1].name);
 
-            //if (UserInformation.userDataStatic.skillSet[0].skillUnLock)
-            //{
-            //    skillButtonObject[0].SetActive(true);
-            //}
-            //if (UserInformation.userDataStatic.skillSet[1].skillUnLock)
-            //{
-            //    skillButtonObject[1].SetActive(true);
-            //}
-        
-
-
+        SkillSet();
     }
+
+    private void SkillSet()
+    {
+        Debug.Log(SkillSettings.UseActiveSkill[0].skillInfoList.Count);
+
+        for(int i = 0; i< SkillSettings.UseActiveSkill.Count; i++)
+        {
+            for(int j = 0; j< SkillSettings.UseActiveSkill[i].skillInfoList.Count; j++)
+            {
+                switch(SkillSettings.ActiveSkillSearch(SkillUi[i + j].name).Slot)
+                {
+                    case 1:
+                        SetPos(SkillUi[i + j], Slot[0]);
+
+                        break;
+                    case 2:
+                        SetPos(SkillUi[i + j], Slot[1]);
+
+                        break;
+                    case 3:
+                        SetPos(SkillUi[i + j], Slot[2]);
+                        break;
+                    case 4:
+                        SetPos(SkillUi[i+j], Slot[3]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    private void SetPos(GameObject skillui, Transform slot)
+    {
+        skillui.SetActive(true);
+        skillui.transform.SetParent(slot);
+        var pos = skillui.GetComponent<RectTransform>();
+        pos.position = slot.GetComponent<RectTransform>().position;
+        skillui.GetComponentInChildren<TextMeshProUGUI>().text = SkillSettings.ActiveSkillSearch(skillui.name).CoolTime.ToString();
+        skillui.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+    }
+
 
     public void OffSkillSet()
     {
@@ -105,8 +136,6 @@ public class SkillFunc : MonoBehaviour
                 {
                     setskillpos.transform.position = targetpos;
                 }
-               
-                
 
             }
 
@@ -152,7 +181,7 @@ public class SkillFunc : MonoBehaviour
             Destroy(setskillpos);
         }
 
-        MapManager.OffFunc();
+        GameManager.OffFunc();
         switch (_skilltype)
         {
             case 1:
@@ -181,7 +210,7 @@ public class SkillFunc : MonoBehaviour
     {
         Instantiate(skillKind[0].Skill, targetpos, Quaternion.identity);
 
-        SkillSetUp(skillKind[0], skillButton[0],fireCooltime);
+        SkillSetUp(skillKind[0], skillButton[0], skillButton[0].GetComponentInChildren<TextMeshProUGUI>(), "Fire");
 
     }
 
@@ -190,31 +219,37 @@ public class SkillFunc : MonoBehaviour
         Vector3 spawnPos = new Vector3(targetpos.x + 3.0f, targetpos.y + 10.0f, targetpos.z);
         var meteor = Instantiate(skillKind[1].Skill, spawnPos, Quaternion.identity);
         meteor.GetComponent<MeteorSkill>().SetTarget = targetpos;
-        SkillSetUp(skillKind[1], skillButton[1],meteorCooltime);
+        SkillSetUp(skillKind[1], skillButton[1], skillButton[1].GetComponentInChildren<TextMeshProUGUI>(), "Meteor");
     }
 
-    private void SkillSetUp(SkillKind _skillkind,Button _button,TextMeshProUGUI _showcooltime)
+    private void SkillSetUp(SkillKind _skillkind,Button _button,TextMeshProUGUI _showcooltime, string name)
     {
         skillActive = false;
         skillnum = 0;
         _skillkind.CanUse = false;
         _button.image.fillAmount = 0;
         _button.enabled = false;
-        StartCoroutine(SkillCoolTime(_button, _skillkind.skillCoolTime, _skillkind, _showcooltime));
+        StartCoroutine(SkillCoolTime(_button, _skillkind, _showcooltime,name));
         Destroy(setskillpos);
     }
 
 
 
-    IEnumerator SkillCoolTime(Button _button,float _cooltime,SkillKind _skill,TextMeshProUGUI _showCooltime)
+    IEnumerator SkillCoolTime(Button _button,SkillKind _skill,TextMeshProUGUI _showCooltime,string name)
     {
         float cooltime = 0;
+        float skillTime = SkillSettings.ActiveSkillSearch(name).CoolTime;
+
         _showCooltime.enabled = true;
+        
+        Debug.Log(_showCooltime.name);
+
+
         while (true)
         {
             cooltime += Time.deltaTime;
-            _button.image.fillAmount += Time.deltaTime / _cooltime;
-            _showCooltime.text = (_cooltime - (int)cooltime).ToString();
+            _button.image.fillAmount += Time.deltaTime / skillTime;
+            _showCooltime.text = (skillTime - (int)cooltime).ToString();
 
             if (cooltime >= _skill.skillCoolTime)
             {

@@ -162,18 +162,11 @@ public class EnemyManager : MonoBehaviour
                 {
                     ClearPanal.SetActive(true);
 
-                    int sumCoin = 0;
-
                     speedSet.StopGame();
 
+                    UserInformation.userDataStatic.userCoin += (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
 
-
-
-                    UserInformation.userDataStatic.userCoin += (stagenum+1 * 20);
-                    sumCoin += stagenum+1 * 20;
-
-
-                    PlusCoin1.text = "È¹µæÄÚÀÎ : " +sumCoin;
+                    PlusCoin1.text = "È¹µæÄÚÀÎ : " + (int)(GameManager.SetMoney*SkillSettings.PassiveValue("GetUserCoinUp"));
 
                     //º° °³¼ö¿¡ µû¸¥ »ó±Ý ¾ò±â
                 }
@@ -208,10 +201,6 @@ public class EnemyManager : MonoBehaviour
         {
             speedSet.StopGame();
             FailPanal.SetActive(true);
-
-            UserInformation.userDataStatic.userCoin += (StageNum * 50);
-            PlusCoin2.text = "È¹µæÄÚÀÎ : " + StageNum * 50;
-            Debug.Log(UserInformation.userDataStatic.userCoin);
         }
     }
 

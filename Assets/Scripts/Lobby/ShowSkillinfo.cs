@@ -25,6 +25,7 @@ public class ShowSkillinfo : MonoBehaviour
     [SerializeField] private GameObject pricePanel = null;
     [SerializeField] private TextMeshProUGUI price = null;
 
+
     private int ShowNum = 0;
     private int PriceValue = 0;
 

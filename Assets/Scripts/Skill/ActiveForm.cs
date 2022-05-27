@@ -1,6 +1,5 @@
-
 [System.Serializable]
-public class PassiveForm
+public class ActiveForm
 {
     public string SkillName;
     public float Value;
@@ -12,6 +11,9 @@ public class PassiveForm
     public int UnLock;
     public string BundleName;
     public string SkillInformation;
+    public int Slot;
+    public float CoolTime;
+    public float CoolTimeDown;
 
 
     private int OriginPrice;
@@ -29,5 +31,6 @@ public class PassiveForm
         CurrentLevel++;
         Value += UpValueRate;
         Price += OriginPrice;
+        CoolTime -= CoolTimeDown;
     }
 }
