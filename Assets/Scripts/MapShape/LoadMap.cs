@@ -15,7 +15,7 @@ public class LoadMap : MonoBehaviour
     {
         if (!MapSuccess)
         {
-            LoadInfo();
+            LoadInfo2();
             MapSuccess = true;
         }
     }
@@ -23,12 +23,22 @@ public class LoadMap : MonoBehaviour
 
     public void LoadInfo()
     {
+
         FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.Open);
+
         byte[] data = new byte[stream.Length];
         stream.Read(data, 0, data.Length);
         stream.Close();
 
         string jsonData = Encoding.UTF8.GetString(data);
         map = JsonConvert.DeserializeObject<MapShapeSettings>(jsonData);
+    }
+
+    public void LoadInfo2()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "MapShape.json");
+        string mapdata = File.ReadAllText(path);
+
+        map = JsonConvert.DeserializeObject<MapShapeSettings>(mapdata);
     }
 }

@@ -164,7 +164,7 @@ public class EnemyManager : MonoBehaviour
 
                     speedSet.StopGame();
 
-                    UserInformation.userDataStatic.userCoin += (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
+                    UserInformation.getMoney += (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
 
                     PlusCoin1.text = "»πµÊƒ⁄¿Œ : " + (int)(GameManager.SetMoney*SkillSettings.PassiveValue("GetUserCoinUp"));
 

@@ -63,31 +63,38 @@ public class SkillSettings : MonoBehaviour
     [SerializeField] private ActiveBundle ActiveBundle = null;
     [SerializeField] private PassiveBundle passiveBundle = null;
 
-    [SerializeField] private List<PassiveSkillSet> PassiveSkill;
-    [SerializeField] private List<ActiveSkillSet> ActiveSkill;
+    public static List<PassiveSkillSet> SPassiveSkill;
+    public static List<ActiveSkillSet> SActiveSkill;
 
-    public static List<PassiveSkillSet> UseSkillInfo;
-    public static List<ActiveSkillSet> UseActiveSkill;
+    //public static List<PassiveSkillSet> SPassiveSkill;
+    //public static List<ActiveSkillSet> SActiveSkill;
 
     private PassiveSkillSet Passive_Money = new PassiveSkillSet("Money");
     private ActiveSkillSet Active_Fire = new ActiveSkillSet("Fire");
 
+    private UserInformation userinfo = null;
+
     private void Awake()
     {
-        PSkillSetUp();
-        ASkillSetUp();
+
+        userinfo = GetComponent<UserInformation>();
+
+        //PSkillSetUp();
+        //ASkillSetUp();
 
         //ResetBtn();
 
+
+    }
+
+    public void SkillSetUp(List<PassiveSkillSet> passiveSkillSets, List<ActiveSkillSet> activeSkillSets)
+    {
+        SPassiveSkill = passiveSkillSets;
+        SActiveSkill = activeSkillSets;
         ShowLevel();
         AShowLevel();
     }
 
-    private void OnDestroy()
-    {
-        UseSkillInfo = PassiveSkill;
-        UseActiveSkill = ActiveSkill;
-    }
 
     private IEnumerator ShowNotText(string text)
     {
@@ -97,27 +104,76 @@ public class SkillSettings : MonoBehaviour
         NotTextPanal.SetActive(false);
     }
 
-    private void ASkillSetUp()
+    #region ActiveSkill
+
+    public void ALevelUpBtn()
     {
-        for (int i = 0; i < ActiveBundle.ActiveSkill.Count; i++)
+        PSkillUnLock(_upskillname);
+        ShowLevel();
+        ShowInfo(_upskillname);
+        userinfo.SaveASkill(SActiveSkill);
+    }
+
+
+    private void ASkillLevelUP(string skillname)
+    {
+        for (int i = 0; i < SActiveSkill.Count; i++)
         {
-            if (ActiveBundle.ActiveSkill[i].BundleName == "Fire")
+            for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
             {
-                Active_Fire.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                if (SActiveSkill[i].skillInfoList[j].SkillName == skillname)
+                {
+                    if (
+                        (SActiveSkill[i].skillInfoList[j].PreSkill == "NULL"
+                        || SearchSkill(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 1) &&
+                        userinfo.userData.userCoin >= SActiveSkill[i].skillInfoList[j].Price)
+                    {
+                        if (SActiveSkill[i].skillInfoList[j].CurrentLevel < SActiveSkill[i].skillInfoList[j].MaxLevel)
+                        {
+                            userinfo.userData.userCoin -= SActiveSkill[i].skillInfoList[j].Price;
+
+                            if (SActiveSkill[i].skillInfoList[j].GetCheckLock != 1)
+                            {
+                                SActiveSkill[i].skillInfoList[j].UnLockSkill();
+                            }
+
+                            SActiveSkill[i].skillInfoList[j].LevelUp();
+                        }
+                        else
+                        {
+                            StopAllCoroutines();
+                            StartCoroutine(ShowNotText("레벨이 Max입니다."));
+                        }
+
+                    }
+
+                    else if (SActiveSkill[i].skillInfoList[j].PreSkill != "NULL" && SearchSkill(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 0)
+                    {
+                        StopAllCoroutines();
+                        StartCoroutine(ShowNotText("선행스킬이 해제되지 않았습니다."));
+                    }
+
+                    else if (userinfo.userData.userCoin < SActiveSkill[i].skillInfoList[j].Price)
+                    {
+                        StopAllCoroutines();
+                        StartCoroutine(ShowNotText("코인이 부족합니다."));
+                    }
+                }
             }
         }
-        ActiveSkill.Add(Active_Fire);
+        ShowLevel();
     }
+
 
     public ActiveForm ASearchSkill(string _searchName)
     {
-        for (int i = 0; i < ActiveSkill.Count; i++)
+        for (int i = 0; i < SActiveSkill.Count; i++)
         {
-            for (int j = 0; j < ActiveSkill[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
             {
-                if (ActiveSkill[i].skillInfoList[j].SkillName == _searchName)
+                if (SActiveSkill[i].skillInfoList[j].SkillName == _searchName)
                 {
-                    return ActiveSkill[i].skillInfoList[j];
+                    return SActiveSkill[i].skillInfoList[j];
                 }
             }
         }
@@ -127,13 +183,13 @@ public class SkillSettings : MonoBehaviour
 
     public static ActiveForm ActiveSkillSearch(string _skillname)
     {
-        for (int i = 0; i < UseActiveSkill.Count; i++)
+        for (int i = 0; i < SActiveSkill.Count; i++)
         {
-            for (int j = 0; j < UseActiveSkill[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
             {
-                if (UseActiveSkill[i].skillInfoList[j].SkillName == _skillname)
+                if (SActiveSkill[i].skillInfoList[j].SkillName == _skillname)
                 {
-                    return UseActiveSkill[i].skillInfoList[j];
+                    return SActiveSkill[i].skillInfoList[j];
                 }
             }
         }
@@ -181,9 +237,9 @@ public class SkillSettings : MonoBehaviour
 
     private void AShowLevel()
     {
-        for (int i = 0; i < ActiveSkill.Count; i++)
+        for (int i = 0; i < SActiveSkill.Count; i++)
         {
-            for (int j = 0; j < ActiveSkill[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
             {
 
                 FireBundle[i + j].level.text = ASearchSkill(FireBundle[i + j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(FireBundle[i + j].skillname).MaxLevel.ToString();
@@ -192,38 +248,32 @@ public class SkillSettings : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
-
+    #endregion
 
 
     #region PassiveSkill
-    public void PSkillSetUp()
-    {
-        for (int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
-        {
-            if (passiveBundle.PassiveSkill[i].BundleName == "Money")
-            {
-                Passive_Money.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
-            }
-        }
+    //public void PSkillSetUp()
+    //{
+    //    for (int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
+    //    {
+    //        if (passiveBundle.PassiveSkill[i].BundleName == "Money")
+    //        {
+    //            Passive_Money.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
+    //        }
+    //    }
 
-        PassiveSkill.Add(Passive_Money);
-    }
+    //    SPassiveSkill.Add(Passive_Money);
+    //}
 
     public static float PassiveValue(string _skillname)
     {
-        for (int i = 0; i < UseSkillInfo.Count; i++)
+        for (int i = 0; i < SPassiveSkill.Count; i++)
         {
-            for (int j = 0; j < UseSkillInfo[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SPassiveSkill[i].skillInfoList.Count; j++)
             {
-                if (UseSkillInfo[i].skillInfoList[j].SkillName == _skillname)
+                if (SPassiveSkill[i].skillInfoList[j].SkillName == _skillname)
                 {
-                    return UseSkillInfo[i].skillInfoList[j].Value;
+                    return SPassiveSkill[i].skillInfoList[j].Value;
                 }
             }
         }
@@ -233,36 +283,37 @@ public class SkillSettings : MonoBehaviour
     private string _upskillname;
     private string _activeName;
 
-    public void LevelUpBtn()
+    public void PLevelUpBtn()
     {
         PSkillUnLock(_upskillname);
         ShowLevel();
         ShowInfo(_upskillname);
+        userinfo.SavePSkill(SPassiveSkill);
     }
 
     public void PSkillUnLock(string skillname)
     {
-        for(int i = 0; i < PassiveSkill.Count; i++)
+        for(int i = 0; i < SPassiveSkill.Count; i++)
         {
-            for(int j = 0; j < PassiveSkill[i].skillInfoList.Count; j++)
+            for(int j = 0; j < SPassiveSkill[i].skillInfoList.Count; j++)
             {
-                if(PassiveSkill[i].skillInfoList[j].SkillName == skillname)
+                if(SPassiveSkill[i].skillInfoList[j].SkillName == skillname)
                 {
                     if(
-                        (PassiveSkill[i].skillInfoList[j].PreSkill == "NULL" 
-                        || SearchSkill(PassiveSkill[i].skillInfoList[j].PreSkill).UnLock == 1) && 
-                        UserInformation.userDataStatic.userCoin >= PassiveSkill[i].skillInfoList[j].Price)
+                        (SPassiveSkill[i].skillInfoList[j].PreSkill == "NULL" 
+                        || SearchSkill(SPassiveSkill[i].skillInfoList[j].PreSkill).UnLock == 1) &&
+                        userinfo.userData.userCoin >= SPassiveSkill[i].skillInfoList[j].Price)
                     {
-                        if (PassiveSkill[i].skillInfoList[j].CurrentLevel < PassiveSkill[i].skillInfoList[j].MaxLevel)
+                        if (SPassiveSkill[i].skillInfoList[j].CurrentLevel < SPassiveSkill[i].skillInfoList[j].MaxLevel)
                         {
-                            UserInformation.userDataStatic.userCoin -= PassiveSkill[i].skillInfoList[j].Price;
+                            userinfo.userData.userCoin -= SPassiveSkill[i].skillInfoList[j].Price;
 
-                            if (PassiveSkill[i].skillInfoList[j].GetCheckLock != 1)
+                            if (SPassiveSkill[i].skillInfoList[j].GetCheckLock != 1)
                             {
-                                PassiveSkill[i].skillInfoList[j].UnLockSkill();
+                                SPassiveSkill[i].skillInfoList[j].UnLockSkill();
                             }
 
-                            PassiveSkill[i].skillInfoList[j].LevelUp();
+                            SPassiveSkill[i].skillInfoList[j].LevelUp();
                         }
                         else
                         {
@@ -272,13 +323,13 @@ public class SkillSettings : MonoBehaviour
 
                     }
 
-                    else if(PassiveSkill[i].skillInfoList[j].PreSkill != "NULL" &&SearchSkill(PassiveSkill[i].skillInfoList[j].PreSkill).UnLock == 0)
+                    else if(SPassiveSkill[i].skillInfoList[j].PreSkill != "NULL" &&SearchSkill(SPassiveSkill[i].skillInfoList[j].PreSkill).UnLock == 0)
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("선행스킬이 해제되지 않았습니다."));
                     }
 
-                    else if(UserInformation.userDataStatic.userCoin < PassiveSkill[i].skillInfoList[j].Price)
+                    else if(userinfo.userData.userCoin < SPassiveSkill[i].skillInfoList[j].Price)
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("코인이 부족합니다."));
@@ -291,13 +342,13 @@ public class SkillSettings : MonoBehaviour
 
     public PassiveForm SearchSkill(string _searchName)
     {
-        for (int i = 0; i < PassiveSkill.Count; i++)
+        for (int i = 0; i < SPassiveSkill.Count; i++)
         {
-            for (int j = 0; j < PassiveSkill[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SPassiveSkill[i].skillInfoList.Count; j++)
             {
-                if (PassiveSkill[i].skillInfoList[j].SkillName == _searchName)
+                if (SPassiveSkill[i].skillInfoList[j].SkillName == _searchName)
                 {
-                    return PassiveSkill[i].skillInfoList[j];
+                    return SPassiveSkill[i].skillInfoList[j];
                 }
             }
         }
@@ -339,9 +390,9 @@ public class SkillSettings : MonoBehaviour
 
     private void ShowLevel()
     {
-        for(int i = 0; i < PassiveSkill.Count; i++)
+        for(int i = 0; i < SPassiveSkill.Count; i++)
         {
-            for(int j = 0; j < PassiveSkill[i].skillInfoList.Count; j++)
+            for(int j = 0; j < SPassiveSkill[i].skillInfoList.Count; j++)
             {
                 MoneyBundle[i+j].level.text = SearchSkill(MoneyBundle[i + j].skillname).CurrentLevel.ToString() + "/" + SearchSkill(MoneyBundle[i + j].skillname).MaxLevel.ToString();
             }
@@ -352,14 +403,14 @@ public class SkillSettings : MonoBehaviour
     private void ResetBtn()
     {
 
-        for (int i = 0; i < PassiveSkill.Count; i++)
+        for (int i = 0; i < SPassiveSkill.Count; i++)
         {
-            for (int j = 0; j < PassiveSkill[i].skillInfoList.Count; j++)
+            for (int j = 0; j < SPassiveSkill[i].skillInfoList.Count; j++)
             {
 
-                PassiveSkill[i].skillInfoList[j].CurrentLevel = 0;
+                SPassiveSkill[i].skillInfoList[j].CurrentLevel = 0;
 
-                PassiveSkill[i].skillInfoList[j].UnLock = 0;
+                SPassiveSkill[i].skillInfoList[j].UnLock = 0;
 
             }
         }

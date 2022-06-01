@@ -11,134 +11,10 @@ public class UserData
 {
     public int userCoin = 0;
 
-    public List<SkillInfo> skillSet;
-
     public List<PassiveSkillSet> PassiveSkill;
-
-    public List<PassiveSkillSet> ActiveSkill;
-
-    public void UnLockSkill(string skillname)
-    {
-        foreach (var skill in skillSet)
-        {
-            if (skill.GetName == skillname)
-            {
-                if (skill.SetUnLock == false)
-                {
-                    if (skill.GetPrice <= userCoin)
-                    {
-                        skill.SetUnLock = true;
-                        userCoin -= skill.GetPrice;
-                    }
-                }
-            }
-        }
-    }
-
-    public void SkillLevelUp(string skillname)
-    {
-        foreach (var skill in skillSet)
-        {
-            if (skill.GetName == skillname)
-            {
-                if (skill.SetUnLock == true)
-                {
-                    if (skill.GetPrice <= userCoin)
-                    {
-                        userCoin -= skill.GetPrice;
-
-                        skill.SkillLevelUp();
-
-                    }
-                }
-            }
-        }
-    }
-}
-
-//[System.Serializable]
-//public class SkillSet
-//{
-//    private string BundleName;
-//    public string GetName => BundleName;
-
-//    public List<PassiveForm> skillInfoList = new List<PassiveForm>();
-
-//    public SkillSet(string name)
-//    {
-//        BundleName = name;
-//    }
-//}
-
-//Dictionary는 시리얼라이즈화 시킬 수 없기 때문에 따로 class를 만들어서 list로 묶어서 저장
-[System.Serializable]
-public class SkillInfo
-{
-    public enum skillType
-    {
-        Active,
-        Passive
-    }
-
-    //스킬 타입
-    [SerializeField]
-    private skillType skilltype;
-
-    public skillType GetType => skilltype;
-
-    //스킬 이름
-    [SerializeField]
-    private string skillName;
-
-    public string GetName => skillName;
-
-    [SerializeField]
-    private int skillprice;
-    public int GetPrice => skillprice;
-
-    //스킬의 해제 여부
-    [SerializeField]
-    private bool skillUnLock;
-
-    public bool SetUnLock { get => skillUnLock; set => skillUnLock = value; }
-
-    [SerializeField]
-    private string preskill;
-
-    [SerializeField]
-    private int skillcooltime;
-    public int GetCoolTime => skillcooltime;
-
-    [SerializeField]
-    private int cooltimeDecrease;
-
-    [SerializeField]
-    private int damage;
-    public int GetDamage => damage;
-
-    [SerializeField]
-    private int damageIncrease;
-
-    [SerializeField]
-    private int skillLevel;
-    public int GetLevel => skillLevel;
-
-    [SerializeField]
-    private int MaxSkillLevel;
-    public int GetMaxLevel => MaxSkillLevel;
-
-    [SerializeField]
-    private int upgradeprice;
-    [SerializeField]
-    private int OriginUpgradePrice;
-
-    public void SkillLevelUp()
-    {
-        skillLevel++;
-        upgradeprice = skillLevel * OriginUpgradePrice;
-        skillcooltime -= cooltimeDecrease;
-        damage += damageIncrease;
-    }
+    
+    public List<ActiveSkillSet> ActiveSkill;
+    
 }
 
 public class UserInformation : MonoBehaviour
@@ -148,16 +24,14 @@ public class UserInformation : MonoBehaviour
 
     //userData를 전역에서 사용하기 위해 static으로 만들고 저장, 불러오기 할 때 userData를 주고 받음
     //씬에서 데이터를 저장할 static변수
-    public static UserData userDataStatic = new UserData();
+    //public static UserData userDataStatic = new UserData();
+
+    public static int getMoney = 0;
+
 
     private static bool SetData = false;
 
     private SkillSettings skill = null;
-
-    //[SerializeField] private PassiveBundle passiveBundle = null;
-    
-    private PassiveSkillSet P1skillBundle = new PassiveSkillSet("Money");
-    
 
     private void Start()
     {
@@ -169,52 +43,34 @@ public class UserInformation : MonoBehaviour
         {
             LoadUserInfo();
             SetData = true;
-            userDataStatic = userData;
+            skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
+     //       userDataStatic = userData;
         }
 
-       // userDataStatic.PassiveSkill.Add(P1skillBundle);
-        userData.userCoin = userDataStatic.userCoin;
+        userData.userCoin += getMoney;
+        getMoney = 0;
 
+
+
+       // userDataStatic.PassiveSkill.Add(P1skillBundle);
+     //   userData.userCoin = userDataStatic.userCoin;
     }
 
-    //public void PSkillSetUp()
-    //{
-    //    for(int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
-    //    {
-    //        if(passiveBundle.PassiveSkill[i].BundleName == "Money")
-    //        {
-    //            P1skillBundle.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
-    //        }
-    //    }
-    //}
+    public void SavePSkill(List<PassiveSkillSet> passiveSkillSets)
+    {
+        userData.PassiveSkill = passiveSkillSets;
+    }
+
+    public void SaveASkill(List<ActiveSkillSet> activeSkillSets)
+    {
+        userData.ActiveSkill = activeSkillSets;
+    }
 
     private void OnDestroy()
     {
-        userData.skillSet = userDataStatic.skillSet;
+     //   userData = userDataStatic;
         SaveUserInfo();
     }
-
-    //생성자를 private으로 만들어서 새로운 객체 생성막기
-    private UserInformation() { }
-
-
-    public void UnlockSkill(string _skillname)
-    {
-        userData.UnLockSkill(_skillname);
-        
-    }
-
-    public void SwitchInfoForward()
-    {
-        userData = userDataStatic;
-    }
-
-    public void SwitchInfoReverse()
-    {
-        userDataStatic = userData;
-    }
-    
-
 
     //유저 데이터 저장
     public void SaveUserInfo()

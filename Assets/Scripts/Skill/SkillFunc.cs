@@ -63,11 +63,11 @@ public class SkillFunc : MonoBehaviour
 
     private void SkillSet()
     {
-        Debug.Log(SkillSettings.UseActiveSkill[0].skillInfoList.Count);
+        Debug.Log(SkillSettings.SActiveSkill[0].skillInfoList.Count);
 
-        for(int i = 0; i< SkillSettings.UseActiveSkill.Count; i++)
+        for(int i = 0; i< SkillSettings.SActiveSkill.Count; i++)
         {
-            for(int j = 0; j< SkillSettings.UseActiveSkill[i].skillInfoList.Count; j++)
+            for(int j = 0; j< SkillSettings.SActiveSkill[i].skillInfoList.Count; j++)
             {
                 switch(SkillSettings.ActiveSkillSearch(SkillUi[i + j].name).Slot)
                 {

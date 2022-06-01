@@ -3992,7 +3992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &376189957
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12671,7 +12671,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1381598259}
         m_TargetAssemblyTypeName: SkillSettings, Assembly-CSharp
-        m_MethodName: LevelUpBtn
+        m_MethodName: PLevelUpBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13681,7 +13681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1294535886
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13732,7 +13732,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  userinfo: {fileID: 0}
+  userinfo: {fileID: 1381598257}
   pricePanel: {fileID: 0}
   price: {fileID: 0}
 --- !u!114 &1294535888
@@ -14386,7 +14386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1357715555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14612,46 +14612,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userData:
     userCoin: 0
-    skillSet:
-    - skilltype: 0
-      skillName: 
-      skillprice: 0
-      skillUnLock: 0
-      preskill: 
-      skillcooltime: 0
-      cooltimeDecrease: 0
-      damage: 0
-      damageIncrease: 0
-      skillLevel: 0
-      MaxSkillLevel: 0
-      upgradeprice: 0
-      OriginUpgradePrice: 0
-    - skilltype: 0
-      skillName: 
-      skillprice: 0
-      skillUnLock: 0
-      preskill: 
-      skillcooltime: 0
-      cooltimeDecrease: 0
-      damage: 0
-      damageIncrease: 0
-      skillLevel: 0
-      MaxSkillLevel: 0
-      upgradeprice: 0
-      OriginUpgradePrice: 0
-    - skilltype: 0
-      skillName: 
-      skillprice: 0
-      skillUnLock: 0
-      preskill: 
-      skillcooltime: 0
-      cooltimeDecrease: 0
-      damage: 0
-      damageIncrease: 0
-      skillLevel: 0
-      MaxSkillLevel: 0
-      upgradeprice: 0
-      OriginUpgradePrice: 0
     PassiveSkill: []
     ActiveSkill: []
 --- !u!4 &1381598258
@@ -14709,9 +14669,7 @@ MonoBehaviour:
   NotTextPanal: {fileID: 21843966}
   NotText: {fileID: 75162115}
   ActiveBundle: {fileID: 11400000, guid: 2f75d8403da4b584cadc2e5b3b0917d4, type: 2}
-  passiveBundle: {fileID: 11400000, guid: 67bd08c34a593ca44819a0a2d9fd35ad, type: 2}
-  PassiveSkill: []
-  ActiveSkill: []
+  passiveBundle: {fileID: 11400000, guid: aca59389dc16bb949992edcdf9d47523, type: 2}
 --- !u!1 &1384722365
 GameObject:
   m_ObjectHideFlags: 0
