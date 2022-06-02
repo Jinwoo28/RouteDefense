@@ -1,5 +1,5 @@
 {
-  "userCoin": 550,
+  "userCoin": 300,
   "PassiveSkill": [
     {
       "skillInfoList": [
@@ -90,35 +90,35 @@
       "skillInfoList": [
         {
           "SkillName": "Meteor",
-          "Value": 20.0,
-          "Price": 150,
-          "CurrentLevel": 0,
+          "Value": 30.0,
+          "Price": 300,
+          "CurrentLevel": 1,
           "MaxLevel": 5,
           "PreSkill": "Fire",
           "UpValueRate": 10.0,
-          "UnLock": 0,
+          "UnLock": 1,
           "BundleName": "Fire",
           "SkillInformation": "하늘에서 거대한 운석을 떨어트려 인근 적에게 피해를 입힙니다.",
-          "Slot": 0,
-          "CoolTime": 10.0,
+          "Slot": 2,
+          "CoolTime": 9.5,
           "CoolTimeDown": 0.5,
-          "GetCheckLock": 0
+          "GetCheckLock": 1
         },
         {
           "SkillName": "Fire",
-          "Value": 0.0,
-          "Price": 100,
-          "CurrentLevel": 0,
+          "Value": 1.0,
+          "Price": 200,
+          "CurrentLevel": 1,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 1.0,
-          "UnLock": 0,
+          "UnLock": 1,
           "BundleName": "Fire",
-          "SkillInformation": "지정 지점에 불을 생성하여 지나가는 적에게 지속적인 데미지를 줍니다.",
-          "Slot": 0,
-          "CoolTime": 10.0,
+          "SkillInformation": "불을 생성하여 지나가는 적에게 지속적인 데미지를 줍니다.",
+          "Slot": 1,
+          "CoolTime": 9.5,
           "CoolTimeDown": 0.5,
-          "GetCheckLock": 0
+          "GetCheckLock": 1
         }
       ],
       "GetName": null

@@ -16,12 +16,24 @@ public class DroppableUI : MonoBehaviour,IPointerEnterHandler,IDropHandler,IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+
+        if (eventData.pointerDrag.CompareTag("OriginUi"))
+        {
+            return;
+        }
+
+        else if (!eventData.pointerDrag.GetComponent<DraggableUI>().canUseSlot)
+        {
+            return;
+        }
+
+        else if (eventData.pointerDrag != null)
         {
             eventData.pointerDrag.transform.SetParent(transform);
             eventData.pointerDrag.GetComponent<RectTransform>().position = rect.position;
             eventData.pointerDrag.GetComponent<DraggableUI>().SetSlotNum(SlotNum);
         }
+
     }
 
 

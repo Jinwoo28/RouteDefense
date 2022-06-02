@@ -79,12 +79,6 @@ public class SkillSettings : MonoBehaviour
 
         userinfo = GetComponent<UserInformation>();
 
-        //PSkillSetUp();
-        //ASkillSetUp();
-
-        //ResetBtn();
-
-
     }
 
     public void SkillSetUp(List<PassiveSkillSet> passiveSkillSets, List<ActiveSkillSet> activeSkillSets)
@@ -108,15 +102,21 @@ public class SkillSettings : MonoBehaviour
 
     public void ALevelUpBtn()
     {
-        PSkillUnLock(_upskillname);
-        ShowLevel();
-        ShowInfo(_upskillname);
+        ASkillLevelUP(_activeName);
+        AShowLevel();
+        AShowInfo(_activeName);
         userinfo.SaveASkill(SActiveSkill);
     }
 
+    private void Update()
+    {
+        Debug.Log(_activeName);
+        Debug.Log("Meteor" + 321);
+    }
 
     private void ASkillLevelUP(string skillname)
     {
+        Debug.Log("·¹º§ ¾÷");
         for (int i = 0; i < SActiveSkill.Count; i++)
         {
             for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
@@ -125,7 +125,7 @@ public class SkillSettings : MonoBehaviour
                 {
                     if (
                         (SActiveSkill[i].skillInfoList[j].PreSkill == "NULL"
-                        || SearchSkill(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 1) &&
+                        || ASearchSkill(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 1) &&
                         userinfo.userData.userCoin >= SActiveSkill[i].skillInfoList[j].Price)
                     {
                         if (SActiveSkill[i].skillInfoList[j].CurrentLevel < SActiveSkill[i].skillInfoList[j].MaxLevel)

@@ -18,6 +18,9 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
     private RectTransform rect;
     private CanvasGroup canvasgroup;
 
+    private bool CanUseSlot = true;
+    public bool canUseSlot => CanUseSlot;
+
     [SerializeField] private string SkillName = null;
     public string GetName => SkillName;
 
@@ -33,7 +36,15 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        rect.position = eventData.position;
+        if (SkillSettings.ActiveSkillSearch(SkillName).UnLock != 0)
+        {
+            rect.position = eventData.position;
+            CanUseSlot = true;
+        }
+        else
+        {
+            CanUseSlot = false;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -59,6 +70,21 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
     private void Start()
     {
         SetSlot();
+    }
+
+    private bool ReSetBtn = false;
+
+    public void ReSetBtnChange()
+    {
+        ReSetBtn = !ReSetBtn;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(1)&&ReSetBtn)
+        {
+            ReturnUi();
+        }
     }
 
     public void ReturnUi()
