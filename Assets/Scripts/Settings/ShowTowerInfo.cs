@@ -127,7 +127,7 @@ public class ShowTowerInfo : MonoBehaviour
                     break;
 
                 case 2:
-                    if (tower.GetTowerLevel >= 7)
+                    if (tower.GetTowerLevel >= 5)
                     {
                         upgradebutton.interactable = false;
                         upgradeprice.fontSize = 50;
@@ -141,7 +141,7 @@ public class ShowTowerInfo : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (tower.GetTowerLevel >= 10)
+                    if (tower.GetTowerLevel >= 7)
                     {
                         upgradebutton.interactable = false;
                         upgradeprice.fontSize = 50;
@@ -179,7 +179,6 @@ public class ShowTowerInfo : MonoBehaviour
 
                         tower = hit.collider.GetComponent<Tower>();
                         ShowInfo(tower);
-                        Debug.Log(tower);
 
                         if (tower != null)
                         {
@@ -259,6 +258,7 @@ public class ShowTowerInfo : MonoBehaviour
         GameManager.buttonOff(); RangeOff();
         tower.SellTower();
         towerinfopanel.SetActive(false);
+        OffSellPrice();
 
     }
 
@@ -283,7 +283,7 @@ public class ShowTowerInfo : MonoBehaviour
 
     public void ShowSellPrice()
     {
-        SellPrice.text = "판매 금액 : " + ((int)(tower.GetSetSellPrice*0.7f)).ToString();
+        SellPrice.text = "판매 금액 : " + (tower.GetSetSellPrice).ToString();
         SellPanel.SetActive(true);
     }
 

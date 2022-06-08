@@ -21,6 +21,8 @@ public class CrossbowTower : Tower
 
             obj.MortarSetDestination(FinalTarget.position, shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
+            obj.ResetBullet();
+            obj.SetParent = this.gameObject.transform;
         }
 
         else
@@ -43,6 +45,7 @@ public class CrossbowTower : Tower
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f-i*2);
             //obj.MortarSetDestination(FinalTarget.position + new Vector3(0, FinalTarget.transform.localPosition.y / 2, 0), shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
+            obj.SetParent = this.gameObject.transform;
             yield return new WaitForSeconds(0.5f);
         }
     }

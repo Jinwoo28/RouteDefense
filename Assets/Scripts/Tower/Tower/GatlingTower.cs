@@ -14,7 +14,6 @@ public class GatlingTower : Tower
     protected override void Start()
     {
         base.Start();
-        Debug.Log(AtkParticle);
         AS.Play();
     }
 

@@ -33,12 +33,15 @@ public class UserInformation : MonoBehaviour
 
     private SkillSettings skill = null;
 
+    [SerializeField] private ActiveBundle ActiveBundle = null;
+    [SerializeField] private PassiveBundle passiveBundle = null;
+
     private void Start()
     {
         skill = this.GetComponent<SkillSettings>();
 
-       // PSkillSetUp();
-
+        // PSkillSetUp();
+        //ResetUserSkillData();
         if (!SetData)
         {
             LoadUserInfo();
@@ -50,15 +53,58 @@ public class UserInformation : MonoBehaviour
         userData.userCoin += getMoney;
         getMoney = 0;
 
+        if (Path.Combine(Application.streamingAssetsPath, "PlayerData.json") == null)
+        {
+            File.Create(Path.Combine(Application.streamingAssetsPath, "PlayerData.json"));
+        }
 
 
-       // userDataStatic.PassiveSkill.Add(P1skillBundle);
-     //   userData.userCoin = userDataStatic.userCoin;
+
+        // userDataStatic.PassiveSkill.Add(P1skillBundle);
+        //   userData.userCoin = userDataStatic.userCoin;
+    }
+
+    private void ResetUserSkillData()
+    {
+
+        foreach(var item in ActiveBundle.ActiveSkill)
+        {
+            for(int i = 0; i < userData.ActiveSkill.Count; i++)
+            {
+                for(int j = 0; j < userData.ActiveSkill[i].skillInfoList.Count; j++)
+                {
+                    if(item.SkillName == userData.ActiveSkill[i].skillInfoList[j].SkillName)
+                    {
+                        userData.ActiveSkill[i].skillInfoList[j] = item;
+                        Debug.Log("COunt");
+                    }
+                }
+            }
+        }
+
+        foreach (var item in passiveBundle.PassiveSkill)
+        {
+            for (int i = 0; i < userData.PassiveSkill.Count; i++)
+            {
+                for (int j = 0; j < userData.PassiveSkill[i].skillInfoList.Count; j++)
+                {
+                    if (item.SkillName == userData.PassiveSkill[i].skillInfoList[j].SkillName)
+                    {
+                        userData.PassiveSkill[i].skillInfoList[j] = item;
+                        Debug.Log("COunt+a3sdf41");
+                    }
+                }
+            }
+        }
     }
 
     public void SavePSkill(List<PassiveSkillSet> passiveSkillSets)
     {
+        Debug.Log("저장");
         userData.PassiveSkill = passiveSkillSets;
+
+        Debug.Log(userData.PassiveSkill[0].skillInfoList.Count);
+
     }
 
     public void SaveASkill(List<ActiveSkillSet> activeSkillSets)
@@ -75,6 +121,8 @@ public class UserInformation : MonoBehaviour
     //유저 데이터 저장
     public void SaveUserInfo()
     {
+
+
         //json은 연속된 string, byte만 가능
         //userdata를 제이슨으로 저장하기 위해 string으로 변환
         string jdata = JsonConvert.SerializeObject(userData,Formatting.Indented);
@@ -85,7 +133,9 @@ public class UserInformation : MonoBehaviour
         ////변환된 byte를 다시 string형태로 변환
         //string format = System.Convert.ToBase64String(bytes);
 
-        string path = Path.Combine(Application.streamingAssetsPath, "PlayerData.txt");
+
+
+        string path = Path.Combine(Application.streamingAssetsPath, "PlayerData.json");
 
         //그렇게 생성된 string형식을 저장
         File.WriteAllText(path, jdata);
@@ -101,7 +151,7 @@ public class UserInformation : MonoBehaviour
     public void LoadUserInfo()
     {
 
-        string path = Path.Combine(Application.streamingAssetsPath, "PlayerData.txt");
+        string path = Path.Combine(Application.streamingAssetsPath, "PlayerData.json");
         string jdata = File.ReadAllText(path);
 
     //byte[] bytes = System.Convert.FromBase64String(jdata);

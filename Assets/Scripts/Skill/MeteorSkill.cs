@@ -14,11 +14,16 @@ public class MeteorSkill : MonoBehaviour
     public Vector3 SetTarget{ set { target = value; } }
 
     private AudioSource As = null;
+
+    private float size;
+    private float damage;
+
     private void Start()
     {
         As = this.GetComponent<AudioSource>();
         Damage = (int)SkillSettings.ActiveSkillSearch("Meteor").Value;
         MultipleSpeed.speedup += SpeedUP;
+        this.transform.localScale = this.transform.localScale * (1 + (0.1f * SkillSettings.ActiveSkillSearch("Meteor").CurrentLevel));
     }
 
     private void SpeedUP(int x)

@@ -15,6 +15,10 @@ public class Bullet : MonoBehaviour
 
     protected Camera cam = null;
 
+    private Transform parent;
+
+    public Transform SetParent { set => parent = value; }
+
 
     protected bulletpolling particle = null;
 
@@ -79,9 +83,19 @@ public class Bullet : MonoBehaviour
 
     protected void ReturnBullet()
     {
+        
         DestroyTimer = 0;
         objectpooling.ReturnObject(this);
     }
+
+    public void ArrowReturnBullet()
+    {
+
+        DestroyTimer = 0;
+        objectpooling.ReturnObject(this);
+        this.gameObject.transform.SetParent(parent);
+    }
+
 
     public virtual void Attack()
     {

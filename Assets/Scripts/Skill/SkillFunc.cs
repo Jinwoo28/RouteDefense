@@ -33,6 +33,7 @@ public class SkillFunc : MonoBehaviour
 
     [SerializeField] private SkillKind[] skillKind = null;
 
+    private Button[] button;
 
     public enum skill
     {
@@ -55,15 +56,14 @@ public class SkillFunc : MonoBehaviour
         MultipleSpeed.speedup += SpeedUP;
 
 
-        Debug.Log(SkillUi[0].name);
-        Debug.Log(SkillUi[1].name);
-
         SkillSet();
+
     }
+
+
 
     private void SkillSet()
     {
-        Debug.Log(SkillSettings.SActiveSkill[0].skillInfoList.Count);
 
         for(int i = 0; i< SkillSettings.SActiveSkill.Count; i++)
         {
@@ -71,6 +71,9 @@ public class SkillFunc : MonoBehaviour
             {
                 switch(SkillSettings.ActiveSkillSearch(SkillUi[i + j].name).Slot)
                 {
+                    case 0:
+                        break;
+
                     case 1:
                         SetPos(SkillUi[i + j], Slot[0]);
 
@@ -172,6 +175,34 @@ public class SkillFunc : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (Slot[0].GetComponentInChildren<Button>() != null)
+            {
+                Slot[0].GetComponentInChildren<Button>().onClick.Invoke();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (Slot[1].GetComponentInChildren<Button>() != null)
+            {
+                Slot[1].GetComponentInChildren<Button>().onClick.Invoke();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (Slot[2].GetComponentInChildren<Button>() != null)
+            {
+                Slot[2].GetComponentInChildren<Button>().onClick.Invoke();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (Slot[3].GetComponentInChildren<Button>() != null)
+            {
+                Slot[3].GetComponentInChildren<Button>().onClick.Invoke();
+            }
+        }
     }
 
     public void ClickSkill(int _skilltype)

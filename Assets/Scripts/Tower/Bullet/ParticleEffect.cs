@@ -23,6 +23,11 @@ public class ParticleEffect : Bullet
         AS.volume = x;
     }
 
+    private void OnDestroy()
+    {
+        SoundSettings.effectsound -= SoundChange;
+    }
+
     protected override void Update()
     {
         TImer += Time.deltaTime;

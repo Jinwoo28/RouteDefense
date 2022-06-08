@@ -4,7 +4,6 @@ using UnityEngine;
 //using System;
 using UnityEngine.UI;
 
-   [System.Serializable]
    public class  UnitState
 {
     public float unitspeed = 0;
@@ -18,6 +17,8 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private int EnemyCode;
+
     //적의 이동 경로
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
@@ -50,6 +51,16 @@ public class Enemy : MonoBehaviour
     private int enemyNum = 0;
     float Hp = 0;
 
+    //public Enemy(EnemyState state)
+    //{
+    //    unitstate.unithp = state.Hp;
+    //    unitstate.unitspeed = state.Speed;
+    //    unitstate.unitcoin = state.coin;
+    //    unitstate.unitamour= state.Amour;
+    //    unitstate.avoidancerate = state.avoidance;
+    //}
+
+
     public void SetPooling(EnemyPooling  _pooling, int _num)
     {
         EP = _pooling;
@@ -60,6 +71,20 @@ public class Enemy : MonoBehaviour
     {
         unitstate.unithp = Hp;
 
+    }
+
+    private void Awake()
+    {
+        SetState(EnemyStateSetUp.GetData(EnemyCode));
+    }
+
+    public void SetState(EnemyState stat)
+    {
+        unitstate.avoidancerate = stat.avoidance;
+        unitstate.unitamour = stat.Amour;
+        unitstate.unitspeed = stat.Speed;
+        unitstate.unitcoin = stat.coin;
+        unitstate.unithp = stat.Hp;
     }
 
     protected virtual void Start()
@@ -291,6 +316,11 @@ public class Enemy : MonoBehaviour
 
     public void EnemyDie()
     {
+        if(GetComponentInChildren<Bullet>() != null)
+        {
+            GetComponentInChildren<Bullet>().ArrowReturnBullet();
+        }
+
         jump = false;
 
         Destroy(hpbarprefab);

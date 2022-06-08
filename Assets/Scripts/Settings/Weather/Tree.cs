@@ -15,8 +15,9 @@ public class Tree : Obstacle
 
     private void Start()
     {
-        removePrice = 30;
-        node.SetOnObstacle = true;
+        removePrice = 10;
+//        node.SetOnObstacle = true;
+        node.OnBranch();
     }
 
     public void EvolveTree(int _age)
@@ -35,8 +36,6 @@ public class Tree : Obstacle
             removePrice += 10;
             }
 
-        Debug.Log("age" + age);
-        Debug.Log("nextLevel" + NextLevel);
     }
 
     public override void RemoveThis()

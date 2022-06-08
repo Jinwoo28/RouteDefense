@@ -102,7 +102,6 @@ public class LobbySceneButton : MonoBehaviour
         {
             Page++;
         }
-        Debug.Log(Page);
         ChangeImage();
     }
     public void PageNumMinus() 

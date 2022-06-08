@@ -92,26 +92,29 @@ public class Enemy_Creture : Enemy
     //    }
     //}
 
-    public void FireAttacked()
+    public void FireAttacked(float damage)
     {
-        Debug.Log("불");
-        StopCoroutine("DotDamage");
-        StartCoroutine("DotDamage");
+        if (!fired)
+        {
+            fired = true;
+            StartCoroutine(DotDamage(damage));
+        }
     }
 
-    public float firedamage = 0;
-    public int GetFireDamage { set => firedamage = value; }
+    private bool fired = false;
 
-    IEnumerator DotDamage()
+
+  
+    IEnumerator DotDamage(float damage)
     {
-        int damagecount = 5;
+        int damagecount = 5 + (SkillSettings.ActiveSkillSearch("Fire").CurrentLevel*2);
         while (damagecount > 0)
         {
             Debug.Log("데미지");
             damagecount--;
-            if (firedamage < GetHp)
+            if (damage < GetHp)
             {
-                firedamage(firedamage);
+                firedamage(damage);
             }
             else
             {
@@ -119,6 +122,8 @@ public class Enemy_Creture : Enemy
             }
             yield return new WaitForSeconds(0.5f);
         }
+
+        fired = false;
        
     }
 }

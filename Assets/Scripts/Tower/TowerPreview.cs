@@ -44,6 +44,9 @@ public class TowerPreview : MonoBehaviour
 
     private bool thisActive = true;
 
+
+    DetectObject detector = new DetectObject();
+
     private void UiStateChange(int _i)
     {
 
@@ -148,10 +151,13 @@ public class TowerPreview : MonoBehaviour
                 {
                     //현재 위치의 설치가능 여부에 따라 preview 위에 ui표시
                     //불가능
-                    if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater)
+                    if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) 
+                        || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater
+                        || ((towernode!=null)&&towernode.SetOnObstacle))
                     {
                         UiStateChange(2);
                     }
+
                     //합체
                     else if ((alreadytower && CanCombination && towerstep != 3 && tower.GetStep != 3) && !OnWater)
                     {
@@ -201,7 +207,7 @@ public class TowerPreview : MonoBehaviour
                     }
 
                     //이동일 때 혹은 새로 지을 때
-                    else if (!alreadytower)
+                    else if (!alreadytower && ((towernode != null) && !towernode.SetOnObstacle))
                     {
                         if (Input.GetMouseButtonDown(0))
                         {
@@ -213,7 +219,6 @@ public class TowerPreview : MonoBehaviour
                             //기존의 타워를 이동할 때
                             if (Origintower != null)
                             {
-
                                 Origintower.transform.position = this.transform.position;
                                 Origintower.GetComponent<Tower>().SetNode = towernode;
                                 Origintower.GetComponent<Tower>().ActiveOn();
@@ -226,8 +231,6 @@ public class TowerPreview : MonoBehaviour
                             //빌드매니저에서 생성한 프리뷰가 타일에 지어질 때
                             else
                             {
-                                //Debug.Log(Origintower);
-                                //Debug.Log("ssss");
                                 GameObject buildedtower = Instantiate(buildTower, this.transform.position, Quaternion.identity);
                                 buildedtower.GetComponent<Tower>().SetNode = towernode;
                                 buildedtower.GetComponent<Tower>().SetNode.GetOnTower = true;
@@ -274,9 +277,7 @@ public class TowerPreview : MonoBehaviour
      //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
             if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& !other.GetComponent<Tower>().GetIced)
             {
-                Debug.Log(other.GetComponent<Tower>().Getname == towername + "1");
-                Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2"); 
-                Debug.Log((other.GetComponent<Tower>().GetStep != 3 && towerstep != 3)+"3");
+               
                 CanCombination = true;
                // Debug.Log(CanCombination + " : 합체 여부");
                 tower = other.GetComponent<Tower>();

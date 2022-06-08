@@ -9,14 +9,13 @@ public class ArrowBullet : Bullet
     private bool Ontarget = false;
 
 
-
     protected override void Update()
     {
         DestroyTimer += Time.deltaTime;
 
         if(DestroyTimer >= 2.0f)
         {
-            ReturnBullet();
+            ArrowReturnBullet();
         }
 
 
@@ -51,16 +50,18 @@ public class ArrowBullet : Bullet
                 enemy = other.GetComponent<Enemy>();
                 AtkCharactor();
                 Ontarget = true;
-                
-                ReturnBullet();
+
+                ontile = true;
+                Invoke("ArrowReturnBullet", 0.5f);
+                this.transform.SetParent(other.gameObject.transform);
+
             }
         }
 
         else if (other.CompareTag("Tile"))
         {
             ontile = true;
-            Invoke("ReturnBullet", 0.5f);
-
+            Invoke("ArrowReturnBullet", 0.5f);
         }
     }
 }

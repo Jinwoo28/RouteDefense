@@ -41,6 +41,12 @@ public class Route : MonoBehaviour
         GameManager.buttonOff += MouseChage;
     }
 
+    private void OnDestroy()
+    {
+        EnemyManager.stageclear -= StageClear;
+        GameManager.buttonOff -= MouseChage;
+    }
+
     public void Settings(int _gridX, int _gridY,Node[,] _grid, Node _start,Node _start2, Node _end)
     {
         gridX = _gridX;
@@ -361,8 +367,6 @@ public class Route : MonoBehaviour
         waypoint.Reverse();
         Vector3[] waypointary = waypoint.ToArray();
 
-        Debug.Log(waypointary.Length + " 321321");
-        Debug.Log(nodelist.Count + "aasdf654as56df4");
 
         for (int i = 0; i < nodelist.Count - 1; i++)
         {
@@ -384,9 +388,7 @@ public class Route : MonoBehaviour
                 nodelist[i].GetComponentInChildren<ShowRoute>().ShowArrow(4);
             }
         }
-        Debug.Log(" asdfasdfasdfasd654564654654654");
 
-        Debug.Log(waypointary.Length + "akshjdflkjahsdlkjf");
 
         return waypointary;
     }

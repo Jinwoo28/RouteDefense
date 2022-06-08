@@ -13,12 +13,18 @@ public class FireSkill : MonoBehaviour
 
     private bool SetFinish = false;
 
+    private float size;
+    private float damage;
+
     private void Start()
     {
         As = this.GetComponent<AudioSource>();
         StartCoroutine("FireSkillAct");
         Invoke("Destroythis", 10.0f);
         MultipleSpeed.speedup += SpeedUP;
+
+        damage = SkillSettings.ActiveSkillSearch("Fire").Value;
+        this.transform.localScale = this.transform.localScale * (1+ (0.1f*SkillSettings.ActiveSkillSearch("Fire").CurrentLevel));
     }
 
     private void Update()
@@ -87,7 +93,7 @@ public class FireSkill : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
            // other.GetComponent<Enemy_Creture>().GetFireDamage = UserInformation.userDataStatic.skillSet[0].GetDamage;
-            other.GetComponent<Enemy_Creture>().FireAttacked();
+            other.GetComponent<Enemy_Creture>().FireAttacked(damage);
         }
 
         if (other.CompareTag("Water")&&SetFinish)

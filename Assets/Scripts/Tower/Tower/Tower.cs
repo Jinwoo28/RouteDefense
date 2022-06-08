@@ -118,7 +118,7 @@ public class Tower : MonoBehaviour
         upgradevalue.upgradeprice = (int)(upgradevalue.upgradeprice*SkillSettings.PassiveValue("UpTowerDown"));
         towerinfo.towerprice = (int)(towerinfo.towerprice * SkillSettings.PassiveValue("SetTowerDown"));
 
-        sellprice += towerinfo.towerprice;
+        sellprice += (int)(towerinfo.towerprice * SkillSettings.PassiveValue("SellTowerUp"));
     }
 
     private void SpeedUP(int x)

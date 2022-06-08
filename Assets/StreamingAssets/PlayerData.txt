@@ -1,20 +1,20 @@
 {
-  "userCoin": 300,
+  "userCoin": 0,
   "PassiveSkill": [
     {
       "skillInfoList": [
         {
           "SkillName": "StartMoney",
-          "Value": 1.1,
-          "Price": 200,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 100,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "게임 시작 시 초기 자본을 더 많이 받습니다.",
-          "GetCheckLock": 1
+          "SkillInformation": "���� ���� �� �ʱ� �ں��� �� ���� �޽��ϴ�.",
+          "GetCheckLock": 0
         },
         {
           "SkillName": "SetTowerDown",
@@ -26,7 +26,7 @@
           "UpValueRate": -0.1,
           "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "타워를 짓는 비용이 감소합니다.",
+          "SkillInformation": "Ÿ���� ���� ����� �����մϴ�.",
           "GetCheckLock": 0
         },
         {
@@ -39,47 +39,47 @@
           "UpValueRate": -0.1,
           "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "타워의 업그레이드 비용이 감소합니다.",
+          "SkillInformation": "Ÿ���� ���׷��̵� ����� �����մϴ�.",
           "GetCheckLock": 0
         },
         {
           "SkillName": "GetCoinUp",
-          "Value": 1.1,
-          "Price": 300,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 150,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "StartMoney",
           "UpValueRate": 0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "적 처치시 얻는 코인의 양이 증가합니다.",
-          "GetCheckLock": 1
+          "SkillInformation": "�� óġ�� ��� ������ ���� �����մϴ�.",
+          "GetCheckLock": 0
         },
         {
           "SkillName": "SellTowerUp",
-          "Value": 0.8,
-          "Price": 300,
-          "CurrentLevel": 1,
+          "Value": 0.7,
+          "Price": 150,
+          "CurrentLevel": 0,
           "MaxLevel": 3,
           "PreSkill": "GetCoinUp",
           "UpValueRate": 0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "타워를 팔 때 돈을 더 많이 받습니다.",
-          "GetCheckLock": 1
+          "SkillInformation": "Ÿ���� �� �� ���� �� ���� �޽��ϴ�.",
+          "GetCheckLock": 0
         },
         {
           "SkillName": "GetUserCoinUp",
-          "Value": 1.1,
-          "Price": 400,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 200,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "SellTowerUp",
           "UpValueRate": 0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
-          "SkillInformation": "스테이지 클리어 시 얻는 유저 코인이 증가합니다.",
-          "GetCheckLock": 1
+          "SkillInformation": "�������� Ŭ���� �� ��� ���� ������ �����մϴ�.",
+          "GetCheckLock": 0
         }
       ],
       "GetName": null
@@ -90,35 +90,35 @@
       "skillInfoList": [
         {
           "SkillName": "Meteor",
-          "Value": 30.0,
-          "Price": 300,
-          "CurrentLevel": 1,
+          "Value": 20.0,
+          "Price": 150,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "Fire",
           "UpValueRate": 10.0,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Fire",
-          "SkillInformation": "하늘에서 거대한 운석을 떨어트려 인근 적에게 피해를 입힙니다.",
-          "Slot": 2,
-          "CoolTime": 9.5,
+          "SkillInformation": "�ϴÿ��� �Ŵ��� ��� ����Ʈ�� �α� ������ ���ظ� �����ϴ�.",
+          "Slot": 0,
+          "CoolTime": 10.0,
           "CoolTimeDown": 0.5,
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         },
         {
           "SkillName": "Fire",
-          "Value": 1.0,
-          "Price": 200,
-          "CurrentLevel": 1,
+          "Value": 0.0,
+          "Price": 100,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 1.0,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Fire",
-          "SkillInformation": "불을 생성하여 지나가는 적에게 지속적인 데미지를 줍니다.",
-          "Slot": 1,
-          "CoolTime": 9.5,
+          "SkillInformation": "���� ������ ���� �����Ͽ� �������� ������ �������� �������� �ݴϴ�.",
+          "Slot": 0,
+          "CoolTime": 10.0,
           "CoolTimeDown": 0.5,
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         }
       ],
       "GetName": null

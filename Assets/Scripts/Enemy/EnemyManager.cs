@@ -88,13 +88,15 @@ public class EnemyManager : MonoBehaviour
         Time.timeScale = x;
     }
 
- 
+    private void OnDestroy()
+    {
+
+    }
 
 
     //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
     public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
     {
-        Debug.Log("스폰 시작");
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
         StartCoroutine(GameStart(_waypoint, _SpawnPos));
@@ -111,7 +113,7 @@ public class EnemyManager : MonoBehaviour
        gameongoing = true;
 
         //적이 나올 개수
-        int count = stageinfo[StageNum ].EnemyCount;
+        int count = GameManager.SetGameLevel == 3? stageinfo[StageNum ].EnemyCount: (int)(stageinfo[StageNum].EnemyCount*0.7f);
         int stagenum = StageNum;
         
         //적 종류

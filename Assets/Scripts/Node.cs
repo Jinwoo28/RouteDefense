@@ -17,7 +17,7 @@ public class Node : MonoBehaviour
 
     //node위에 장애물이 있는지
     private bool OnObstacle = false;
-    public bool SetOnObstacle { set => OnObstacle = value; }
+    public bool SetOnObstacle { get => OnObstacle; set => OnObstacle = value; }
 
 
     //Node의 인덱스 번호
@@ -194,7 +194,6 @@ public class Node : MonoBehaviour
 
     public void OnBranch()
     {
-        Debug.Log("나뭇가지");
         if (!end && !start)
         {
             OnObstacle = true;

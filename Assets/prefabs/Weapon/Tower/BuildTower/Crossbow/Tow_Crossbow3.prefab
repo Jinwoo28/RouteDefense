@@ -314,7 +314,7 @@ MonoBehaviour:
   upgradevalue:
     priceUprate: 100
     upgradeprice: 100
-    UpdamageValue: 5
+    UpdamageValue: 4
     UpcriticalValue: 12
   towerinfo:
     towerprice: 600
@@ -322,7 +322,7 @@ MonoBehaviour:
     towerdamage: 10
     towercritical: 10
     towerrange: 1.6
-    atkdelay: 0.8
+    atkdelay: 0.75
   buildstate: []
   towerpreview: {fileID: 3047223702295900138, guid: e332b569389f0e94b9058ad35aeddcd3, type: 3}
   towerBody: {fileID: 1538286225513994151}
@@ -330,7 +330,7 @@ MonoBehaviour:
   shootPos: {fileID: 2668255226572724042}
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   towerstep: 3
   AtkParticle: {fileID: 0}
 --- !u!114 &5192152709863315496

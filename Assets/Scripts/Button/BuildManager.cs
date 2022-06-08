@@ -85,7 +85,7 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-        Debug.Log("asdf");
+
         GameManager.buttonOff();
 
         if (towerpreviewActive)

@@ -69,6 +69,7 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
     private void Start()
     {
+        Debug.Log(skillsettings);
         SetSlot();
     }
 

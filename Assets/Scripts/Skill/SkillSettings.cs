@@ -63,8 +63,8 @@ public class SkillSettings : MonoBehaviour
     [SerializeField] private ActiveBundle ActiveBundle = null;
     [SerializeField] private PassiveBundle passiveBundle = null;
 
-    public static List<PassiveSkillSet> SPassiveSkill;
-    public static List<ActiveSkillSet> SActiveSkill;
+    public static List<PassiveSkillSet> SPassiveSkill = new List<PassiveSkillSet>();
+    public static List<ActiveSkillSet> SActiveSkill= new List<ActiveSkillSet>();
 
     //public static List<PassiveSkillSet> SPassiveSkill;
     //public static List<ActiveSkillSet> SActiveSkill;
@@ -108,11 +108,6 @@ public class SkillSettings : MonoBehaviour
         userinfo.SaveASkill(SActiveSkill);
     }
 
-    private void Update()
-    {
-        Debug.Log(_activeName);
-        Debug.Log("Meteor" + 321);
-    }
 
     private void ASkillLevelUP(string skillname)
     {
@@ -252,18 +247,34 @@ public class SkillSettings : MonoBehaviour
 
 
     #region PassiveSkill
-    //public void PSkillSetUp()
-    //{
-    //    for (int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
-    //    {
-    //        if (passiveBundle.PassiveSkill[i].BundleName == "Money")
-    //        {
-    //            Passive_Money.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
-    //        }
-    //    }
+    public void PSkillSetUp()
+    {
+        for (int i = 0; i < passiveBundle.PassiveSkill.Count; i++)
+        {
+            if (passiveBundle.PassiveSkill[i].BundleName == "Money")
+            {
+                Passive_Money.skillInfoList.Add(passiveBundle.PassiveSkill[i]);
+            }
+        }
 
-    //    SPassiveSkill.Add(Passive_Money);
-    //}
+
+        SPassiveSkill.Add(Passive_Money);
+    }
+
+    public void ASkillSetUp()
+    {
+        for (int i = 0; i < ActiveBundle.ActiveSkill.Count; i++)
+        {
+            if (ActiveBundle.ActiveSkill[i].BundleName == "Fire")
+            {
+                Active_Fire.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+            }
+        }
+
+        SActiveSkill.Add(Active_Fire);
+    }
+
+
 
     public static float PassiveValue(string _skillname)
     {

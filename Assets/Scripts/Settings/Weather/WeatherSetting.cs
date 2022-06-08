@@ -43,6 +43,10 @@ public class WeatherSetting : MonoBehaviour
         EnemyManager.stageclear += StageClear; 
     }
 
+    private void OnDestroy()
+    {
+        EnemyManager.stageclear -= StageClear;
+    }
 
     //게임준비 화면에 작동할 메서드
     public void StageClear()

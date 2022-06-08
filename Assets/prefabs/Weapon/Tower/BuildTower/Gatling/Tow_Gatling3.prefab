@@ -133,7 +133,7 @@ MonoBehaviour:
   upgradevalue:
     priceUprate: 30
     upgradeprice: 100
-    UpdamageValue: 3
+    UpdamageValue: 1.5
     UpcriticalValue: 7
   towerinfo:
     towerprice: 600

@@ -112,7 +112,7 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
-  Range: 1.5
+  Range: 1
 --- !u!96 &6031117039284999958
 TrailRenderer:
   serializedVersion: 2
