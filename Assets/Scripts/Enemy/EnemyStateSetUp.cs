@@ -29,7 +29,7 @@ public class EnemyStateSetUp : MonoBehaviour
 
         string data = www.downloadHandler.text;
 
-        print(data);
+       // print(data);
 
         SetEnemy(data);
     }
@@ -42,7 +42,7 @@ public class EnemyStateSetUp : MonoBehaviour
         int rowSize = row.Length;
         int columnsize = row[0].Split('\t').Length;
 
-        Debug.Log(row.Length);
+   
        // Debug.Log(so.enemydata.Length + "asdf");
 
         for(int i = 0; i < rowSize; i++)

@@ -1,0 +1,246 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f4a38ce2ff0ed4d9cc36a99736a9a5, type: 3}
+  m_Name: TowerDataTest
+  m_EditorClassIdentifier: 
+  towerdata:
+  - Name: "\uC11D\uAD81"
+    TowerStep: 1
+    TowerCode: 1
+    Damage: 4
+    Delay: 1
+    Range: 1.2
+    Critical: 0
+    UpgradeAtk: 3
+    UpgradeCri: 2
+    TowerPrice: 150
+    UpgradePrice: 50
+  - Name: "\uC11D\uAD81"
+    TowerStep: 2
+    TowerCode: 2
+    Damage: 7
+    Delay: 0.9
+    Range: 1.4
+    Critical: 5
+    UpgradeAtk: 2.5
+    UpgradeCri: 4
+    TowerPrice: 300
+    UpgradePrice: 75
+  - Name: "\uC11D\uAD81"
+    TowerStep: 3
+    TowerCode: 3
+    Damage: 10
+    Delay: 0.75
+    Range: 1.6
+    Critical: 10
+    UpgradeAtk: 4
+    UpgradeCri: 6
+    TowerPrice: 600
+    UpgradePrice: 100
+  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    TowerStep: 1
+    TowerCode: 11
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    TowerStep: 2
+    TowerCode: 12
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    TowerStep: 3
+    TowerCode: 13
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uAE30\uAD00\uCD1D"
+    TowerStep: 1
+    TowerCode: 21
+    Damage: 1
+    Delay: 0.25
+    Range: 1
+    Critical: 0
+    UpgradeAtk: 0.25
+    UpgradeCri: 2
+    TowerPrice: 150
+    UpgradePrice: 50
+  - Name: "\uAE30\uAD00\uCD1D"
+    TowerStep: 2
+    TowerCode: 22
+    Damage: 2
+    Delay: 0.225
+    Range: 1.15
+    Critical: 3
+    UpgradeAtk: 0.6
+    UpgradeCri: 3
+    TowerPrice: 300
+    UpgradePrice: 75
+  - Name: "\uAE30\uAD00\uCD1D"
+    TowerStep: 3
+    TowerCode: 23
+    Damage: 3
+    Delay: 0.2
+    Range: 1.3
+    Critical: 5
+    UpgradeAtk: 1.5
+    UpgradeCri: 5
+    TowerPrice: 600
+    UpgradePrice: 100
+  - Name: "\uB808\uC774\uC800"
+    TowerStep: 1
+    TowerCode: 31
+    Damage: 1
+    Delay: 1
+    Range: 1.75
+    Critical: 0
+    UpgradeAtk: 1
+    UpgradeCri: 3
+    TowerPrice: 200
+    UpgradePrice: 75
+  - Name: "\uB808\uC774\uC800"
+    TowerStep: 2
+    TowerCode: 32
+    Damage: 2
+    Delay: 0.85
+    Range: 2
+    Critical: 5
+    UpgradeAtk: 2
+    UpgradeCri: 5
+    TowerPrice: 400
+    UpgradePrice: 100
+  - Name: "\uB808\uC774\uC800"
+    TowerStep: 3
+    TowerCode: 33
+    Damage: 3
+    Delay: 0.6
+    Range: 2.25
+    Critical: 10
+    UpgradeAtk: 4
+    UpgradeCri: 7
+    TowerPrice: 800
+    UpgradePrice: 125
+  - Name: "\uBC15\uACA9\uD3EC"
+    TowerStep: 1
+    TowerCode: 41
+    Damage: 5
+    Delay: 2
+    Range: 2
+    Critical: 0
+    UpgradeAtk: 1.5
+    UpgradeCri: 5
+    TowerPrice: 200
+    UpgradePrice: 75
+  - Name: "\uBC15\uACA9\uD3EC"
+    TowerStep: 2
+    TowerCode: 42
+    Damage: 7
+    Delay: 1.75
+    Range: 2.25
+    Critical: 5
+    UpgradeAtk: 2.5
+    UpgradeCri: 7
+    TowerPrice: 400
+    UpgradePrice: 100
+  - Name: "\uBC15\uACA9\uD3EC"
+    TowerStep: 3
+    TowerCode: 43
+    Damage: 10
+    Delay: 1.5
+    Range: 2.5
+    Critical: 10
+    UpgradeAtk: 4
+    UpgradeCri: 10
+    TowerPrice: 800
+    UpgradePrice: 125
+  - Name: "\uD50C\uB77C\uC988\uB9C8"
+    TowerStep: 1
+    TowerCode: 51
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD50C\uB77C\uC988\uB9C8"
+    TowerStep: 2
+    TowerCode: 52
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD50C\uB77C\uC988\uB9C8"
+    TowerStep: 3
+    TowerCode: 53
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD14C\uC2AC\uB77C"
+    TowerStep: 1
+    TowerCode: 61
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD14C\uC2AC\uB77C"
+    TowerStep: 2
+    TowerCode: 62
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0
+  - Name: "\uD14C\uC2AC\uB77C"
+    TowerStep: 3
+    TowerCode: 63
+    Damage: 0
+    Delay: 0
+    Range: 0
+    Critical: 0
+    UpgradeAtk: 0
+    UpgradeCri: 0
+    TowerPrice: 0
+    UpgradePrice: 0

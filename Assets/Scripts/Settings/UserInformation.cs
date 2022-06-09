@@ -33,7 +33,7 @@ public class UserInformation : MonoBehaviour
 
     private SkillSettings skill = null;
 
-    [SerializeField] private ActiveBundle ActiveBundle = null;
+    [SerializeField] private ActiveBundle2 ActiveBundle = null;
     [SerializeField] private PassiveBundle passiveBundle = null;
 
     private void Start()
@@ -46,9 +46,12 @@ public class UserInformation : MonoBehaviour
         {
             LoadUserInfo();
             SetData = true;
+            ResetUserSkillData();
             skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
      //       userDataStatic = userData;
         }
+
+        Debug.Log(userData.ActiveSkill.Count);
 
         userData.userCoin += getMoney;
         getMoney = 0;
@@ -57,30 +60,75 @@ public class UserInformation : MonoBehaviour
         {
             File.Create(Path.Combine(Application.streamingAssetsPath, "PlayerData.json"));
         }
-
-
-
-        // userDataStatic.PassiveSkill.Add(P1skillBundle);
-        //   userData.userCoin = userDataStatic.userCoin;
     }
 
     private void ResetUserSkillData()
     {
+        Debug.Log("스킬 초기화");
+        ////엑셀에 저장된 스킬 개수만큼 반복
+        //foreach(var item in ActiveBundle.ActiveSkill)
+        //{
+        //    //userdata의 번들 개수
+        //    for (int i = 0; i < userData.ActiveSkill.Count; i++)
+        //    {
+        //        //각 번들에 있는 스킬개수
+        //        for (int j = 0; j < userData.ActiveSkill[i].skillInfoList.Count; j++)
+        //        {
+        //            if (item.SkillName == userData.ActiveSkill[i].skillInfoList[j].SkillName)
+        //            {
+        //                userData.ActiveSkill[i].skillInfoList[j] = item;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
-        foreach(var item in ActiveBundle.ActiveSkill)
+
+        //엑셀에 저장된 스킬 개수만큼 반복
+        foreach (var item in ActiveBundle.ActiveSkill)
         {
-            for(int i = 0; i < userData.ActiveSkill.Count; i++)
+            
+                bool success2 = false;
+            //userdata의 번들 개수
+            for (int i = 0; i < userData.ActiveSkill.Count; i++)
             {
-                for(int j = 0; j < userData.ActiveSkill[i].skillInfoList.Count; j++)
+                Debug.Log(item.BundleName + " : " + userData.ActiveSkill[i].BundleName + "번들네임");
+                if (item.BundleName == userData.ActiveSkill[i].BundleName)
                 {
-                    if(item.SkillName == userData.ActiveSkill[i].skillInfoList[j].SkillName)
+                    bool success = false;
+                    for(int j = 0; j < userData.ActiveSkill[i].skillInfoList.Count; j++)
                     {
-                        userData.ActiveSkill[i].skillInfoList[j] = item;
-                        Debug.Log("COunt");
+
+                        Debug.Log(item.SkillName + " : " + userData.ActiveSkill[i].skillInfoList[j].SkillName + "스킬네임");
+
+                        if (item.SkillName == userData.ActiveSkill[i].skillInfoList[j].SkillName)
+                        {
+                            Debug.Log("a");
+                            userData.ActiveSkill[i].skillInfoList[j] = item;
+                            success = true;
+                            break;
+                        }
                     }
+
+                    if (!success)
+                    {
+                        Debug.Log("B");
+                        userData.ActiveSkill[i].skillInfoList.Add(item);
+                    }
+                    success2 = true;
                 }
             }
+                if (!success2)
+                {
+                    Debug.Log("C");
+                    ActiveSkillSet newSet = new ActiveSkillSet(item.BundleName);
+                    newSet.skillInfoList.Add(item);
+                    userData.ActiveSkill.Add(newSet);
+                }
+
         }
+
+
 
         foreach (var item in passiveBundle.PassiveSkill)
         {
@@ -91,7 +139,6 @@ public class UserInformation : MonoBehaviour
                     if (item.SkillName == userData.PassiveSkill[i].skillInfoList[j].SkillName)
                     {
                         userData.PassiveSkill[i].skillInfoList[j] = item;
-                        Debug.Log("COunt+a3sdf41");
                     }
                 }
             }
@@ -102,9 +149,6 @@ public class UserInformation : MonoBehaviour
     {
         Debug.Log("저장");
         userData.PassiveSkill = passiveSkillSets;
-
-        Debug.Log(userData.PassiveSkill[0].skillInfoList.Count);
-
     }
 
     public void SaveASkill(List<ActiveSkillSet> activeSkillSets)

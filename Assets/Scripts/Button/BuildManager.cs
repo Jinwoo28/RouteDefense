@@ -96,7 +96,7 @@ public class BuildManager : MonoBehaviour
         }
 
         showtowerinfo.SetTowerinfoOff();
-         towerprice = buildtower[_slotnum].builditem.GetComponent<Tower>().Gettowerprice;
+         towerprice = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice;
 
             if (playercoin >= towerprice)
             {
@@ -108,7 +108,7 @@ public class BuildManager : MonoBehaviour
 
                     //preview.GetComponent<TowerPreview>().SetUp(playerstate,buildstate);
                     //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
-                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
+                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).Range);
                     preview.GetComponent<TowerPreview>().FirstSetUp(buildtower[_slotnum].builditem,this);
                     playerstate.GetSetPlayerCoin = towerprice;
                 }

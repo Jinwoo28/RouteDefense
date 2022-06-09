@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     //적의 이동 경로
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
-    [SerializeField] protected UnitState unitstate = null;
+    protected UnitState unitstate = new UnitState();
 
     private GameObject hpbar = null;
     private GameObject damagenum = null;

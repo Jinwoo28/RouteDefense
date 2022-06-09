@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //타워의 업그레이드 정보
-[System.Serializable]
+
 public class UpgradeValue
 {
     //타워 업그레이드 비용
@@ -15,7 +15,7 @@ public class UpgradeValue
 
 
 //타워의 정보
-[System.Serializable]
+
 public class TowerInfo
 {
     //타워의 가격
@@ -36,16 +36,44 @@ public class Tower : MonoBehaviour
         support
     }
 
+    private void Awake()
+    {
+       TowerSetUp(TowerDataSetUp.GetData(TowerCode));
+
+    }
+
+    private void TowerSetUp(TowerData towerdata)
+    {
+        Debug.Log(towerdata.Delay);
+
+        towerinfo.atkdelay = towerdata.Delay;
+        towerinfo.towerrange = towerdata.Range;
+        towerinfo.towercritical = towerdata.Critical;
+        towerinfo.towerdamage = towerdata.Damage;
+        towerinfo.towername = towerdata.Name;
+        towerinfo.towerprice = towerdata.TowerPrice;
+
+        upgradevalue.UpdamageValue = towerdata.UpgradeAtk;
+        upgradevalue.UpcriticalValue = towerdata.UpgradeCri;
+        upgradevalue.upgradeprice = towerdata.UpgradePrice;
+        upgradevalue.priceUprate = towerdata.UpgradePrice;
+    }
+
+    
+
+    [SerializeField] private int TowerCode;
+    public int GetTowerCode => TowerCode;
+
     protected AudioSource AS = null;
 
     //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
 
     //타워별 업그레이드 수치
-    [SerializeField] UpgradeValue upgradevalue = null;
+    UpgradeValue upgradevalue = new UpgradeValue();
 
     //타워별 수치
-    [SerializeField] protected TowerInfo towerinfo = null;
+    protected TowerInfo towerinfo = new TowerInfo();
 
     //tower prefab에게 넘겨줄 상태 Ui
     public GameObject[] buildstate = null;

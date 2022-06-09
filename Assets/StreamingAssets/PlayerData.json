@@ -87,6 +87,7 @@
   ],
   "ActiveSkill": [
     {
+      "BundleName": "Fire",
       "skillInfoList": [
         {
           "SkillName": "Meteor",
@@ -101,7 +102,7 @@
           "SkillInformation": "하늘에서 거대한 운석을 떨어트려 인근 적에게 피해를 입힙니다.",
           "Slot": 0,
           "CoolTime": 10.0,
-          "CoolTimeDown": 0.5,
+          "CoolTimeDown": 1.0,
           "GetCheckLock": 0
         },
         {
@@ -114,14 +115,108 @@
           "UpValueRate": 1.0,
           "UnLock": 0,
           "BundleName": "Fire",
-          "SkillInformation": "불을 생성하여 지나가는 적에게 지속적인 데미지를 줍니다.",
+          "SkillInformation": "지정 지점에 불을 생성하여 지나가는 적에게 지속적인 데미지를 줍니다.",
           "Slot": 0,
           "CoolTime": 10.0,
-          "CoolTimeDown": 0.5,
+          "CoolTimeDown": 1.0,
           "GetCheckLock": 0
         }
-      ],
-      "GetName": null
+      ]
+    },
+    {
+      "BundleName": "Electric",
+      "skillInfoList": [
+        {
+          "SkillName": "LightningBolt",
+          "Value": 10.0,
+          "Price": 150,
+          "CurrentLevel": 0,
+          "MaxLevel": 5,
+          "PreSkill": "NULL",
+          "UpValueRate": 5.0,
+          "UnLock": 0,
+          "BundleName": "Electric",
+          "SkillInformation": "하늘에서 번개를 떨어트려 인근 적을 감전시킨다.",
+          "Slot": 0,
+          "CoolTime": 10.0,
+          "CoolTimeDown": 1.0,
+          "GetCheckLock": 0
+        }
+      ]
+    },
+    {
+      "BundleName": "Ice",
+      "skillInfoList": [
+        {
+          "SkillName": "freezing",
+          "Value": 1.0,
+          "Price": 150,
+          "CurrentLevel": 0,
+          "MaxLevel": 5,
+          "PreSkill": "NULL",
+          "UpValueRate": 1.0,
+          "UnLock": 0,
+          "BundleName": "Ice",
+          "SkillInformation": "해당 지역을 지나는 적의 이동속도를 낯춘다. 적이 물에 있다면 해당 적을 얼린다.",
+          "Slot": 0,
+          "CoolTime": 10.0,
+          "CoolTimeDown": 1.0,
+          "GetCheckLock": 0
+        }
+      ]
+    },
+    {
+      "BundleName": "Obs",
+      "skillInfoList": [
+        {
+          "SkillName": "WoodObs",
+          "Value": 20.0,
+          "Price": 100,
+          "CurrentLevel": 0,
+          "MaxLevel": 3,
+          "PreSkill": "NULL",
+          "UpValueRate": 5.0,
+          "UnLock": 0,
+          "BundleName": "Obs",
+          "SkillInformation": "적이 지나는 길목을 나무로 막습니다.",
+          "Slot": 0,
+          "CoolTime": 0.0,
+          "CoolTimeDown": 0.0,
+          "GetCheckLock": 0
+        },
+        {
+          "SkillName": "StoneObs",
+          "Value": 30.0,
+          "Price": 125,
+          "CurrentLevel": 0,
+          "MaxLevel": 3,
+          "PreSkill": "WoodObs",
+          "UpValueRate": 5.0,
+          "UnLock": 0,
+          "BundleName": "Obs",
+          "SkillInformation": "적이 지나는 길목을 돌로 막습니다.",
+          "Slot": 0,
+          "CoolTime": 0.0,
+          "CoolTimeDown": 0.0,
+          "GetCheckLock": 0
+        },
+        {
+          "SkillName": "BarbedWire",
+          "Value": 20.0,
+          "Price": 150,
+          "CurrentLevel": 0,
+          "MaxLevel": 3,
+          "PreSkill": "StoneObs",
+          "UpValueRate": 5.0,
+          "UnLock": 0,
+          "BundleName": "Obs",
+          "SkillInformation": "적이 지나는 길목을 철조망으로 막습니다.",
+          "Slot": 0,
+          "CoolTime": 0.0,
+          "CoolTimeDown": 0.0,
+          "GetCheckLock": 0
+        }
+      ]
     }
   ]
 }

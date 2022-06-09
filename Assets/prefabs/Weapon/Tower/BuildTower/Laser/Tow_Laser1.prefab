@@ -232,19 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb386d5e3703fc4a855676ba8eae11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TowerCode: 31
   uppertower: {fileID: 7980187492818512454, guid: 543bb799468827744806f608932d36fd, type: 3}
-  upgradevalue:
-    priceUprate: 75
-    upgradeprice: 75
-    UpdamageValue: 1
-    UpcriticalValue: 3
-  towerinfo:
-    towerprice: 200
-    towername: "\uB808\uC774\uC800"
-    towerdamage: 1
-    towercritical: 0
-    towerrange: 1.5
-    atkdelay: 1
   buildstate: []
   towerpreview: {fileID: 500732071518667701, guid: a2dd3a9469624f249b3985091d41fb54, type: 3}
   towerBody: {fileID: 500732071518642065}

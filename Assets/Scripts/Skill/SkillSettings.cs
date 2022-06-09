@@ -28,8 +28,8 @@ public class PassiveSkillSet
 [System.Serializable]
 public class ActiveSkillSet
 {
-    private string BundleName;
-    public string GetName => BundleName;
+    public string BundleName;
+    //public string GetName => BundleName;
 
     public List<ActiveForm> skillInfoList = new List<ActiveForm>();
 
@@ -70,7 +70,11 @@ public class SkillSettings : MonoBehaviour
     //public static List<ActiveSkillSet> SActiveSkill;
 
     private PassiveSkillSet Passive_Money = new PassiveSkillSet("Money");
+
     private ActiveSkillSet Active_Fire = new ActiveSkillSet("Fire");
+    private ActiveSkillSet Active_Ice = new ActiveSkillSet("Ice");
+    private ActiveSkillSet Active_Electric = new ActiveSkillSet("Electric");
+    private ActiveSkillSet Active_Obstacle = new ActiveSkillSet("Obstacle");
 
     private UserInformation userinfo = null;
 
@@ -83,6 +87,8 @@ public class SkillSettings : MonoBehaviour
 
     public void SkillSetUp(List<PassiveSkillSet> passiveSkillSets, List<ActiveSkillSet> activeSkillSets)
     {
+        ASkillSetUp();
+
         SPassiveSkill = passiveSkillSets;
         SActiveSkill = activeSkillSets;
         ShowLevel();
@@ -232,15 +238,16 @@ public class SkillSettings : MonoBehaviour
 
     private void AShowLevel()
     {
-        for (int i = 0; i < SActiveSkill.Count; i++)
-        {
-            for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
+       
+       // for (int i = 0; i < SActiveSkill.Count; i++)
+       // {
+            for (int j = 0; j < SActiveSkill[0].skillInfoList.Count; j++)
             {
 
-                FireBundle[i + j].level.text = ASearchSkill(FireBundle[i + j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(FireBundle[i + j].skillname).MaxLevel.ToString();
+                FireBundle[j].level.text = ASearchSkill(FireBundle[ j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(FireBundle[ j].skillname).MaxLevel.ToString();
                 
             }
-        }
+        //}
     }
 
     #endregion
@@ -265,13 +272,30 @@ public class SkillSettings : MonoBehaviour
     {
         for (int i = 0; i < ActiveBundle.ActiveSkill.Count; i++)
         {
-            if (ActiveBundle.ActiveSkill[i].BundleName == "Fire")
+            switch (ActiveBundle.ActiveSkill[i].BundleName)
             {
-                Active_Fire.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                case "Fire":
+                    Active_Fire.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                    break;
+                case "Ice":
+                    Active_Ice.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                    break;
+                case "Electric":
+                    Active_Electric.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                    break;
+                case "Obstacle":
+                    Active_Obstacle.skillInfoList.Add(ActiveBundle.ActiveSkill[i]);
+                    break;
             }
         }
 
         SActiveSkill.Add(Active_Fire);
+        SActiveSkill.Add(Active_Ice);
+        SActiveSkill.Add(Active_Electric);
+        SActiveSkill.Add(Active_Obstacle);
+
+        //Debug.Log(SActiveSkill.Count);
+
     }
 
 

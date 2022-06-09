@@ -104,7 +104,7 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
     public void SetSlot()
     {
-
+        Debug.Log(skillsettings.ASearchSkill(SkillName).Slot);
         switch (skillsettings.ASearchSkill(SkillName).Slot)
         {
             case 1:
