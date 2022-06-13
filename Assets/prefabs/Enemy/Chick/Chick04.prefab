@@ -220,6 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyCode: 4
+  electricShock: 0
+  Fired: 0
+  Iced: 0
+  blood: 0
   HpUpValue: 1
 --- !u!1 &975012753349744667
 GameObject:

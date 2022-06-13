@@ -79,7 +79,7 @@ public class Mortarbullet : Bullet
                 }
                 else
                 {
-                    float decrease = damage - (int)(damage * 0.6f);
+                    float decrease = damage - (int)(damage * 0.3f);
                     if (decrease <= 0) continue;
                     EC.GetComponent<Enemy>().EnemyAttacked(decrease);
                 }

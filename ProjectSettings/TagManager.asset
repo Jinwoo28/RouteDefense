@@ -15,6 +15,7 @@ TagManager:
   - Obstacle
   - SkillUi
   - OriginUi
+  - FireBullet
   layers:
   - Default
   - TransparentFX

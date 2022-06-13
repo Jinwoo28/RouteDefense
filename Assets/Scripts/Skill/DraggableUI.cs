@@ -69,7 +69,6 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
     private void Start()
     {
-        Debug.Log(skillsettings);
         SetSlot();
     }
 
@@ -104,7 +103,6 @@ public class DraggableUI : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDrag
 
     public void SetSlot()
     {
-        Debug.Log(skillsettings.ASearchSkill(SkillName).Slot);
         switch (skillsettings.ASearchSkill(SkillName).Slot)
         {
             case 1:

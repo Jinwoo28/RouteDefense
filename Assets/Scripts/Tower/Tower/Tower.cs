@@ -44,8 +44,6 @@ public class Tower : MonoBehaviour
 
     private void TowerSetUp(TowerData towerdata)
     {
-        Debug.Log(towerdata.Delay);
-
         towerinfo.atkdelay = towerdata.Delay;
         towerinfo.towerrange = towerdata.Range;
         towerinfo.towercritical = towerdata.Critical;

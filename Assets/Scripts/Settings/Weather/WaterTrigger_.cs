@@ -17,7 +17,7 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            Debug.Log("µé¾î¿È");
+            Debug.Log("¹Ù´Ù");
             other.GetComponent<Tower>().SetTowerCanWork = false;
             towerlist.Add(other.GetComponent<Tower>());
         }

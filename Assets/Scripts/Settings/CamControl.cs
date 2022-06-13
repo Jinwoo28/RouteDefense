@@ -33,6 +33,12 @@ public class CamControl : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Time.timeScale += 1;
+            Debug.Log(Time.timeScale);
+        }
+
         if (canCamMove)
         {
             //키보드 WASD로 이동

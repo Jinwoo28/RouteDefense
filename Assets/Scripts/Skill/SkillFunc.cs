@@ -39,6 +39,11 @@ public class SkillFunc : MonoBehaviour
     {
         Fire =1,
         Meteor,
+        Freezing,
+        Lightning,
+        WoodObs,
+        StoneObs,
+        BarbedWire
     }
     skill skillnum = 0;
 
@@ -161,13 +166,43 @@ public class SkillFunc : MonoBehaviour
                         case skill.Fire:
                             if (skillKind[0].CanUse)
                             {
-                                FireSkill();
+                                BuildSkill(0);
                             }
                             break;
                         case skill.Meteor:
                             if (skillKind[1].CanUse)
                             {
                                 MeteorSkill();
+                            }
+                            break;
+                        case skill.Freezing:
+                            if (skillKind[2].CanUse)
+                            {
+                                BuildSkill(2);
+                            }
+                            break;
+                        case skill.Lightning:
+                            if (skillKind[3].CanUse)
+                            {
+                                LightningBolt();
+                            }
+                            break;
+                        case skill.WoodObs:
+                            if (skillKind[4].CanUse)
+                            {
+                                BuildSkill(4);
+                            }
+                            break;
+                        case skill.StoneObs:
+                            if (skillKind[5].CanUse)
+                            {
+                                BuildSkill(5);
+                            }
+                            break;
+                        case skill.BarbedWire:
+                            if (skillKind[6].CanUse)
+                            {
+                                BuildSkill(6);
                             }
                             break;
                     }
@@ -213,28 +248,36 @@ public class SkillFunc : MonoBehaviour
         }
 
         GameManager.OffFunc();
-        switch (_skilltype)
+
+        SkillNum(_skilltype);
+    }
+
+    public void SkillNum(int num)
+    {
+        if (skillKind[num].CanUse)
         {
-            case 1:
-                if (skillKind[0].CanUse)
-                {
-                    skillnum = skill.Fire;
-                    setskillpos = Instantiate(SetSkillPos,Vector3.zero,Quaternion.Euler(90,0,0));
-                    skillActive = true;
-                }
-                break;
-            case 2:
-                if (skillKind[1].CanUse)
-                {
-                    skillnum = skill.Meteor;
-                    setskillpos = Instantiate(SetSkillPos, Vector3.zero, Quaternion.Euler(90, 0, 0));
-                    skillActive = true;
-                }
-                break;
+            skillnum = (skill)(num);
+            setskillpos = Instantiate(SetSkillPos, Vector3.zero, Quaternion.Euler(90, 0, 0));
+            skillActive = true;
         }
+    }
+
+    void LightningBolt()
+    {
+        Debug.Log("번개스킬");
+        var bolt = Instantiate(skillKind[3].Skill, targetpos, Quaternion.identity);
+        bolt.GetComponent<lightbolt>().SetPos(new Vector3(targetpos.x, targetpos.y + 20, targetpos.z), targetpos);
+        SkillSetUp(skillKind[3], skillButton[3], skillButton[3].GetComponentInChildren<TextMeshProUGUI>(), skillKind[3].Skillname);
 
 
-        
+
+    }
+
+    private void BuildSkill(int prefabsNum)
+    {
+        Instantiate(skillKind[prefabsNum].Skill, targetpos, Quaternion.identity);
+
+        SkillSetUp(skillKind[prefabsNum], skillButton[prefabsNum], skillButton[prefabsNum].GetComponentInChildren<TextMeshProUGUI>(), skillKind[prefabsNum].Skillname);
     }
 
     private void FireSkill()

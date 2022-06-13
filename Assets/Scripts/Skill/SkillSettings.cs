@@ -14,8 +14,8 @@ public class SKillText
 [System.Serializable]
 public class PassiveSkillSet
 {
-    private string BundleName;
-    public string GetName => BundleName;
+    public string BundleName;
+    //public string GetName => BundleName;
 
     public List<PassiveForm> skillInfoList = new List<PassiveForm>();
 

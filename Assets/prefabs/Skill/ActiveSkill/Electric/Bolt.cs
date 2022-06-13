@@ -4,32 +4,22 @@ using UnityEngine;
 
 public class Bolt : MonoBehaviour
 {
-    public GameObject BoombEffect;
-    public GameObject Lightning;
-
-    // Update is called once per frame
-    void Update()
+    private SphereCollider Range;
+    private void Start()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                StartCoroutine(makeeffect(hit.point));
-                var item = Instantiate(Lightning);
-                item.GetComponent<lightbolt>().SetPos(hit.point, new Vector3(hit.point.x, hit.point.y + 30, hit.point.z));
-
-                Debug.Log(hit.point);
-
-
-            }
-        }
+        Range = this.GetComponent<SphereCollider>();
     }
 
-    IEnumerator makeeffect(Vector3 pos)
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(0.1f);
-        Instantiate(BoombEffect, pos + new Vector3(0,1.5f,0),Quaternion.identity);
+        if (other.CompareTag("Water"))
+        {
+            Range.radius = 1.5f;
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            StartCoroutine(other.GetComponent<Enemy>().ElectricShock());
+        }
     }
 }

@@ -31,7 +31,6 @@ public class LaserTower : Tower
 
         if (FinalTarget != null)
         {
-            Debug.Log("≈∏∞Ÿ¿÷¿Ω");
             //RaycastHit hit;
             //if(Physics.Raycast(shootPos.position, shootPos.forward,out hit))
             //{
@@ -40,7 +39,6 @@ public class LaserTower : Tower
             if (Atking)
             {
 
-                Debug.Log("ddddd");
                 lR.enabled = true;
 
                 lR.SetPosition(0, shootPos.position);

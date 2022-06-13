@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8593104211233122223}
   - component: {fileID: 8593104211238362779}
-  - component: {fileID: 4178007928809512812}
+  - component: {fileID: 5262206783759821507}
+  - component: {fileID: 65331372702826665}
+  - component: {fileID: 2612995464745147271}
+  - component: {fileID: -4024098814460262376}
   m_Layer: 0
   m_Name: LightningPrefab
   m_TagString: Untagged
@@ -26,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8593104211232717867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.85}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +54,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02d22a64daa120542b4215115693e884, type: 2}
+  - {fileID: 2100000, guid: 920e2f130168d0249a1b788ef3a82089, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,7 +84,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.3947296
+        value: 0.0719005
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -90,7 +93,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0.07479668
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -102,8 +105,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.99911493, b: 0.8632076, a: 1}
-      key1: {r: 1, g: 0.88678104, b: 0.79607844, a: 1}
+      key0: {r: 0.8627451, g: 0.892892, b: 1, a: 1}
+      key1: {r: 0.7242346, g: 0.7423953, b: 0.990566, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -137,7 +140,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &4178007928809512812
+--- !u!114 &5262206783759821507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,14 +149,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 8593104211232717867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7081c1b7ad00d224dbd6bd377e61b6a7, type: 3}
+  m_Script: {fileID: 11500000, guid: fd721dc2729f7ca40a6f12dd8a5de103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EndObject: {fileID: 0}
   Generations: 6
-  Duration: 0.03
+  Duration: 0.02
   ChaosFactor: 0.15
   ManualMode: 0
   Rows: 1
   Columns: 1
   AnimationMode: 3
+  Effect: {fileID: 4368261306594057589, guid: 80f45b45fc3ed6e479e6b120c4a3fde3, type: 3}
+--- !u!135 &65331372702826665
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593104211232717867}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2612995464745147271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593104211232717867}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-4024098814460262376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593104211232717867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7b9e7c2d84bf947a657a69cecf125a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

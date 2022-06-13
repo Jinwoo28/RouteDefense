@@ -96,6 +96,11 @@ public class BuildManager : MonoBehaviour
         }
 
         showtowerinfo.SetTowerinfoOff();
+
+        Debug.Log(_slotnum);
+        Debug.Log(buildtower[_slotnum].builditem.GetComponent<Tower>() + "1¹ø");
+
+
          towerprice = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice;
 
             if (playercoin >= towerprice)

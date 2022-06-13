@@ -113,6 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyCode: 11
+  electricShock: 0
+  Fired: 0
+  Iced: 0
+  blood: 0
   HpUpValue: 1
 --- !u!54 &4402052285060182350
 Rigidbody:

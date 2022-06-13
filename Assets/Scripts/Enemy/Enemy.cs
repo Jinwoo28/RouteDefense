@@ -17,6 +17,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    
     [SerializeField] private int EnemyCode;
 
     //적의 이동 경로
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
 
     private Transform Water = null;
     private bool underTheSea = false;
+    public bool GetWet => underTheSea;
     private bool speedInit = false;
 
     private float unitspeed = 0;
@@ -51,14 +53,11 @@ public class Enemy : MonoBehaviour
     private int enemyNum = 0;
     float Hp = 0;
 
-    //public Enemy(EnemyState state)
-    //{
-    //    unitstate.unithp = state.Hp;
-    //    unitstate.unitspeed = state.Speed;
-    //    unitstate.unitcoin = state.coin;
-    //    unitstate.unitamour= state.Amour;
-    //    unitstate.avoidancerate = state.avoidance;
-    //}
+
+    public bool electricShock = false;
+    public bool Fired = false;
+    public bool Iced = false;
+    public bool blood = false;
 
 
     public void SetPooling(EnemyPooling  _pooling, int _num)
@@ -70,7 +69,6 @@ public class Enemy : MonoBehaviour
     public void ResetHp()
     {
         unitstate.unithp = Hp;
-
     }
 
     private void Awake()
@@ -91,13 +89,16 @@ public class Enemy : MonoBehaviour
     {
         Hp = unitstate.unithp;
         MultipleSpeed.speedup += SpeedUP;
+        TimeScale = Time.timeScale;
     }
 
+    private float TimeScale = 1;
     private void SpeedUP(int x)
     {
-        Time.timeScale = x;
-    }
+        OriginTimeScale = x;
 
+        TimeScale = x;
+    }
 
 
     public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum,Transform _water)
@@ -134,8 +135,10 @@ public class Enemy : MonoBehaviour
 
         Vector3 currentPos = this.transform.position;
 
+
         while (waypointindex != Waypoint.Length - 1)
         {
+        Debug.Log(underTheSea);
 
             if (this.transform.position.y < Water.transform.position.y)
             {
@@ -194,12 +197,13 @@ public class Enemy : MonoBehaviour
                     if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
                     else
                     {
-                        if (X < -0.05f) unitspeed += Time.deltaTime;
-                        else if (X > 0.05f) unitspeed -= Time.deltaTime;
+                        
+                        if (X < -0.05f) unitspeed += Time.unscaledDeltaTime* TimeScale;
+                        else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime* TimeScale;
                         else unitspeed = unitstate.unitspeed;
                     }
                     //다음 목적지로 이동
-                    this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.deltaTime);
+                    this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime* TimeScale);
                 }
 
                 //Debug.Log("유닛 스피드 : " + unitspeed);
@@ -208,7 +212,7 @@ public class Enemy : MonoBehaviour
                 Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
 
                 //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
-                Vector3 TowerDir = Quaternion.RotateTowards(this.transform.rotation, rotationtotarget, 360 * Time.deltaTime).eulerAngles;
+                Vector3 TowerDir = Quaternion.RotateTowards(this.transform.rotation, rotationtotarget, 360 * Time.unscaledDeltaTime * TimeScale).eulerAngles;
 
                 //현재의 rotation값에 Vector3형태로 저장한 값 사용
                 this.transform.rotation = Quaternion.Euler(0, TowerDir.y, 0);
@@ -258,7 +262,7 @@ public class Enemy : MonoBehaviour
         Timer = 0;
         while (Vector3.Magnitude(_next - this.transform.position) > 0.05f)
         {
-            Timer += Time.deltaTime;
+            Timer += Time.unscaledDeltaTime* TimeScale;
            
             Vector3 MovePos =  parabola(_current, _next, 1.5f, 1, Timer*unitspeed);
 
@@ -313,6 +317,71 @@ public class Enemy : MonoBehaviour
             unitstate.unithp -= _damage;
         }
     }
+
+
+    float originSpeed;
+
+
+    private float OriginTimeScale = 1;
+
+    private bool alreadyslow = false;
+
+    public void SlowDown()
+    {
+        if (!alreadyslow)
+        {
+            alreadyslow = true;
+
+            if (!underTheSea)
+            {
+                TimeScale *= 0.5f;
+                Debug.Log("SLow");
+            }
+            else
+            {
+                Debug.Log("Stop");
+                TimeScale = 0;
+                Iced = true;
+            }
+        }
+
+        if (underTheSea)
+        {
+            TimeScale = 0;
+            Iced = true;
+        }
+    }
+
+    public void returnSpeed()
+    {
+        TimeScale = OriginTimeScale;
+        Iced = false;
+        alreadyslow = false;
+    }
+
+
+
+    public IEnumerator IcedEnemy()
+    {
+        unitspeed = 0;
+
+        yield return new WaitForSeconds(1.0f);
+        unitspeed = originSpeed;
+
+    }
+
+    public IEnumerator ElectricShock()
+    {
+        Debug.Log("실행");
+        electricShock = true;
+        EnemyAttacked(10);
+
+        yield return new WaitForSeconds(2.0f);
+        electricShock = false;
+
+    }
+
+    
 
     public void EnemyDie()
     {

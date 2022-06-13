@@ -330,13 +330,10 @@ public class TowerPreview : MonoBehaviour
 
     public void DestroyThis()
     {
-        Debug.Log("ÆÄ±«");
         thisActive = false;
-        Debug.Log("dddd");
         showtowerinfo.RangeOff();
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("ssss");
             buildstate[i].SetActive(false);
         }
         Destroy(this.gameObject);

@@ -189,12 +189,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyCode: 2
-  unitstate:
-    unitspeed: 1
-    unitcoin: 5
-    unithp: 5
-    unitamour: 0
-    avoidancerate: 0
+  electricShock: 0
+  Fired: 0
+  Iced: 0
+  blood: 0
   HpUpValue: 1
 --- !u!1 &6983224403829673540
 GameObject:

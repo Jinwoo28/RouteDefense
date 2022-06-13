@@ -96,11 +96,19 @@ using System.Collections.Generic;
         private int animationPingPongDirection = 1;
         private bool orthographic;
 
+        public GameObject Effect = null;
         public void SetPos(Vector3 start, Vector3 end)
         {
             StartPosition = start;
             EndPosition = end;
         }
+
+    public lightbolt(Vector3 start, Vector3 end)
+    {
+        StartPosition = start;
+        EndPosition = end;
+
+    }
         private void GetPerpendicularVector(ref Vector3 directionNormalized, out Vector3 side)
         {
             if (directionNormalized == Vector3.zero)
@@ -143,7 +151,15 @@ using System.Collections.Generic;
             }
         }
 
-        private void GenerateLightningBolt(Vector3 start, Vector3 end, int generation, int totalGenerations, float offsetAmount)
+    private void Awake()
+    {
+        RandomGenerator = new System.Random();
+        segments = new List<KeyValuePair<Vector3, Vector3>>();
+        StartPosition = new Vector3(-2, 5, 0);
+        EndPosition = new Vector3(3, 0, 0);
+    }
+
+    private void GenerateLightningBolt(Vector3 start, Vector3 end, int generation, int totalGenerations, float offsetAmount)
         {
             if (generation < 0 || generation > 8)
             {
@@ -153,7 +169,6 @@ using System.Collections.Generic;
             {
                 start.z = end.z = Mathf.Min(start.z, end.z);
             }
-
             segments.Add(new KeyValuePair<Vector3, Vector3>(start, end));
             if (generation == 0)
             {
@@ -290,13 +305,17 @@ using System.Collections.Generic;
 
         private void Start()
         {
-        Destroy(this.gameObject, 0.7f);
+            Destroy(this.gameObject, 1.0f);
 
             orthographic = (Camera.main != null && Camera.main.orthographic);
             lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.positionCount = 0;
             UpdateFromMaterialChange();
+
+            var effect = Instantiate(Effect, new Vector3(EndPosition.x,EndPosition.y+0.35f,EndPosition.z), Quaternion.identity);
+        effect.transform.SetParent(this.transform);
         }
+
 
         private void Update()
         {

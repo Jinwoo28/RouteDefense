@@ -11,8 +11,10 @@ public class Enemy_Creture : Enemy
     private bool iseating = false;
     public bool GetSetEating { get => iseating; set => iseating = value; }
 
+
     protected override void Start()
     {
+
         base.Start();
         originHP = GetHp;
     }
@@ -52,45 +54,7 @@ public class Enemy_Creture : Enemy
         Debug.Log(GetHp);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    StopCoroutine("eatingfruit");
-    //    if (other.CompareTag("Fruit"))
-    //    {
-    //        StartCoroutine("eatingfruit", other.GetComponent<Fruit>());
-    //    }
-    //}
-
-    //IEnumerator eatingfruit(Fruit fruit)
-    //{
-    //    int eatvalue = (int)(originHP / 10)+1;
-
-    //    while (true)
-    //    {
-    //        yield return new WaitForSeconds(0.3f);
-    //        if (fruit != null)
-    //        {
-    //            if (fruit.GetRemains - eatvalue >= 0)
-    //            {
-    //                fruit.CountDown(eatvalue);
-    //                if (GetHp + eatvalue >= originHP) SetOriginHp = originHP;
-    //                else GetHp = eatvalue;
-    //            }
-    //            else
-    //            {
-    //                fruit.ReturnObj();
-    //                if (GetHp + eatvalue >= originHP) SetOriginHp = originHP;
-    //                else GetHp = fruit.GetRemains;
-    //            }
-
-
-    //        }
-    //        else
-    //        {
-    //            break;
-    //        }
-    //    }
-    //}
+   
 
     public void FireAttacked(float damage)
     {
@@ -105,12 +69,12 @@ public class Enemy_Creture : Enemy
 
 
   
-    IEnumerator DotDamage(float damage)
+    public IEnumerator DotDamage(float damage)
     {
-        int damagecount = 5 + (SkillSettings.ActiveSkillSearch("Fire").CurrentLevel*2);
+        
+        int damagecount = 5;
         while (damagecount > 0)
         {
-            Debug.Log("µ¥¹ÌÁö");
             damagecount--;
             if (damage < GetHp)
             {
@@ -119,6 +83,7 @@ public class Enemy_Creture : Enemy
             else
             {
                 EnemyDie();
+                fired = false;
             }
             yield return new WaitForSeconds(0.5f);
         }
@@ -126,4 +91,14 @@ public class Enemy_Creture : Enemy
         fired = false;
        
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("FireBullet"))
+        {
+            firedamage(1);
+        }
+    }
+
+
 }
