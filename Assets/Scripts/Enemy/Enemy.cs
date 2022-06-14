@@ -17,7 +17,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    
+
     [SerializeField] private int EnemyCode;
 
     //적의 이동 경로
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     private GameObject hpbar = null;
     private GameObject damagenum = null;
     private GameObject hpbarprefab = null;
-    
+
     private Camera cam = null;
     protected enum currentstate { nomal, posion, fire, ice, }
     protected currentstate CS;
@@ -54,13 +54,15 @@ public class Enemy : MonoBehaviour
     float Hp = 0;
 
 
-    public bool electricShock = false;
+    private bool electricShock = false;
+    public bool GetShock() => electricShock;
+
     public bool Fired = false;
     public bool Iced = false;
     public bool blood = false;
 
 
-    public void SetPooling(EnemyPooling  _pooling, int _num)
+    public void SetPooling(EnemyPooling _pooling, int _num)
     {
         EP = _pooling;
         enemyNum = _num;
@@ -101,7 +103,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint,Transform _canvas,GameObject _hpbar, GameObject _damagenum,Transform _water)
+    public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint, Transform _canvas, GameObject _hpbar, GameObject _damagenum, Transform _water)
     {
         Water = _water;
         hpbar = _hpbar;
@@ -111,7 +113,7 @@ public class Enemy : MonoBehaviour
         canvas = _canvas;
     }
 
-   public void StartMove()
+    public void StartMove()
     {
 
         unitspeed = unitstate.unitspeed;
@@ -120,8 +122,8 @@ public class Enemy : MonoBehaviour
         {
             hpbarprefab = Instantiate(hpbar);
             hpbarprefab.transform.SetParent(canvas);
-            hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this,this.transform);
-            hpbar.GetComponentInChildren<RectTransform>().localScale = new Vector3(1+ 0.03f * (1+unitstate.unithp*0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
+            hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this, this.transform);
+            hpbar.GetComponentInChildren<RectTransform>().localScale = new Vector3(1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
         }
 
         StartCoroutine("MoveUnit");
@@ -138,7 +140,6 @@ public class Enemy : MonoBehaviour
 
         while (waypointindex != Waypoint.Length - 1)
         {
-        Debug.Log(underTheSea);
 
             if (this.transform.position.y < Water.transform.position.y)
             {
@@ -147,7 +148,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                if(!speedInit) unitspeed *= 1.15f;
+                if (!speedInit) unitspeed *= 1.15f;
                 speedInit = true;
                 underTheSea = false;
             }
@@ -157,11 +158,11 @@ public class Enemy : MonoBehaviour
             if (waypointindex < Waypoint.Length)
             {
 
-                if (Vector3.Magnitude(MoveToPoint-this.transform.position)<0.05f)
+                if (Vector3.Magnitude(MoveToPoint - this.transform.position) < 0.05f)
                 {
                     currentPos = Waypoint[waypointindex];
                     waypointindex++;
-                    
+
                 }
 
                 //오르막길
@@ -169,7 +170,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (!jump)
                     {
-                        if(underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
+                        if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
                         else unitspeed *= 0.8f;
                         StartCoroutine(MoveToNext(currentPos, Waypoint[waypointindex]));
                     }
@@ -178,7 +179,7 @@ public class Enemy : MonoBehaviour
                 //내리막길
                 else if (Waypoint[waypointindex].y < currentPos.y)
                 {
-                    
+
                     if (!jump)
                     {
                         if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
@@ -190,20 +191,20 @@ public class Enemy : MonoBehaviour
                 //평지
                 else
                 {
-                    
+
                     float X = unitspeed - unitstate.unitspeed;
 
                     //느린상태
                     if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
                     else
                     {
-                        
-                        if (X < -0.05f) unitspeed += Time.unscaledDeltaTime* TimeScale;
-                        else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime* TimeScale;
+
+                        if (X < -0.05f) unitspeed += Time.unscaledDeltaTime * TimeScale;
+                        else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime * TimeScale;
                         else unitspeed = unitstate.unitspeed;
                     }
                     //다음 목적지로 이동
-                    this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime* TimeScale);
+                    this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime * TimeScale);
                 }
 
                 //Debug.Log("유닛 스피드 : " + unitspeed);
@@ -216,12 +217,12 @@ public class Enemy : MonoBehaviour
 
                 //현재의 rotation값에 Vector3형태로 저장한 값 사용
                 this.transform.rotation = Quaternion.Euler(0, TowerDir.y, 0);
-                
+
                 yield return null;
             }
             else
             {
-                
+
                 yield break;
             }
         }
@@ -231,7 +232,7 @@ public class Enemy : MonoBehaviour
     }
 
     //포물선 이동
-    private Vector3 parabola(Vector3 _start, Vector3 _end, float _height, float _power,float _time)
+    private Vector3 parabola(Vector3 _start, Vector3 _end, float _height, float _power, float _time)
     {
         //y축은 파워값과 높이값에 time.deltatime을 곱한다.
         //time이 1보다 작을 때는 양수, 1보다 클 때는(음수)이기 때문에 포물선 이동이 가능
@@ -254,7 +255,7 @@ public class Enemy : MonoBehaviour
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);
     }
 
-    
+
 
     private IEnumerator MoveToNext(Vector3 _current, Vector3 _next)
     {
@@ -262,9 +263,9 @@ public class Enemy : MonoBehaviour
         Timer = 0;
         while (Vector3.Magnitude(_next - this.transform.position) > 0.05f)
         {
-            Timer += Time.unscaledDeltaTime* TimeScale;
-           
-            Vector3 MovePos =  parabola(_current, _next, 1.5f, 1, Timer*unitspeed);
+            Timer += Time.unscaledDeltaTime * TimeScale;
+
+            Vector3 MovePos = parabola(_current, _next, 1.5f, 1, Timer * unitspeed);
 
             this.transform.position = MovePos;
             yield return null;
@@ -278,7 +279,19 @@ public class Enemy : MonoBehaviour
 
 
 
+    public void ElectricDamage(float _damage)
+    {
+        StopCoroutine("ElectricShock");
+        StartCoroutine("ElectricShock");
+        EnemyAttacked(_damage);
+        electricShock = true;
+    }
 
+    IEnumerator ElectricShock()
+    {
+        yield return new WaitForSeconds(1.0f);
+        electricShock = false;
+    }
 
 
 
@@ -370,16 +383,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public IEnumerator ElectricShock()
-    {
-        Debug.Log("실행");
-        electricShock = true;
-        EnemyAttacked(10);
 
-        yield return new WaitForSeconds(2.0f);
-        electricShock = false;
-
-    }
 
     
 

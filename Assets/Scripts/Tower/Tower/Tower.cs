@@ -107,6 +107,7 @@ public class Tower : MonoBehaviour
     //타워의 합체 단계 1,2,3단계
     [SerializeField] private int towerstep = 1;
 
+
     //포신이 회전할 속도
     protected float rotationspeed = 720;
 

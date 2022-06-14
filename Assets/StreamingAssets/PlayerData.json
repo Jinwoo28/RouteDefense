@@ -1,5 +1,5 @@
 {
-  "userCoin": 4850,
+  "userCoin": 3925,
   "PassiveSkill": [
     {
       "BundleName": "Money",
@@ -149,19 +149,19 @@
       "skillInfoList": [
         {
           "SkillName": "freezing",
-          "Value": 2.0,
-          "Price": 300,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 150,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 1.0,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Ice",
           "SkillInformation": "해당 지역을 지나는 적의 이동속도를 낯춘다. 적이 물에 있다면 해당 적을 얼린다.",
-          "Slot": 1,
-          "CoolTime": 9.0,
+          "Slot": 0,
+          "CoolTime": 10.0,
           "CoolTimeDown": 1.0,
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         }
       ]
     },

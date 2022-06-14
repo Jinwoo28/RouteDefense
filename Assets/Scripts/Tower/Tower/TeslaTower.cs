@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class TeslaTower : Tower
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject ElectricBulet = null;
+
+
+    protected override void Start()
     {
-        
+        base.Start();
+        ElectricBulet.GetComponent<TeslaBullet>().InitSetUp(GetStep + 2, this,GetStep+4);
+        ElectricBulet.transform.position = shootPos.position;
+        ElectricBulet.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Attack()
     {
-        
+
+            ElectricBulet.SetActive(true);
+            ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget);
+
     }
+
+    public void ReturnBullet(TeslaBullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+        bullet.transform.position = shootPos.position;
+    }
+
+    public Transform GetShootPos() => shootPos;
+
 }

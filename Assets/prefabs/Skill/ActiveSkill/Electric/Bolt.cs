@@ -19,7 +19,7 @@ public class Bolt : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            StartCoroutine(other.GetComponent<Enemy>().ElectricShock());
+            other.GetComponent<Enemy>().ElectricDamage(10);
         }
     }
 }
