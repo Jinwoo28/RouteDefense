@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class TeslaBullet : MonoBehaviour
 {
-    private TeslaEffect TE = null;
-
     [SerializeField] private LayerMask enemylayer;
-    private float Range = 0.6f;
+    private float Range = 0.5f;
 
     private Transform target = null;
 
@@ -20,15 +18,14 @@ public class TeslaBullet : MonoBehaviour
     private int MaxCount = 3;
     private int MaxOriginCount = 0;
 
-    private bool isgoing = false;
-
     List<Enemy> enemylist = new List<Enemy>();
 
-    private void Awake()
-    {
-        TE = this.GetComponent<TeslaEffect>();
-    }
+    [SerializeField]
+    private GameObject BoltPrefab = null;
 
+    Queue<TeslaEffect> boltqueue = new Queue<TeslaEffect>();
+
+    //초기화
     public void InitSetUp(int _Count, TeslaTower _teslaTower,int _MaxCount)
     {
         Count = _Count;
@@ -36,14 +33,54 @@ public class TeslaBullet : MonoBehaviour
         tesla = _teslaTower;
         MaxCount = _MaxCount;
         MaxOriginCount = MaxCount;
+        MakeQueue();
     }
 
-    public void SetUp(float _Damage, Transform _target)
+    //번개 이펙트 오브젝트 생성
+    private void MakeQueue()
     {
+        for(int i = 0; i < MaxCount+Count; i++)
+        {
+            var bolt = Instantiate(BoltPrefab, this.transform).GetComponent<TeslaEffect>();
+            bolt.gameObject.transform.position = tesla.GetShootPos().position;
+            bolt.GetTB = this;
+            bolt.gameObject.SetActive(false);
+            boltqueue.Enqueue(bolt);
+        }
+    }
+
+    //큐에서 오브젝트 가져오기
+    private TeslaEffect DequeueBolt()
+    {
+        var obj = boltqueue.Dequeue();
+        obj.gameObject.SetActive(true);
+        return obj;
+    }
+
+    //큐에 오브젝트 집어넣기
+    public void ReturnEffect(TeslaEffect effect)
+    {
+        boltqueue.Enqueue(effect);
+        effect.gameObject.SetActive(false);
+        effect.gameObject.transform.position = tesla.GetShootPos().position;
+    }
+
+
+    //공격이 시작할 때 처음 시작될 함수
+    public void SetUp(float _Damage, Transform _target,Transform Startpos)
+    {        
+        //이펙트를 하나 가져와서 실행
+        var obj = DequeueBolt();
+
+        obj.SetPos(Startpos, _target);
+
+        //List에 활성화 이펙트 넣어두기
+        ActiveEffect.Add(obj);
+
         target = _target;
         Damage = _Damage;
-        isgoing = true;
-        StartCoroutine(Trigger(_Damage));
+
+        StartCoroutine("Trigger");
     }
 
     /*
@@ -58,36 +95,22 @@ public class TeslaBullet : MonoBehaviour
      */
 
 
+    private List<TeslaEffect> ActiveEffect = new List<TeslaEffect>();
 
-    private void Update()
+    IEnumerator Trigger()
     {
-        //if (isgoing)
-        //{
-        //    Vector3 Dir = target.position - transform.position;
 
-        //    this.transform.position += Dir.normalized * Time.deltaTime*20;
-
-        //    if (Vector3.Distance(target.position, this.transform.position) < 0.1f)
-        //    {
-        //        AtkCharactor(Damage);
-        //    }
-        //}
-    }
-
-
-    IEnumerator Trigger(float damage)
-    {
-        TE.SetPos(this.transform.position, target.position);
         yield return new WaitForSeconds(0.15f);
-        AtkCharactor(damage);
+        AtkCharactor(Damage);
     }
     
     public void AtkCharactor(float damage)
     {
-        this.transform.position = target.transform.position;
+
+
+
         if (target.GetComponent<Enemy>().GetShock())
         {
-            Debug.Log(target.GetComponent<Enemy>().GetShock());
             if (MaxCount > 1)
             {
                 Count++;
@@ -96,7 +119,7 @@ public class TeslaBullet : MonoBehaviour
         }
 
         //데미지 주기
-        target.GetComponent<Enemy>().ElectricDamage(Damage);
+       
         //카운터 감소, 데미지 감소
         Count--;
         
@@ -107,24 +130,27 @@ public class TeslaBullet : MonoBehaviour
             Damage = 1;
         }
 
-        if (Range > 0.3f)
+        if (!target.GetComponent<Enemy>().GetWet&&Range > 0.2f)
         {
             Range -= 0.1f;
         }
 
-        Debug.Log(enemylist);
         //공격했던 적의 리스트 보관
         enemylist.Add(target.GetComponent<Enemy>());
 
         //현재 위치를 기준으로 적을 검색
-        Collider[] E_collider = Physics.OverlapSphere(this.transform.position, Range, enemylayer);
-        Debug.Log(E_collider.Length);
+        Collider[] E_collider = Physics.OverlapSphere(target.position, Range, enemylayer);
+
 
         Transform ShortestTarget = null;
 
+        target.GetComponent<Enemy>().ElectricDamage(Damage);
+
         if (Count == 0)
         {
+            Debug.Log("1번");
             ReturnBullet();
+            return;
         }
 
         //이미 맞은 적 + 새로운 적이 한 마리 이상일 때
@@ -160,41 +186,38 @@ public class TeslaBullet : MonoBehaviour
             //인근의 적이 이미 공격한 대상밖에 없을 경우 종료
             if(ShortestTarget == null)
             {
+                Debug.Log("2번");
                 ReturnBullet();
+                return;
             }
             //대상이 있다면 그 대상을 target으로 공격함수 실행
             else
             {
-                SetUp(Damage, ShortestTarget);
+                SetUp(Damage, ShortestTarget,target);
             }
             
             //가장 거리가 짧은 대상을 최종 타겟으로 설정.
-            
-            //SetBulletTest(ShortestTarget, damage);
+
         }
         //인근의 대상이 없다면 종료
         else
         {
+            Debug.Log("3번");
             ReturnBullet();
+            return;
         }
     }
 
     public void ReturnBullet()
     {
+        ActiveEffect.Clear();
         this.transform.position = tesla.GetShootPos().position;
-        TE.SetisTrigger = false;
         target = null;
         Range = 2.0f;
         enemylist.Clear();
         Count = OriginCount;
         MaxCount = MaxOriginCount;
-        isgoing = false;
         //tesla.ReturnBullet(this);        
-    }
-
-    public void ResetInfo()
-    {
-
     }
     
 }

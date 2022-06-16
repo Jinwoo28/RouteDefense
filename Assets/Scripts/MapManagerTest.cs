@@ -59,8 +59,19 @@ public class MapManagerTest : MonoBehaviour
 
         this.GetComponent<Route>().Settings(gridX, gridY, grid, StartNode,StartNode2, EndNode);
 
+        for(int i = 0; i < gridY; i++)
+        {
+            for(int j = 0; j < gridX; j++)
+            {
+                grid[i, j].Test();
+            }
+        }
+
         Instantiate(StartEnd[0], new Vector3(StartNode.GetX, StartNode.GetYDepth/2, StartNode.GetY), Quaternion.Euler(0, 90, 0));
         Instantiate(StartEnd[1], new Vector3(EndNode.GetX, EndNode.GetYDepth/2, EndNode.GetY), Quaternion.Euler(0, 90, 0));
+
+        Debug.Log(StartNode.GetYDepth / 2 + " : Start");
+        Debug.Log(EndNode.GetYDepth / 2 + " : End");
 
         if (GameManager.SetGameLevel == 3)
         {
@@ -68,8 +79,14 @@ public class MapManagerTest : MonoBehaviour
         }
     }
 
-    
 
+    private void Start()
+    {
+        for(int i = 0; i< useableNode.Count; i++)
+        {
+            Debug.Log(useableNode[i].GetYDepth);
+        }
+    }
 
     private void MakeHeight()
     {
@@ -101,17 +118,7 @@ public class MapManagerTest : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //StartEnd[0].transform.position = Camera.main.WorldToScreenPoint(new Vector3(startY, StartNode.GetYDepth/2+0.2f, startX));
-        //StartEnd[1].transform.position = Camera.main.WorldToScreenPoint(new Vector3(endY, EndNode.GetYDepth/2+0.2f, endX));
-        //
-        //if (GameManager.SetGameLevel == 3)
-        //{
-        //    StartEnd[2].transform.position = Camera.main.WorldToScreenPoint(new Vector3(StartNode2.GetX, StartNode.GetYDepth / 2 + 1.2f, StartNode2.GetY));
-        //}
 
-    }
 
     private void Mapmake()
     {

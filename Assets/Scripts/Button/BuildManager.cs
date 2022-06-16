@@ -17,7 +17,7 @@ public class BuildManager : MonoBehaviour
 
     [SerializeField] private GameObject[] buildstate = null;
 
-    string towername = null;
+    //string towername = null;
 
     [SerializeField] private ShowTowerInfo showtowerinfo = null;
     [SerializeField] private BuildTower[] buildtower = null;
@@ -30,16 +30,46 @@ public class BuildManager : MonoBehaviour
     private GameObject craft = null;
 
     //타일위에 다른 포탑이 있는지 확인
-    private bool alreadyontile = false;
+    //private bool alreadyontile = false;
 
     //현재 타일 위에 프리뷰 포탑이 위치해있는지
-    private bool ontile = false;
+    //private bool ontile = false;
+
+    private static List<FireGunTower> firetowerlist = new List<FireGunTower>();
+
+    public static void ActiveTower(FireGunTower firetower)
+    {
+        firetowerlist.Add(firetower);
+    }
+
+    public static void ReturnActiveTower(FireGunTower firetower)
+    {
+        firetowerlist.Remove(firetower);
+    }
+
+    public static void Rained(bool wet)
+    {
+        for(int i = 0; i < firetowerlist.Count; i++)
+        {
+            firetowerlist[i].ChangeWet(wet);
+        }
+    }
+
+    public static void FInishRained()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        firetowerlist.Clear();
+    }
+
 
     //프리뷰 포탑이 활성화 되어있는지
     private bool towerpreviewActive = false;
     
-    
-    private bool canbuild = false;
+    //private bool canbuild = false;
 
 
     Vector3 mousepos = Vector3.zero;
@@ -96,10 +126,6 @@ public class BuildManager : MonoBehaviour
         }
 
         showtowerinfo.SetTowerinfoOff();
-
-        Debug.Log(_slotnum);
-        Debug.Log(buildtower[_slotnum].builditem.GetComponent<Tower>() + "1번");
-
 
          towerprice = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice;
 

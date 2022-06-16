@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class FireGunBullet : MonoBehaviour
 {
-    float Damage = 0;
+    private float Damage = 0;
     private float Delay = 1;
     private float Timer = 0;
-    private bool InjectDamage = true;
 
     public float GetDamage() => Damage;
 
@@ -17,29 +16,26 @@ public class FireGunBullet : MonoBehaviour
     private void Awake()
     {
         Bcollider = GetComponent<BoxCollider>();
+        Bcollider.enabled = false;
     }
 
     public void SetUp(float _damage, float _delay)
     {
         Damage = _damage;
         Delay = _delay;
+
+        StartCoroutine("fireDamage");
     }
+    
 
-    private void Update()
+
+    IEnumerator fireDamage()
     {
-        Debug.Log(enemylist.Count);
+        yield return new WaitForSeconds(0.1f);
+        Bcollider.enabled = true;
 
-        if (Timer < Delay)
-        {
-            Timer += Time.deltaTime;
-            Bcollider.enabled = false;
-        }
-        else
-        {
-            Timer = 0;
-
-            Bcollider.enabled = true;
-        }
+        yield return null;
+        Bcollider.enabled = false;
     }
 
 
@@ -47,10 +43,15 @@ public class FireGunBullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Enter");
-            other.GetComponent<Enemy>().EnemyAttacked(Damage);
+            if (other.GetComponent<Enemy_Creture>() != null)
+            {
+                other.GetComponent<Enemy_Creture>().FireAttacked(Damage);
+            }
+            else if(other.GetComponent <Enemy>() != null)
+            {
+                other.GetComponent<Enemy>().EnemyAttacked(Damage);
+            }
         }
     }
-
 
 }

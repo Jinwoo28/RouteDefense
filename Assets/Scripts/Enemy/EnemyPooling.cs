@@ -49,10 +49,10 @@ public class EnemyPooling : MonoBehaviour
 
     public void ReturnEnemy(Enemy _enemy,int _enemyNum)
     {
-
+        _enemy.gameObject.layer = 2;
         _enemy.gameObject.SetActive(false);
         _enemy.ResetHp();
-        _enemy.transform.position = Vector3.zero;
+        //_enemy.transform.position = Vector3.zero;
         enemyPooling[_enemyNum].enemypooling.Enqueue(_enemy);
     }
 

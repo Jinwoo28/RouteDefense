@@ -141,6 +141,7 @@ public class EnemyManager : MonoBehaviour
             var enemy = Pooling.GetEnemy(enemynum, _spawnPos);
             enemy.SetUpEnemy(this, _wayPoint, canvas,hpbar,damagenum, water);
             enemy.SetPooling(Pooling, enemynum);
+            enemy.gameObject.layer = 6;
             enemy.StartMove();
 
             //소환되는 enemy를 list에 추가
@@ -187,6 +188,7 @@ public class EnemyManager : MonoBehaviour
     //출현한 적이 체력이 다 되서 죽을 때
     public void EnemyDie(Enemy enemy,int coin)
     {
+        enemy.gameObject.layer = 0;
         playerstate.PlayerCoinUp(coin + Mathf.CeilToInt(coin * EnemyCoinRate));
         EnemyCount.Remove(enemy);
         EnemyRemainCount--;

@@ -3,8 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum enemyState
+{
+    Nomal,
+    Electric,
+    Fire,
+    Water,
+    Iced
+}
+
 public class EnemyHpbar : MonoBehaviour
 {
+    [SerializeField] private GameObject ElecIcon = null;
+    [SerializeField] private GameObject FireIcon = null;
+    [SerializeField] private GameObject IceIcon = null;
+
+    private enemyState enemyState;
+
     private Transform followenemy = null;
     private Enemy enemyinfo = null;
     private Camera cam = null;
@@ -17,6 +32,40 @@ public class EnemyHpbar : MonoBehaviour
     private bool setupfinish = false;
 
     [SerializeField]private Image image = null;
+
+    public void StateChange(enemyState state)
+    {
+        switch (state)
+        {
+            case enemyState.Electric:
+                ElecIcon.SetActive(true);
+                break;
+            case enemyState.Fire:
+                FireIcon.SetActive(true);
+                IceIcon.SetActive(false);
+                break;
+            case enemyState.Iced:
+                IceIcon.SetActive(true);
+                FireIcon.SetActive(false);
+                break;
+        }
+    }
+
+    public void ReturnIcon(enemyState state)
+    {
+        switch (state)
+        {
+            case enemyState.Electric:
+                ElecIcon.SetActive(false);
+                break;
+            case enemyState.Fire:
+                FireIcon.SetActive(false);
+                break;
+            case enemyState.Iced:
+                IceIcon.SetActive(false);
+                break;
+        }
+    }
 
     private void Start()
     {

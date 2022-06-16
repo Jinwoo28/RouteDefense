@@ -69,6 +69,8 @@ public class TeslaEffect : MonoBehaviour
     public System.Random RandomGenerator = new System.Random();
 
     private LineRenderer lineRenderer;
+    public bool Offrenderer { set => lineRenderer.enabled = value; }
+    
     private List<KeyValuePair<Vector3, Vector3>> segments = new List<KeyValuePair<Vector3, Vector3>>();
     private int startIndex;
     private Vector2 size;
@@ -81,11 +83,30 @@ public class TeslaEffect : MonoBehaviour
 
     public bool SetisTrigger { set => isTrigger = value; }
 
-    public void SetPos(Vector3 start, Vector3 end)
+    private Transform StartPos = null;
+    private Transform EndPos;
+
+    private TeslaBullet TB = null;
+    public TeslaBullet GetTB { set => TB = value; }
+
+    public void ReturnEffect()
     {
-        StartPosition = start;
-        EndPosition = end;
+        isTrigger = false;
+        TB.ReturnEffect(this);
+    }
+
+    public void SetPos(Transform _start, Transform _end)
+    {
+        Invoke("ReturnEffect", 0.15f);
+
+        StartPos = _start;
+        EndPos = _end;
+
+        lineRenderer.enabled = true;
+
         isTrigger = true;
+
+
     }
 
     private void GetPerpendicularVector(ref Vector3 directionNormalized, out Vector3 side)
@@ -132,6 +153,7 @@ public class TeslaEffect : MonoBehaviour
 
     private void Awake()
     {
+        lineRenderer = GetComponent<LineRenderer>();
         RandomGenerator = new System.Random();
         segments = new List<KeyValuePair<Vector3, Vector3>>();
         StartPosition = this.transform.position;
@@ -285,7 +307,7 @@ public class TeslaEffect : MonoBehaviour
     private void Start()
     {
         orthographic = (Camera.main != null && Camera.main.orthographic);
-        lineRenderer = GetComponent<LineRenderer>();
+       
         lineRenderer.positionCount = 0;
         UpdateFromMaterialChange();
     }
@@ -295,6 +317,14 @@ public class TeslaEffect : MonoBehaviour
     {
         if (isTrigger)
         {
+            StartPosition = StartPos.position;
+            EndPosition = EndPos.position;
+
+            //if(StartPosition == Vector3.zero || EndPosition == Vector3.zero)
+            //{
+            //    ReturnEffect();
+            //}
+
             orthographic = (Camera.main != null && Camera.main.orthographic);
             if (timer <= 0.0f)
             {

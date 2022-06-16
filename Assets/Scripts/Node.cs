@@ -105,6 +105,11 @@ public class Node : MonoBehaviour
 
     [SerializeField] float ydepth = 1.0f;
 
+    public void Test()
+    {
+        ydepth = this.transform.localScale.y;
+    }
+
     public void UpDownTile(List<Node> _neighbournode, float _Ydepth)
     {
         //이미 높이가 변한 적이 있는지

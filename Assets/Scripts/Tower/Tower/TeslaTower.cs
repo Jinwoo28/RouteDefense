@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class TeslaTower : Tower
 {
+
+    [SerializeField] private ParticleSystem Effect = null;
     [SerializeField] private GameObject ElectricBulet = null;
 
+    private bool isAtking = false;
 
     protected override void Start()
     {
         base.Start();
+        Debug.Log(GetStep);
         ElectricBulet.GetComponent<TeslaBullet>().InitSetUp(GetStep + 2, this,GetStep+4);
-        ElectricBulet.transform.position = shootPos.position;
-        ElectricBulet.SetActive(false);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
+        if(FinalTarget == null)
+        {
+            Effect.Stop();
+        }
     }
 
     protected override void Attack()
     {
-
-            ElectricBulet.SetActive(true);
-            ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget);
-
-    }
-
-    public void ReturnBullet(TeslaBullet bullet)
-    {
-        bullet.gameObject.SetActive(false);
-        bullet.transform.position = shootPos.position;
+        Effect.Play();
+        ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget,this.transform);   
     }
 
     public Transform GetShootPos() => shootPos;

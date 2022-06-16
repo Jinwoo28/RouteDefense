@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject hpbar = null;
     private GameObject damagenum = null;
-    private GameObject hpbarprefab = null;
+    protected GameObject hpbarprefab = null;
 
     private Camera cam = null;
     protected enum currentstate { nomal, posion, fire, ice, }
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     private Transform canvas = null;
 
     private Transform Water = null;
-    private bool underTheSea = false;
+    protected bool underTheSea = false;
     public bool GetWet => underTheSea;
     private bool speedInit = false;
 
@@ -227,7 +227,9 @@ public class Enemy : MonoBehaviour
             }
         }
         EM.EnemyArriveDestination(this);
-        Destroy(hpbarprefab);
+        var prefab = hpbarprefab;
+        hpbarprefab = null;
+        Destroy(prefab);
         EP.ReturnEnemy(this, enemyNum);
     }
 
@@ -273,27 +275,28 @@ public class Enemy : MonoBehaviour
         jump = false;
     }
 
-
-
-
-
-
-
     public void ElectricDamage(float _damage)
     {
-        StopCoroutine("ElectricShock");
-        StartCoroutine("ElectricShock");
-        EnemyAttacked(_damage);
-        electricShock = true;
+
+        if (hpbarprefab != null)
+        {
+            hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Electric);
+            StopCoroutine("ElectricShock");
+            StartCoroutine("ElectricShock");
+
+            float Damage = underTheSea ? _damage * 2 : _damage;
+
+            EnemyAttacked(Damage);
+            electricShock = true;
+        }
     }
 
     IEnumerator ElectricShock()
     {
         yield return new WaitForSeconds(1.0f);
+        hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Electric);
         electricShock = false;
     }
-
-
 
     public virtual void EnemyAttacked(float _damage)
     {
@@ -307,18 +310,10 @@ public class Enemy : MonoBehaviour
             realdamage = 0;
         }
 
-        ShowDamage(realdamage);
-        if (realdamage >= unitstate.unithp)
-        {
-            EnemyDie();
-        }
-        else
-        {
-            unitstate.unithp -= realdamage;
-        }
+        realDamage(realdamage);
     }
 
-    public void firedamage(float _damage)
+    public void realDamage(float _damage)
     {
         ShowDamage(_damage);
         if (_damage >= unitstate.unithp)
@@ -367,11 +362,20 @@ public class Enemy : MonoBehaviour
 
     public void returnSpeed()
     {
-        TimeScale = OriginTimeScale;
+        ReturnTimeScale();
         Iced = false;
         alreadyslow = false;
     }
 
+    public void ReturnTimeScale()
+    {
+        TimeScale = OriginTimeScale;
+    }
+
+    public void SpeedChange(float n)
+    {
+        TimeScale *= n; 
+    }
 
 
     public IEnumerator IcedEnemy()

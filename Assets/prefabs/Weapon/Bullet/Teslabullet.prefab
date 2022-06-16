@@ -46,3 +46,4 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
+  BoltPrefab: {fileID: 0}

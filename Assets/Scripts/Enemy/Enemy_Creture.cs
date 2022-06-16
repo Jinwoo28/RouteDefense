@@ -54,51 +54,59 @@ public class Enemy_Creture : Enemy
         Debug.Log(GetHp);
     }
 
-   
 
+    private float FireDamage = 0;
     public void FireAttacked(float damage)
     {
-        if (!fired)
-        {
-            fired = true;
-            StartCoroutine(DotDamage(damage));
-        }
+        FireDamage = damage;
+        fired = true;
+        StopCoroutine("DotDamage");
+        StartCoroutine("DotDamage");
     }
 
     private bool fired = false;
 
 
   
-    public IEnumerator DotDamage(float damage)
+    public IEnumerator DotDamage()
     {
-        
+        hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Fire);
         int damagecount = 5;
         while (damagecount > 0)
         {
+            SpeedChange(1.25f);
             damagecount--;
-            if (damage < GetHp)
+
+            float realdamage = underTheSea?FireDamage/2:FireDamage;
+
+            if (realdamage < GetHp)
             {
-                firedamage(damage);
+                realDamage(realdamage);
             }
             else
             {
-                EnemyDie();
                 fired = false;
+                hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
+                returnSpeed();
+                EnemyDie();
             }
-            yield return new WaitForSeconds(0.5f);
+
+            if (underTheSea)
+            {
+
+                break;
+            }
+
+            yield return new WaitForSeconds(0.4f);
         }
+
+        returnSpeed();
+        hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
 
         fired = false;
        
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("FireBullet"))
-        {
-            firedamage(1);
-        }
-    }
 
 
 }

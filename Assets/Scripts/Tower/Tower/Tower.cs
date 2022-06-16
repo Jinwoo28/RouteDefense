@@ -59,7 +59,7 @@ public class Tower : MonoBehaviour
 
     
 
-    [SerializeField] private int TowerCode;
+    [SerializeField] private int TowerCode = 0;
     public int GetTowerCode => TowerCode;
 
     protected AudioSource AS = null;
@@ -163,7 +163,8 @@ public class Tower : MonoBehaviour
 
     protected virtual void Update()
     {
-       // AS.volume = SoundSettings.currentsound;
+        // AS.volume = SoundSettings.currentsound;
+
         if (TowerCanWork&&!towericed)
         {
             if (FinalTarget != null)
@@ -191,7 +192,7 @@ public class Tower : MonoBehaviour
             if (FinalTarget != null)
             {
                 Vector3 GetDistance = FinalTarget.position - this.transform.position;
-                if (Vector3.Magnitude(GetDistance)>towerinfo.towerrange)
+                if (Vector3.Distance(FinalTarget.position, this.transform.position) >towerinfo.towerrange)
                 {
                     FinalTarget = null;
                 }
@@ -204,8 +205,7 @@ public class Tower : MonoBehaviour
             //가장 짧은 거리의 오브젝트 위치를 담을 변수
             Transform ShortestTarget = null;
 
-            if (FinalTarget == null)
-            {
+
                 if (E_collider.Length > 0)
                 {
                     float S_ShortestTarget = Mathf.Infinity;
@@ -227,7 +227,11 @@ public class Tower : MonoBehaviour
                     FinalTarget = ShortestTarget;
                     //가장 거리가 짧은 대상을 최종 타겟으로 설정.
                 }
-            }
+                else
+                {
+                    FinalTarget = null;
+                }
+            
             yield return null;
         }
     }
@@ -290,22 +294,32 @@ public class Tower : MonoBehaviour
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
         towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
         towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
-        
-        
-        if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
+
+
+        if (FinalTarget != null)
         {
-            Atking = true;
-            atkspeed -= Time.deltaTime;
-            if (atkspeed <= 0)
+            if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
             {
-                atkspeed = towerinfo.atkdelay;
-                int critical = Random.Range(1, 101);
-                Attack();
+                Atking = true;
+                atkspeed -= Time.deltaTime;
+                if (atkspeed <= 0)
+                {
+                    atkspeed = towerinfo.atkdelay;
+                    int critical = Random.Range(1, 101);
+                    float origindamage = towerinfo.towerdamage;
+                    if(critical <= towerinfo.towercritical)
+                    {
+                        towerinfo.towerdamage *= 2;
+                    }
+                    Attack();
+
+                    towerinfo.towerdamage = origindamage;
+                }
             }
-        }
-        else
-        {
-            Atking = false;
+            else
+            {
+                Atking = false;
+            }
         }
 
 

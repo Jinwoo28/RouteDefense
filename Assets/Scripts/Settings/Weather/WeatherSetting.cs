@@ -26,7 +26,7 @@ public class WeatherSetting : MonoBehaviour
 
     private int rainRate = 10;
 
-    private bool treechanged = false;
+    //private bool treechanged = false;
 
     // 스테이지가 넘어가면 랜덤으로 나무 생성 0~3개
     // 나무가 생성되면 리스트에 저장
@@ -117,11 +117,13 @@ public class WeatherSetting : MonoBehaviour
         {
             rained = true;
             Rain.Play();
+            BuildManager.Rained(true);
         }
         else
         {
             rained = false;
             Rain.Stop();
+            BuildManager.Rained(false);
         }
     }
 
