@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatlingTower : Tower
+public class GatlingTower : AtkTower
 {
     [SerializeField] Transform RotateBarral = null;
 
@@ -27,7 +27,7 @@ public class GatlingTower : Tower
     {
         base.Update();
 
-        if (SetTowerCanWork&&!GetIced)
+        if (SetTowerCanWork)
         {
             if (FinalTarget != null)
             {
@@ -58,8 +58,8 @@ public class GatlingTower : Tower
         {
             AtkParticle.SetActive(true);
             HitEffect.SetActive(true);
+            Debug.Log(FinalTarget.gameObject.name);
             FinalTarget.GetComponent<Enemy>().EnemyAttacked(towerinfo.towerdamage);
-           
         }
 
     }

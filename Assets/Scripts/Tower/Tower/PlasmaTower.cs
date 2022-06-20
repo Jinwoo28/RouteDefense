@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlasmaTower : Tower
+public class PlasmaTower : AtkTower
 {
     [SerializeField] private ParticleSystem Charging;
     [SerializeField] private ParticleSystem Boom;

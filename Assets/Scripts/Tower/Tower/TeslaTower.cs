@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeslaTower : Tower
+public class TeslaTower : AtkTower
 {
 
     [SerializeField] private ParticleSystem Effect = null;

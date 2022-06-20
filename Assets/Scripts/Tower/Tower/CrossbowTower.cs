@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossbowTower : Tower
+public class CrossbowTower : AtkTower
 {
     private bulletpolling op = null;
     protected override void Start()

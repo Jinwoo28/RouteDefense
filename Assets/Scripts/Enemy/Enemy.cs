@@ -11,9 +11,8 @@ using UnityEngine.UI;
     public float unithp = 0;
     public int unitamour = 0;
     public int avoidancerate = 0;
+    public int type = 0;    //지상이면 0, 하늘이면 1
 }
-
-
 
 public class Enemy : MonoBehaviour
 {
@@ -86,6 +85,7 @@ public class Enemy : MonoBehaviour
         unitstate.unitspeed = stat.Speed;
         unitstate.unitcoin = stat.coin;
         unitstate.unithp = stat.Hp;
+        unitstate.type = stat.enemytype;
     }
 
     protected virtual void Start()
@@ -446,5 +446,7 @@ public class Enemy : MonoBehaviour
             unitstate.unithp = value;
         }
     }
+
+    public int GetEnemyType => unitstate.type;
 
 }

@@ -275,7 +275,7 @@ public class TowerPreview : MonoBehaviour
         if (other.CompareTag("Tower"))
         {
      //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
-            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& !other.GetComponent<Tower>().GetIced)
+            if(other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& !other.GetComponent<Tower>().GetCanWork)
             {
                
                 CanCombination = true;

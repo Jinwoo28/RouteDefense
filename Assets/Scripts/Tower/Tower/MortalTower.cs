@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MortalTower : Tower
+public class MortalTower : AtkTower
 {
     [SerializeField] private bulletpolling bulletPool = null;
     [SerializeField] private bulletpolling patriclePool = null;

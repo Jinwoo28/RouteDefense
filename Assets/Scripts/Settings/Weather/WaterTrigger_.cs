@@ -55,7 +55,7 @@ public class WaterTrigger_ : MonoBehaviour
 
         foreach (Tower tower in towerlist)
         {
-            tower.GetIced = true;
+            tower.GetCanWork = true;
         }
     }
 

@@ -5,9 +5,9 @@ using UnityEngine.Networking;
 
 public class EnemyStateSetUp : MonoBehaviour
 {
-    public EnemyDataTest so;
+    public EnemyDataTest Enemydata;
 
-    const string URL = "https://docs.google.com/spreadsheets/d/1TGYXHFpwIhrgfxqPvFgqKRWoIfrCWKggKbzQOVXlHeQ/export?format=tsv&range=A2:H";
+    const string URL = "https://docs.google.com/spreadsheets/d/1TGYXHFpwIhrgfxqPvFgqKRWoIfrCWKggKbzQOVXlHeQ/export?format=tsv&range=A2:I";
 
     public static EnemyState[] enemystate;
 
@@ -29,21 +29,16 @@ public class EnemyStateSetUp : MonoBehaviour
 
         string data = www.downloadHandler.text;
 
-       // print(data);
+        print(data);
 
         SetEnemy(data);
     }
 
     void SetEnemy(string tsv)
     {
-       
-
         string[] row = tsv.Split('\n');
         int rowSize = row.Length;
         int columnsize = row[0].Split('\t').Length;
-
-   
-       // Debug.Log(so.enemydata.Length + "asdf");
 
         for(int i = 0; i < rowSize; i++)
         {
@@ -51,7 +46,7 @@ public class EnemyStateSetUp : MonoBehaviour
 
             for(int j = 0; j < columnsize; j++)
             {
-                EnemyState item = so.enemydata[i];
+                EnemyState item = Enemydata.enemydata[i];
 
                 item.Name = column[0];
                 item.UnitCode = int.Parse(column[1]);
@@ -61,10 +56,11 @@ public class EnemyStateSetUp : MonoBehaviour
                 item.coin = int.Parse(column[5]);
                 item.Amour = int.Parse(column[6]);
                 item.avoidance = int.Parse(column[7]);
+                item.enemytype = int.Parse(column[8]);
             }
         }
 
-        enemystate = so.enemydata;
+        enemystate = Enemydata.enemydata;
     }
 
     public static EnemyState GetData(int unitcode)

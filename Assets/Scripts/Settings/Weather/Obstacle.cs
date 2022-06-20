@@ -20,7 +20,7 @@ public class Obstacle : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            other.GetComponent<Tower>().GetIced = true;
+            other.GetComponent<Tower>().GetCanWork = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class Obstacle : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            other.GetComponent<Tower>().GetIced = false ;
+            other.GetComponent<Tower>().GetCanWork = false ;
         }
     }
 }

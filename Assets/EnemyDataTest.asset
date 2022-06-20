@@ -13,38 +13,42 @@ MonoBehaviour:
   m_Name: EnemyDataTest
   m_EditorClassIdentifier: 
   enemydata:
-  - Name: Chick
+  - Name: "Chick(\uB178\uB9D0)"
     UnitCode: 1
-    Hp: 3
-    Speed: 0.5
+    Hp: 10
+    Speed: 0.6
     Damage: 1
     coin: 3
     Amour: 0
     avoidance: 0
+    enemytype: 1
   - Name: Chick
     UnitCode: 2
     Hp: 5
-    Speed: 3
+    Speed: 0.8
     Damage: 1
     coin: 3
     Amour: 0
     avoidance: 0
+    enemytype: 0
   - Name: Chick
     UnitCode: 3
     Hp: 7
-    Speed: 3
+    Speed: 1
     Damage: 1
     coin: 4
     Amour: 0
     avoidance: 0
+    enemytype: 0
   - Name: Chick
     UnitCode: 4
     Hp: 9
-    Speed: 3
+    Speed: 1
     Damage: 1
     coin: 4
     Amour: 0
     avoidance: 0
+    enemytype: 0
   - Name: Pig
     UnitCode: 11
     Hp: 16
@@ -53,14 +57,16 @@ MonoBehaviour:
     coin: 4
     Amour: 1
     avoidance: 0
+    enemytype: 0
   - Name: Pig
     UnitCode: 12
     Hp: 18
     Speed: 0.7
     Damage: 2
-    coin: 4
+    coin: 5
     Amour: 1
     avoidance: 0
+    enemytype: 0
   - Name: Pig
     UnitCode: 13
     Hp: 22
@@ -69,62 +75,70 @@ MonoBehaviour:
     coin: 5
     Amour: 1
     avoidance: 0
+    enemytype: 0
   - Name: Pig
     UnitCode: 14
     Hp: 25
     Speed: 0.65
     Damage: 2
-    coin: 5
+    coin: 6
     Amour: 2
     avoidance: 0
+    enemytype: 0
   - Name: Pig
     UnitCode: 15
     Hp: 30
     Speed: 0.75
     Damage: 2
-    coin: 5
+    coin: 7
     Amour: 3
     avoidance: 0
+    enemytype: 0
   - Name: Snake
     UnitCode: 21
     Hp: 5
     Speed: 1.2
     Damage: 1
-    coin: 4
+    coin: 2
     Amour: 0
     avoidance: 30
+    enemytype: 0
   - Name: Snake
     UnitCode: 22
     Hp: 6
     Speed: 1.2
     Damage: 1
-    coin: 4
+    coin: 2
     Amour: 0
     avoidance: 40
+    enemytype: 0
   - Name: Snake
     UnitCode: 23
     Hp: 7
     Speed: 1.5
     Damage: 1
-    coin: 4
+    coin: 3
     Amour: 0
     avoidance: 50
+    enemytype: 0
   - Name: Snake
     UnitCode: 24
     Hp: 8
     Speed: 1.2
     Damage: 1
-    coin: 5
+    coin: 4
     Amour: 0
     avoidance: 50
+    enemytype: 0
   - Name: Snake
     UnitCode: 25
     Hp: 9
     Speed: 1.5
     Damage: 1
-    coin: 5
+    coin: 4
     Amour: 0
-    avoidance: 50
+    avoidance: 60
+    enemytype: 0
   - Name: Sheep
     UnitCode: 31
     Hp: 20
@@ -133,6 +147,7 @@ MonoBehaviour:
     coin: 6
     Amour: 3
     avoidance: 20
+    enemytype: 0
   - Name: Sheep
     UnitCode: 32
     Hp: 22
@@ -141,6 +156,7 @@ MonoBehaviour:
     coin: 6
     Amour: 3
     avoidance: 20
+    enemytype: 0
   - Name: Sheep
     UnitCode: 33
     Hp: 24
@@ -149,6 +165,7 @@ MonoBehaviour:
     coin: 6
     Amour: 3
     avoidance: 20
+    enemytype: 0
   - Name: Sheep
     UnitCode: 34
     Hp: 26
@@ -157,6 +174,7 @@ MonoBehaviour:
     coin: 6
     Amour: 4
     avoidance: 20
+    enemytype: 0
   - Name: Sheep
     UnitCode: 35
     Hp: 28
@@ -165,3 +183,13 @@ MonoBehaviour:
     coin: 7
     Amour: 5
     avoidance: 20
+    enemytype: 0
+  - Name: Eagle
+    UnitCode: 41
+    Hp: 10
+    Speed: 1
+    Damage: 2
+    coin: 7
+    Amour: 1
+    avoidance: 50
+    enemytype: 1

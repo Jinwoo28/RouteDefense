@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireGunTower : Tower
+public class FireGunTower : AtkTower
 {
     [SerializeField] private GameObject FireBullet = null;
     private ParticleSystem FireEffect = null;

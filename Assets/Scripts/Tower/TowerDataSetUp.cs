@@ -7,7 +7,7 @@ public class TowerDataSetUp : MonoBehaviour
 {
     public TowerDataSc TD;
 
-    const string URL = "https://docs.google.com/spreadsheets/d/19oIy0vvxi2Xtfw5X8V8ZsdRhoujJgtXPAy7Qru5Sjv4/export?format=tsv&range=A2:K";
+    const string URL = "https://docs.google.com/spreadsheets/d/19oIy0vvxi2Xtfw5X8V8ZsdRhoujJgtXPAy7Qru5Sjv4/export?format=tsv&range=A2:L";
 
     public static TowerData[] towerDatas;
 
@@ -72,6 +72,7 @@ public class TowerDataSetUp : MonoBehaviour
                 item.UpgradeCri = float.Parse(column[8]);
                 item.TowerPrice = int.Parse(column[9]);
                 item.UpgradePrice = int.Parse(column[10]);
+                item.CanAtk = int.Parse(column[11]);
             }
         }
 

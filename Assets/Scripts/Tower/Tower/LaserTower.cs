@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserTower : Tower
+public class LaserTower : AtkTower
 {
     private LineRenderer lR = null;
     private Transform OriginTarget = null;

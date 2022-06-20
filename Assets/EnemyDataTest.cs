@@ -13,13 +13,11 @@ public class EnemyState
     public int coin;
     public int Amour;
     public int avoidance;
+    public int enemytype;
 }
 
 [CreateAssetMenu(fileName = "EnemyDataTest", menuName = "Scriptable Object/Enemy Data", order = int.MaxValue)]
 public class EnemyDataTest : ScriptableObject
 {
-   
     public EnemyState[] enemydata;
-
-
 }
