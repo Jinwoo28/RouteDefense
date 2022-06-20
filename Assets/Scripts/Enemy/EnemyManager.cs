@@ -10,6 +10,9 @@ public class StageInfo
 {
     public float SpawnTime = 0;
     public int EnemyCount;
+
+    public List<int> enemyNum;
+
 }
 public class EnemyManager : MonoBehaviour
 {
@@ -67,6 +70,8 @@ public class EnemyManager : MonoBehaviour
     public int Getmaxstage => stageinfo.Length;
     public int Getcurrentstage => StageNum + 1;
 
+
+
     private void Start()
     {
         Pooling = this.GetComponent<EnemyPooling>();
@@ -88,23 +93,18 @@ public class EnemyManager : MonoBehaviour
         Time.timeScale = x;
     }
 
-    private void OnDestroy()
-    {
-
-    }
-
 
     //게임 시작 될 때 enemy의 루트와 스폰 위치를 받아서 게임 시작
-    public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos)
+    public void gameStartCourtain(Vector3[] _waypoint, Vector3 _SpawnPos,int spawnNum)
     {
         waypoint = _waypoint;
         SpawnPos = _SpawnPos;
-        StartCoroutine(GameStart(_waypoint, _SpawnPos));
+        StartCoroutine(GameStart(_waypoint, _SpawnPos,spawnNum));
     }
 
     int X = 0;
 
-    IEnumerator GameStart(Vector3[] _wayPoint, Vector3 _spawnPos)
+    IEnumerator GameStart(Vector3[] _wayPoint, Vector3 _spawnPos,int spawnNum)
     {
         GameManager.buttonOff();
 
@@ -121,22 +121,10 @@ public class EnemyManager : MonoBehaviour
         {
             X++;
             int enemynum = 0;
-            if (StageNum == 0)
-            {
-                enemynum = 0;
-            }
-            else if (StageNum == 1)
-            {
-                enemynum = Random.Range(StageNum - 1, StageNum + 1);
-            }
-            else if (StageNum == 2)
-            {
-                enemynum = Random.Range(StageNum - 2, StageNum + 1);
-            }
-            else
-            {
-                enemynum = Random.Range(StageNum - 3, StageNum + 1);
-            }
+
+            int num = Random.Range(0, stageinfo[StageNum].enemyNum.Count);
+
+            enemynum = stageinfo[StageNum].enemyNum[num];
 
             var enemy = Pooling.GetEnemy(enemynum, _spawnPos);
             enemy.SetUpEnemy(this, _wayPoint, canvas,hpbar,damagenum, water);
@@ -152,33 +140,35 @@ public class EnemyManager : MonoBehaviour
         }
         SpawnFinish = true;
 
-
-        while (true)
+        if (spawnNum == 1)
         {
-            if (SpawnFinish && EnemyRemainCount == 0)
+            while (true)
             {
-                StageNum++;
-
-                stageclear();
-
-                if (StageNum >= stageinfo.Length)
+                if (SpawnFinish && EnemyRemainCount == 0)
                 {
-                    ClearPanal.SetActive(true);
+                    StageNum++;
 
-                    speedSet.StopGame();
+                    stageclear();
 
-                    UserInformation.getMoney += (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
+                    if (StageNum >= stageinfo.Length)
+                    {
+                        ClearPanal.SetActive(true);
 
-                    PlusCoin1.text = "획득코인 : " + (int)(GameManager.SetMoney*SkillSettings.PassiveValue("GetUserCoinUp"));
+                        speedSet.StopGame();
 
-                    //별 개수에 따른 상금 얻기
+                        UserInformation.getMoney += (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
+
+                        PlusCoin1.text = "획득코인 : " + (int)(GameManager.SetMoney * SkillSettings.PassiveValue("GetUserCoinUp"));
+
+                        //별 개수에 따른 상금 얻기
+                    }
+
+                    gameongoing = false;
+
+                    break;
                 }
-
-                gameongoing = false;
-
-                break;
+                yield return null;
             }
-            yield return null;
         }
     }
 

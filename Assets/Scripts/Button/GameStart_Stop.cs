@@ -142,9 +142,9 @@ public class GameStart_Stop : MonoBehaviour
             if (findpath)
             {
 
-                Vector3[] ddd = WayPoint(StartNode, EndNode);
+                Vector3[] waypoints = WayPoint(StartNode, EndNode);
 
-                EM.gameStartCourtain(ddd, ddd[0]);
+                EM.gameStartCourtain(waypoints, waypoints[0],1);
                 StartCoroutine("GameStartCheck");
             }
 

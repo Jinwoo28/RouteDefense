@@ -145,16 +145,16 @@ public class Route : MonoBehaviour
             if (!isgameing)
             {
                 isgameing = true;
-                if (FindPath(Start2Node)&& FindPath(StartNode)) // 여기서 문제가 생김
+                if (FindPath(Start2Node)&& FindPath(StartNode))
                 {
                    
                     FindPath(StartNode);
                     Vector3[] waypoint = WayPoint2(StartNode, EndNode,waypointnode);
-                    EM.gameStartCourtain(waypoint, waypoint[0]);
+                    EM.gameStartCourtain(waypoint, waypoint[0],1);
 
                     FindPath(Start2Node);
                     Vector3[] waypoint2 = WayPoint2(Start2Node, EndNode, waypointnode2);
-                    EM.gameStartCourtain(waypoint2, waypoint2[0]);
+                    EM.gameStartCourtain(waypoint2, waypoint2[0],2);
                     
                 }
                 else
@@ -173,7 +173,7 @@ public class Route : MonoBehaviour
                 if (FindPath(StartNode))
                 {
                     Vector3[] waypoint = WayPoint2(StartNode, EndNode,waypointnode);
-                    EM.gameStartCourtain(waypoint, waypoint[0]);
+                    EM.gameStartCourtain(waypoint, waypoint[0],1);
                 }
                 else
                 {

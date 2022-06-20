@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2e22c8ebd6e7953459afec0238c3d786, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0039e15461dc9b44a81a5f64a2ee55f6, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3972,7 +3972,6 @@ GameObject:
   - component: {fileID: 376008673}
   - component: {fileID: 376008676}
   - component: {fileID: 376008675}
-  - component: {fileID: 376008674}
   m_Layer: 5
   m_Name: Slot1
   m_TagString: Untagged
@@ -4000,19 +3999,6 @@ RectTransform:
   m_AnchoredPosition: {x: -165, y: -11.799988}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &376008674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376008672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a190542145c04048b5975494b309718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlotNum: 1
 --- !u!114 &376008675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4557,10 +4543,28 @@ MonoBehaviour:
   atkcritical: {fileID: 1735997265}
   atkspeed: {fileID: 1237408798}
   upgradeprice: {fileID: 1862675761}
-  TowerPriceGatling: {fileID: 1730760258}
-  TowerPriceArrow: {fileID: 1084895982}
-  TowerPriceMortar: {fileID: 292068693}
-  TowerPriceLazer: {fileID: 1024460986}
+  textinfo:
+  - towername: "\uC11D\uAD81"
+    towercode: 1
+    showinfo: {fileID: 1730760258}
+  - towername: "\uAC8C\uD2C0\uB9C1"
+    towercode: 21
+    showinfo: {fileID: 1084895982}
+  - towername: "\uBC15\uACA9\uD3EC"
+    towercode: 41
+    showinfo: {fileID: 292068693}
+  - towername: "\uB808\uC774\uC800"
+    towercode: 31
+    showinfo: {fileID: 1024460986}
+  - towername: "\uD50C\uB77C\uC988\uB9C8"
+    towercode: 51
+    showinfo: {fileID: 157472507}
+  - towername: "\uD14C\uC2AC\uB77C"
+    towercode: 61
+    showinfo: {fileID: 183940353}
+  - towername: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    towercode: 11
+    showinfo: {fileID: 1340418001}
   rangePrefab: {fileID: 2627479921450125027, guid: 59bad40050b8b3c4582a1d2645c2844a, type: 3}
   enemymanager: {fileID: 1667784359}
   SellPanel: {fileID: 584502693}
@@ -7342,6 +7346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 592647473}
+  - component: {fileID: 592647474}
   m_Layer: 5
   m_Name: StoneObs
   m_TagString: Untagged
@@ -7370,6 +7375,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.3, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &592647474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592647472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 5
 --- !u!1 &595549878
 GameObject:
   m_ObjectHideFlags: 0
@@ -7558,7 +7576,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e22c8ebd6e7953459afec0238c3d786, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0039e15461dc9b44a81a5f64a2ee55f6, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9377,6 +9395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820272353}
+  - component: {fileID: 820272354}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -9405,6 +9424,19 @@ RectTransform:
   m_AnchoredPosition: {x: -165.2, y: -11.999985}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &820272354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820272352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 0
 --- !u!1 &833297896
 GameObject:
   m_ObjectHideFlags: 0
@@ -9775,6 +9807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 867095129}
+  - component: {fileID: 867095130}
   m_Layer: 5
   m_Name: BarbedWire
   m_TagString: Untagged
@@ -9803,6 +9836,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.3, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &867095130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867095128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 6
 --- !u!1 &867282720
 GameObject:
   m_ObjectHideFlags: 0
@@ -13816,6 +13862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1170589257}
+  - component: {fileID: 1170589258}
   m_Layer: 5
   m_Name: LightningBolt
   m_TagString: Untagged
@@ -13844,6 +13891,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.3, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1170589258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170589256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 3
 --- !u!1 &1172297623
 GameObject:
   m_ObjectHideFlags: 0
@@ -14674,6 +14734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219214658}
+  - component: {fileID: 1219214659}
   m_Layer: 5
   m_Name: Meteor
   m_TagString: Untagged
@@ -14702,6 +14763,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.3, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1219214659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219214657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 1
 --- !u!1 &1219454039
 GameObject:
   m_ObjectHideFlags: 0
@@ -16684,7 +16758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b420df67b337a04ebc803c78aa07170, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e359816a5470b543a42ae879a4c5c5a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17404,6 +17478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575822020}
+  - component: {fileID: 1575822021}
   m_Layer: 5
   m_Name: freezing
   m_TagString: Untagged
@@ -17432,6 +17507,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.3, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1575822021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575822019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 2
 --- !u!1 &1576531876
 GameObject:
   m_ObjectHideFlags: 0
@@ -17803,7 +17891,6 @@ GameObject:
   - component: {fileID: 1626291854}
   - component: {fileID: 1626291857}
   - component: {fileID: 1626291856}
-  - component: {fileID: 1626291855}
   m_Layer: 5
   m_Name: Slot4
   m_TagString: Untagged
@@ -17831,19 +17918,6 @@ RectTransform:
   m_AnchoredPosition: {x: 165, y: -11.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1626291855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626291853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a190542145c04048b5975494b309718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlotNum: 4
 --- !u!114 &1626291856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17992,7 +18066,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 10
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -18146,6 +18220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1635797565}
+  - component: {fileID: 1635797566}
   m_Layer: 5
   m_Name: WoodObs
   m_TagString: Untagged
@@ -18174,6 +18249,19 @@ RectTransform:
   m_AnchoredPosition: {x: -55.299988, y: -12}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1635797566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635797564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681f5421a28b44e478609e1b0d8db35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Number: 4
 --- !u!1 &1637879164
 GameObject:
   m_ObjectHideFlags: 0
@@ -18343,7 +18431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 1b420df67b337a04ebc803c78aa07170, type: 3}
+  m_Texture: {fileID: 2800000, guid: 3e359816a5470b543a42ae879a4c5c5a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -18528,45 +18616,65 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 20
+    EnemyCount: 5
+    enemyNum: 0000000001000000
+  - SpawnTime: 1
+    EnemyCount: 10
+    enemyNum: 00000000
   - SpawnTime: 1
     EnemyCount: 25
-  - SpawnTime: 1
-    EnemyCount: 25
-  - SpawnTime: 1
-    EnemyCount: 30
+    enemyNum: 
   - SpawnTime: 1
     EnemyCount: 30
+    enemyNum: 
+  - SpawnTime: 1
+    EnemyCount: 30
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 35
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 35
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 42
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 44
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 46
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 48
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 52
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 52
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 54
+    enemyNum: 
   playerstate: {fileID: 968497605}
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}
@@ -22493,7 +22601,6 @@ GameObject:
   - component: {fileID: 2015636557}
   - component: {fileID: 2015636560}
   - component: {fileID: 2015636559}
-  - component: {fileID: 2015636558}
   m_Layer: 5
   m_Name: Slot3
   m_TagString: Untagged
@@ -22521,19 +22628,6 @@ RectTransform:
   m_AnchoredPosition: {x: 55, y: -11.799988}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2015636558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015636556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a190542145c04048b5975494b309718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlotNum: 3
 --- !u!114 &2015636559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22928,7 +23022,6 @@ GameObject:
   - component: {fileID: 2048001106}
   - component: {fileID: 2048001109}
   - component: {fileID: 2048001108}
-  - component: {fileID: 2048001107}
   m_Layer: 5
   m_Name: Slot2
   m_TagString: Untagged
@@ -22956,19 +23049,6 @@ RectTransform:
   m_AnchoredPosition: {x: -55, y: -11.799988}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2048001107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2048001105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a190542145c04048b5975494b309718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SlotNum: 2
 --- !u!114 &2048001108
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ public class TeslaTower : Tower
 
     protected override void Start()
     {
+        SoundStop = false;
         base.Start();
-        Debug.Log(GetStep);
         ElectricBulet.GetComponent<TeslaBullet>().InitSetUp(GetStep + 2, this,GetStep+4);
     }
 
@@ -29,6 +29,8 @@ public class TeslaTower : Tower
 
     protected override void Attack()
     {
+        AS.Play();
+        Debug.Log("АјАн");
         Effect.Play();
         ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget,this.transform);   
     }

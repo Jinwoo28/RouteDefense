@@ -31,11 +31,7 @@ public class LaserTower : Tower
 
         if (FinalTarget != null)
         {
-            //RaycastHit hit;
-            //if(Physics.Raycast(shootPos.position, shootPos.forward,out hit))
-            //{
-            //    if (hit.collider.CompareTag("Enemy"))
-            //    {
+ 
             if (Atking)
             {
 

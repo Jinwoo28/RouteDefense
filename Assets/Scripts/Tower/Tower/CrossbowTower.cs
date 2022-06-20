@@ -19,10 +19,10 @@ public class CrossbowTower : Tower
             var obj = op.GetObject(shootPos.position);
             obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f);
 
+            obj.SetParent = shootPos;
             obj.MortarSetDestination(FinalTarget.position, shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
             obj.ResetBullet();
-            obj.SetParent = this.gameObject.transform;
         }
 
         else

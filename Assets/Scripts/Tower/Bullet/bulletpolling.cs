@@ -33,7 +33,6 @@ public class bulletpolling : MonoBehaviour
     {
         if (poolingQueue.Count > 0)
         {
-            Debug.Log("호출");
             var obj = poolingQueue.Dequeue();
             obj.gameObject.transform.position = _insPos;
             obj.gameObject.SetActive(true);
@@ -52,7 +51,6 @@ public class bulletpolling : MonoBehaviour
 
     public void ReturnObject(Bullet _object)
     {
-        Debug.Log("회수");
         _object.gameObject.SetActive(false);
         poolingQueue.Enqueue(_object);
     }

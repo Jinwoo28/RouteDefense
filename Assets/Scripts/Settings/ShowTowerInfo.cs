@@ -5,6 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+[System.Serializable]
+public class towerTextinfo
+{
+    public string towername;
+    public int towercode;
+    public TextMeshProUGUI showinfo;
+}
+
 public class ShowTowerInfo : MonoBehaviour
 {
     private Tower tower;
@@ -22,11 +30,8 @@ public class ShowTowerInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI atkspeed = null;
     [SerializeField] private TextMeshProUGUI upgradeprice = null;
 
+    [SerializeField] private towerTextinfo[] textinfo;
 
-    [SerializeField] private TextMeshProUGUI TowerPriceGatling = null;
-    [SerializeField] private TextMeshProUGUI TowerPriceArrow = null;
-    [SerializeField] private TextMeshProUGUI TowerPriceMortar = null;
-    [SerializeField] private TextMeshProUGUI TowerPriceLazer = null;
 
 
     //공격 범위 표시에 사용할 Sprite이미지
@@ -72,10 +77,11 @@ public class ShowTowerInfo : MonoBehaviour
             rangesprite[i].SetActive(false);
         }
 
-        TowerPriceGatling.text = "석궁\n" + 150 * SkillSettings.PassiveValue("SetTowerDown");
-        TowerPriceArrow.text = "기관총\n" + 150 * SkillSettings.PassiveValue("SetTowerDown");
-        TowerPriceMortar.text = "박격포\n" + 200 * SkillSettings.PassiveValue("SetTowerDown");
-        TowerPriceLazer.text = "레이저\n" + 200 * SkillSettings.PassiveValue("SetTowerDown");
+        for(int i = 0; i< textinfo.Length; i++)
+        {
+            textinfo[i].showinfo.text = textinfo[i].towername + "\n" + TowerDataSetUp.GetData(textinfo[i].towercode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+
+        }
 
     }
 

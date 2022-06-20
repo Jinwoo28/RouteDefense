@@ -5,7 +5,7 @@ using UnityEngine;
 public class Mortarbullet : Bullet
 {
     [SerializeField] private LayerMask enemylayer;
-    [SerializeField] private float Range = 3.0f;
+    [SerializeField] private float Range = 1.5f;
 
     private float Timer = 0;
 

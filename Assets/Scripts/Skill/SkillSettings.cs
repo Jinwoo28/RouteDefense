@@ -44,7 +44,7 @@ public class ActiveSkillSet
 public class SkillSettings : MonoBehaviour
 {
     [SerializeField] private List<SKillText> MoneyBundle;
-    [SerializeField] private List<SKillText> FireBundle;
+    [SerializeField] private List<SKillText> ShowActiveSkillText;
 
     [SerializeField] private TextMeshProUGUI skillname = null;
     [SerializeField] private TextMeshProUGUI Infotext = null;
@@ -148,7 +148,7 @@ public class SkillSettings : MonoBehaviour
 
                     }
 
-                    else if (SActiveSkill[i].skillInfoList[j].PreSkill != "NULL" && SearchSkill(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 0)
+                    else if (SActiveSkill[i].skillInfoList[j].PreSkill != "NULL" && ActiveSkillSearch(SActiveSkill[i].skillInfoList[j].PreSkill).UnLock == 0)
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("선행스킬이 해제되지 않았습니다."));
@@ -190,6 +190,7 @@ public class SkillSettings : MonoBehaviour
             {
                 if (SActiveSkill[i].skillInfoList[j].SkillName == _skillname)
                 {
+                    
                     return SActiveSkill[i].skillInfoList[j];
                 }
             }
@@ -212,8 +213,8 @@ public class SkillSettings : MonoBehaviour
 
         AInfotext.text =
             ASearchSkill(_searchname).SkillInformation + "\n" +
-            "현재 수치 : " + ASearchSkill(_searchname).Value + "%\n" +
-            "다음 업그레이드 수치 : " + (ASearchSkill(_searchname).Value + ASearchSkill(_searchname).UpValueRate) + "\n" +
+            "현재 데미지 : " + ASearchSkill(_searchname).Value + "\n" +
+            "다음 업그레이드 데미지 : " + (ASearchSkill(_searchname).Value + ASearchSkill(_searchname).UpValueRate) + "\n" +
             "현재 쿨타임 : " + (ASearchSkill(_searchname).CoolTime) + "초\n" +
             "다음 쿨타임 수치 : " + ((ASearchSkill(_searchname).CoolTime) - (ASearchSkill(_searchname).CoolTimeDown)) + "초";
 
@@ -238,15 +239,28 @@ public class SkillSettings : MonoBehaviour
 
     private void AShowLevel()
     {
-       
-       // for (int i = 0; i < SActiveSkill.Count; i++)
-       // {
-            for (int j = 0; j < SActiveSkill[0].skillInfoList.Count; j++)
-            {
+        for(int j = 0; j< ShowActiveSkillText.Count; j++)
+        {
+            ShowActiveSkillText[j].level.text = ASearchSkill(ShowActiveSkillText[j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(ShowActiveSkillText[j].skillname).MaxLevel.ToString();
+            //for (int j = 0; j < SActiveSkill.Count; j++)
+            //{
+            //    for(int k = 0; k < SActiveSkill[j].skillInfoList.Count)
+            //    {
+            //        if(ShowActiveSkillText[i].skillname == ASearchSkill())
+            //    }
+            //}
+        }
 
-                FireBundle[j].level.text = ASearchSkill(FireBundle[ j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(FireBundle[ j].skillname).MaxLevel.ToString();
-                
-            }
+
+
+
+        // for (int i = 0; i < SActiveSkill.Count; i++)
+        // {
+        //    for (int j = 0; j < SActiveSkill[i].skillInfoList.Count; j++)
+        //    {
+        //        ShowActiveSkillText[j].level.text = ASearchSkill(ShowActiveSkillText[ j].skillname).CurrentLevel.ToString() + "/" + ASearchSkill(ShowActiveSkillText[ j].skillname).MaxLevel.ToString();
+        //        Debug.Log(ShowActiveSkillText[j].skillname);
+        //    }
         //}
     }
 
@@ -383,6 +397,7 @@ public class SkillSettings : MonoBehaviour
             {
                 if (SPassiveSkill[i].skillInfoList[j].SkillName == _searchName)
                 {
+                    
                     return SPassiveSkill[i].skillInfoList[j];
                 }
             }

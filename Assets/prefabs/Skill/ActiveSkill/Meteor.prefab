@@ -211,7 +211,7 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 64
-  Range: 3
+  Range: 2
   ParticleEffect: {fileID: 8787802281463096307, guid: b154ca51a5ded464baf497fa6e2bfa8d, type: 3}
 --- !u!82 &1606075603103211984
 AudioSource:

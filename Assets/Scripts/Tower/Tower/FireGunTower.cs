@@ -33,6 +33,7 @@ public class FireGunTower : Tower
         if (FinalTarget == null)
         {
             FireEffect.Stop();
+            AS.Stop();
             isfired = false;
             //Bullet.enabled = false;
         }
@@ -56,6 +57,7 @@ public class FireGunTower : Tower
 
         if (!isfired)
         {
+            AS.Play();
             isfired = true;
             FireEffect.Play();
         }

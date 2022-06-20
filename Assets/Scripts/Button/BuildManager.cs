@@ -37,9 +37,12 @@ public class BuildManager : MonoBehaviour
 
     private static List<FireGunTower> firetowerlist = new List<FireGunTower>();
 
+    private static bool iswet = false;
+
     public static void ActiveTower(FireGunTower firetower)
     {
         firetowerlist.Add(firetower);
+        firetower.ChangeWet(iswet);
     }
 
     public static void ReturnActiveTower(FireGunTower firetower)
@@ -49,19 +52,17 @@ public class BuildManager : MonoBehaviour
 
     public static void Rained(bool wet)
     {
-        for(int i = 0; i < firetowerlist.Count; i++)
+        iswet = wet;
+        for (int i = 0; i < firetowerlist.Count; i++)
         {
             firetowerlist[i].ChangeWet(wet);
         }
     }
 
-    public static void FInishRained()
-    {
-
-    }
 
     private void OnDestroy()
     {
+        iswet = false;
         firetowerlist.Clear();
     }
 
@@ -78,6 +79,7 @@ public class BuildManager : MonoBehaviour
 
     private void Start()
     {
+        
     }
 
     private void Update()
@@ -127,8 +129,10 @@ public class BuildManager : MonoBehaviour
 
         showtowerinfo.SetTowerinfoOff();
 
-         towerprice = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice;
-
+        float price = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+         towerprice = (int)price;
+       // Debug.Log(TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown"));
+        
             if (playercoin >= towerprice)
             {
                 if (!towerpreviewActive)

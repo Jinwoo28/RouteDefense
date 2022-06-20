@@ -1,47 +1,47 @@
 {
-  "userCoin": 3625,
+  "userCoin": 80,
   "PassiveSkill": [
     {
       "BundleName": "Money",
       "skillInfoList": [
         {
           "SkillName": "StartMoney",
-          "Value": 1.0,
-          "Price": 100,
-          "CurrentLevel": 0,
+          "Value": 1.1,
+          "Price": 200,
+          "CurrentLevel": 1,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 0.1,
-          "UnLock": 0,
+          "UnLock": 1,
           "BundleName": "Money",
           "SkillInformation": "게임 시작 시 초기 자본을 더 많이 받습니다.",
-          "GetCheckLock": 0
+          "GetCheckLock": 1
         },
         {
           "SkillName": "SetTowerDown",
-          "Value": 1.0,
-          "Price": 120,
-          "CurrentLevel": 0,
+          "Value": 0.9,
+          "Price": 240,
+          "CurrentLevel": 1,
           "MaxLevel": 5,
           "PreSkill": "StartMoney",
           "UpValueRate": -0.1,
-          "UnLock": 0,
+          "UnLock": 1,
           "BundleName": "Money",
           "SkillInformation": "타워를 짓는 비용이 감소합니다.",
-          "GetCheckLock": 0
+          "GetCheckLock": 1
         },
         {
           "SkillName": "UpTowerDown",
-          "Value": 1.0,
-          "Price": 200,
-          "CurrentLevel": 0,
+          "Value": 0.9,
+          "Price": 400,
+          "CurrentLevel": 1,
           "MaxLevel": 3,
           "PreSkill": "SetTowerDown",
           "UpValueRate": -0.1,
-          "UnLock": 0,
+          "UnLock": 1,
           "BundleName": "Money",
           "SkillInformation": "타워의 업그레이드 비용이 감소합니다.",
-          "GetCheckLock": 0
+          "GetCheckLock": 1
         },
         {
           "SkillName": "GetCoinUp",
@@ -91,17 +91,17 @@
       "skillInfoList": [
         {
           "SkillName": "Meteor",
-          "Value": 20.0,
+          "Value": 0.0,
           "Price": 150,
           "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "Fire",
-          "UpValueRate": 10.0,
+          "UpValueRate": 5.0,
           "UnLock": 0,
           "BundleName": "Fire",
           "SkillInformation": "하늘에서 거대한 운석을 떨어트려 인근 적에게 피해를 입힙니다.",
           "Slot": 0,
-          "CoolTime": 10.0,
+          "CoolTime": 12.0,
           "CoolTimeDown": 1.0,
           "GetCheckLock": 0
         },
@@ -128,7 +128,7 @@
       "skillInfoList": [
         {
           "SkillName": "LightningBolt",
-          "Value": 10.0,
+          "Value": 0.0,
           "Price": 150,
           "CurrentLevel": 0,
           "MaxLevel": 5,
@@ -149,7 +149,7 @@
       "skillInfoList": [
         {
           "SkillName": "freezing",
-          "Value": 1.0,
+          "Value": 0.0,
           "Price": 150,
           "CurrentLevel": 0,
           "MaxLevel": 5,
@@ -159,7 +159,7 @@
           "BundleName": "Ice",
           "SkillInformation": "해당 지역을 지나는 적의 이동속도를 낯춘다. 적이 물에 있다면 해당 적을 얼린다.",
           "Slot": 0,
-          "CoolTime": 10.0,
+          "CoolTime": 15.0,
           "CoolTimeDown": 1.0,
           "GetCheckLock": 0
         }
@@ -170,7 +170,7 @@
       "skillInfoList": [
         {
           "SkillName": "WoodObs",
-          "Value": 20.0,
+          "Value": 0.0,
           "Price": 100,
           "CurrentLevel": 0,
           "MaxLevel": 3,
@@ -186,7 +186,7 @@
         },
         {
           "SkillName": "StoneObs",
-          "Value": 30.0,
+          "Value": 0.0,
           "Price": 125,
           "CurrentLevel": 0,
           "MaxLevel": 3,
@@ -202,7 +202,7 @@
         },
         {
           "SkillName": "BarbedWire",
-          "Value": 20.0,
+          "Value": 0.0,
           "Price": 150,
           "CurrentLevel": 0,
           "MaxLevel": 3,

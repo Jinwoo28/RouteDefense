@@ -10,6 +10,12 @@ public class PlasmaTower : Tower
 
     private bool isShoot = false;
 
+    protected override void Start()
+    {
+        base.Start();
+        SoundStop = false;
+    }
+
     protected override void Update()
     {
         //발사중이 아닐 때
@@ -37,6 +43,7 @@ public class PlasmaTower : Tower
         Charging.Play();
         yield return new WaitForSeconds(0.5f);
 
+        AS.Play();
         Boom.Play();
         isShoot = true;
         PlasmaLaser.GetComponent<Plasmabullet>().SetDamage(towerinfo.towerdamage);

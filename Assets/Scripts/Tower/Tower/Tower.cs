@@ -15,7 +15,6 @@ public class UpgradeValue
 
 
 //타워의 정보
-
 public class TowerInfo
 {
     //타워의 가격
@@ -27,19 +26,22 @@ public class TowerInfo
     public float atkdelay = 0;
 }
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Tower : MonoBehaviour
 {
-    public enum TowerType
-    {
-        Unknown,
-        offense,
-        support
-    }
+    [SerializeField] private int TowerCode = 0;
 
-    private void Awake()
+    [SerializeField] protected bool canAtkGroundOnly;
+    [SerializeField] protected bool canAtkFlyOnly;
+
+    private bool TowerCanWork = true;
+
+    protected AudioSource AS = null;
+
+    protected virtual void Awake()
     {
        TowerSetUp(TowerDataSetUp.GetData(TowerCode));
-
     }
 
     private void TowerSetUp(TowerData towerdata)
@@ -59,11 +61,6 @@ public class Tower : MonoBehaviour
 
     
 
-    [SerializeField] private int TowerCode = 0;
-    public int GetTowerCode => TowerCode;
-
-    protected AudioSource AS = null;
-
     //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
 
@@ -79,10 +76,7 @@ public class Tower : MonoBehaviour
     //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
 
-    //미리보기 타워 생성
-    //private GameObject preview = null;
 
-    private bool TowerCanWork = true;
 
     //적 방향으로 돌아갈 포신
     //y축 회전
@@ -93,7 +87,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected Transform shootPos = null;
 
     //주위를 검사할 레이어
-    [SerializeField] private LayerMask layer;
+    [SerializeField] private LayerMask SearchLayer;
 
     //플레이어 coin값을 가져올 playstate
     private PlayerState playerstate = null;
@@ -161,6 +155,8 @@ public class Tower : MonoBehaviour
         }
     }
 
+    protected bool SoundStop = true;
+
     protected virtual void Update()
     {
         // AS.volume = SoundSettings.currentsound;
@@ -173,7 +169,10 @@ public class Tower : MonoBehaviour
             }
             else
             {
-                AS.Stop();
+                if (SoundStop)
+                {
+                    AS.Stop();
+                }
             }
         }
     }
@@ -192,18 +191,20 @@ public class Tower : MonoBehaviour
             if (FinalTarget != null)
             {
                 Vector3 GetDistance = FinalTarget.position - this.transform.position;
-                if (Vector3.Distance(FinalTarget.position, this.transform.position) >towerinfo.towerrange)
+                if (Vector3.Distance(FinalTarget.position, this.transform.position) > towerinfo.towerrange||!FinalTarget.transform.gameObject.activeInHierarchy)
                 {
                     FinalTarget = null;
                 }
             }
+            else
+            {
 
-            //OverlapSphere : 객체 주변의 Collider를 검출
-            //검출한 collider를 배열형 변수에 저장
-            Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, layer);
+                //OverlapSphere : 객체 주변의 Collider를 검출
+                //검출한 collider를 배열형 변수에 저장
+                Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, SearchLayer);
 
-            //가장 짧은 거리의 오브젝트 위치를 담을 변수
-            Transform ShortestTarget = null;
+                //가장 짧은 거리의 오브젝트 위치를 담을 변수
+                Transform ShortestTarget = null;
 
 
                 if (E_collider.Length > 0)
@@ -231,6 +232,8 @@ public class Tower : MonoBehaviour
                 {
                     FinalTarget = null;
                 }
+            }
+
             
             yield return null;
         }
@@ -307,7 +310,7 @@ public class Tower : MonoBehaviour
                     atkspeed = towerinfo.atkdelay;
                     int critical = Random.Range(1, 101);
                     float origindamage = towerinfo.towerdamage;
-                    if(critical <= towerinfo.towercritical)
+                    if(critical <= towerinfo.towercritical*100)
                     {
                         towerinfo.towerdamage *= 2;
                     }
@@ -335,9 +338,11 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
-        if (playerstate.GetSetPlayerCoin >= (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown")))
+        int upgradeprice = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+
+        if (playerstate.GetSetPlayerCoin >= upgradeprice)
         {
-            sellprice += (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+            sellprice += upgradeprice;
 
             towerlevel++;
             towerinfo.towerdamage += upgradevalue.UpdamageValue;
@@ -499,8 +504,8 @@ public class Tower : MonoBehaviour
             node = value;
         }
     }
-         
-    
+
+
     //타워 이름
     public string Getname => towerinfo.towername;
     //타워 단계
@@ -522,6 +527,7 @@ public class Tower : MonoBehaviour
 
     public float GetTowerUPDamage => upgradevalue.UpdamageValue;
     public float GetTowerUpCri => upgradevalue.UpcriticalValue;
+    public int GetTowerCode => TowerCode;
 
     #endregion
 }

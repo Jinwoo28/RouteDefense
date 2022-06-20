@@ -12,6 +12,8 @@ public class Plasmabullet : MonoBehaviour
 
     private float DeltaValue = 0;
 
+    private Transform parent;
+
     public void SetDamage(float damage)
     {
         Damage = damage;
@@ -38,15 +40,13 @@ public class Plasmabullet : MonoBehaviour
         {
             DeltaValue += Time.deltaTime;
 
-            float Scale = Vector3.Distance(this.transform.position, this.transform.parent.position);
 
-            Debug.Log(Scale);
-
-            this.transform.localScale = new Vector3(X - (Time.deltaTime * 0.75f), Scale*3, Z - (Time.deltaTime * 0.75f));
 
             this.transform.position += (-this.transform.up * Time.deltaTime*30);
 
-
+            float Scale = Vector3.Distance(this.transform.localPosition, this.transform.parent.localPosition);
+            this.transform.localScale = new Vector3(X - (Time.deltaTime * 0.75f), Scale, Z - (Time.deltaTime * 0.75f));
+            
         }
 
     }

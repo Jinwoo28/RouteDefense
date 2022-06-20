@@ -52,8 +52,6 @@ public class SkillFunc : MonoBehaviour
 
     DetectObject detectObject = new DetectObject();
 
-
-
     private void Start()
     {
         GameManager.buttonOff += OffSkillSet;
@@ -62,10 +60,7 @@ public class SkillFunc : MonoBehaviour
 
 
         SkillSet();
-
     }
-
-
 
     private void SkillSet()
     {
@@ -212,28 +207,30 @@ public class SkillFunc : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (Slot[0].GetComponentInChildren<Button>() != null)
+            if (Slot[0].GetComponentInChildren<Button>() != null&& skillKind[Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse)
             {
+                Debug.Log(Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum);
+                Debug.Log(skillKind[Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse+"asldkjhf");
                 Slot[0].GetComponentInChildren<Button>().onClick.Invoke();
             }
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            if (Slot[1].GetComponentInChildren<Button>() != null)
+            if (Slot[1].GetComponentInChildren<Button>() != null&& skillKind[Slot[1].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse)
             {
                 Slot[1].GetComponentInChildren<Button>().onClick.Invoke();
             }
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            if (Slot[2].GetComponentInChildren<Button>() != null)
+            if (Slot[2].GetComponentInChildren<Button>() != null&& skillKind[Slot[2].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse)
             {
                 Slot[2].GetComponentInChildren<Button>().onClick.Invoke();
             }
         }
         else if (Input.GetKeyDown(KeyCode.V))
         {
-            if (Slot[3].GetComponentInChildren<Button>() != null)
+            if (Slot[3].GetComponentInChildren<Button>() != null&& skillKind[Slot[3].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse)
             {
                 Slot[3].GetComponentInChildren<Button>().onClick.Invoke();
             }
@@ -242,6 +239,8 @@ public class SkillFunc : MonoBehaviour
 
     public void ClickSkill(int _skilltype)
     {
+        Debug.Log("Å¬¸¯");
+
         if (setskillpos != null)
         {
             Destroy(setskillpos);
@@ -268,9 +267,6 @@ public class SkillFunc : MonoBehaviour
         var bolt = Instantiate(skillKind[3].Skill, targetpos, Quaternion.identity);
         bolt.GetComponent<lightbolt>().SetPos(new Vector3(targetpos.x, targetpos.y + 20, targetpos.z), targetpos);
         SkillSetUp(skillKind[3], skillButton[3], skillButton[3].GetComponentInChildren<TextMeshProUGUI>(), skillKind[3].Skillname);
-
-
-
     }
 
     private void BuildSkill(int prefabsNum)
@@ -316,16 +312,15 @@ public class SkillFunc : MonoBehaviour
 
         _showCooltime.enabled = true;
         
-        Debug.Log(_showCooltime.name);
-
 
         while (true)
         {
             cooltime += Time.deltaTime;
             _button.image.fillAmount += Time.deltaTime / skillTime;
+            Debug.Log(_button.image.fillAmount);
             _showCooltime.text = (skillTime - (int)cooltime).ToString();
 
-            if (cooltime >= _skill.skillCoolTime)
+            if (cooltime >= skillTime)
             {
                 _button.enabled = true;
                 _skill.CanUse = true;

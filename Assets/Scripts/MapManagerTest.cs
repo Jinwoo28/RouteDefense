@@ -70,9 +70,6 @@ public class MapManagerTest : MonoBehaviour
         Instantiate(StartEnd[0], new Vector3(StartNode.GetX, StartNode.GetYDepth/2, StartNode.GetY), Quaternion.Euler(0, 90, 0));
         Instantiate(StartEnd[1], new Vector3(EndNode.GetX, EndNode.GetYDepth/2, EndNode.GetY), Quaternion.Euler(0, 90, 0));
 
-        Debug.Log(StartNode.GetYDepth / 2 + " : Start");
-        Debug.Log(EndNode.GetYDepth / 2 + " : End");
-
         if (GameManager.SetGameLevel == 3)
         {
             Instantiate(StartEnd[0], new Vector3(StartNode2.GetX, StartNode2.GetYDepth/2, StartNode2.GetY), Quaternion.Euler(0, 90, 0));
@@ -80,13 +77,7 @@ public class MapManagerTest : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        for(int i = 0; i< useableNode.Count; i++)
-        {
-            Debug.Log(useableNode[i].GetYDepth);
-        }
-    }
+
 
     private void MakeHeight()
     {

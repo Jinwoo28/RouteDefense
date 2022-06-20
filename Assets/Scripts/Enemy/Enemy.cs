@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         SetState(EnemyStateSetUp.GetData(EnemyCode));
+        TimeScale = OriginTimeScale = Time.timeScale;
     }
 
     public void SetState(EnemyState stat)
@@ -94,7 +95,7 @@ public class Enemy : MonoBehaviour
         TimeScale = Time.timeScale;
     }
 
-    private float TimeScale = 1;
+    protected float TimeScale = 1;
     private void SpeedUP(int x)
     {
         OriginTimeScale = x;
@@ -286,7 +287,7 @@ public class Enemy : MonoBehaviour
 
             float Damage = underTheSea ? _damage * 2 : _damage;
 
-            EnemyAttacked(Damage);
+            realDamage(Damage);
             electricShock = true;
         }
     }
@@ -330,7 +331,7 @@ public class Enemy : MonoBehaviour
     float originSpeed;
 
 
-    private float OriginTimeScale = 1;
+    protected float OriginTimeScale = 1;
 
     private bool alreadyslow = false;
 
@@ -387,20 +388,23 @@ public class Enemy : MonoBehaviour
 
     }
 
-
+  
 
     
 
     public void EnemyDie()
     {
-        if(GetComponentInChildren<Bullet>() != null)
+        if(this.GetComponentInChildren<Bullet>() != null)
         {
-            GetComponentInChildren<Bullet>().ArrowReturnBullet();
+            this.GetComponentInChildren<Bullet>().ArrowReturnBullet();
+
+            Debug.Log("Asdf");
         }
 
         jump = false;
 
         Destroy(hpbarprefab);
+        returnSpeed();
         EM.EnemyDie(this, unitstate.unitcoin);
         EP.ReturnEnemy(this, enemyNum);
     }

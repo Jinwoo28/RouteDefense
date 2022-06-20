@@ -17,11 +17,13 @@ public class MeteorSkill : MonoBehaviour
 
     private float size;
     private float damage;
+    private float fireDamage;
 
     private void Start()
     {
         As = this.GetComponent<AudioSource>();
         Damage = (int)SkillSettings.ActiveSkillSearch("Meteor").Value;
+        fireDamage = (int)(Damage / 3);
         MultipleSpeed.speedup += SpeedUP;
         this.transform.localScale = this.transform.localScale * (1 + (0.1f * SkillSettings.ActiveSkillSearch("Meteor").CurrentLevel));
     }
@@ -58,14 +60,17 @@ public class MeteorSkill : MonoBehaviour
                 if (Vector3.Distance(this.transform.position, enemy[i].transform.position) < Range * 0.3f)
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage);
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage/2));
                 }
                 else if(Vector3.Distance(this.transform.position, enemy[i].transform.position) < Range * 0.6f)
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage*0.6f);
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 3));
                 }
                 else
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage * 0.3f);
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 4));
                 }
             }
         }

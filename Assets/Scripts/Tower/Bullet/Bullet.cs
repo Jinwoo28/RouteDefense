@@ -90,11 +90,11 @@ public class Bullet : MonoBehaviour
 
     public void ArrowReturnBullet()
     {
-
         DestroyTimer = 0;
         objectpooling.ReturnObject(this);
         this.gameObject.transform.SetParent(parent);
     }
+
 
 
     public virtual void Attack()

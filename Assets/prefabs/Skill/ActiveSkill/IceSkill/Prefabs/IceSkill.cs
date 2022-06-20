@@ -16,11 +16,19 @@ public class IceSkill : MonoBehaviour
         this.transform.Rotate(0, 180*Time.deltaTime, 0);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             enemylist.Add(other.GetComponent<Enemy>());
+            other.GetComponent<Enemy_Creture>().FireAttacked(SkillSettings.ActiveSkillSearch("freezing").Value);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
             other.GetComponent<Enemy>().SlowDown();
         }
     }
@@ -37,6 +45,7 @@ public class IceSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            enemylist.Remove(other.GetComponent<Enemy>());
             other.GetComponent<Enemy>().returnSpeed();
         }
     }

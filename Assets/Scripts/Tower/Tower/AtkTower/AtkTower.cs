@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AtkTower : MonoBehaviour
+public class AtkTower : Tower
 {
-    void Start()
+    protected override void Awake()
     {
-        
-    }
-
-    void Update()
-    {
+        base.Awake();
         
     }
 }

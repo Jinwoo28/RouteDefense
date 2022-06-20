@@ -123,12 +123,7 @@ public class TeslaBullet : MonoBehaviour
         //카운터 감소, 데미지 감소
         Count--;
         
-        Damage--;
-
-        if(Damage < 1)
-        {
-            Damage = 1;
-        }
+       
 
         if (!target.GetComponent<Enemy>().GetWet&&Range > 0.2f)
         {
@@ -146,9 +141,15 @@ public class TeslaBullet : MonoBehaviour
 
         target.GetComponent<Enemy>().ElectricDamage(Damage);
 
+        Damage--;
+
+        if (Damage < 1)
+        {
+            Damage = 1;
+        }
+
         if (Count == 0)
         {
-            Debug.Log("1번");
             ReturnBullet();
             return;
         }
@@ -186,7 +187,6 @@ public class TeslaBullet : MonoBehaviour
             //인근의 적이 이미 공격한 대상밖에 없을 경우 종료
             if(ShortestTarget == null)
             {
-                Debug.Log("2번");
                 ReturnBullet();
                 return;
             }
@@ -202,7 +202,6 @@ public class TeslaBullet : MonoBehaviour
         //인근의 대상이 없다면 종료
         else
         {
-            Debug.Log("3번");
             ReturnBullet();
             return;
         }

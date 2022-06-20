@@ -861,7 +861,7 @@ X X 10 X
             {
                 TileCanChange = false;
                 Vector3[] waypoint = WayPoint(StartNode, EndNode);
-                EM.gameStartCourtain(waypoint, waypoint[0]);
+                EM.gameStartCourtain(waypoint, waypoint[0],1);
                 StartCoroutine("GameStartCheck");
             }
 

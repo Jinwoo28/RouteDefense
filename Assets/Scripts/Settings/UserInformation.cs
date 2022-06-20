@@ -33,7 +33,7 @@ public class UserInformation : MonoBehaviour
 
     private SkillSettings skill = null;
 
-    [SerializeField] private ActiveBundle2 ActiveBundle = null;
+    [SerializeField] private ActiveBundle ActiveBundle = null;
     [SerializeField] private PassiveBundle passiveBundle = null;
 
     private void Start()
@@ -42,23 +42,20 @@ public class UserInformation : MonoBehaviour
 
         // PSkillSetUp();
         //ResetUserSkillData();
-        if (!SetData)
-        {
+
             LoadUserInfo();
-            SetData = true;
-            ResetUserSkillData();
+           // SetData = true;
+           // ResetUserSkillData();
             skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
-     //       userDataStatic = userData;
-        }
 
 
         userData.userCoin += getMoney;
         getMoney = 0;
 
-        if (Path.Combine(Application.streamingAssetsPath, "PlayerData.json") == null)
-        {
-            File.Create(Path.Combine(Application.streamingAssetsPath, "PlayerData.json"));
-        }
+        //if (Path.Combine(Application.streamingAssetsPath, "PlayerData.json") == null)
+        //{
+        //    File.Create(Path.Combine(Application.streamingAssetsPath, "PlayerData.json"));
+        //}
     }
 
     private void ResetUserSkillData()
@@ -68,7 +65,7 @@ public class UserInformation : MonoBehaviour
         //엑셀에 저장된 스킬 개수만큼 반복
         foreach (var item in ActiveBundle.ActiveSkill)
         {
-                bool success2 = false;
+            bool success2 = false;
             //userdata의 번들 개수
             for (int i = 0; i < userData.ActiveSkill.Count; i++)
             {
@@ -104,7 +101,6 @@ public class UserInformation : MonoBehaviour
         foreach (var item in passiveBundle.PassiveSkill)
         {
             bool success2 = false;
-            //userdata의 번들 개수
             for (int i = 0; i < userData.PassiveSkill.Count; i++)
             {
                 if (item.BundleName == userData.PassiveSkill[i].BundleName)
@@ -135,21 +131,6 @@ public class UserInformation : MonoBehaviour
             }
 
         }
-
-
-        //foreach (var item in passiveBundle.PassiveSkill)
-        //{
-        //    for (int i = 0; i < userData.PassiveSkill.Count; i++)
-        //    {
-        //        for (int j = 0; j < userData.PassiveSkill[i].skillInfoList.Count; j++)
-        //        {
-        //            if (item.SkillName == userData.PassiveSkill[i].skillInfoList[j].SkillName)
-        //            {
-        //                userData.PassiveSkill[i].skillInfoList[j] = item;
-        //            }
-        //        }
-        //    }
-        //}
     }
 
     public void SavePSkill(List<PassiveSkillSet> passiveSkillSets)

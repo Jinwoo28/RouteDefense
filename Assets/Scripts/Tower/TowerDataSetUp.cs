@@ -13,13 +13,19 @@ public class TowerDataSetUp : MonoBehaviour
 
     private static int AlreadySet = 0;
 
-    private void Start()
+    [SerializeField] private GameObject DarkImage = null;
+
+    private void Awake()
     {
+        DarkImage.SetActive(false);
         if (AlreadySet == 0)
         {
+            DarkImage.SetActive(true);
             StartCoroutine(DataSetFromWeb());
             AlreadySet = 1;
         }
+
+        
     }
 
     IEnumerator DataSetFromWeb()
@@ -29,9 +35,11 @@ public class TowerDataSetUp : MonoBehaviour
 
         string data = www.downloadHandler.text;
 
-        print(data);
+        //print(data);
 
         SetEnemy(data);
+        DarkImage.SetActive(false);
+
     }
 
     void SetEnemy(string tsv)
@@ -56,12 +64,12 @@ public class TowerDataSetUp : MonoBehaviour
                 item.Name = column[0];
                 item.TowerStep = int.Parse(column[1]);
                 item.TowerCode = int.Parse(column[2]);
-                item.Damage = int.Parse(column[3]);
+                item.Damage = float.Parse(column[3]);
                 item.Delay = float.Parse(column[4]);
                 item.Range = float.Parse(column[5]);
-                item.Critical = int.Parse(column[6]);
+                item.Critical = float.Parse(column[6]);
                 item.UpgradeAtk = float.Parse(column[7]);
-                item.UpgradeCri = int.Parse(column[8]);
+                item.UpgradeCri = float.Parse(column[8]);
                 item.TowerPrice = int.Parse(column[9]);
                 item.UpgradePrice = int.Parse(column[10]);
             }

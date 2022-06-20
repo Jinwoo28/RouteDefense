@@ -21,8 +21,9 @@ public class ArrowBullet : Bullet
 
         if (!ontile)
         {
-                this.transform.position += moveDir * bullspeed * Time.deltaTime;
-                this.transform.LookAt(this.transform.position + moveDir);
+                Vector3 dir = target.transform.position- this.transform.position;
+                this.transform.position += dir.normalized * bullspeed * Time.deltaTime;
+                this.transform.LookAt(target.position);
         }
         else
         {
@@ -47,21 +48,28 @@ public class ArrowBullet : Bullet
         {
             if (!ontile)
             {
-                enemy = other.GetComponent<Enemy>();
-                AtkCharactor();
+                other.GetComponent<Enemy>().EnemyAttacked(damage);
+                //AtkCharactor();
                 Ontarget = true;
 
                 ontile = true;
-                Invoke("ArrowReturnBullet", 0.5f);
-                this.transform.SetParent(other.gameObject.transform);
+                if (other.GetComponent<Enemy>().gameObject.activeInHierarchy)
+                {
+                    Return();
+                    this.transform.SetParent(other.gameObject.transform);
+                }
+                else
+                {
+                    ArrowReturnBullet();
+                }
 
             }
         }
+    }
 
-        else if (other.CompareTag("Tile"))
-        {
-            ontile = true;
-            Invoke("ArrowReturnBullet", 0.5f);
-        }
+    IEnumerator Return()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ArrowReturnBullet();
     }
 }

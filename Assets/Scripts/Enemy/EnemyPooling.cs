@@ -25,7 +25,6 @@ public class EnemyPooling : MonoBehaviour
 
     public Enemy GetEnemy(int _enemyNum,Vector3 _spawnPos)
     {
-
         if (enemyPooling[_enemyNum].enemypooling.Count > 0)
         {
 

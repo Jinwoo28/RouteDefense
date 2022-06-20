@@ -23,6 +23,7 @@ public class Enemy_Creture : Enemy
     void Update()
     {
         UnitCharacteristic();
+
     }
 
     protected override void UnitCharacteristic()
@@ -59,9 +60,16 @@ public class Enemy_Creture : Enemy
     public void FireAttacked(float damage)
     {
         FireDamage = damage;
-        fired = true;
-        StopCoroutine("DotDamage");
-        StartCoroutine("DotDamage");
+        if (this.gameObject.activeInHierarchy)
+        {
+            if (!fired)
+            {
+                SpeedChange(1.25f);
+                fired = true;
+            }
+            StopCoroutine("DotDamage");
+            StartCoroutine("DotDamage");
+        }
     }
 
     private bool fired = false;
@@ -72,9 +80,9 @@ public class Enemy_Creture : Enemy
     {
         hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Fire);
         int damagecount = 5;
+
         while (damagecount > 0)
         {
-            SpeedChange(1.25f);
             damagecount--;
 
             float realdamage = underTheSea?FireDamage/2:FireDamage;
