@@ -33,7 +33,7 @@ public class HpNum : MonoBehaviour
     {
         speed += Time.deltaTime;
 
-            text.transform.position = cam.WorldToScreenPoint(new Vector3(X, Y + 1f + speed * 1.5f, Z));
+        text.transform.position = cam.WorldToScreenPoint(new Vector3(X, Y + 1f + speed * 1.5f, Z));
         alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime*1.5f);
         text.color = alpha;
     }

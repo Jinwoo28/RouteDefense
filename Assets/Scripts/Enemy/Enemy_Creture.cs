@@ -23,7 +23,6 @@ public class Enemy_Creture : Enemy
     void Update()
     {
         UnitCharacteristic();
-
     }
 
     protected override void UnitCharacteristic()

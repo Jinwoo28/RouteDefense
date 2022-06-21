@@ -113,7 +113,7 @@ public class EnemyManager : MonoBehaviour
        gameongoing = true;
 
         //적이 나올 개수
-        int count = GameManager.SetGameLevel == 3? stageinfo[StageNum ].EnemyCount: (int)(stageinfo[StageNum].EnemyCount*0.7f);
+        int count = GameManager.SetGameLevel == 3? (int)(stageinfo[StageNum ].EnemyCount*0.7f): stageinfo[StageNum].EnemyCount;
         int stagenum = StageNum;
         
         //적 종류

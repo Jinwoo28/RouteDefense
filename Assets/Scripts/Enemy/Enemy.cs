@@ -4,6 +4,11 @@ using UnityEngine;
 //using System;
 using UnityEngine.UI;
 
+public interface IEnumyAttacked
+{
+    void Attacked(float damage);
+}
+
    public class  UnitState
 {
     public float unitspeed = 0;
@@ -14,7 +19,7 @@ using UnityEngine.UI;
     public int type = 0;    //지상이면 0, 하늘이면 1
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IEnumyAttacked
 {
 
     [SerializeField] private int EnemyCode;
@@ -123,14 +128,107 @@ public class Enemy : MonoBehaviour
         {
             hpbarprefab = Instantiate(hpbar);
             hpbarprefab.transform.SetParent(canvas);
-            hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this, this.transform);
+            hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this, this.transform);    //수정필요
             hpbar.GetComponentInChildren<RectTransform>().localScale = new Vector3(1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
         }
 
-        StartCoroutine("MoveUnit");
+        if (unitstate.type == 0)
+        {
+            StartCoroutine("MoveGroundUnit");
+        }
+        else
+        {
+            StartCoroutine("MoveFlyUnit");
+        }
     }
 
-    public IEnumerator MoveUnit()
+    //공중유닛 움직임
+    public IEnumerator MoveFlyUnit()
+    {
+        int waypointindex = 0;
+
+        Vector3 MoveToPoint = Waypoint[waypointindex];
+
+        Vector3 currentPos = this.transform.position;
+
+
+        while (waypointindex != Waypoint.Length - 1)
+        {
+            MoveToPoint = Waypoint[waypointindex];
+
+            if (waypointindex < Waypoint.Length)
+            {
+
+                //waypoint 변경
+                if (Vector3.Magnitude(MoveToPoint - this.transform.position) < 0.05f)
+                {
+                    currentPos = Waypoint[waypointindex];
+                    waypointindex++;
+                    jump = false;
+                }
+
+                ////오르막길
+                //if (Waypoint[waypointindex].y > currentPos.y)
+                //{
+                //    if (!jump)
+                //    {
+                //        jump = true;
+                //        unitspeed *= 0.8f;
+                //    }
+                //}
+
+                ////내리막길
+                //else if (Waypoint[waypointindex].y < currentPos.y)
+                //{
+                //    if (!jump)
+                //    {
+                //        jump = true;
+                //        unitspeed *= 1.2f;
+                //    }
+                //}
+
+                ////평지
+                //else
+                //{
+                //    float X = unitspeed - unitstate.unitspeed;
+
+                //    //속도 안정화
+                //    if (X < -0.05f) unitspeed += Time.unscaledDeltaTime * TimeScale;
+                //    else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime * TimeScale;
+                //    else unitspeed = unitstate.unitspeed;
+
+                //    //다음 목적지로 이동
+                //}
+                
+                this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime * TimeScale);
+
+                //Debug.Log("유닛 스피드 : " + unitspeed);
+                Vector3 relativePos = Waypoint[waypointindex] - this.transform.position;
+                //현재 위치에서 타겟위치로의 방향값
+                Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
+
+                //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
+                Vector3 TowerDir = Quaternion.RotateTowards(this.transform.rotation, rotationtotarget, 360 * Time.unscaledDeltaTime * TimeScale).eulerAngles;
+
+                //현재의 rotation값에 Vector3형태로 저장한 값 사용
+                this.transform.rotation = Quaternion.Euler(0, TowerDir.y, 0);
+
+                yield return null;
+            }
+            else
+            {
+
+                yield break;
+            }
+        }
+        EM.EnemyArriveDestination(this);
+        var prefab = hpbarprefab;
+        hpbarprefab = null;
+        Destroy(prefab);
+        EP.ReturnEnemy(this, enemyNum);
+    }
+
+    public IEnumerator MoveGroundUnit()
     {
         int waypointindex = 0;
 
@@ -299,6 +397,8 @@ public class Enemy : MonoBehaviour
         electricShock = false;
     }
 
+    
+
     public virtual void EnemyAttacked(float _damage)
     {
         float realdamage = 0;
@@ -415,16 +515,28 @@ public class Enemy : MonoBehaviour
     {
         cam = Camera.main;
     
-        GameObject damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position),
-            Quaternion.identity);
+        GameObject damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position), Quaternion.identity);
         damagecount.transform.SetParent(canvas);
-        damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage);
- 
+
+        if (unitstate.type == 0)
+        {
+            damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage);
+        }
+        else
+        {
+            Vector3 pos = this.GetComponentInChildren<FlyEnemy>().gameObject.transform.localPosition;
+            damagecount.GetComponent<HpNum>().SetUp(pos.x, pos.y, pos.z, _damage);
+        }
     }
 
     virtual protected void UnitCharacteristic() { }
 
     virtual protected void UnitSkill() { }
+
+    public void Attacked(float damage)
+    {
+        EnemyAttacked(damage);
+    }
 
     public float GetHp
     {

@@ -18616,11 +18616,11 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 5
-    enemyNum: 0000000001000000
+    EnemyCount: 1
+    enemyNum: 13000000
   - SpawnTime: 1
-    EnemyCount: 10
-    enemyNum: 00000000
+    EnemyCount: 1
+    enemyNum: 02000000
   - SpawnTime: 1
     EnemyCount: 25
     enemyNum: 
@@ -18731,7 +18731,8 @@ MonoBehaviour:
   - enemy: {fileID: 5605937428500773743, guid: 777556a5416b69b45a96c59e89a5d9ba, type: 3}
   - enemy: {fileID: 110966413873681984, guid: 98ec0a8a7d14ded4a9cf008fa65ae9a6, type: 3}
   - enemy: {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
-  - enemy: {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
+  - enemy: {fileID: 1879581886640764, guid: 7a51eab5e2fa3b94aaf07a2232d9c2dc, type: 3}
+  - enemy: {fileID: 1537502993957880, guid: 4783215a413fe04479b0b73cb00871bd, type: 3}
 --- !u!1 &1673361433
 GameObject:
   m_ObjectHideFlags: 0

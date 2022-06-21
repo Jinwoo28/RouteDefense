@@ -31,9 +31,23 @@ public class GatlingTower : AtkTower
         {
             if (FinalTarget != null)
             {
-                
-                Vector3 Insight = cam.transform.position - FinalTarget.position;
-                HitEffect.transform.position = FinalTarget.position + Insight.normalized;
+                if (FinalTarget.GetComponentInChildren<FlyEnemy>() == null)
+                {
+                    Vector3 Insight = cam.transform.position - FinalTarget.position;
+                    HitEffect.transform.position = FinalTarget.position + Insight.normalized;
+                }
+                else
+                {
+                    Vector3 pos = FinalTarget.GetComponentInChildren<FlyEnemy>().gameObject.transform.localPosition ;
+                    pos.y += FinalTarget.position.y;
+
+                    Debug.Log(pos.y);
+
+                    Vector3 Insight = cam.transform.position - pos;
+                    HitEffect.transform.position = pos + Insight.normalized;
+
+                    Debug.Log((pos + Insight.normalized).y + "2");
+                }
                 //HitEffect.GetComponent<ParticleSystem>().Play();
             }
             else
@@ -58,8 +72,7 @@ public class GatlingTower : AtkTower
         {
             AtkParticle.SetActive(true);
             HitEffect.SetActive(true);
-            Debug.Log(FinalTarget.gameObject.name);
-            FinalTarget.GetComponent<Enemy>().EnemyAttacked(towerinfo.towerdamage);
+            FinalTarget.GetComponent<IEnumyAttacked>().Attacked(towerinfo.towerdamage);
         }
 
     }

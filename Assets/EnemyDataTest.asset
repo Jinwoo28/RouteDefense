@@ -21,7 +21,7 @@ MonoBehaviour:
     coin: 3
     Amour: 0
     avoidance: 0
-    enemytype: 1
+    enemytype: 0
   - Name: Chick
     UnitCode: 2
     Hp: 5
@@ -192,4 +192,13 @@ MonoBehaviour:
     coin: 7
     Amour: 1
     avoidance: 50
+    enemytype: 1
+  - Name: Eagle
+    UnitCode: 42
+    Hp: 12
+    Speed: 1.25
+    Damage: 2
+    coin: 8
+    Amour: 1
+    avoidance: 60
     enemytype: 1
