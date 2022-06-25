@@ -38,6 +38,7 @@ public class UserInformation : MonoBehaviour
 
     private void Start()
     {
+
         skill = this.GetComponent<SkillSettings>();
 
         // PSkillSetUp();

@@ -19,9 +19,13 @@ public class FlyEnemy : Enemy_Creture
     float X = 0;
     private void Update()
     {
+       // Body.transform.position += Vector3.up * Time.deltaTime*0.25f;
+
         X += Time.deltaTime*180; 
         Mark.rotation = Quaternion.Euler(-90, 0, X);
     }
 
+    public Transform GetBody() => Body;
 
+    
 }

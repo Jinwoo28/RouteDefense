@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StageType
+{
+    Nomal,
+    UnOrderCheckPoint,
+    OrderCheckPoint
+}
+
 public class GameManager : MonoBehaviour
 {
     private static int GameLevel = 3;
@@ -17,10 +24,10 @@ public class GameManager : MonoBehaviour
     public delegate void ButtonOff();
     public static ButtonOff buttonOff;
 
-    private void Start()
-    {
-
-    }
+    private static int PointCount = 2;
+    public static int GetSetPointCount { get => PointCount; set => PointCount = value; }
+    private static StageType stagetype = StageType.OrderCheckPoint;
+    public static StageType GetSetStageType { get => stagetype; set => stagetype = value; }
 
     public static void OffFunc()
     {

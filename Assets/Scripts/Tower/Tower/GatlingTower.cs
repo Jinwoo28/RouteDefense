@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GatlingTower : AtkTower
+public class GatlingTower : HitScanTower
 {
     [SerializeField] Transform RotateBarral = null;
 
@@ -31,23 +31,24 @@ public class GatlingTower : AtkTower
         {
             if (FinalTarget != null)
             {
-                if (FinalTarget.GetComponentInChildren<FlyEnemy>() == null)
-                {
                     Vector3 Insight = cam.transform.position - FinalTarget.position;
                     HitEffect.transform.position = FinalTarget.position + Insight.normalized;
-                }
-                else
-                {
-                    Vector3 pos = FinalTarget.GetComponentInChildren<FlyEnemy>().gameObject.transform.localPosition ;
-                    pos.y += FinalTarget.position.y;
+                Debug.Log(HitEffect.transform.position);
+                //if (FinalTarget.GetComponentInChildren<FlyEnemy>() == null)
+                //{
+                //}
+                //else
+                //{
+                //    Vector3 pos = FinalTarget.GetComponentInChildren<FlyEnemy>().GetBody().position;
+                //    //pos.y += FinalTarget.position.y;
 
-                    Debug.Log(pos.y);
+                //    //Debug.Log(pos.y);
 
-                    Vector3 Insight = cam.transform.position - pos;
-                    HitEffect.transform.position = pos + Insight.normalized;
+                //    Vector3 Insight = cam.transform.position - pos;
+                //    HitEffect.transform.position = pos + Insight.normalized;
 
-                    Debug.Log((pos + Insight.normalized).y + "2");
-                }
+                //    //Debug.Log((pos + Insight.normalized).y + "2");
+                //}
                 //HitEffect.GetComponent<ParticleSystem>().Play();
             }
             else

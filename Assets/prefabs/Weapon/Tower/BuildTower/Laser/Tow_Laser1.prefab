@@ -239,10 +239,6 @@ MonoBehaviour:
   towerBody: {fileID: 500732071518642065}
   towerTurret: {fileID: 500732071518642065}
   shootPos: {fileID: 2281000113917283791}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 1
   AtkParticle: {fileID: 4579801013871707243}
 --- !u!120 &-7769494181586192729
 LineRenderer:

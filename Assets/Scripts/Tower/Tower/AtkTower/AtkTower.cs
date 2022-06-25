@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AtkTower : Tower
 {
+    private Transform targetCollider = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -34,10 +36,11 @@ public class AtkTower : Tower
         {
             if (FinalTarget != null)
             {
-                
-                if (Vector3.Distance(FinalTarget.position, this.transform.position) > towerinfo.towerrange || !FinalTarget.transform.gameObject.activeInHierarchy)
+
+                if (!FinalTarget.transform.gameObject.activeInHierarchy||Vector3.Distance(FinalTarget.GetComponent<IEnumyAttacked>().GetPos().gameObject.transform.position, this.transform.position) > towerinfo.towerrange)
                 {
                     FinalTarget = null;
+                    Debug.Log("??");
                 }
             }
             else
@@ -84,7 +87,18 @@ public class AtkTower : Tower
                             ShortestTarget = EC.transform;
                         }
                     }
-                    FinalTarget = ShortestTarget;
+
+                    if (ShortestTarget != null)
+                    {
+                        if (ShortestTarget.GetComponent<Enemy>().GetEnemyType == 1)
+                        {
+                            FinalTarget = ShortestTarget.GetComponentInChildren<FlyEnemy>().GetBody();
+                        }
+                        else
+                        {
+                            FinalTarget = ShortestTarget;
+                        }
+                    }
                     //가장 거리가 짧은 대상을 최종 타겟으로 설정.
                 }
                 else
@@ -102,14 +116,9 @@ public class AtkTower : Tower
     {
         Vector3 relativePos = Vector3.zero;
 
-        if (FinalTarget.GetComponent<Enemy>().GetEnemyType == 0) 
-        {
+
             relativePos = FinalTarget.position - transform.position;
-        }
-        else
-        {
-            relativePos = FinalTarget.GetComponentInChildren<BirdHitBox>().gameObject.transform.position - transform.position;
-        }
+
 
         
         //현재 위치에서 타겟위치로의 방향값
@@ -122,14 +131,9 @@ public class AtkTower : Tower
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
         // towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
 
-        if (FinalTarget.GetComponent<Enemy>().GetEnemyType == 0)
-        {
+ 
             towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
-        }
-        else
-        {
-            towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.GetComponentInChildren<BirdHitBox>().gameObject.transform.localScale.y / 2), TowerDir2.y, 0);
-        }
+ 
 
 
         if (FinalTarget != null)

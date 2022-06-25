@@ -169,56 +169,6 @@ public class Tower : MonoBehaviour
 
     protected bool Atking = false;
 
-    //protected virtual void RotateTurret()
-    //{ 
-    //    Vector3 relativePos = FinalTarget.position - transform.position;
-    //    //현재 위치에서 타겟위치로의 방향값
-    //    Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
-
-    //    //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
-    //    Vector3 TowerDir = Quaternion.RotateTowards(towerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
-    //    Vector3 TowerDir2 = Quaternion.RotateTowards(towerTurret.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
-
-    //    //현재의 rotation값에 Vector3형태로 저장한 값 사용
-    //    towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
-    //    towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
-
-
-    //    if (FinalTarget != null)
-    //    {
-    //        if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
-    //        {
-    //            Atking = true;
-    //            atkspeed -= Time.deltaTime;
-    //            if (atkspeed <= 0)
-    //            {
-    //                atkspeed = towerinfo.atkdelay;
-    //                int critical = Random.Range(1, 101);
-    //                float origindamage = towerinfo.towerdamage;
-    //                if(critical <= towerinfo.towercritical*100)
-    //                {
-    //                    towerinfo.towerdamage *= 2;
-    //                }
-    //                Attack();
-
-    //                towerinfo.towerdamage = origindamage;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            Atking = false;
-    //        }
-    //    }
-    //}
-
-
-    //protected virtual void Attack() 
-    //{
-
-    //}
-
-
-
     public void TowerUpgrade()
     {
         int upgradeprice = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));

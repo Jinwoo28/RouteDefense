@@ -5,7 +5,7 @@ using UnityEngine;
 public class LaserTower : AtkTower
 {
     private LineRenderer lR = null;
-    private Transform OriginTarget = null;
+    private Transform existingTarget = null;
     private float atkdamage = 0;
     private bool isAtking = false;
 
@@ -20,74 +20,43 @@ public class LaserTower : AtkTower
     {
         base.Update();
 
-        if (OriginTarget != FinalTarget)
+        if (isAtking)
         {
-            StopCoroutine("LaserShoot");
-            OriginTarget = FinalTarget;
-            atkdamage = towerinfo.towerdamage;
-            isAtking = false;
-        }
-
-
-        if (FinalTarget != null)
-        {
- 
-            if (Atking)
+            if (FinalTarget != null)
             {
-
-                lR.enabled = true;
-
                 lR.SetPosition(0, shootPos.position);
-                lR.SetPosition(1, FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0));
-                /* + shootPos.forward * hit.collider.transform.localScale.z / 2*/
+                lR.SetPosition(1, existingTarget.position);
 
-                if (!isAtking)
-                {
-                    StartCoroutine("LaserShoot");
-                }
-                // }
-
-                AtkParticle.transform.position = FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0);
-                //  }
+                AtkParticle.transform.position = existingTarget.position/*FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0)*/;
             }
             else
             {
+                AtkParticle.SetActive(false);
                 lR.enabled = false;
+                isAtking = false;
+                Debug.Log("Å¸°Ù ¾øÀ½");
             }
-
-        }
-        else
-        {
-            AtkParticle.SetActive(false);
-
-            StopCoroutine("LaserShoot");
-            atkdamage = towerinfo.towerdamage;
-            isAtking = false;
-            lR.enabled = false;
         }
     }
-    Transform target = null;
-    private IEnumerator LaserShoot()
+
+  
+
+    protected override void Attack()
     {
-        AtkParticle.SetActive(true);
         isAtking = true;
-        if (target != FinalTarget)
+
+        if (existingTarget != FinalTarget)
         {
-            AS.Play();
-            target = FinalTarget;
+            existingTarget = FinalTarget;
+            atkdamage = towerinfo.towerdamage;
         }
 
-        while (FinalTarget != null)
-        {
-            yield return new WaitForSeconds(0.7f);
-            if (FinalTarget != null)
-            {
-                FinalTarget.GetComponent<Enemy>().EnemyAttacked(atkdamage);
-                atkdamage += (GetStep+1);
-            }
-
-        }
-        
+        lR.enabled = true;
+        AtkParticle.SetActive(true);
+        Debug.Log(existingTarget);
+        Debug.Log(existingTarget.GetComponent<IEnumyAttacked>());
+        existingTarget.GetComponent<IEnumyAttacked>().Attacked(atkdamage);
+        atkdamage += (GetStep + 1);
     }
 
 }

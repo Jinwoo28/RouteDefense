@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public interface IEnumyAttacked
 {
     void Attacked(float damage);
+    Transform GetPos();
 }
 
    public class  UnitState
@@ -129,7 +130,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
             hpbarprefab = Instantiate(hpbar);
             hpbarprefab.transform.SetParent(canvas);
             hpbarprefab.GetComponent<EnemyHpbar>().SetUpEnemy(this, this.transform);    //수정필요
-            hpbar.GetComponentInChildren<RectTransform>().localScale = new Vector3(1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
+            hpbarprefab.GetComponentInChildren<RectTransform>().localScale = new Vector3(1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1 + 0.03f * (1 + unitstate.unithp * 0.1f), 1);
         }
 
         if (unitstate.type == 0)
@@ -524,7 +525,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         }
         else
         {
-            Vector3 pos = this.GetComponentInChildren<FlyEnemy>().gameObject.transform.localPosition;
+            Vector3 pos = this.GetComponentInChildren<FlyEnemy>().GetBody().position;
             damagecount.GetComponent<HpNum>().SetUp(pos.x, pos.y, pos.z, _damage);
         }
     }
@@ -536,6 +537,11 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     public void Attacked(float damage)
     {
         EnemyAttacked(damage);
+    }
+
+    public Transform GetPos()
+    {
+        return this.gameObject.transform;
     }
 
     public float GetHp
@@ -560,5 +566,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     }
 
     public int GetEnemyType => unitstate.type;
+
+
 
 }

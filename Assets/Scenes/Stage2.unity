@@ -1514,7 +1514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001c73acc8480174a82790a7b2ebbb76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapmanager: {fileID: 2058199560}
+  mapmanager: {fileID: 0}
   playerstate: {fileID: 968497605}
   enemymanager: {fileID: 1667784359}
   Gettetris: {fileID: 266069878}
@@ -4350,6 +4350,7 @@ MonoBehaviour:
   atkcritical: {fileID: 1735997265}
   atkspeed: {fileID: 1237408798}
   upgradeprice: {fileID: 1862675761}
+  textinfo: []
   rangePrefab: {fileID: 2627479921450125027, guid: 59bad40050b8b3c4582a1d2645c2844a, type: 3}
   enemymanager: {fileID: 1667784359}
   SellPanel: {fileID: 584502693}
@@ -7640,6 +7641,101 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &711394624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 711394628}
+  - component: {fileID: 711394627}
+  - component: {fileID: 711394626}
+  - component: {fileID: 711394625}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &711394625
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711394624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &711394626
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711394624}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &711394627
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711394624}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &711394628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711394624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.480833, y: 0.78, z: 13.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &728843369
 GameObject:
   m_ObjectHideFlags: 0
@@ -8494,15 +8590,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3cc25f8915e342408bb5fd8347d970b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slot: []
+  SkillUi: []
   layermask:
     serializedVersion: 2
     m_Bits: 256
   skillButton:
   - {fileID: 1567569921}
   - {fileID: 1541328884}
-  skillButtonObject:
-  - {fileID: 1864435698}
-  - {fileID: 346367671}
   SetSkillPos: {fileID: 6371284306393463203, guid: 8a9851f5fda2a49469fa6006a3b9d6a2, type: 3}
   skillKind:
   - Skill: {fileID: 693241459792565792, guid: 7c8a8896cea0a8145ba94f88ba7c62ac, type: 3}
@@ -8513,8 +8608,6 @@ MonoBehaviour:
     Skillname: Meteor
     skillCoolTime: 10
     CanUse: 1
-  fireCooltime: {fileID: 44624426}
-  meteorCooltime: {fileID: 729047792}
 --- !u!1 &833297896
 GameObject:
   m_ObjectHideFlags: 0
@@ -10387,7 +10480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercoin: 12000
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0
@@ -14890,7 +14982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdab35585e6220b45876e35079605ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapmanager: {fileID: 2058199560}
+  mapmanager: {fileID: 0}
   MakeTreeObj:
   - {fileID: 4143688071060470818, guid: 8c0816fd31a638c478fe9a13661f379d, type: 3}
   - {fileID: 4523924983119212889, guid: 2dd7f5604e16ee146a160c3b45ed9514, type: 3}
@@ -16258,44 +16350,64 @@ MonoBehaviour:
   stageinfo:
   - SpawnTime: 1
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 1
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 1
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 1
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 1
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 1
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.9
     EnemyCount: 40
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 42
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 44
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 46
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 48
+    enemyNum: 
   - SpawnTime: 0.8
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 50
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 52
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 52
+    enemyNum: 
   - SpawnTime: 0.7
     EnemyCount: 54
+    enemyNum: 
   playerstate: {fileID: 968497605}
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}

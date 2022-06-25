@@ -184,21 +184,75 @@ MonoBehaviour:
     Amour: 5
     avoidance: 20
     enemytype: 0
-  - Name: Eagle
+  - Name: Bird
     UnitCode: 41
-    Hp: 10
-    Speed: 1
+    Hp: 20
+    Speed: 0.5
     Damage: 2
     coin: 7
-    Amour: 1
-    avoidance: 50
+    Amour: 0
+    avoidance: 0
     enemytype: 1
-  - Name: Eagle
+  - Name: Bird
     UnitCode: 42
     Hp: 12
-    Speed: 1.25
+    Speed: 0.65
     Damage: 2
     coin: 8
     Amour: 1
     avoidance: 60
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 43
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 44
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 45
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 46
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 47
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
+    enemytype: 1
+  - Name: Bird
+    UnitCode: 48
+    Hp: 1
+    Speed: 1
+    Damage: 1
+    coin: 1
+    Amour: 1
+    avoidance: 1
     enemytype: 1

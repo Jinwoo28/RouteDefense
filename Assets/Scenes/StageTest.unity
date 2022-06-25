@@ -207,8 +207,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22313950}
-  - component: {fileID: 22313949}
   - component: {fileID: 22313951}
+  - component: {fileID: 22313949}
   m_Layer: 2
   m_Name: Water
   m_TagString: Untagged
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.3726415, g: 0.67909366, b: 1, a: 0.6509804}
+  m_Color: {r: 0.3915094, g: 0.7017205, b: 1, a: 0.6392157}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5865,7 +5865,6 @@ Transform:
   - {fileID: 2058199561}
   - {fileID: 1667784360}
   - {fileID: 1476617157}
-  - {fileID: 1160854745}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13787,72 +13786,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!1 &1160854744
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1160854745}
-  - component: {fileID: 1160854746}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1160854745
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160854744}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 490423460}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160854746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160854744}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4ffb3b81b6d81469bd9f24aff9fb82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartEnd:
-  - {fileID: 0}
-  - {fileID: 0}
-  cursorimage: {fileID: 2800000, guid: 2aae0fa96c6bdf041956ee19e8da7fe2, type: 3}
-  playerstate: {fileID: 968497605}
-  Tile: {fileID: 3729677010003484839, guid: 1b7fbcaa030b89e408e2e31578989370, type: 3}
-  gridX: 30
-  gridY: 30
-  initialGridX: 2
-  initialGridY: 4
-  Tilecolor:
-  - {fileID: 2100000, guid: f270b6f8ed8c662448db207e71b27abb, type: 2}
-  - {fileID: 2100000, guid: 304c4f2eb6c9a9744a7c6130b3e3c38e, type: 2}
-  - {fileID: 2100000, guid: aa3c1ff8dacc99b4cb9543229987b511, type: 2}
-  - {fileID: 2100000, guid: 7996f3f40400b174fa17c30c217b1f86, type: 2}
-  - {fileID: 2100000, guid: 8447aa3b6d3191a4192423887d02882e, type: 2}
-  - {fileID: 2100000, guid: 030ddb62937cf614f87d09a1933b10f5, type: 2}
-  - {fileID: 2100000, guid: dc777811e4b131841afc128ed93222f8, type: 2}
-  - {fileID: 2100000, guid: 9dffaaec32720f746a6cdb23c3aa8af2, type: 2}
-  - {fileID: 2100000, guid: b5a413ba31e634f479d6987dcb83843f, type: 2}
-  AddTilePrefab: {fileID: 4156143761454224607, guid: e87c515dec63c494a8add1d7fabf7f5c, type: 3}
-  NotFound: {fileID: 866557939}
-  EM: {fileID: 1667784359}
 --- !u!1 &1170589256
 GameObject:
   m_ObjectHideFlags: 0
@@ -18620,10 +18553,10 @@ MonoBehaviour:
     enemyNum: 13000000
   - SpawnTime: 1
     EnemyCount: 1
-    enemyNum: 02000000
+    enemyNum: 15000000
   - SpawnTime: 1
-    EnemyCount: 25
-    enemyNum: 
+    EnemyCount: 1
+    enemyNum: 00000000
   - SpawnTime: 1
     EnemyCount: 30
     enemyNum: 
@@ -18733,6 +18666,12 @@ MonoBehaviour:
   - enemy: {fileID: 1691713848445316514, guid: 5fc36a3bbef5dc744b04f77a5f1d8d0b, type: 3}
   - enemy: {fileID: 1879581886640764, guid: 7a51eab5e2fa3b94aaf07a2232d9c2dc, type: 3}
   - enemy: {fileID: 1537502993957880, guid: 4783215a413fe04479b0b73cb00871bd, type: 3}
+  - enemy: {fileID: 100092, guid: 040770b1b5d24ef48be3b2b48353c1ff, type: 3}
+  - enemy: {fileID: 100092, guid: 5a7612e645ba26a43a6483249999e907, type: 3}
+  - enemy: {fileID: 100092, guid: 7d394b5ffd1a15943aae17fcdd87bea9, type: 3}
+  - enemy: {fileID: 100124, guid: 459aeb780b3c43748b5a2bb13e1809c8, type: 3}
+  - enemy: {fileID: 100092, guid: 40ba60a1fcd52884f8878990bd8dd37e, type: 3}
+  - enemy: {fileID: 100092, guid: 91da67b32e5c13648a459e093ac1acb6, type: 3}
 --- !u!1 &1673361433
 GameObject:
   m_ObjectHideFlags: 0
@@ -23208,6 +23147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ed041ca1fb8e44fb73c0f475c2c1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckPoint: {fileID: 5655401898756684476, guid: e223cb918fbc7714b823928961ae5d91, type: 3}
   StartEnd:
   - {fileID: 5844522163540186749, guid: 665e6a0da53e0c2469e5bcc8f76de1fc, type: 3}
   - {fileID: 4378891341127712221, guid: bb27417978caca847b0a4b8811c8d7b4, type: 3}

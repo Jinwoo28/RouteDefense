@@ -33,6 +33,8 @@ public class EnemyHpbar : MonoBehaviour
 
     [SerializeField]private Image image = null;
 
+    private float height = 0;
+
     public void StateChange(enemyState state)
     {
         switch (state)
@@ -76,7 +78,9 @@ public class EnemyHpbar : MonoBehaviour
 
     void Update()
     {
-        this.transform.position = cam.WorldToScreenPoint(new Vector3(followenemy.position.x, followenemy.position.y + 1.0f, followenemy.position.z));
+
+        this.transform.position = cam.WorldToScreenPoint(new Vector3(followenemy.position.x, followenemy.position.y + height, followenemy.position.z));
+
         hpvalue.value = enemyinfo.GetHp/MaxHp;
 
 
@@ -100,7 +104,17 @@ public class EnemyHpbar : MonoBehaviour
 
     public void SetUpEnemy(Enemy _enemyinfo, Transform _followenemy)
     {
-        followenemy = _followenemy;
+        if (_followenemy.GetComponentInChildren<BirdHitBox>() != null)
+        {
+            followenemy = _followenemy.GetComponentInChildren<BirdHitBox>().gameObject.transform;
+            height = 0.5f;
+        }
+        else
+        {
+            followenemy = _followenemy;
+            height = 1;
+        }
+
         enemyinfo = _enemyinfo;
 
         MaxHp = enemyinfo.GetHp;
