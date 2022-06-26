@@ -14,6 +14,9 @@ public class HpNum : MonoBehaviour
     float X = 0;
     float Y = 0;
     float Z = 0;
+
+    private int Block = 0;  //0이면 회피 1이면 데미지
+
     void Start()
     {
         cam = Camera.main;
@@ -21,11 +24,18 @@ public class HpNum : MonoBehaviour
         text = this.GetComponent<TextMeshProUGUI>();
         alpha = text.color;
 
-        if (damage <= 0) text.text = "Miss";
+
+        if (damage <= 0&&Block == 0) text.text = "Miss";
+        else if(damage <=0&&Block == 1)
+        {
+            text.text = "Black";
+        }
         else
         {
-            text.text = damage.ToString();
+            text.text = damage.ToString("F2");
         }
+        
+
     }
 
     // Update is called once per frame
@@ -38,7 +48,7 @@ public class HpNum : MonoBehaviour
         text.color = alpha;
     }
 
-    public void SetUp(float _x, float _y, float _z, float _damage)
+    public void SetUp(float _x, float _y, float _z, float _damage, int _block)
     {
         X = _x;
         Y = _y;
@@ -46,6 +56,8 @@ public class HpNum : MonoBehaviour
 
 
         damage = _damage;
+
+        Block = _block;
 
     }
 }

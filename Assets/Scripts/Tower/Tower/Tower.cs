@@ -60,7 +60,7 @@ public class Tower : MonoBehaviour
         upgradevalue.UpdamageValue = towerdata.UpgradeAtk;
         upgradevalue.UpcriticalValue = towerdata.UpgradeCri;
         upgradevalue.upgradeprice = towerdata.UpgradePrice;
-        upgradevalue.priceUprate = towerdata.UpgradePrice;
+        upgradevalue.priceUprate = 0;
     }
 
     

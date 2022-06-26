@@ -7,6 +7,8 @@ public class MortalTower : AtkTower
     [SerializeField] private bulletpolling bulletPool = null;
     [SerializeField] private bulletpolling patriclePool = null;
 
+    [SerializeField] private float BulletRange = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -26,7 +28,7 @@ public class MortalTower : AtkTower
         obj.SetUp(FinalTarget, towerinfo.towerdamage, bulletPool,5);
         obj.MortarSetDestination(FinalTarget.position,shootPos.position);
         obj.Attack();
-        obj.SetMortarRange(GetStep + 1);
+        obj.SetMortarRange(BulletRange);
 
         obj.SetPool(patriclePool);
         AS.Play();

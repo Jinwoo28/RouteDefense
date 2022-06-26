@@ -10,6 +10,8 @@ public class PlasmaTower : AtkTower
 
     private bool isShoot = false;
 
+    private bool ischarging = false;
+
     protected override void Start()
     {
         base.Start();
@@ -31,6 +33,21 @@ public class PlasmaTower : AtkTower
             //    Charging.Stop();
             //}
         }
+
+        if (FinalTarget != null)
+        {
+            if (!ischarging)
+            {
+                Charging.Play();
+                ischarging = true;
+            }
+        }
+        else
+        {
+            ischarging = false;
+            Charging.Stop();
+        }
+
     }
 
     protected override void Attack()
@@ -40,21 +57,21 @@ public class PlasmaTower : AtkTower
 
     IEnumerator Shoot()
     {
-        Charging.Play();
-        yield return new WaitForSeconds(0.5f);
 
         AS.Play();
         Boom.Play();
         isShoot = true;
         PlasmaLaser.GetComponent<Plasmabullet>().SetDamage(towerinfo.towerdamage);
         PlasmaLaser.SetActive(true);
-     
+        Charging.Stop();
 
         yield return new WaitForSeconds(0.3f);
         PlasmaLaser.GetComponent<Plasmabullet>().ReturnScale();
         isShoot = false;
         PlasmaLaser.SetActive(false);
-        Charging.Stop();
+        Charging.Play();
+
+        ischarging = true;
     }
 
 

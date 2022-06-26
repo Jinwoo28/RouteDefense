@@ -6,7 +6,6 @@ public class Enemy_Creture : Enemy
 {
     private float timevalue = 0;
     private float originHP = 0;
-    [SerializeField] private int HpUpValue = 0;
 
     private bool iseating = false;
     public bool GetSetEating { get => iseating; set => iseating = value; }
@@ -34,24 +33,18 @@ public class Enemy_Creture : Enemy
             timevalue = 0;
             if (GetHp < originHP)
             {
-                GetHp = HpUpValue;
+                if (GetHp + unitstate.feature >= originHP)
+                {
+                    unitstate.unithp = originHP;
+                }
+                else
+                {
+                    GetHp = unitstate.feature;
+                }
+
+                Debug.Log(unitstate.unithp);
             }
         }
-    }
-
-    public void HealHp(int num)
-    {
-        float Hp = GetHp;
-       if(Hp+num >= originHP)
-        {
-            SetOriginHp = originHP;
-        }
-        else
-        {
-            SetOriginHp = Hp = num;
-        }
-
-        Debug.Log(GetHp);
     }
 
 

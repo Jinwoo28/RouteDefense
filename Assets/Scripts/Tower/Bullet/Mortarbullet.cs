@@ -5,7 +5,7 @@ using UnityEngine;
 public class Mortarbullet : Bullet
 {
     [SerializeField] private LayerMask enemylayer;
-    [SerializeField] private float Range = 1.5f;
+   // [SerializeField] private float Range = 0;
 
     private float Timer = 0;
 
@@ -67,11 +67,11 @@ public class Mortarbullet : Bullet
         {
             foreach (Collider EC in E_collider)
             {
-                if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange * 0.3f)
+                if (Vector3.Distance(EC.transform.position,this.transform.position) < MortarRange * 0.3f)
                 {
                     EC.GetComponent<Enemy>().EnemyAttacked(damage);
                 }
-                else if (Vector3.Magnitude(EC.transform.position - this.transform.position) < MortarRange * 0.6f)
+                else if (Vector3.Distance(EC.transform.position,this.transform.position) < MortarRange * 0.6f)
                 {
                     float decrease = damage - (int)(damage*0.6f);
                     if (decrease <= 0) continue;

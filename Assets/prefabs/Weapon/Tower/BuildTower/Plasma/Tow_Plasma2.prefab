@@ -5079,10 +5079,6 @@ MonoBehaviour:
   towerBody: {fileID: 983002618951938788}
   towerTurret: {fileID: 983002618951938788}
   shootPos: {fileID: 983002618951938786}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 2
   AtkParticle: {fileID: 0}
   Charging: {fileID: 983002618932541344}
   Boom: {fileID: 8028190976638858924}
@@ -5287,7 +5283,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3623530654532409927}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

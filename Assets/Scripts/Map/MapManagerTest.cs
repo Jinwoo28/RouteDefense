@@ -81,8 +81,8 @@ public class MapManagerTest : MonoBehaviour
 
 
         //체크포인트 생성
-        Instantiate(CheckPoint, new Vector3(checknode[0].GetX, checknode[0].GetYDepth*0.6f, checknode[0].GetY), Quaternion.Euler(0, 90, 0));
-        Instantiate(CheckPoint, new Vector3(checknode[1].GetX, checknode[1].GetYDepth*0.6f, checknode[1].GetY), Quaternion.Euler(0, 90, 0));
+//        Instantiate(CheckPoint, new Vector3(checknode[0].GetX, checknode[0].GetYDepth*0.6f, checknode[0].GetY), Quaternion.Euler(0, 90, 0));
+//        Instantiate(CheckPoint, new Vector3(checknode[1].GetX, checknode[1].GetYDepth*0.6f, checknode[1].GetY), Quaternion.Euler(0, 90, 0));
 
 
         if (GameManager.SetGameLevel == 3)

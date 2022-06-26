@@ -40,7 +40,6 @@ public class AtkTower : Tower
                 if (!FinalTarget.transform.gameObject.activeInHierarchy||Vector3.Distance(FinalTarget.GetComponent<IEnumyAttacked>().GetPos().gameObject.transform.position, this.transform.position) > towerinfo.towerrange)
                 {
                     FinalTarget = null;
-                    Debug.Log("??");
                 }
             }
             else
@@ -125,22 +124,24 @@ public class AtkTower : Tower
         Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
 
         //현재의 rotation값을 타겟위치로의 방향값으로 변환 후 Vector3로 형태로 저장
-       // Vector3 TowerDir = Quaternion.RotateTowards(towerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
+        Vector3 TowerDir = Quaternion.RotateTowards(towerBody.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
         Vector3 TowerDir2 = Quaternion.RotateTowards(towerTurret.rotation, rotationtotarget, rotationspeed * Time.deltaTime).eulerAngles;
 
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
-        // towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
+         towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
 
  
             towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
- 
 
+
+        bool atkstart = false;
 
         if (FinalTarget != null)
         {
-               
             if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
             {
+
+
 
                 Atking = true;
                 atkspeed -= Time.deltaTime;
@@ -161,6 +162,7 @@ public class AtkTower : Tower
             else
             {
                 Atking = false;
+                atkstart = false;
             }
         }
     }

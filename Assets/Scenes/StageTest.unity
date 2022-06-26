@@ -18550,7 +18550,7 @@ MonoBehaviour:
   stageinfo:
   - SpawnTime: 1
     EnemyCount: 1
-    enemyNum: 13000000
+    enemyNum: 04000000
   - SpawnTime: 1
     EnemyCount: 1
     enemyNum: 15000000

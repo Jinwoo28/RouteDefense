@@ -7,7 +7,7 @@ public class EnemyStateSetUp : MonoBehaviour
 {
     public EnemyDataTest Enemydata;
 
-    const string URL = "https://docs.google.com/spreadsheets/d/1TGYXHFpwIhrgfxqPvFgqKRWoIfrCWKggKbzQOVXlHeQ/export?format=tsv&range=A2:I";
+    const string URL = "https://docs.google.com/spreadsheets/d/1TGYXHFpwIhrgfxqPvFgqKRWoIfrCWKggKbzQOVXlHeQ/export?format=tsv&range=A2:J";
 
     public static EnemyState[] enemystate;
 
@@ -56,7 +56,8 @@ public class EnemyStateSetUp : MonoBehaviour
                 item.coin = int.Parse(column[5]);
                 item.Amour = int.Parse(column[6]);
                 item.avoidance = int.Parse(column[7]);
-                item.enemytype = int.Parse(column[8]);
+                item.feature = float.Parse(column[8]);
+                item.enemytype = int.Parse(column[9]);
             }
         }
 

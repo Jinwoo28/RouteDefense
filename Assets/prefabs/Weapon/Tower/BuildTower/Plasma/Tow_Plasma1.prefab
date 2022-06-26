@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 1583532196173008742}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.00049829483, y: 0.0027830005, z: 0.4169876}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 1583532196173370180}
   m_RootOrder: 1
@@ -355,7 +355,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 2
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -5066,10 +5066,6 @@ MonoBehaviour:
   towerBody: {fileID: 1583532196173370178}
   towerTurret: {fileID: 1583532196173370178}
   shootPos: {fileID: 1583532196173370180}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 1
   AtkParticle: {fileID: 0}
   Charging: {fileID: 1583532196158166534}
   Boom: {fileID: 8785744855984532005}
@@ -5305,7 +5301,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7669319184814519781}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

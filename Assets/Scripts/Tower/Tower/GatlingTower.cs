@@ -33,7 +33,6 @@ public class GatlingTower : HitScanTower
             {
                     Vector3 Insight = cam.transform.position - FinalTarget.position;
                     HitEffect.transform.position = FinalTarget.position + Insight.normalized;
-                Debug.Log(HitEffect.transform.position);
                 //if (FinalTarget.GetComponentInChildren<FlyEnemy>() == null)
                 //{
                 //}

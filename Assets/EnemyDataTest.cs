@@ -13,6 +13,7 @@ public class EnemyState
     public int coin;
     public int Amour;
     public int avoidance;
+    public float feature;
     public int enemytype;
 }
 

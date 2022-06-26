@@ -18,6 +18,7 @@ public interface IEnumyAttacked
     public int unitamour = 0;
     public int avoidancerate = 0;
     public int type = 0;    //지상이면 0, 하늘이면 1
+    public float feature = 0;
 }
 
 public class Enemy : MonoBehaviour, IEnumyAttacked
@@ -92,6 +93,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         unitstate.unitcoin = stat.coin;
         unitstate.unithp = stat.Hp;
         unitstate.type = stat.enemytype;
+        unitstate.feature = stat.feature;
     }
 
     protected virtual void Start()
@@ -409,15 +411,20 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         int X = Random.Range(1, 101);
         if (X < unitstate.avoidancerate)
         {
-            realdamage = 0;
+            realDamage(0);
+            ShowDamage(0, 0);
+        }
+        else
+        {
+            ShowDamage(realdamage, 1);
+            realDamage(realdamage);
         }
 
-        realDamage(realdamage);
     }
 
     public void realDamage(float _damage)
     {
-        ShowDamage(_damage);
+        
         if (_damage >= unitstate.unithp)
         {
             EnemyDie();
@@ -512,21 +519,30 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
     
 
-    public void ShowDamage(float _damage)
+    public void ShowDamage(float _damage, int _Block)
     {
         cam = Camera.main;
-    
-        GameObject damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position), Quaternion.identity);
+
+        GameObject damagecount = null;
+
+        if (unitstate.type == 0)
+        {
+            damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position), Quaternion.identity);
+        }
+        else
+        {
+            damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.GetComponentInChildren<FlyEnemy>().GetBody().position), Quaternion.identity);
+        }
         damagecount.transform.SetParent(canvas);
 
         if (unitstate.type == 0)
         {
-            damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage);
+            damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage, _Block);
         }
         else
         {
             Vector3 pos = this.GetComponentInChildren<FlyEnemy>().GetBody().position;
-            damagecount.GetComponent<HpNum>().SetUp(pos.x, pos.y, pos.z, _damage);
+            damagecount.GetComponent<HpNum>().SetUp(pos.x, pos.y, pos.z, _damage, _Block);
         }
     }
 

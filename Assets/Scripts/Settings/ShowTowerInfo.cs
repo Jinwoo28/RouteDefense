@@ -101,7 +101,7 @@ public class ShowTowerInfo : MonoBehaviour
                 towerlevel.color = Color.black;
                 atkdamage.text = "데미지 : " + tower.GetDamage.ToString();
                 atkdamage.color = Color.black;
-                atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString();
+                atkcritical.text = "크리티컬 : " + (tower.GetCritical*100).ToString() + "%";
                 atkcritical.color = Color.black;
             }
             else
@@ -110,14 +110,14 @@ public class ShowTowerInfo : MonoBehaviour
                 towerlevel.color = Color.red;
                 atkdamage.text = "데미지 : " + tower.GetDamage.ToString() + " -> " + (tower.GetDamage + tower.GetTowerUPDamage);
                 atkdamage.color = Color.red;
-                atkcritical.text = "크리티컬 : " + tower.GetCritical.ToString() + " -> " + (tower.GetCritical + tower.GetTowerUpCri);
+                atkcritical.text = "크리티컬 : " + (tower.GetCritical * 100).ToString() + "%" + " -> " + (tower.GetCritical + tower.GetTowerUpCri)*100 + "%";
                 atkcritical.color = Color.red;
             }
 
             switch (tower.GetStep)
             {
                 case 1:
-                    if (tower.GetTowerLevel >= 5)
+                    if (tower.GetTowerLevel >= 3)
                     {
                         upgradebutton.interactable = false;
                         upgradeprice.fontSize = 50;
