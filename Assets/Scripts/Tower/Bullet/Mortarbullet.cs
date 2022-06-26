@@ -21,7 +21,7 @@ public class Mortarbullet : Bullet
         while (true)
         {
 
-            Timer += Time.deltaTime * 1.1f;
+            Timer += Time.deltaTime * 2.5f;
             Vector3 MovePos = ParaBolaMove(_current, _Desti, 2.0f, 1, Timer);
 
             this.transform.position = MovePos;

@@ -23148,7 +23148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ed041ca1fb8e44fb73c0f475c2c1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckPoint: {fileID: 5655401898756684476, guid: e223cb918fbc7714b823928961ae5d91, type: 3}
+  CheckPoint1: {fileID: 5376617998765640813, guid: 338252a0c89a96141895527b85636694, type: 3}
+  CheckPoint2: {fileID: 5376617998765640813, guid: 38238fefb1aa8de48abda1951ea1158a, type: 3}
   StartEnd:
   - {fileID: 5844522163540186749, guid: 665e6a0da53e0c2469e5bcc8f76de1fc, type: 3}
   - {fileID: 4378891341127712221, guid: bb27417978caca847b0a4b8811c8d7b4, type: 3}
