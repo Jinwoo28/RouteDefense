@@ -6,42 +6,42 @@
       "skillInfoList": [
         {
           "SkillName": "StartMoney",
-          "Value": 1.1,
-          "Price": 200,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 100,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "NULL",
           "UpValueRate": 0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
           "SkillInformation": "게임 시작 시 초기 자본을 더 많이 받습니다.",
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         },
         {
           "SkillName": "SetTowerDown",
-          "Value": 0.9,
-          "Price": 240,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 120,
+          "CurrentLevel": 0,
           "MaxLevel": 5,
           "PreSkill": "StartMoney",
           "UpValueRate": -0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
           "SkillInformation": "타워를 짓는 비용이 감소합니다.",
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         },
         {
           "SkillName": "UpTowerDown",
-          "Value": 0.9,
-          "Price": 400,
-          "CurrentLevel": 1,
+          "Value": 1.0,
+          "Price": 200,
+          "CurrentLevel": 0,
           "MaxLevel": 3,
           "PreSkill": "SetTowerDown",
           "UpValueRate": -0.1,
-          "UnLock": 1,
+          "UnLock": 0,
           "BundleName": "Money",
           "SkillInformation": "타워의 업그레이드 비용이 감소합니다.",
-          "GetCheckLock": 1
+          "GetCheckLock": 0
         },
         {
           "SkillName": "GetCoinUp",

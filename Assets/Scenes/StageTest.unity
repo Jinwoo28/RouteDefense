@@ -11562,6 +11562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playercoin: 10000
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0
@@ -18549,11 +18550,11 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 04000000
+    EnemyCount: 20
+    enemyNum: 00000000
   - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 15000000
+    EnemyCount: 20
+    enemyNum: 01000000
   - SpawnTime: 1
     EnemyCount: 1
     enemyNum: 00000000
