@@ -48,20 +48,21 @@ public class ArrowBullet : Bullet
         {
             if (!ontile)
             {
-                other.GetComponent<IEnumyAttacked>().Attacked(damage);
                 //AtkCharactor();
                 Ontarget = true;
 
                 ontile = true;
                 if (other.GetComponent<IEnumyAttacked>().GetPos().gameObject.activeInHierarchy)
                 {
-                    Return();
+
                     this.transform.SetParent(other.gameObject.transform);
+                    Return();
                 }
                 else
                 {
                     ArrowReturnBullet();
                 }
+                other.GetComponent<IEnumyAttacked>().Attacked(damage);
 
             }
         }

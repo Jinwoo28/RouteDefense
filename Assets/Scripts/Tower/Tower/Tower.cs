@@ -57,6 +57,8 @@ public class Tower : MonoBehaviour
         towerinfo.towerstep = towerdata.TowerStep;
         towerinfo.CanAtk = towerdata.CanAtk;
 
+        towerstep = towerdata.TowerStep;
+
         upgradevalue.UpdamageValue = towerdata.UpgradeAtk;
         upgradevalue.UpcriticalValue = towerdata.UpgradeCri;
         upgradevalue.upgradeprice = towerdata.UpgradePrice;

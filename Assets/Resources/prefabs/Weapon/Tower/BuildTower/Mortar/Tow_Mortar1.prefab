@@ -286,7 +286,7 @@ MonoBehaviour:
   AtkParticle: {fileID: 5238216411096038357}
   bulletPool: {fileID: 9023076012954905427}
   patriclePool: {fileID: -6001656686809835563}
-  BulletRange: 0.3
+  BulletRange: 1
 --- !u!114 &9023076012954905427
 MonoBehaviour:
   m_ObjectHideFlags: 0

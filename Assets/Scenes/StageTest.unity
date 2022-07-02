@@ -4749,25 +4749,18 @@ MonoBehaviour:
   textinfo:
   - towername: "\uC11D\uAD81"
     towercode: 1
-    showinfo: {fileID: 0}
   - towername: "\uAC8C\uD2C0\uB9C1"
     towercode: 21
-    showinfo: {fileID: 0}
   - towername: "\uBC15\uACA9\uD3EC"
     towercode: 41
-    showinfo: {fileID: 0}
   - towername: "\uB808\uC774\uC800"
     towercode: 31
-    showinfo: {fileID: 0}
   - towername: "\uD50C\uB77C\uC988\uB9C8"
     towercode: 51
-    showinfo: {fileID: 0}
   - towername: "\uD14C\uC2AC\uB77C"
     towercode: 61
-    showinfo: {fileID: 0}
   - towername: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
     towercode: 11
-    showinfo: {fileID: 0}
   rangePrefab: {fileID: 2402910031036656168, guid: 78b9bb74ae66f264d802f6d6adc19df1, type: 3}
   enemymanager: {fileID: 1667784359}
   SellPanel: {fileID: 584502693}
@@ -7269,6 +7262,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565560548}
   m_CullTransparentMesh: 1
+--- !u!1 &575233595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575233599}
+  - component: {fileID: 575233598}
+  - component: {fileID: 575233597}
+  - component: {fileID: 575233596}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!64 &575233596
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575233595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &575233597
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575233595}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b6fa569fd73fd2b4ca12a4d944c7d314, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &575233598
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575233595}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &575233599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575233595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.690233, y: -19.598606, z: -10.649424}
+  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577212434
 GameObject:
   m_ObjectHideFlags: 0
@@ -9773,6 +9862,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769192615}
   m_CullTransparentMesh: 1
+--- !u!1 &773525614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773525617}
+  - component: {fileID: 773525616}
+  - component: {fileID: 773525615}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!23 &773525615
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773525614}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: b6fa569fd73fd2b4ca12a4d944c7d314, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &773525616
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773525614}
+  m_Mesh: {fileID: 5022432329719827366, guid: 1ca3b6247c2f2ed40b738fd9bd2b9450, type: 3}
+--- !u!4 &773525617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773525614}
+  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: -106, y: -525, z: 725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!1 &799685962
 GameObject:
   m_ObjectHideFlags: 0
@@ -12770,7 +12940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d275292beda5028498f70b5d9ec467e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playercoin: 10000
+  playercoin: 500
 --- !u!4 &968497606
 Transform:
   m_ObjectHideFlags: 0
@@ -19854,65 +20024,65 @@ MonoBehaviour:
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
-    EnemyCount: 20
-    enemyNum: 0700000008000000090000000a0000000b0000000c0000000d000000
-  - SpawnTime: 1
-    EnemyCount: 20
-    enemyNum: 000000000200000001000000
-  - SpawnTime: 1
-    EnemyCount: 1
+    EnemyCount: 10
     enemyNum: 00000000
   - SpawnTime: 1
-    EnemyCount: 30
-    enemyNum: 
+    EnemyCount: 15
+    enemyNum: 04000000
+  - SpawnTime: 1
+    EnemyCount: 20
+    enemyNum: 000000000400000013000000
+  - SpawnTime: 1
+    EnemyCount: 25
+    enemyNum: 0400000009000000
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemyNum: 08000000
   - SpawnTime: 1
     EnemyCount: 30
-    enemyNum: 
-  - SpawnTime: 0.9
+    enemyNum: 0e00000001000000
+  - SpawnTime: 1
     EnemyCount: 35
-    enemyNum: 
-  - SpawnTime: 0.9
-    EnemyCount: 35
-    enemyNum: 
-  - SpawnTime: 0.9
+    enemyNum: 0100000005000000
+  - SpawnTime: 1
     EnemyCount: 40
-    enemyNum: 
-  - SpawnTime: 0.9
-    EnemyCount: 40
-    enemyNum: 
-  - SpawnTime: 0.9
-    EnemyCount: 40
-    enemyNum: 
-  - SpawnTime: 0.8
-    EnemyCount: 42
-    enemyNum: 
-  - SpawnTime: 0.8
-    EnemyCount: 44
-    enemyNum: 
-  - SpawnTime: 0.8
-    EnemyCount: 46
-    enemyNum: 
-  - SpawnTime: 0.8
-    EnemyCount: 48
-    enemyNum: 
-  - SpawnTime: 0.8
+    enemyNum: 010000000a00000014000000
+  - SpawnTime: 1
+    EnemyCount: 45
+    enemyNum: 050000000f000000
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemyNum: 0d000000
+  - SpawnTime: 1
     EnemyCount: 50
-    enemyNum: 
-  - SpawnTime: 0.7
-    EnemyCount: 50
-    enemyNum: 
-  - SpawnTime: 0.7
-    EnemyCount: 50
-    enemyNum: 
-  - SpawnTime: 0.7
-    EnemyCount: 52
-    enemyNum: 
-  - SpawnTime: 0.7
-    EnemyCount: 52
-    enemyNum: 
-  - SpawnTime: 0.7
-    EnemyCount: 54
-    enemyNum: 
+    enemyNum: 020000000a000000
+  - SpawnTime: 1
+    EnemyCount: 55
+    enemyNum: 050000000f000000
+  - SpawnTime: 1
+    EnemyCount: 60
+    enemyNum: 020000000600000015000000
+  - SpawnTime: 1
+    EnemyCount: 65
+    enemyNum: 0b000000
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemyNum: 12000000
+  - SpawnTime: 1
+    EnemyCount: 70
+    enemyNum: 0600000010000000
+  - SpawnTime: 1
+    EnemyCount: 75
+    enemyNum: 0300000007000000
+  - SpawnTime: 1
+    EnemyCount: 80
+    enemyNum: 16000000
+  - SpawnTime: 1
+    EnemyCount: 85
+    enemyNum: 0c00000011000000
+  - SpawnTime: 1
+    EnemyCount: 1
+    enemyNum: 17000000
   playerstate: {fileID: 968497605}
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}

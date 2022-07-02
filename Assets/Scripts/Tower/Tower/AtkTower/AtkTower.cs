@@ -141,8 +141,6 @@ public class AtkTower : Tower
             if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
             {
 
-
-
                 Atking = true;
                 atkspeed -= Time.deltaTime;
                 if (atkspeed <= 0)

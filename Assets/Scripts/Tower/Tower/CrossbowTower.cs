@@ -23,6 +23,7 @@ public class CrossbowTower : AtkTower
             obj.MortarSetDestination(FinalTarget.position, shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
             obj.ResetBullet();
+            obj.gameObject.GetComponent<TrailRenderer>().enabled = true;
         }
 
         else
