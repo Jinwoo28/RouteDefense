@@ -10,7 +10,7 @@ public class towerTextinfo
 {
     public string towername;
     public int towercode;
-    public TextMeshProUGUI showinfo;
+    //public TextMeshProUGUI showinfo;
 }
 
 public class ShowTowerInfo : MonoBehaviour
@@ -77,11 +77,11 @@ public class ShowTowerInfo : MonoBehaviour
             rangesprite[i].SetActive(false);
         }
 
-        for(int i = 0; i< textinfo.Length; i++)
-        {
-            textinfo[i].showinfo.text = textinfo[i].towername + "\n" + TowerDataSetUp.GetData(textinfo[i].towercode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+        //for(int i = 0; i< textinfo.Length; i++)
+        //{
+        //    textinfo[i].showinfo.text = textinfo[i].towername + "\n" + TowerDataSetUp.GetData(textinfo[i].towercode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
 
-        }
+        //}
 
     }
 

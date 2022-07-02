@@ -3,7 +3,19 @@ guid: db9270c0d8710df41829c3133ece415d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - towerinfopanel: {instanceID: 0}
+  - upgradebutton: {instanceID: 0}
+  - towername: {instanceID: 0}
+  - towerlevel: {instanceID: 0}
+  - atkdamage: {instanceID: 0}
+  - atkcritical: {instanceID: 0}
+  - atkspeed: {instanceID: 0}
+  - upgradeprice: {instanceID: 0}
+  - rangePrefab: {fileID: 2402910031036656168, guid: 78b9bb74ae66f264d802f6d6adc19df1, type: 3}
+  - enemymanager: {instanceID: 0}
+  - SellPanel: {instanceID: 0}
+  - SellPrice: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

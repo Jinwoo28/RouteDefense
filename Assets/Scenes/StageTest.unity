@@ -1053,7 +1053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: 0, y: -55.970005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &43123369
@@ -4768,7 +4768,7 @@ MonoBehaviour:
   - towername: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
     towercode: 11
     showinfo: {fileID: 0}
-  rangePrefab: {fileID: 2627479921450125027, guid: 59bad40050b8b3c4582a1d2645c2844a, type: 3}
+  rangePrefab: {fileID: 2402910031036656168, guid: 78b9bb74ae66f264d802f6d6adc19df1, type: 3}
   enemymanager: {fileID: 1667784359}
   SellPanel: {fileID: 584502693}
   SellPrice: {fileID: 2027491144}
@@ -8581,7 +8581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: 0, y: -55.970005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673447217
@@ -10527,7 +10527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: 0, y: -55.970005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &835909983
@@ -17751,7 +17751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: 0, y: -55.970005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1470415437
@@ -18899,7 +18899,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.9999466}
+  m_AnchoredPosition: {x: 0, y: 0.99993896}
   m_SizeDelta: {x: 0, y: -55.970005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1605130779
