@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class Example : MonoBehaviour
+public class ExampleTest2 : MonoBehaviour
 {
 	[SerializeField] MstItems mstItems;
 	[SerializeField] Text text;

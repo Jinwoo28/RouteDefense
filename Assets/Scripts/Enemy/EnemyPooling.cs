@@ -15,6 +15,11 @@ public class EnemyPooling : MonoBehaviour
 
     [SerializeField] private List<pooling> enemyPooling;
 
+    public string GetName(int num)
+    {
+        return enemyPooling[num].enemy.name;
+    }
+
     public Enemy CreatEnemy(int _enemyNum)
     {
         var newenemy = Instantiate(enemyPooling[_enemyNum].enemy, this.transform).GetComponent<Enemy>();

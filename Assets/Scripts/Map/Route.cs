@@ -472,11 +472,12 @@ public class Route : MonoBehaviour
         return neighbours;
     }
 
+    //Unorder
     public bool FindPath2(Node _Start)
     {
         GameManager.buttonOff();
 
-        int CheckCount = GameManager.GetSetPointCount;
+        int CheckCount = GameManager.SetGameLevel+1;
 
         bool findpath = false;
 
@@ -584,11 +585,12 @@ public class Route : MonoBehaviour
 
     }
 
+    //Order
     public bool FindPath3(Node _Start)
     {
         GameManager.buttonOff();
 
-        bool[] passed = new bool[GameManager.GetSetPointCount];
+        bool[] passed = new bool[GameManager.SetGameLevel+1];
         bool succesed = false;
 
         bool findpath = false;

@@ -38,6 +38,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject hpbar = null;
     [SerializeField] private GameObject damagenum = null;
 
+    [SerializeField] private Image imagebar = null;
+    [SerializeField] private Image[] imageEnemy = null;
+
     private int StageNum = 0;
     public int GetStageNum => StageNum;
 
@@ -76,16 +79,11 @@ public class EnemyManager : MonoBehaviour
     {
         Pooling = this.GetComponent<EnemyPooling>();
 
-
-        //if (UserInformation.userDataStatic.skillSet[2].skillUnLock)
-        //{
-        //    EnemyCoinRate = (UserInformation.userDataStatic.skillSet[2].damage/100);
-        //}
-
         EnemyCount = new List<Enemy>();
         MultipleSpeed.speedup += SpeedUP;
         ClearPanal.SetActive(false);
         FailPanal.SetActive(false);
+        ShowEnemyImage(0);
     }
 
     private void SpeedUP(int x)
@@ -164,7 +162,8 @@ public class EnemyManager : MonoBehaviour
                     }
 
                     gameongoing = false;
-
+                    ShowEnemyImageReset();
+                    ShowEnemyImage(StageNum);
                     break;
                 }
                 yield return null;
@@ -203,6 +202,37 @@ public class EnemyManager : MonoBehaviour
         get
         {
             return gameongoing;
+        }
+    }
+
+    private void ShowEnemyImage(int num)
+    {
+        for(int i =0;i< stageinfo[num].enemyNum.Count; i++)
+        {
+            imageEnemy[i].gameObject.SetActive(true);
+
+
+            Sprite enemy = Resources.Load<Sprite>("Image/EnemyImage/" + Pooling.GetName(stageinfo[num].enemyNum[i]));
+            imageEnemy[i].sprite = enemy;
+
+            imageEnemy[i].rectTransform.anchoredPosition = new Vector2((-70 * (stageinfo[num].enemyNum.Count - 1)) + (i * 140), 460);
+
+        }
+
+        float size = stageinfo[num].enemyNum.Count > 1 ? (Mathf.Abs(imageEnemy[0].rectTransform.rect.x) + Mathf.Abs(imageEnemy[stageinfo[num].enemyNum.Count - 1].rectTransform.rect.x)) : 0;
+
+        float size2 = (Mathf.Abs(imageEnemy[0].rectTransform.anchoredPosition.x) + Mathf.Abs(imageEnemy[stageinfo[num].enemyNum.Count - 1].rectTransform.anchoredPosition.x));
+
+        Debug.Log(imageEnemy[0].rectTransform.rect.x + " : 첫 번째 이미지 x");
+        Debug.Log(imageEnemy[stageinfo[num].enemyNum.Count - 1].rectTransform.rect.x + " : 마지막 번째 이미지 x");
+        imagebar.rectTransform.sizeDelta = new Vector2(size2, 20);
+    }
+
+    private void ShowEnemyImageReset()
+    {
+        for(int i = 0; i < imageEnemy.Length; i++)
+        {
+            imageEnemy[i].gameObject.SetActive(false);
         }
     }
 

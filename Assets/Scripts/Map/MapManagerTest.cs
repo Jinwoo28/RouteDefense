@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MapManagerTest : MonoBehaviour
 {
-    [SerializeField] private GameObject CheckPoint1 = null;
-    [SerializeField] private GameObject CheckPoint2 = null;
-    int checkPointCount =0;
+    [SerializeField] private GameObject CheckPoint = null;
+    [SerializeField] private GameObject[] NumCheckPoint = null;
+    int checkPointCount = 0;
     Node[] checknode;
 
 
@@ -59,7 +59,7 @@ public class MapManagerTest : MonoBehaviour
 
     private void Awake()
     {
-        checkPointCount = GameManager.GetSetPointCount;
+        checkPointCount = GameManager.SetGameLevel+1;
         checknode = new Node[checkPointCount];
 
         Mapmake();
@@ -80,16 +80,28 @@ public class MapManagerTest : MonoBehaviour
         Instantiate(StartEnd[0], new Vector3(StartNode.GetX, StartNode.GetYDepth/2, StartNode.GetY), Quaternion.Euler(0, 90, 0));
         Instantiate(StartEnd[1], new Vector3(EndNode.GetX, EndNode.GetYDepth/2, EndNode.GetY), Quaternion.Euler(0, 90, 0));
 
-
-        //체크포인트 생성
-        //Instantiate(CheckPoint1, new Vector3(checknode[0].GetX, checknode[0].GetYDepth/2, checknode[0].GetY), Quaternion.Euler(0, 90, 0));
-        //Instantiate(CheckPoint2, new Vector3(checknode[1].GetX, checknode[1].GetYDepth/2, checknode[1].GetY), Quaternion.Euler(0, 90, 0));
-
-
-        if (GameManager.SetGameLevel == 3)
+        if (GameManager.SetGameLevel == 3&&GameManager.GetSetStageType == StageType.Nomal)
         {
             Instantiate(StartEnd[0], new Vector3(StartNode2.GetX, StartNode2.GetYDepth/2, StartNode2.GetY), Quaternion.Euler(0, 90, 0));
         }
+
+        //체크포인트 생성
+        if (GameManager.GetSetStageType == StageType.UnOrderCheckPoint)
+        {
+            for (int i = 0; i < checkPointCount; i++)
+            {
+                Instantiate(CheckPoint, new Vector3(checknode[i].GetX, checknode[i].GetYDepth / 2, checknode[i].GetY), Quaternion.Euler(0, 90, 0));
+            }
+        }
+        else if(GameManager.GetSetStageType == StageType.OrderCheckPoint)
+        {
+            for (int i = 0; i < checkPointCount; i++)
+            {
+                Instantiate(NumCheckPoint[i], new Vector3(checknode[i].GetX, checknode[i].GetYDepth / 2, checknode[i].GetY), Quaternion.Euler(0, 90, 0));
+            }
+        }
+
+
     }
 
 
@@ -268,7 +280,7 @@ public class MapManagerTest : MonoBehaviour
             StartNode2.Getwalkable = true;
         }
 
-
+        //체크 포인트 모드
         if (GameManager.GetSetStageType == StageType.UnOrderCheckPoint)
         {
             Node[] checknode2 = new Node[checkPointCount];

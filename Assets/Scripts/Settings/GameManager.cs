@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     private static int PointCount = 2;
     public static int GetSetPointCount { get => PointCount; set => PointCount = value; }
-    private static StageType stagetype = StageType.Nomal;
+    private static StageType stagetype = StageType.UnOrderCheckPoint;
     public static StageType GetSetStageType { get => stagetype; set => stagetype = value; }
 
     public static void OffFunc()

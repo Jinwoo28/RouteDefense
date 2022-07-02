@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 //포탑과 타일을 직렬화 시켜 하이라키 창에서 관리
@@ -18,6 +19,7 @@ public class BuildManager : MonoBehaviour
     [SerializeField] private GameObject[] buildstate = null;
 
     //string towername = null;
+
 
     [SerializeField] private ShowTowerInfo showtowerinfo = null;
     [SerializeField] private BuildTower[] buildtower = null;
@@ -38,6 +40,55 @@ public class BuildManager : MonoBehaviour
     private static List<FireGunTower> firetowerlist = new List<FireGunTower>();
 
     private static bool iswet = false;
+
+    [SerializeField] private GameObject BuildInfoPanel = null;
+    [SerializeField] private TextMeshProUGUI[] info = null;
+    private int TowerCode = 0;
+    private int PrefabsNum = 0;
+    private bool BTowerPanel = false;
+    private bool BMouseOnPanel = false;
+
+    public void TOnPanel()
+    {
+        BMouseOnPanel = true;
+    }
+    public void FOnPanel()
+    {
+        BMouseOnPanel = false;
+    }
+
+
+
+    public void ClickBtnCode(int Code)
+    {
+        TowerCode = Code;
+        BTowerPanel = true;
+    }
+
+    public void ClickBtnPrefabsNum(int num)
+    {
+        PrefabsNum = num;
+        BuildInfoPanel.SetActive(true);
+
+        info[0].text = TowerDataSetUp.GetData(TowerCode).Name;
+        info[1].text = TowerDataSetUp.GetData(TowerCode).TowerInfo;
+        info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).Damage;
+        info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).Delay;
+        info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+    }
+
+    public void ClickBuild()
+    {
+        SlotClick(PrefabsNum);
+        OffTowerPanel();
+    }
+
+    private void OffTowerPanel()
+    {
+        BTowerPanel = false;
+        FOnPanel();
+        BuildInfoPanel.SetActive(false);
+    }
 
     public static void ActiveTower(FireGunTower firetower)
     {
@@ -84,6 +135,22 @@ public class BuildManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (BTowerPanel)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OffTowerPanel();
+            }
+        }
+
+        if (!BMouseOnPanel)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                OffTowerPanel();
+            }
+        }
 
         playercoin = playerstate.GetSetPlayerCoin;
 
@@ -141,8 +208,6 @@ public class BuildManager : MonoBehaviour
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
-                    //preview.GetComponent<TowerPreview>().SetUp(playerstate,buildstate);
-                    //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, buildtower[_slotnum].builditem.GetComponent<Tower>().GetRange);
                     preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).Range);
                     preview.GetComponent<TowerPreview>().FirstSetUp(buildtower[_slotnum].builditem,this);
                     playerstate.GetSetPlayerCoin = towerprice;

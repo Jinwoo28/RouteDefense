@@ -7,6 +7,7 @@ using TMPro;
 public class StageSelect : MonoBehaviour
 {
     [SerializeField] private GameObject levelChoice = null;
+    [SerializeField] private GameObject GameType = null;
 
     [SerializeField] private TextMeshProUGUI easyMoney = null;
     [SerializeField] private TextMeshProUGUI namalMoney = null;
@@ -28,6 +29,9 @@ public class StageSelect : MonoBehaviour
     {
         GameManager.SetStageShape = stageShape;
         GameManager.SetGameLevel = level;
+
+
+
 
         switch (level)
         {
@@ -52,8 +56,8 @@ public class StageSelect : MonoBehaviour
 
     public void OnLevelChoice()
     {
-        SetMoney();
-        levelChoice.SetActive(true);
+        //SetMoney();
+        GameType.SetActive(true);
     }
 
     public void SetMoney()
@@ -92,11 +96,27 @@ public class StageSelect : MonoBehaviour
 
     private void PrintMoney(int money)
     {
-        easymoney = money;
-        nomalmoney = (money + (money / 2) + (money / 4));
-        hardmoney = money * 3;
+        float multinum = 0;
+        switch (GameManager.GetSetStageType)
+        {
+            case StageType.Nomal:
+                multinum = 1;
+                break;
+            case StageType.UnOrderCheckPoint:
+                multinum = 1.5f;
+                break;
+            case StageType.OrderCheckPoint:
+                multinum = 2;
+                break;
+        }
 
-        easyMoney.text = "보상 : "+ money + "원";
+        Debug.Log(multinum);
+
+        easymoney = (int)(money * multinum);
+        nomalmoney = (int)((money + (money / 2) + (money / 4))*multinum);
+        hardmoney = (int)(money * 3*multinum);
+
+        easyMoney.text = "보상 : "+ easymoney + "원";
         namalMoney.text = "보상 : " + nomalmoney + "원";
         hardMoney.text = "보상 : " + hardmoney + "원";   
     }
@@ -105,6 +125,23 @@ public class StageSelect : MonoBehaviour
     {
         levelChoice.SetActive(false);
         stageShape = null;
+    }
+
+    public void OffGameType()
+    {
+        GameType.SetActive(false);
+        GameManager.GetSetStageType = StageType.Nomal;
+    }
+
+    public void SelectGameType(int type)
+    {
+
+        GameManager.GetSetStageType = (StageType)type;
+        Debug.Log(GameManager.GetSetStageType);
+        SetMoney();
+
+        GameType.SetActive(false);
+        levelChoice.SetActive(true);
     }
 
 }
