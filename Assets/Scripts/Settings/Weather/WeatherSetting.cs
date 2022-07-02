@@ -24,7 +24,7 @@ public class WeatherSetting : MonoBehaviour
     [SerializeField] private ParticleSystem Rain = null;
     private bool rained = false;
 
-    private int rainRate = 10;
+    private int rainRate = 100;
 
     //private bool treechanged = false;
 

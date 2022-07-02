@@ -505,8 +505,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         if(this.GetComponentInChildren<Bullet>() != null)
         {
             this.GetComponentInChildren<Bullet>().ArrowReturnBullet();
-
-            Debug.Log("Asdf");
         }
 
         jump = false;

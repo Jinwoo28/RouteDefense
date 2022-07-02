@@ -14,6 +14,9 @@ public class CamControl : MonoBehaviour
     //메인 카메라를 담을 변수
     private Camera camera;
 
+    private Vector3 OriginPos;
+    private Vector3 OriginAngle;
+
     //마우스로 이동할 때 해당 부분의 두께
     private float XThicness = Screen.height / 25;
     private float YThicness = Screen.height / 17;
@@ -21,6 +24,18 @@ public class CamControl : MonoBehaviour
     private void Start()
     {
         camera = Camera.main;
+
+        OriginPos = this.transform.position;
+        OriginAngle = this.transform.rotation.eulerAngles;
+
+    }
+
+    public void ReSetCamPos()
+    {
+        this.transform.position = OriginPos;
+        this.transform.rotation = Quaternion.Euler(OriginAngle);
+        rotation = 0;
+        sumzoom = 0;
     }
 
     //카메라 이동
@@ -33,18 +48,18 @@ public class CamControl : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Time.timeScale += 1;
-            Debug.Log(Time.timeScale);
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Time.timeScale += 1;
+        //    Debug.Log(Time.timeScale);
+        //}
 
         if (canCamMove)
         {
             //키보드 WASD로 이동
             CamMoveByKeyBoard();
             ZoomCamera();
-
+            RotateCamera();
             //카메라가 회전중일 때는 마우스로 이동 불가
             if (Input.GetMouseButton(1))
             {
@@ -57,13 +72,24 @@ public class CamControl : MonoBehaviour
         }
     }
 
+
+    float rotation = 0;
     private void RotateCamera()
     {
         //마우스의 이동값 좌표 저장
         float mouseDelat = Input.GetAxisRaw("Mouse X");
         float thisAngle = this.transform.rotation.eulerAngles.y;
+        this.transform.rotation = Quaternion.Euler(0, thisAngle + mouseDelat, 0).normalized;
 
-        this.transform.rotation = Quaternion.Euler(0, thisAngle + mouseDelat, 0).normalized;        
+        if (Input.GetKey(KeyCode.E)) 
+        {
+            rotation -= Time.deltaTime*10;
+        }
+        else if(Input.GetKey(KeyCode.Q))
+        {
+            rotation -= Time.deltaTime*10;
+        }
+        this.transform.rotation = Quaternion.Euler(0, rotation, 0).normalized;
     }
 
 

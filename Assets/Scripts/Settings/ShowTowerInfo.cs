@@ -85,6 +85,8 @@ public class ShowTowerInfo : MonoBehaviour
 
     }
 
+    private bool CanUpgrade = true;
+
     private void Update()
     {
         
@@ -99,19 +101,22 @@ public class ShowTowerInfo : MonoBehaviour
             {
                 towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString();
                 towerlevel.color = Color.black;
-                atkdamage.text = "데미지 : " + tower.GetDamage.ToString();
+                atkdamage.text = "데미지 : " + tower.GetDamage.ToString("F2");
                 atkdamage.color = Color.black;
-                atkcritical.text = "크리티컬 : " + (tower.GetCritical*100).ToString() + "%";
+                atkcritical.text = "크리티컬 : " + (tower.GetCritical*100).ToString("F2") + "%";
                 atkcritical.color = Color.black;
             }
             else
             {
-                towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString() + " -> " + (tower.GetTowerLevel + 1).ToString();
-                towerlevel.color = Color.red;
-                atkdamage.text = "데미지 : " + tower.GetDamage.ToString() + " -> " + (tower.GetDamage + tower.GetTowerUPDamage);
-                atkdamage.color = Color.red;
-                atkcritical.text = "크리티컬 : " + (tower.GetCritical * 100).ToString() + "%" + " -> " + (tower.GetCritical + tower.GetTowerUpCri)*100 + "%";
-                atkcritical.color = Color.red;
+                if (upgradebutton.interactable)
+                {
+                    towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString() + " -> " + (tower.GetTowerLevel + 1).ToString();
+                    towerlevel.color = Color.red;
+                    atkdamage.text = "데미지 : " + tower.GetDamage.ToString("F2") + " -> " + (tower.GetDamage + tower.GetTowerUPDamage).ToString("F2");
+                    atkdamage.color = Color.red;
+                    atkcritical.text = "크리티컬 : " + (tower.GetCritical * 100).ToString("F2") + "%" + " -> " + ((tower.GetCritical + tower.GetTowerUpCri) * 100).ToString("F2") + "%";
+                    atkcritical.color = Color.red;
+                }
             }
 
             switch (tower.GetStep)

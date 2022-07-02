@@ -107,19 +107,33 @@ public class TeslaBullet : MonoBehaviour
     public void AtkCharactor(float damage)
     {
 
-
-
-        if (target.GetComponent<Enemy>().GetShock())
+        if(target.GetComponent<Enemy>() != null)
         {
-            if (MaxCount > 1)
+            if (target.GetComponent<Enemy>().GetShock())
             {
-                Count++;
-                MaxCount--;
+                if (MaxCount > 1)
+                {
+                    Count++;
+                    MaxCount--;
+                }
+            }
+        }
+        else
+        {
+            if (target.GetComponent<BirdHitBox>().GetShock())
+            {
+                if (MaxCount > 1)
+                {
+                    Count++;
+                    MaxCount--;
+                }
             }
         }
 
+
+
         //데미지 주기
-       
+
         //카운터 감소, 데미지 감소
         Count--;
         

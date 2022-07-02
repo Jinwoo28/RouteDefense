@@ -32,6 +32,7 @@ public class TeslaTower : AtkTower
         AS.Play();
         Debug.Log("АјАн");
         Effect.Play();
+
         ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget,this.transform);   
     }
 

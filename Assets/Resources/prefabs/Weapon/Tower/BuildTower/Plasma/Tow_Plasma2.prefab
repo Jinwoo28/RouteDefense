@@ -5075,7 +5075,7 @@ MonoBehaviour:
   TowerCode: 52
   uppertower: {fileID: 8270097391267786164, guid: af0dbe2a3ac5056479a006ff1de92a11, type: 3}
   buildstate: []
-  towerpreview: {fileID: 983002618952363720}
+  towerpreview: {fileID: 983002618952363720, guid: 2bd655aa1796f404dbd7e3ea6bdd9678, type: 3}
   towerBody: {fileID: 983002618951938788}
   towerTurret: {fileID: 983002618951938788}
   shootPos: {fileID: 983002618951938786}

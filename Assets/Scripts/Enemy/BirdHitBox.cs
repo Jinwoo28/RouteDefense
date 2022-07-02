@@ -13,6 +13,11 @@ public class BirdHitBox : MonoBehaviour,IEnumyAttacked
         enemy.Attacked(damage);
     }
 
+    public bool GetShock()
+    {
+        return enemy.GetShock();
+    }
+
     private void Update()
     {
     Debug.Log(GetComponentInParent<Enemy>().gameObject.transform);
