@@ -1108,7 +1108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ef0fe902da96647a377b285bd372b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCode: 41
+  Boss: 0
+  EnemyCode: 45
   Fired: 0
   Iced: 0
   blood: 0

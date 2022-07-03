@@ -1627,11 +1627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ef0fe902da96647a377b285bd372b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCode: 47
+  Boss: 0
+  EnemyCode: 44
   Fired: 0
   Iced: 0
   blood: 0
-  HpUpValue: 0
   Body: {fileID: 400090}
   Mark: {fileID: 5550697084391151953}
   height: 1.5
