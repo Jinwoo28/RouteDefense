@@ -186,7 +186,14 @@ public class EnemyManager : MonoBehaviour
     //출현한 적이 도착지에 도착했을 때
     public void EnemyArriveDestination(Enemy enemy)
     {
-        playerstate.PlayerLifeDown();
+        if (!enemy.GetBoss())
+        {
+            playerstate.PlayerLifeDown(1);
+        }
+        else
+        {
+            playerstate.PlayerLifeDown(5);
+        }
         EnemyCount.Remove(enemy);
         EnemyRemainCount--;
 

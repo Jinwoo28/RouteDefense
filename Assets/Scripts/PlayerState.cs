@@ -42,11 +42,11 @@ public class PlayerState : MonoBehaviour
 
     }
 
-    public void PlayerLifeDown()
+    public void PlayerLifeDown(int num)
     {
         if (playerlife >= 0)
         {
-            playerlife--;
+            playerlife-=num;
         }
     }
 
