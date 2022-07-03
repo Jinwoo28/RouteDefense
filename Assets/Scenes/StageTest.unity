@@ -21471,7 +21471,7 @@ MonoBehaviour:
     enemyNum: 000000000400000013000000
   - SpawnTime: 1
     EnemyCount: 25
-    enemyNum: 040000000d000000
+    enemyNum: 0400000009000000
   - SpawnTime: 1
     EnemyCount: 1
     enemyNum: 08000000

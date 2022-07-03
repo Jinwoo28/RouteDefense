@@ -6,7 +6,7 @@ using UnityEngine;
 public class TeslaBullet : MonoBehaviour
 {
     [SerializeField] private LayerMask enemylayer;
-    private float Range = 0.5f;
+    private float Range = 3f;
 
     private Transform target = null;
 
@@ -116,8 +116,7 @@ public class TeslaBullet : MonoBehaviour
                 }
             }
 
-        //카운터 감소, 데미지 감소
-        Count--;
+
         
        
 
@@ -126,10 +125,9 @@ public class TeslaBullet : MonoBehaviour
             Range -= 0.1f;
         }
 
-      
+        Debug.Log(Range + " 범위");
 
-        //데미지 주기
-        target.GetComponent<Enemy>().ElectricDamage(Damage);
+        
 
         Damage--;
 
@@ -144,12 +142,18 @@ public class TeslaBullet : MonoBehaviour
             return;
         }
 
+        //카운터 감소, 데미지 감소
+        Count--;
+
         //공격했던 적의 리스트 보관
         enemylist.Add(target.GetComponent<Enemy>());
 
         //현재 위치를 기준으로 적을 검색
         Collider[] E_collider = Physics.OverlapSphere(target.position, Range, enemylayer);
-        Debug.Log(E_collider);
+        Debug.Log(E_collider.Length);
+
+        //데미지 주기
+        target.GetComponent<Enemy>().ElectricDamage(Damage);
 
         Transform ShortestTarget = null;
 
@@ -214,13 +218,11 @@ public class TeslaBullet : MonoBehaviour
             ReturnEffect(ActiveEffect[i]);
         }
         ActiveEffect.Clear();
-        //this.transform.position = tesla.GetShootPos().position;
         target = null;
-        //Range = 2.0f;
+        Range = 3.0f;
         enemylist.Clear();
         Count = OriginCount;
         MaxCount = MaxOriginCount;
-        //tesla.ReturnBullet(this);        
     }
     
 }
