@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 //포탑과 타일을 직렬화 시켜 하이라키 창에서 관리
@@ -43,6 +44,7 @@ public class BuildManager : MonoBehaviour
 
     [SerializeField] private GameObject BuildInfoPanel = null;
     [SerializeField] private TextMeshProUGUI[] info = null;
+    [SerializeField] private Image towerimage = null;
     private int TowerCode = 0;
     private int PrefabsNum = 0;
     private bool BTowerPanel = false;
@@ -57,17 +59,14 @@ public class BuildManager : MonoBehaviour
         BMouseOnPanel = false;
     }
 
-
-
     public void ClickBtnCode(int Code)
     {
         TowerCode = Code;
         BTowerPanel = true;
     }
 
-    public void ClickBtnPrefabsNum(int num)
+    public void OnMouseBuildTowerPanel(int TowerCode)
     {
-        PrefabsNum = num;
         BuildInfoPanel.SetActive(true);
 
         info[0].text = TowerDataSetUp.GetData(TowerCode).Name;
@@ -75,6 +74,11 @@ public class BuildManager : MonoBehaviour
         info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).Damage;
         info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).Delay;
         info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + TowerDataSetUp.GetData(TowerCode).Name);
+    }
+    public void ExitMouseBUildTowerPanel()
+    {
+        BuildInfoPanel.SetActive(false);
     }
 
     public void ClickBuild()

@@ -92,21 +92,17 @@ public class TeslaEffect : MonoBehaviour
     public void ReturnEffect()
     {
         isTrigger = false;
-        TB.ReturnEffect(this);
+        lineRenderer.enabled = false;
     }
 
     public void SetPos(Transform _start, Transform _end)
     {
-        Invoke("ReturnEffect", 0.15f);
-
         StartPos = _start;
         EndPos = _end;
 
         lineRenderer.enabled = true;
 
         isTrigger = true;
-
-
     }
 
     private void GetPerpendicularVector(ref Vector3 directionNormalized, out Vector3 side)

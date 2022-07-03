@@ -223,8 +223,6 @@ public class EnemyManager : MonoBehaviour
 
         float size2 = (Mathf.Abs(imageEnemy[0].rectTransform.anchoredPosition.x) + Mathf.Abs(imageEnemy[stageinfo[num].enemyNum.Count - 1].rectTransform.anchoredPosition.x));
 
-        Debug.Log(imageEnemy[0].rectTransform.rect.x + " : 첫 번째 이미지 x");
-        Debug.Log(imageEnemy[stageinfo[num].enemyNum.Count - 1].rectTransform.rect.x + " : 마지막 번째 이미지 x");
         imagebar.rectTransform.sizeDelta = new Vector2(size2, 20);
     }
 

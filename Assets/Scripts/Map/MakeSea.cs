@@ -8,9 +8,9 @@ public class MakeSea : MonoBehaviour
 
     private void Awake()
     {
-        for(int i = 0; i < 3; i++)  //세로 
+        for(int i = 0; i < 6; i++)  //세로 
         {
-            for(int j = 0;j < 3; j++)   //가로
+            for(int j = 0;j < 6; j++)   //가로
             {
                 for (int k = 0; k < 2; k++) //한 블럭 안에 세로
                 {
@@ -18,8 +18,7 @@ public class MakeSea : MonoBehaviour
                     {
                         //-12.5   -> -7.5
                         //-12.5   -> -7.5
-                        var sea =Instantiate(Sea, new Vector3((2.5f + l * 5)+(j*10), this.transform.position.y, (2.5f + k * 5)+(i*10)), Quaternion.identity,this.transform);
-                        Debug.Log(sea.transform.position);
+                        var sea =Instantiate(Sea, new Vector3((-17.5f + l * 5)+(j*10), this.transform.position.y, (-12.5f + k * 5)+(i*10)), Quaternion.identity,this.transform);
                     }
                 }
             }

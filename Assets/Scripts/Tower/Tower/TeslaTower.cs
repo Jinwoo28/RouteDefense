@@ -30,7 +30,7 @@ public class TeslaTower : AtkTower
     protected override void Attack()
     {
         AS.Play();
-        Debug.Log("АјАн");
+       
         Effect.Play();
 
         ElectricBulet.GetComponent<TeslaBullet>().SetUp(towerinfo.towerdamage, FinalTarget,this.transform);   

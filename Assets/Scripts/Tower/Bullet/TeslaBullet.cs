@@ -65,6 +65,7 @@ public class TeslaBullet : MonoBehaviour
         effect.gameObject.transform.position = tesla.GetShootPos().position;
     }
 
+    
 
     //공격이 시작할 때 처음 시작될 함수
     public void SetUp(float _Damage, Transform _target,Transform Startpos)
@@ -99,16 +100,13 @@ public class TeslaBullet : MonoBehaviour
 
     IEnumerator Trigger()
     {
-
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
         AtkCharactor(Damage);
     }
-    
+
     public void AtkCharactor(float damage)
     {
 
-        if(target.GetComponent<Enemy>() != null)
-        {
             if (target.GetComponent<Enemy>().GetShock())
             {
                 if (MaxCount > 1)
@@ -117,22 +115,6 @@ public class TeslaBullet : MonoBehaviour
                     MaxCount--;
                 }
             }
-        }
-        else
-        {
-            if (target.GetComponent<BirdHitBox>().GetShock())
-            {
-                if (MaxCount > 1)
-                {
-                    Count++;
-                    MaxCount--;
-                }
-            }
-        }
-
-
-
-        //데미지 주기
 
         //카운터 감소, 데미지 감소
         Count--;
@@ -144,15 +126,9 @@ public class TeslaBullet : MonoBehaviour
             Range -= 0.1f;
         }
 
-        //공격했던 적의 리스트 보관
-        enemylist.Add(target.GetComponent<Enemy>());
+      
 
-        //현재 위치를 기준으로 적을 검색
-        Collider[] E_collider = Physics.OverlapSphere(target.position, Range, enemylayer);
-
-
-        Transform ShortestTarget = null;
-
+        //데미지 주기
         target.GetComponent<Enemy>().ElectricDamage(Damage);
 
         Damage--;
@@ -167,6 +143,15 @@ public class TeslaBullet : MonoBehaviour
             ReturnBullet();
             return;
         }
+
+        //공격했던 적의 리스트 보관
+        enemylist.Add(target.GetComponent<Enemy>());
+
+        //현재 위치를 기준으로 적을 검색
+        Collider[] E_collider = Physics.OverlapSphere(target.position, Range, enemylayer);
+
+
+        Transform ShortestTarget = null;
 
         //이미 맞은 적 + 새로운 적이 한 마리 이상일 때
         if (E_collider.Length > 1)
@@ -184,7 +169,7 @@ public class TeslaBullet : MonoBehaviour
 
                 else
                 {
-                    float CalDistance = Vector3.SqrMagnitude(EC.transform.position - this.transform.position);
+                    float CalDistance = Vector3.SqrMagnitude(EC.transform.position - target.position);
                     // 터렛과 검출된 collider와의 거리를 담을 변수선언
                     // Vector3.Distance와 Vector3.magnitude도 거리비교를 할 수 있지만 이 둘은 Root을 통해 실제 거리를 계산하기 때문에 연산이 더 들어간다.
                     //SqrMagnitude는 실제거리*실제거리로 Root가 계산되지 않는 함수로 단순 거리비교일 때는 이것을 쓰는 게 연산 속도가 빠르다.
@@ -223,10 +208,15 @@ public class TeslaBullet : MonoBehaviour
 
     public void ReturnBullet()
     {
+        for(int i = 0; i < ActiveEffect.Count; i++)
+        {
+            ActiveEffect[i].ReturnEffect();
+            ReturnEffect(ActiveEffect[i]);
+        }
         ActiveEffect.Clear();
-        this.transform.position = tesla.GetShootPos().position;
+        //this.transform.position = tesla.GetShootPos().position;
         target = null;
-        Range = 2.0f;
+        //Range = 2.0f;
         enemylist.Clear();
         Count = OriginCount;
         MaxCount = MaxOriginCount;

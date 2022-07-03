@@ -13,10 +13,14 @@ public class EnemyStateSetUp : MonoBehaviour
 
     private static int AlreadySet = 0;
 
+    [SerializeField] private GameObject DarkImage = null;
+
     private void Start()
     {
+        DarkImage.SetActive(false);
         if (AlreadySet == 0)
         {
+            DarkImage.SetActive(true);
             StartCoroutine(DataSetFromWeb());
             AlreadySet = 1;
         }
@@ -32,6 +36,9 @@ public class EnemyStateSetUp : MonoBehaviour
         print(data);
 
         SetEnemy(data);
+
+        DarkImage.SetActive(false);
+
     }
 
     void SetEnemy(string tsv)

@@ -8,6 +8,8 @@ public class FireGunBullet : MonoBehaviour
     private float Delay = 1;
     private float Timer = 0;
 
+    [SerializeField] private bool isAtk = false;
+
     public float GetDamage() => Damage;
 
     private List<Enemy_Creture> enemylist = new List<Enemy_Creture>();
@@ -16,18 +18,24 @@ public class FireGunBullet : MonoBehaviour
     private void Awake()
     {
         Bcollider = GetComponent<BoxCollider>();
-        Bcollider.enabled = false;
+        //Bcollider.enabled = false;
     }
 
-    public void SetUp(float _damage, float _delay)
+    public void SetUp(float _damage)
     {
         Damage = _damage;
-        Delay = _delay;
 
-        StartCoroutine("fireDamage");
+        isAtk = true;
+        Bcollider.enabled = true;
+        Invoke("Off", 0.1f);
+        // Debug.Log("공격1");
+        // StartCoroutine("fireDamage");
     }
     
-
+    private void Off()
+    {
+        Bcollider.enabled = false;
+    }
 
     IEnumerator fireDamage()
     {
@@ -38,7 +46,6 @@ public class FireGunBullet : MonoBehaviour
         Bcollider.enabled = false;
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -47,11 +54,52 @@ public class FireGunBullet : MonoBehaviour
             {
                 other.GetComponent<Enemy_Creture>().FireAttacked(Damage);
             }
-            else if(other.GetComponent <Enemy>() != null)
+            else if (other.GetComponent<Enemy>() != null)
             {
                 other.GetComponent<Enemy>().EnemyAttacked(Damage);
             }
         }
     }
+
+
+    //private void OnTriggerStay(Collider other)
+    //{
+
+
+    //    if (isAtk)
+    //    {
+            
+    //        Debug.Log("1단계");
+    //        if (other.CompareTag("Enemy"))
+    //        {
+    //            Debug.Log("2단계");
+    //            if (other.GetComponent<Enemy_Creture>() != null)
+    //            {
+    //                Debug.Log("불 공격");
+    //                other.GetComponent<Enemy_Creture>().FireAttacked(Damage);
+    //            }
+    //            else if (other.GetComponent<Enemy>() != null)
+    //            {
+    //                other.GetComponent<Enemy>().EnemyAttacked(Damage);
+    //            }
+    //        }
+    //        isAtk = false;
+    //    }
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        if (other.GetComponent<Enemy_Creture>() != null)
+    //        {
+    //            other.GetComponent<Enemy_Creture>().FireAttacked(Damage);
+    //        }
+    //        else if(other.GetComponent <Enemy>() != null)
+    //        {
+    //            other.GetComponent<Enemy>().EnemyAttacked(Damage);
+    //        }
+    //    }
+    //}
 
 }

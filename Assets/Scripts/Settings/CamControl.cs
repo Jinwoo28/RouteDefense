@@ -83,11 +83,11 @@ public class CamControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E)) 
         {
-            rotation -= Time.deltaTime*10;
+            rotation -= Time.deltaTime*30;
         }
         else if(Input.GetKey(KeyCode.Q))
         {
-            rotation -= Time.deltaTime*10;
+            rotation += Time.deltaTime*30;
         }
         this.transform.rotation = Quaternion.Euler(0, rotation, 0).normalized;
     }

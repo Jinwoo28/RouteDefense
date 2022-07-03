@@ -237,10 +237,6 @@ MonoBehaviour:
   towerBody: {fileID: 6771768949204722080}
   towerTurret: {fileID: 6771768949204722080}
   shootPos: {fileID: 6771768949204722082}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 1
   AtkParticle: {fileID: 0}
   FireBullet: {fileID: 8860413789229910943}
 --- !u!65 &-7998236545151643448
@@ -445,8 +441,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5, z: 7}
-  m_Center: {x: 0, y: 0, z: 4}
+  m_Size: {x: 2.5, y: 2.5, z: 7.5}
+  m_Center: {x: 0, y: 0, z: 4.5}
 --- !u!114 &4467605841149626927
 MonoBehaviour:
   m_ObjectHideFlags: 0

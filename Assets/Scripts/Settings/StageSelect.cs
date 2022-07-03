@@ -110,8 +110,6 @@ public class StageSelect : MonoBehaviour
                 break;
         }
 
-        Debug.Log(multinum);
-
         easymoney = (int)(money * multinum);
         nomalmoney = (int)((money + (money / 2) + (money / 4))*multinum);
         hardmoney = (int)(money * 3*multinum);
@@ -137,7 +135,6 @@ public class StageSelect : MonoBehaviour
     {
 
         GameManager.GetSetStageType = (StageType)type;
-        Debug.Log(GameManager.GetSetStageType);
         SetMoney();
 
         GameType.SetActive(false);

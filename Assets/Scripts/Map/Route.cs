@@ -140,7 +140,6 @@ public class Route : MonoBehaviour
     {
         if (GameManager.GetSetStageType == StageType.Nomal)
         {
-            Debug.Log("Nomal");
             if (GameManager.SetGameLevel == 3)
             {
                 if (!isgameing)

@@ -23,7 +23,8 @@ public interface IEnumyAttacked
 
 public class Enemy : MonoBehaviour, IEnumyAttacked
 {
-
+    [SerializeField] private bool Boss;
+    public bool GetBoss() => Boss;
     [SerializeField] private int EnemyCode;
 
     //적의 이동 경로
@@ -388,7 +389,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
             float Damage = underTheSea ? _damage * 2 : _damage;
 
-            realDamage(Damage);
+            realDamage(Damage,1);
             electricShock = true;
         }
     }
@@ -411,20 +412,18 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         int X = Random.Range(1, 101);
         if (X < unitstate.avoidancerate)
         {
-            realDamage(0);
             ShowDamage(0, 0);
         }
         else
         {
-            ShowDamage(realdamage, 1);
-            realDamage(realdamage);
+            realDamage(realdamage,1);
         }
 
     }
 
-    public void realDamage(float _damage)
+    public void realDamage(float _damage,int damagetype)
     {
-        
+        ShowDamage(_damage, damagetype);
         if (_damage >= unitstate.unithp)
         {
             EnemyDie();

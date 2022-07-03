@@ -6,7 +6,7 @@ public class FireGunTower : AtkTower
 {
     [SerializeField] private GameObject FireBullet = null;
     private ParticleSystem FireEffect = null;
-    private BoxCollider Bullet = null;
+    private BoxCollider BulletCollider = null;
     private FireGunBullet fireGunBullet = null;
     private bool isfired = false;
 
@@ -14,17 +14,19 @@ public class FireGunTower : AtkTower
 
     protected override void Start()
     {
-        FireBullet.GetComponent<FireGunBullet>().SetUp(towerinfo.towerdamage,towerinfo.atkdelay);
+        //FireBullet.GetComponent<FireGunBullet>().SetUp(towerinfo.towerdamage,towerinfo.atkdelay);
         base.Start();
         FireEffect = FireBullet.GetComponent<ParticleSystem>();
-        Bullet = FireBullet.GetComponent<BoxCollider>();
+        BulletCollider = FireBullet.GetComponent<BoxCollider>();
         fireGunBullet = FireBullet.GetComponent<FireGunBullet>();
         BuildManager.ActiveTower(this);
+        BulletCollider.enabled = false;
     }
 
     public void ChangeWet(bool wet)
     {
         isWetTower = wet;
+        
     }
 
     protected override void Update()
@@ -35,7 +37,7 @@ public class FireGunTower : AtkTower
             FireEffect.Stop();
             AS.Stop();
             isfired = false;
-            //Bullet.enabled = false;
+            BulletCollider.enabled = false;
         }
         Timer += Time.deltaTime;
     }
@@ -52,11 +54,12 @@ public class FireGunTower : AtkTower
     {
 
         float giveDamage = isWetTower ? towerinfo.towerdamage / 2 : towerinfo.towerdamage;
-
-        fireGunBullet.SetUp(giveDamage, towerinfo.atkdelay);
+        Debug.Log("???");
+        fireGunBullet.SetUp(giveDamage);
 
         if (!isfired)
         {
+            BulletCollider.enabled = true;
             AS.Play();
             isfired = true;
             FireEffect.Play();

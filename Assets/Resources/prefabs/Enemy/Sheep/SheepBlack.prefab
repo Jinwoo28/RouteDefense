@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1691713848445316514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 1691713848445649064}
   - {fileID: 1691713848445678992}
@@ -46,7 +46,7 @@ Animator:
   m_GameObject: {fileID: 1691713848445316514}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 28bbc0813052d1f40b0ae2719bdd2c65, type: 3}
-  m_Controller: {fileID: 9100000, guid: e7d5530b541014443a99baff24980478, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -96,8 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda773d22b269e74583108f43d26fd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: 1
   EnemyCode: 35
-  HpUpValue: 4
+  Fired: 0
+  Iced: 0
+  blood: 0
 --- !u!1 &1691713848445318080
 GameObject:
   m_ObjectHideFlags: 0

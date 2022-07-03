@@ -56,6 +56,8 @@ public class EnemyPooling : MonoBehaviour
         _enemy.gameObject.layer = 2;
         _enemy.gameObject.SetActive(false);
         _enemy.ResetHp();
+
+        _enemy.StopAllCoroutines();
         //_enemy.transform.position = Vector3.zero;
         enemyPooling[_enemyNum].enemypooling.Enqueue(_enemy);
     }

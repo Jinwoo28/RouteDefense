@@ -41,17 +41,17 @@ public class Enemy_Creture : Enemy
                 {
                     GetHp = unitstate.feature;
                 }
-
-                Debug.Log(unitstate.unithp);
             }
         }
     }
 
-
+    private IEnumerator fire;
     private float FireDamage = 0;
+
     public void FireAttacked(float damage)
     {
         FireDamage = damage;
+        
         if (this.gameObject.activeInHierarchy)
         {
             if (!fired)
@@ -59,6 +59,8 @@ public class Enemy_Creture : Enemy
                 SpeedChange(1.25f);
                 fired = true;
             }
+            fire = DotDamage();
+
             StopCoroutine("DotDamage");
             StartCoroutine("DotDamage");
         }
@@ -81,7 +83,7 @@ public class Enemy_Creture : Enemy
 
             if (realdamage < GetHp)
             {
-                realDamage(realdamage);
+                realDamage(realdamage,1);
             }
             else
             {
