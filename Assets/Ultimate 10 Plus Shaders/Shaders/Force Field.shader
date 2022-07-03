@@ -43,7 +43,7 @@ Shader "Ultimate 10+ Shaders/Force Field"
         _MainTex ("Texture", 2D) = "white" {}
         [HDR] _Color ("Color", Color) = (1,1,1,1)
 
-        _FresnelPower("Fresnel Power", Range(0, 10)) = 3
+        _FresnelPower("Fresnel Power", Range(0, 50)) = 3
         _ScrollDirection ("Scroll Direction", float) = (0, 0, 0, 0)
     }
     SubShader

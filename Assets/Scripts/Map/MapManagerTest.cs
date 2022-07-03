@@ -296,6 +296,7 @@ public class MapManagerTest : MonoBehaviour
                 useableNode.Remove(node);
 
                 node.GetSetPoint = 1;
+                node.SetOnObstacle = true;
             }
 
             for (int i = 0; i < checkPointCount; i++)
@@ -316,7 +317,7 @@ public class MapManagerTest : MonoBehaviour
                 checknode[i] = node;
 
                 useableNode.Remove(node);
-
+                node.SetOnObstacle = true;
                 node.GetSetPoint = i + 1;
             }
 

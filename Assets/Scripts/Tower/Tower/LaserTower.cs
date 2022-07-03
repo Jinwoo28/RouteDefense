@@ -56,7 +56,7 @@ public class LaserTower : AtkTower
         Debug.Log(existingTarget);
         Debug.Log(existingTarget.GetComponent<IEnumyAttacked>());
         existingTarget.GetComponent<IEnumyAttacked>().Attacked(atkdamage);
-        atkdamage += (GetStep + 1);
+        atkdamage += (GetStep);
     }
 
 }

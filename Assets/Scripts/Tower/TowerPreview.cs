@@ -156,18 +156,21 @@ public class TowerPreview : MonoBehaviour
                         || ((towernode!=null)&&towernode.SetOnObstacle))
                     {
                         UiStateChange(2);
+                        GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 0, 0));
                     }
 
                     //합체
                     else if ((alreadytower && CanCombination && towerstep != 3 && tower.GetStep != 3) && !OnWater)
                     {
                         //  Debug.Log(alreadytower + " : " + CanCombination + " : " + (towerstep != 3 && tower.GetStep != 3));
+                        GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 1, 0));
                         UiStateChange(0);
                     }
                     //가능
                     else
                     {
                         UiStateChange(1);
+                        GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(0, 1, 0));
                     }
                 }
 

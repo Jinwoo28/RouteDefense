@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 3087942348891455589}
   - component: {fileID: -5263434514986571743}
   m_Layer: 9
-  m_Name: Tow_Gatling1 Preview
+  m_Name: Tow_Gatling1 Preview 1
   m_TagString: TowerPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
