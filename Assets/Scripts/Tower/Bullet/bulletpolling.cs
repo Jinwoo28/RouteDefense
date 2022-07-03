@@ -51,12 +51,12 @@ public class bulletpolling : MonoBehaviour
 
     public void ReturnObject(Bullet _object)
     {
+        _object.gameObject.SetActive(false);
+        poolingQueue.Enqueue(_object);
         if (_object.gameObject.GetComponent<TrailRenderer>() != null)
         {
             _object.gameObject.GetComponent<TrailRenderer>().enabled = false;
         }
-        _object.gameObject.SetActive(false);
-        poolingQueue.Enqueue(_object);
     }
 
 }

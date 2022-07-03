@@ -14,22 +14,16 @@ public class CrossbowTower : AtkTower
 
     protected override void Attack() 
     {
-        if (GetStep != 3)
-        {
+
             var obj = op.GetObject(shootPos.position);
-            obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 10f);
+            obj.SetUp(FinalTarget, towerinfo.towerdamage, op, 20f);
 
             obj.SetParent = shootPos;
             obj.MortarSetDestination(FinalTarget.position, shootPos.transform.position);
             obj.SetArrowDir(shootPos.forward);
             obj.ResetBullet();
-            obj.gameObject.GetComponent<TrailRenderer>().enabled = true;
-        }
-
-        else
-        {
-            StartCoroutine("Level3Attack");
-        }
+            
+        
             AS.Play();
     }
 

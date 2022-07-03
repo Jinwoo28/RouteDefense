@@ -7,7 +7,12 @@ public class ArrowBullet : Bullet
     private Enemy enemy = null;
     private bool ontile = false;
     private bool Ontarget = false;
+    private LineRenderer LR = null;
 
+    private void Awake()
+    {
+        LR = this.GetComponent<LineRenderer>();
+    }
 
     protected override void Update()
     {
@@ -18,6 +23,10 @@ public class ArrowBullet : Bullet
             ArrowReturnBullet();
         }
 
+        if (!target.gameObject.activeInHierarchy)
+        {
+            ArrowReturnBullet();
+        }
 
         if (!ontile)
         {
@@ -35,6 +44,11 @@ public class ArrowBullet : Bullet
     {
         ontile = false;
         Ontarget = false;
+    }
+
+    public void SetUP()
+    {
+        LR.enabled = true;
     }
 
     protected override void AtkCharactor()

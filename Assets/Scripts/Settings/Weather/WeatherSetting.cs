@@ -90,11 +90,20 @@ public class WeatherSetting : MonoBehaviour
         for(int i = 0; i < Count; i++)
         {
             CheckEmptyNode();
+
+            if(checkednodelist.Count == 0)
+            {
+                return;
+            }
+
             int num = Random.Range(0, checkednodelist.Count);
             int treeNum = Random.Range(0, MakeTreeObj.Length);
 
             var newTree = Instantiate(MakeTreeObj[treeNum], new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth / 2, checkednodelist[num].gridY), Quaternion.identity);
             newTree.GetComponent<Tree>().SetNode = checkednodelist[num];
+            
+
+            Debug.Log(checkednodelist[num].gridX + " : "  + checkednodelist[num].gridY);
 
             checkednodelist[num].OnBranch();
 
@@ -135,19 +144,20 @@ public class WeatherSetting : MonoBehaviour
         {
             if (GameManager.SetGameLevel == 1)
             {
-                if (!tilelist[i].GetOnTower && !tilelist[i].Getwalkable)
+                if (!tilelist[i].GetOnTower && !tilelist[i].Getwalkable&&!tilelist[i].SetOnObstacle)
                 {
                     checkednodelist.Add(tilelist[i]);
                 }
             }
             else
             {
-                if (!tilelist[i].GetOnTower)
+                if (!tilelist[i].GetOnTower&& !tilelist[i].SetOnObstacle)
                 {
                     checkednodelist.Add(tilelist[i]);
                 }
             }
         }
+        Debug.Log(checkednodelist.Count);
     }
 
     public void GameStart()

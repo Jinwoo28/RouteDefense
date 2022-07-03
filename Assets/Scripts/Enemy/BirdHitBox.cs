@@ -20,7 +20,7 @@ public class BirdHitBox : MonoBehaviour,IEnumyAttacked
 
     private void Update()
     {
-    Debug.Log(GetComponentInParent<Enemy>().gameObject.transform);
+
     }
         
 

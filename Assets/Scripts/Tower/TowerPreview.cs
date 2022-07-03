@@ -274,14 +274,14 @@ public class TowerPreview : MonoBehaviour
        // Debug.Log(towerstep);
         if (other.CompareTag("Tower"))
         {
-            Debug.Log((other.GetComponent<Tower>().Getname == towername) + "1");
+            //Debug.Log((other.GetComponent<Tower>().Getname == towername) + "1");
 
-            Debug.Log(other.GetComponent<Tower>().Getname + "name1");
-            Debug.Log(towername + "name2");
+            //Debug.Log(other.GetComponent<Tower>().Getname + "name1");
+            //Debug.Log(towername + "name2");
 
-            Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2");
-            Debug.Log((other.GetComponent<Tower>().GetStep != 3 && towerstep != 3) + "3");
-            Debug.Log((!other.GetComponent<Tower>().GetCanWork) + "4");
+            //Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2");
+            //Debug.Log((other.GetComponent<Tower>().GetStep != 3 && towerstep != 3) + "3");
+            //Debug.Log((!other.GetComponent<Tower>().GetCanWork) + "4");
 
 
             //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
