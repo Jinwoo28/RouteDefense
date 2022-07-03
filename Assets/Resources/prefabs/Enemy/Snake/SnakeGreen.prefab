@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss: 0
-  EnemyCode: 25
+  EnemyCode: 21
   Fired: 0
   Iced: 0
   blood: 0
