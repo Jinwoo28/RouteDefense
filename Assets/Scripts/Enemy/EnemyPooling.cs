@@ -22,7 +22,6 @@ public class EnemyPooling : MonoBehaviour
 
     public bool GetBoss(int num)
     {
-        Debug.Log(enemyPooling[num].enemy.GetComponent<Enemy>().GetBoss());
         return enemyPooling[num].enemy.GetComponent<Enemy>().GetBoss();
     }
 

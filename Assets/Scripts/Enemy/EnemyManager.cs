@@ -232,7 +232,6 @@ public class EnemyManager : MonoBehaviour
             if (Pooling.GetBoss(stageinfo[num].enemyNum[i]))
             {
                 ShowBoss.enabled = true;
-                Debug.Log("???");
             }
 
             ShowBoss.rectTransform.anchoredPosition = new Vector2((-70 * (stageinfo[num].enemyNum.Count - 1)) + (i * 140), 380);

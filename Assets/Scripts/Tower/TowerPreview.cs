@@ -151,9 +151,10 @@ public class TowerPreview : MonoBehaviour
                 {
                     //현재 위치의 설치가능 여부에 따라 preview 위에 ui표시
                     //불가능
+
                     if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) 
                         || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater
-                        || ((towernode!=null)&&towernode.GetSetCheckNode)||towernode.GetSetCheckNode)
+                        || ((towernode!=null)&&towernode.GetSetCheckNode))
                     {
                         UiStateChange(2);
                         GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 0, 0));
