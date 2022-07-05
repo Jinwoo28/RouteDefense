@@ -340,7 +340,7 @@ public class MapManagerTest : MonoBehaviour
                     useableNode.Add(checknode2[i]);
                 }
 
-            }
+            //}
         }
 
     }
