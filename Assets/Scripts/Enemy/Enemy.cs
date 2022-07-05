@@ -385,8 +385,12 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         if (hpbarprefab != null)
         {
             hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Electric);
-            StopCoroutine("ElectricShock");
-            StartCoroutine("ElectricShock");
+
+            if (this.isActiveAndEnabled)
+            {
+                StopCoroutine("ElectricShock");
+                StartCoroutine("ElectricShock");
+            }
 
             float Damage = underTheSea ? _damage * 2 : _damage;
 
