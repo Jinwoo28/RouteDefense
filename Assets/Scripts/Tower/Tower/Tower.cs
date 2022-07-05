@@ -43,6 +43,7 @@ public class Tower : MonoBehaviour
 
     protected virtual void Awake()
     {
+        this.transform.rotation = Quaternion.Euler(0, 180,0);
        TowerSetUp(TowerDataSetUp.GetData(TowerCode));
     }
 
@@ -267,6 +268,7 @@ public class Tower : MonoBehaviour
     public void TowerStepUp(Tower _tower)
     {
         GameObject buildedtower = Instantiate(uppertower, this.transform.position, Quaternion.identity);
+
         buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
         buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
         buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;

@@ -82,13 +82,13 @@ public class TowerPreview : MonoBehaviour
     //이동할 때 원래 타워의 정보
     private GameObject Origintower = null;
 
-    private void Start()
-    {
 
-    }
+
+        
 
     private void Update()
     {
+
         Camera cam = Camera.main;
         Vector3 thisPos = this.transform.position;
         thisPos.y += 2.0f;
@@ -153,7 +153,7 @@ public class TowerPreview : MonoBehaviour
                     //불가능
                     if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) 
                         || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater
-                        || ((towernode!=null)&&towernode.SetOnObstacle))
+                        || ((towernode!=null)&&towernode.GetSetCheckNode)||towernode.GetSetCheckNode)
                     {
                         UiStateChange(2);
                         GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 0, 0));
@@ -210,7 +210,7 @@ public class TowerPreview : MonoBehaviour
                     }
 
                     //이동일 때 혹은 새로 지을 때
-                    else if (!alreadytower && ((towernode != null) && !towernode.SetOnObstacle))
+                    else if (!alreadytower && ((towernode != null) && !towernode.SetOnObstacle) && !towernode.GetSetCheckNode)
                     {
                         if (Input.GetMouseButtonDown(0))
                         {
@@ -277,15 +277,6 @@ public class TowerPreview : MonoBehaviour
        // Debug.Log(towerstep);
         if (other.CompareTag("Tower"))
         {
-            //Debug.Log((other.GetComponent<Tower>().Getname == towername) + "1");
-
-            //Debug.Log(other.GetComponent<Tower>().Getname + "name1");
-            //Debug.Log(towername + "name2");
-
-            //Debug.Log((other.GetComponent<Tower>().GetStep == towerstep) + "2");
-            //Debug.Log((other.GetComponent<Tower>().GetStep != 3 && towerstep != 3) + "3");
-            //Debug.Log((!other.GetComponent<Tower>().GetCanWork) + "4");
-
 
             //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
             if (other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& other.GetComponent<Tower>().GetCanWork)
@@ -321,6 +312,7 @@ public class TowerPreview : MonoBehaviour
         towername = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).Name;
         towerstep = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).TowerStep;
         StartCoroutine("BuildTower");
+
     }
 
     //타워에서 이동버튼을 눌렀을 때 초기화함수

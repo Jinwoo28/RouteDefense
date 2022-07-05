@@ -92,8 +92,11 @@ public class FireSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-           // other.GetComponent<Enemy_Creture>().GetFireDamage = UserInformation.userDataStatic.skillSet[0].GetDamage;
-            other.GetComponent<Enemy_Creture>().FireAttacked(damage);
+            // other.GetComponent<Enemy_Creture>().GetFireDamage = UserInformation.userDataStatic.skillSet[0].GetDamage;
+            if (other.GetComponent<Enemy>().GetEnemyType == 0)
+            {
+                other.GetComponent<Enemy_Creture>().FireAttacked(damage,5);
+            }
         }
 
         if (other.CompareTag("Water")&&SetFinish)

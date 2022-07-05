@@ -40,6 +40,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private Image imagebar = null;
     [SerializeField] private Image[] imageEnemy = null;
+    [SerializeField] private TextMeshProUGUI ShowBoss = null;
 
     private int StageNum = 0;
     public int GetStageNum => StageNum;
@@ -130,6 +131,8 @@ public class EnemyManager : MonoBehaviour
             enemy.gameObject.layer = 6;
             enemy.StartMove();
 
+ 
+
             //소환되는 enemy를 list에 추가
             EnemyCount.Add(enemy.GetComponent<Enemy>());
             EnemyRemainCount++;
@@ -161,6 +164,7 @@ public class EnemyManager : MonoBehaviour
                         //별 개수에 따른 상금 얻기
                     }
 
+                    ShowBoss.enabled = false;
                     gameongoing = false;
                     ShowEnemyImageReset();
                     ShowEnemyImage(StageNum);
@@ -212,6 +216,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    Vector2 BossTextPos;
     private void ShowEnemyImage(int num)
     {
         for(int i =0;i< stageinfo[num].enemyNum.Count; i++)
@@ -223,6 +228,14 @@ public class EnemyManager : MonoBehaviour
             imageEnemy[i].sprite = enemy;
 
             imageEnemy[i].rectTransform.anchoredPosition = new Vector2((-70 * (stageinfo[num].enemyNum.Count - 1)) + (i * 140), 460);
+
+            if (Pooling.GetBoss(stageinfo[num].enemyNum[i]))
+            {
+                ShowBoss.enabled = true;
+                Debug.Log("???");
+            }
+
+            ShowBoss.rectTransform.anchoredPosition = new Vector2((-70 * (stageinfo[num].enemyNum.Count - 1)) + (i * 140), 380);
 
         }
 

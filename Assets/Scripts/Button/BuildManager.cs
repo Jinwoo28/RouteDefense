@@ -39,6 +39,7 @@ public class BuildManager : MonoBehaviour
     //private bool ontile = false;
 
     private static List<FireGunTower> firetowerlist = new List<FireGunTower>();
+    private static List<TeslaTower> teslatowerlist = new List<TeslaTower>();
 
     private static bool iswet = false;
 
@@ -74,7 +75,7 @@ public class BuildManager : MonoBehaviour
         info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).Damage;
         info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).Delay;
         info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
-        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + TowerDataSetUp.GetData(TowerCode).Name);
+        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(TowerCode).Name+ TowerDataSetUp.GetData(TowerCode).TowerStep));
     }
     public void ExitMouseBUildTowerPanel()
     {
@@ -99,11 +100,20 @@ public class BuildManager : MonoBehaviour
         firetowerlist.Add(firetower);
         firetower.ChangeWet(iswet);
     }
-
     public static void ReturnActiveTower(FireGunTower firetower)
     {
         firetowerlist.Remove(firetower);
     }
+
+    public static void ActiveTowerTesla(TeslaTower tesla)
+    {
+        teslatowerlist.Add(tesla);
+    }
+    public static void ReturnActiveTowerTesla(TeslaTower tesla)
+    {
+        teslatowerlist.Remove(tesla);
+    }
+
 
     public static void Rained(bool wet)
     {
@@ -111,6 +121,10 @@ public class BuildManager : MonoBehaviour
         for (int i = 0; i < firetowerlist.Count; i++)
         {
             firetowerlist[i].ChangeWet(wet);
+        }
+        for (int i = 0; i < teslatowerlist.Count; i++)
+        {
+            teslatowerlist[i].ChangeWet(wet);
         }
     }
 
@@ -217,8 +231,14 @@ public class BuildManager : MonoBehaviour
                     playerstate.GetSetPlayerCoin = towerprice;
                 }
             }
-        
+            else
+            {
+            playerstate.ShowNotEnoughMoneyCor();
+            }
     }
+
+
+
 
     public bool GettowerpreviewActive
     {

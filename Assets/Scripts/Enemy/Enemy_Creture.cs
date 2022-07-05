@@ -48,10 +48,12 @@ public class Enemy_Creture : Enemy
     private IEnumerator fire;
     private float FireDamage = 0;
 
-    public void FireAttacked(float damage)
+    public void FireAttacked(float damage,int Count)
     {
         FireDamage = damage;
-        
+        damagecount = Count;
+
+
         if (this.gameObject.activeInHierarchy)
         {
             if (!fired)
@@ -70,10 +72,10 @@ public class Enemy_Creture : Enemy
 
 
   
+    int damagecount = 5;
     public IEnumerator DotDamage()
     {
         hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Fire);
-        int damagecount = 5;
 
         while (damagecount > 0)
         {

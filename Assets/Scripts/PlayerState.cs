@@ -7,6 +7,7 @@ public class PlayerState : MonoBehaviour
 {
 
     [SerializeField] private int playercoin = 10000;
+    [SerializeField] private GameObject NotEnoughMoney = null;
     public int SetPlayerCoin { get => playercoin; set => playercoin = value; }
 
     private int playerlife = 30;
@@ -50,6 +51,18 @@ public class PlayerState : MonoBehaviour
         }
     }
 
-   
+    public void ShowNotEnoughMoneyCor()
+    {
+        NotEnoughMoney.SetActive(true);
+        StopCoroutine("ShowNotEnoughMoney");
+        StartCoroutine("ShowNotEnoughMoney");
+    }
+    private IEnumerator ShowNotEnoughMoney()
+    {
+        yield return new WaitForSeconds(1f);
+        NotEnoughMoney.SetActive(false);
+    }
+
+
 
 }

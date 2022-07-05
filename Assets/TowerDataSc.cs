@@ -18,6 +18,7 @@ public class TowerData
     public int UpgradePrice;
     public int CanAtk;  // 1_ 지상만 공격, 2_ 공중만 공격 3_ 모두 공격
     public string TowerInfo;
+    public string DetailInformation;
 }
 
 [CreateAssetMenu(fileName = "TowerDataTest", menuName = "Scriptable Object/Tower Data")]

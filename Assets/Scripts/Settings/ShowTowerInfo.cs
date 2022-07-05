@@ -5,12 +5,46 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+public class NumChange
+{
+    public string StringReturnNum(float num)
+    {
+        if((num*10)%10 == 0)
+        {
+            return num.ToString();
+        }
+        else if((num * 100) % 10 == 0)
+        {
+            return num.ToString("F1");
+        }
+        else
+        {
+            return num.ToString("F2");
+        }
+    }
+
+    public string HunReturnNum(float num)
+    {
+        if ((num * 10) % 10 == 0)
+        {
+            return (num*100).ToString();
+        }
+        else if ((num * 100) % 10 == 0)
+        {
+            return (num*100).ToString("F1");
+        }
+        else
+        {
+            return (num*100).ToString("F2");
+        }
+    }
+}
+
 [System.Serializable]
 public class towerTextinfo
 {
     public string towername;
     public int towercode;
-    //public TextMeshProUGUI showinfo;
 }
 
 public class ShowTowerInfo : MonoBehaviour
@@ -23,6 +57,7 @@ public class ShowTowerInfo : MonoBehaviour
 
     [SerializeField] private Button upgradebutton;
 
+    [SerializeField] private Image towerimage = null;
     [SerializeField] private TextMeshProUGUI towername = null;
     [SerializeField] private TextMeshProUGUI towerlevel = null;
     [SerializeField] private TextMeshProUGUI atkdamage = null;
@@ -52,6 +87,7 @@ public class ShowTowerInfo : MonoBehaviour
 
     private bool ShowUpgradeInfo = false;
 
+    NumChange NC = new NumChange();
     public void ShowUPInfo()
     {
         ShowUpgradeInfo = !ShowUpgradeInfo;
@@ -96,14 +132,16 @@ public class ShowTowerInfo : MonoBehaviour
         {
             towername.text = $"{tower.Getname}";
             atkspeed.text =  "레벨 "+tower.GetStep.ToString();
+            towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(tower.GetTowerCode).Name)+TowerDataSetUp.GetData(tower.GetTowerCode).TowerStep);
+
 
             if (!ShowUpgradeInfo)
             {
                 towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString();
                 towerlevel.color = Color.black;
-                atkdamage.text = "데미지 : " + tower.GetDamage.ToString("F2");
+                atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage);
                 atkdamage.color = Color.black;
-                atkcritical.text = "크리티컬 : " + (tower.GetCritical*100).ToString("F2") + "%";
+                atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%";
                 atkcritical.color = Color.black;
             }
             else
@@ -112,12 +150,22 @@ public class ShowTowerInfo : MonoBehaviour
                 {
                     towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString() + " -> " + (tower.GetTowerLevel + 1).ToString();
                     towerlevel.color = Color.red;
-                    atkdamage.text = "데미지 : " + tower.GetDamage.ToString("F2") + " -> " + (tower.GetDamage + tower.GetTowerUPDamage).ToString("F2");
+                    atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage) + " -> " + NC.StringReturnNum(tower.GetDamage + tower.GetTowerUPDamage);
                     atkdamage.color = Color.red;
-                    atkcritical.text = "크리티컬 : " + (tower.GetCritical * 100).ToString("F2") + "%" + " -> " + ((tower.GetCritical + tower.GetTowerUpCri) * 100).ToString("F2") + "%";
+                    atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%" + " -> " + NC.HunReturnNum(tower.GetCritical + tower.GetTowerUpCri) + "%";
                     atkcritical.color = Color.red;
                 }
+                else
+                {
+                    towerlevel.text = "업그레이드 : " + tower.GetTowerLevel.ToString();
+                    towerlevel.color = Color.black;
+                    atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage);
+                    atkdamage.color = Color.black;
+                    atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%";
+                    atkcritical.color = Color.black;
+                }
             }
+
 
             switch (tower.GetStep)
             {

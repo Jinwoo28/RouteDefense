@@ -10,6 +10,8 @@ public class SettingCs : MonoBehaviour
     [SerializeField] private GameObject settingPanal = null;
     private MultipleSpeed multipleSpeed = null;
 
+    [SerializeField] private GameObject showDataPanel = null;
+
     private bool settingpanelcheck = false;
 
     private void Start()
@@ -43,6 +45,16 @@ public class SettingCs : MonoBehaviour
         multipleSpeed.OnClcikCanCel();
     }
 
+    public void ShowDataPanel()
+    {
+        showDataPanel.SetActive(true);
+        multipleSpeed.OnClickStart(0);
+    }
 
+    public void OffDataPanel()
+    {
+        showDataPanel.SetActive(false);
+        multipleSpeed.OnClcikCanCel();
+    }
 
 }

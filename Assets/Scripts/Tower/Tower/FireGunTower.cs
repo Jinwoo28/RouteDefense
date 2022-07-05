@@ -25,8 +25,7 @@ public class FireGunTower : AtkTower
 
     public void ChangeWet(bool wet)
     {
-        isWetTower = wet;
-        
+        isWetTower = wet;  
     }
 
     protected override void Update()
@@ -55,7 +54,7 @@ public class FireGunTower : AtkTower
 
         float giveDamage = isWetTower ? towerinfo.towerdamage / 2 : towerinfo.towerdamage;
         Debug.Log("???");
-        fireGunBullet.SetUp(giveDamage);
+        fireGunBullet.SetUp(giveDamage,towerinfo.towerstep+4);
 
         if (!isfired)
         {

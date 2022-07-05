@@ -19,9 +19,9 @@ public class DetectObject : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100f, layerMask))
             {
                 newnode = hit.collider.transform.GetComponent<Node>();
+                return newnode;
             }
 
-            return newnode;
         }
         return null;
     }

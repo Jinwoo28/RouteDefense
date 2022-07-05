@@ -402,6 +402,10 @@ X X 10 X
                 yield return null;
             }
         }
+        else
+        {
+            playerstate.ShowNotEnoughMoneyCor();
+        }
     }
 
     public void CanCelMakeTile()

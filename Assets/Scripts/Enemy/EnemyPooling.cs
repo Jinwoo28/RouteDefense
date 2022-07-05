@@ -20,6 +20,12 @@ public class EnemyPooling : MonoBehaviour
         return enemyPooling[num].enemy.name;
     }
 
+    public bool GetBoss(int num)
+    {
+        Debug.Log(enemyPooling[num].enemy.GetComponent<Enemy>().GetBoss());
+        return enemyPooling[num].enemy.GetComponent<Enemy>().GetBoss();
+    }
+
     public Enemy CreatEnemy(int _enemyNum)
     {
         var newenemy = Instantiate(enemyPooling[_enemyNum].enemy, this.transform).GetComponent<Enemy>();
@@ -32,7 +38,6 @@ public class EnemyPooling : MonoBehaviour
     {
         if (enemyPooling[_enemyNum].enemypooling.Count > 0)
         {
-
             var obj = enemyPooling[_enemyNum].enemypooling.Dequeue();
             obj.gameObject.transform.position = _spawnPos;
             obj.gameObject.SetActive(true);

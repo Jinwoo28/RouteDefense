@@ -60,17 +60,17 @@ public class MeteorSkill : MonoBehaviour
                 if (Vector3.Distance(this.transform.position, enemy[i].transform.position) < Range * 0.3f)
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage);
-                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage/2));
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage/2),5);
                 }
                 else if(Vector3.Distance(this.transform.position, enemy[i].transform.position) < Range * 0.6f)
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage*0.6f);
-                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 3));
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 3),5);
                 }
                 else
                 {
                     enemy[i].GetComponent<Enemy>().EnemyAttacked(Damage * 0.3f);
-                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 4));
+                    enemy[i].GetComponent<Enemy_Creture>().FireAttacked((int)(Damage / 4),5);
                 }
             }
         }

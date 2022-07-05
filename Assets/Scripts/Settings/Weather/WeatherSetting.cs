@@ -6,6 +6,9 @@ public class WeatherSetting : MonoBehaviour
 {
     [SerializeField] private AddTile mapmanager = null;
 
+    [SerializeField] private Renderer SkyBox = null;
+    [SerializeField] private Renderer Sea = null;
+
     //받아온 활성화 리스트
     private List<Node> tilelist = new List<Node>();
 
@@ -40,7 +43,8 @@ public class WeatherSetting : MonoBehaviour
 
     private void Start()
     {
-        EnemyManager.stageclear += StageClear; 
+        EnemyManager.stageclear += StageClear;
+        
     }
 
     private void OnDestroy()
@@ -126,12 +130,16 @@ public class WeatherSetting : MonoBehaviour
         {
             rained = true;
             Rain.Play();
+            SkyBox.sharedMaterial.SetColor("_Tint", new Color(0.3f, 0.3f, 0.3f));
+            Sea.sharedMaterial.SetFloat("_RimPower", 10);
             BuildManager.Rained(true);
         }
         else
         {
             rained = false;
             Rain.Stop();
+            SkyBox.sharedMaterial.SetColor("_Tint", new Color(0.65f, 0.65f, 0.65f));
+            Sea.sharedMaterial.SetFloat("_RimPower", 5);
             BuildManager.Rained(false);
         }
     }

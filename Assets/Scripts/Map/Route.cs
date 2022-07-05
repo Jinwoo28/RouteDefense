@@ -89,7 +89,7 @@ public class Route : MonoBehaviour
         while (Input.GetMouseButton(0))
         {
             Node changenode = detector.ReturnNode();
-
+            Debug.Log(changenode);
             if (changenode != null)
             {
                 changenode.ChangeWalkableColor(walkable);
@@ -333,7 +333,7 @@ public class Route : MonoBehaviour
 
     private IEnumerator ShowNotFoundRoute()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         NotFound.SetActive(false);
     }
 

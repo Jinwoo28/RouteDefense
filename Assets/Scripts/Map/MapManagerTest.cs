@@ -296,7 +296,7 @@ public class MapManagerTest : MonoBehaviour
                 useableNode.Remove(node);
 
                 node.GetSetPoint = 1;
-                node.SetOnObstacle = true;
+                node.GetSetCheckNode = true;
             }
 
             for (int i = 0; i < checkPointCount; i++)
@@ -306,24 +306,40 @@ public class MapManagerTest : MonoBehaviour
         }
         else if (GameManager.GetSetStageType == StageType.OrderCheckPoint)
         {
-            Node[] checknode2 = new Node[checkPointCount];
+            //Node[,] nodelist =  grid;
 
-            for (int i = 0; i < checkPointCount; i++)
-            {
-                Node node = selectpoint.GetCheckNodePoint(useableNode);
+            //Node start = StartNode;
+            //Node end = EndNode;
 
-                checknode2[i] = node;
+            //Node[] order = new Node[checkPointCount];
 
-                checknode[i] = node;
+            //while (true)
+            //{
 
-                useableNode.Remove(node);
-                node.SetOnObstacle = true;
-                node.GetSetPoint = i + 1;
-            }
+                Node[] checknode2 = new Node[checkPointCount];
 
-            for (int i = 0; i < checkPointCount; i++)
-            {
-                useableNode.Add(checknode2[i]);
+                for (int i = 0; i < checkPointCount; i++)
+                {
+                    Node node = selectpoint.GetCheckNodePoint(useableNode);
+
+                    checknode2[i] = node;
+
+                    checknode[i] = node;
+
+                    useableNode.Remove(node);
+                    node.GetSetCheckNode = true;
+                    node.GetSetPoint = i + 1;
+
+                  //  order[i] = node;
+                }
+
+
+
+                for (int i = 0; i < checkPointCount; i++)
+                {
+                    useableNode.Add(checknode2[i]);
+                }
+
             }
         }
 

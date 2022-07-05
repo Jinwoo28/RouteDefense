@@ -9,7 +9,7 @@ public class FireGunBullet : MonoBehaviour
     private float Timer = 0;
 
     [SerializeField] private bool isAtk = false;
-
+    private int FCount = 0;
     public float GetDamage() => Damage;
 
     private List<Enemy_Creture> enemylist = new List<Enemy_Creture>();
@@ -21,10 +21,10 @@ public class FireGunBullet : MonoBehaviour
         //Bcollider.enabled = false;
     }
 
-    public void SetUp(float _damage)
+    public void SetUp(float _damage,int Count)
     {
         Damage = _damage;
-
+        FCount = Count;
         isAtk = true;
         Bcollider.enabled = true;
         Invoke("Off", 0.1f);
@@ -52,7 +52,7 @@ public class FireGunBullet : MonoBehaviour
         {
             if (other.GetComponent<Enemy_Creture>() != null)
             {
-                other.GetComponent<Enemy_Creture>().FireAttacked(Damage);
+                other.GetComponent<Enemy_Creture>().FireAttacked(Damage, FCount);
             }
             else if (other.GetComponent<Enemy>() != null)
             {

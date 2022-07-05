@@ -5041,16 +5041,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerCode: 62
-  uppertower: {fileID: 3336974930149280022, guid: f57424cc0d236da4295c6647840d6549, type: 3}
+  uppertower: {fileID: 3336974930149280022, guid: dcc2199176a48e24e8e16bde177788b2, type: 3}
   buildstate: []
   towerpreview: {fileID: 772142591241098727, guid: a83a071ae0efc3c468eca8c8b20e40cc, type: 3}
   towerBody: {fileID: 1558428582100224710}
   towerTurret: {fileID: 1558428582100224710}
   shootPos: {fileID: 1558428582100224710}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 2
   AtkParticle: {fileID: 0}
   Effect: {fileID: 772142591256792199}
   ElectricBulet: {fileID: 8450984886543276679}

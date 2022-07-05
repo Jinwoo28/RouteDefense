@@ -10,7 +10,7 @@ Shader "Custom/Sea"
         _BumpMap("BumpMap",2D) = "Bump"{}
         _Cube("Cube",Cube) = ""{}
 
-        _RimPower("RimPower",Range(0,5)) = 3
+        _RimPower("RimPower",Range(0,10)) = 3
 
             _AlphaPower("AlphaPower",Range(0,1)) = 0.5
 

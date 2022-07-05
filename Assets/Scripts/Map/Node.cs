@@ -19,6 +19,8 @@ public class Node : MonoBehaviour
     private bool OnObstacle = false;
     public bool SetOnObstacle { get => OnObstacle; set => OnObstacle = value; }
 
+    private bool CheckNode = false;
+    public bool GetSetCheckNode { get => CheckNode; set => CheckNode = value; }
 
     //Node의 인덱스 번호
     public int gridX;

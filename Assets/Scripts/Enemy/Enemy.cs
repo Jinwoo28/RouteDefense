@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     public bool GetBoss() => Boss;
     [SerializeField] private int EnemyCode;
 
+
     //적의 이동 경로
     private Vector3[] Waypoint;
     private EnemyManager EM = null;
@@ -448,16 +449,21 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         {
             alreadyslow = true;
 
-            if (!underTheSea)
+            if (unitstate.type == 0)
             {
-                TimeScale *= 0.5f;
-                Debug.Log("SLow");
+                if (!underTheSea)
+                {
+                    TimeScale *= 0.5f;
+                }
+                else
+                {
+                    TimeScale = 0;
+                    Iced = true;
+                }
             }
             else
             {
-                Debug.Log("Stop");
-                TimeScale = 0;
-                Iced = true;
+                TimeScale *= 0.5f;
             }
         }
 

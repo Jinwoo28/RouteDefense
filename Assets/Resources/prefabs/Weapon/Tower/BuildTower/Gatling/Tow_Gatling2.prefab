@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952561914480389280}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
@@ -54,10 +54,6 @@ MonoBehaviour:
   towerBody: {fileID: 1952561914479964292}
   towerTurret: {fileID: 1952561914479964292}
   shootPos: {fileID: 1952561914479964294}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 2
   AtkParticle: {fileID: 8428444402255710621}
   RotateBarral: {fileID: 1952561914479964294}
   HitEffect: {fileID: 279747066564829931}
@@ -195,14 +191,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952561914480389282}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1952561914479964292}
   m_Father: {fileID: 1952561914479964288}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &1952561914483355810
 MeshFilter:
   m_ObjectHideFlags: 0

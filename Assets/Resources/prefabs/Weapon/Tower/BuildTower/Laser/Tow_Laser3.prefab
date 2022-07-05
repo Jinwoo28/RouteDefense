@@ -192,7 +192,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998161900100632052}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
@@ -235,14 +235,10 @@ MonoBehaviour:
   TowerCode: 33
   uppertower: {fileID: 0}
   buildstate: []
-  towerpreview: {fileID: 8817138273659128893, guid: 7ecdc9c4b8c14f445b406a7429a42b87, type: 3}
+  towerpreview: {fileID: 1998161900100632052, guid: 842514befd47b6f46963ab0aeaba25fd, type: 3}
   towerBody: {fileID: 1998161900100133328}
   towerTurret: {fileID: 1998161900100133328}
   shootPos: {fileID: 8191073097481023651}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 3
   AtkParticle: {fileID: 493297357229145050}
 --- !u!120 &3350877231820963173
 LineRenderer:
@@ -476,14 +472,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998161900100632054}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1998161900100133328}
   m_Father: {fileID: 1998161900100133332}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &1998161900097266166
 MeshFilter:
   m_ObjectHideFlags: 0

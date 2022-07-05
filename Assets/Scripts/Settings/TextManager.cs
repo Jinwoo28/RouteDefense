@@ -34,7 +34,7 @@ public class TextManager : MonoBehaviour
         int addtilenum = mapmanager.GetAddTileNum;
         int addtileprice = mapmanager.GetAddtilePrice;
 
-        playercoin.text = $"{coin}";
+        playercoin.text = "$" + coin;
         playerlife.text = $"{life}";
 
         if (currentstage <= 20)
@@ -42,6 +42,6 @@ public class TextManager : MonoBehaviour
             stageinfo.text = $"스테이지 {currentstage} / {maxstage}";
         }
         Gettetris.sprite = Settetris[addtilenum];
-        tileprice.text = addtileprice.ToString();
+        tileprice.text = "$" + addtileprice.ToString();
     }
 }

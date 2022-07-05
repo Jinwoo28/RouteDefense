@@ -31,8 +31,8 @@ public class ResolutionSetting : MonoBehaviour
 
         //if (resolutionDropdown != null && fullscreenDropdown != null)
         //{
-        //    ResolutionInit();
-        //    OkBtnClick();
+            ResolutionInit();
+            OkBtnClick();
         //}
         //ChangeRect();
     }

@@ -32,7 +32,6 @@ public class NumRotation : MonoBehaviour
 
                 this.transform.position += new Vector3(0, Mathf.Sin(MoveTime)*0.0075f, 0);
 
-                Debug.Log(Mathf.Sin(MoveTime));
         }
     }
 }

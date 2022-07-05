@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 1738059869916267212}
   m_Layer: 9
   m_Name: Tow_Tesla3
-  m_TagString: TowerPreview
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4951,10 +4951,6 @@ MonoBehaviour:
   towerBody: {fileID: 893529548680412338}
   towerTurret: {fileID: 893529548680412338}
   shootPos: {fileID: 893529548680412338}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 3
   AtkParticle: {fileID: 0}
   Effect: {fileID: 3336974930129522802}
   ElectricBulet: {fileID: 7033317806201376311}

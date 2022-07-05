@@ -15,6 +15,8 @@ public class HpNum : MonoBehaviour
     float Y = 0;
     float Z = 0;
 
+    NumChange NC = new NumChange();
+
     private int Block = 0;  //0이면 회피 1이면 데미지
 
     void Start()
@@ -22,19 +24,22 @@ public class HpNum : MonoBehaviour
         cam = Camera.main;
         Destroy(this.gameObject, 0.75f);
         text = this.GetComponent<TextMeshProUGUI>();
-        alpha = text.color;
+        
 
 
         if (damage <= 0&&Block == 0) text.text = "Miss";
         else if(damage <=0&&Block == 1)
         {
             text.text = "Black";
+            text.color = new Color(0.85f, 0.85f, 0.85f);
+
         }
         else
         {
-            text.text = damage.ToString("F2");
+            text.text = NC.StringReturnNum(damage);
         }
-        
+        alpha = text.color;
+
 
     }
 

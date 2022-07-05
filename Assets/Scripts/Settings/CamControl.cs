@@ -24,7 +24,6 @@ public class CamControl : MonoBehaviour
     private void Start()
     {
         camera = Camera.main;
-
         OriginPos = this.transform.position;
         OriginAngle = this.transform.rotation.eulerAngles;
 

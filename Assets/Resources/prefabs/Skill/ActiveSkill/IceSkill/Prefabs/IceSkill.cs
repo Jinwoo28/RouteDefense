@@ -21,7 +21,7 @@ public class IceSkill : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             enemylist.Add(other.GetComponent<Enemy>());
-            other.GetComponent<Enemy_Creture>().FireAttacked(SkillSettings.ActiveSkillSearch("freezing").Value);
+            other.GetComponent<Enemy_Creture>().FireAttacked(SkillSettings.ActiveSkillSearch("freezing").Value,5);
         }
     }
 
