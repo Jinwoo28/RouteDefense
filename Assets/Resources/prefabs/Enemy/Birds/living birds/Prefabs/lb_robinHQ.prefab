@@ -1561,7 +1561,7 @@ GameObject:
   - component: {fileID: 6785129818163671364}
   m_Layer: 6
   m_Name: lb_robinHQ
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1627,11 +1627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ef0fe902da96647a377b285bd372b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: 0
   EnemyCode: 48
   Fired: 0
   Iced: 0
   blood: 0
-  HpUpValue: 0
   Body: {fileID: 400090}
   Mark: {fileID: 8300105723027595714}
   height: 1.5

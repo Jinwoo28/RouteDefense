@@ -7,7 +7,7 @@ using TMPro;
 public class ObstacleRemove : MonoBehaviour
 {
     [SerializeField] PlayerState playerstate = null;
-
+    [SerializeField] SoundManager SM;
     [SerializeField] private GameObject sellinfo = null;
 
     [SerializeField] private LayerMask layermask;
@@ -58,10 +58,15 @@ public class ObstacleRemove : MonoBehaviour
     {
        if(obs.GetPrice <= playerstate.GetSetPlayerCoin)
        {
-           playerstate.GetSetPlayerCoin = obs.GetPrice;
+            SM.TurnOnSound(0);
+            playerstate.GetSetPlayerCoin = obs.GetPrice;
            obs.RemoveThis();
            sellinfo.SetActive(false);
        }
+        else
+        {
+            SM.TurnOnSound(6);
+        }
     }
 
 }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireSkill : MonoBehaviour
+public class FireSkill : SkillParent
 {
     [SerializeField] private LayerMask laytermask;
     private bool skillused = false;
     private bool onwater = false;
 
-    private AudioSource As = null;
+   
 
 
     private bool SetFinish = false;
@@ -18,7 +18,7 @@ public class FireSkill : MonoBehaviour
 
     private void Start()
     {
-        As = this.GetComponent<AudioSource>();
+        
         StartCoroutine("FireSkillAct");
         Invoke("Destroythis", 10.0f);
         MultipleSpeed.speedup += SpeedUP;

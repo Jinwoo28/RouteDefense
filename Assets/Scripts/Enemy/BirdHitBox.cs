@@ -26,7 +26,6 @@ public class BirdHitBox : MonoBehaviour,IEnumyAttacked
 
     public Transform GetPos()
     {
-        Debug.Log(GetComponentInParent<Enemy>().gameObject.transform);
         return GetComponentInParent<Enemy>().gameObject.transform;
         
     }

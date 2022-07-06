@@ -32,6 +32,8 @@ public class TowerInfo
 
 public class Tower : MonoBehaviour
 {
+    [SerializeField] GameObject SM;
+
     [SerializeField] private int TowerCode = 0;
 
     protected bool TowerCanWork = true;
@@ -129,6 +131,7 @@ public class Tower : MonoBehaviour
     protected virtual void Start()
     {
         AS = this.GetComponent<AudioSource>();
+        Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(1);
         atkspeed = towerinfo.atkdelay;
         StartCoroutine("AutoSearch");
         node.GetOnTower = true;
@@ -146,6 +149,11 @@ public class Tower : MonoBehaviour
     private void SpeedUP(int x)
     {
         Time.timeScale = x;
+    }
+
+    private void OnDestroy()
+    {
+        SoundSettings.effectsound -= SoundChange;
     }
 
     private void SoundChange(float x)
@@ -178,6 +186,7 @@ public class Tower : MonoBehaviour
 
         if (playerstate.GetSetPlayerCoin >= upgradeprice)
         {
+            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(2);
             sellprice += upgradeprice;
 
             towerlevel++;
@@ -194,6 +203,10 @@ public class Tower : MonoBehaviour
             playerstate.GetSetPlayerCoin = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
             upgradevalue.upgradeprice += (int)(upgradevalue.priceUprate * SkillSettings.PassiveValue("UpTowerDown"));
         }
+        else
+        {
+            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(0);
+        }
 
     }
 
@@ -204,7 +217,7 @@ public class Tower : MonoBehaviour
             playerstate.GetSetPlayerCoin = (-sellprice);
             node.GetOnTower = false;
             Destroy(this.gameObject);
-        
+        Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(3);
     }
 
     private int sellprice = 0;
@@ -215,6 +228,7 @@ public class Tower : MonoBehaviour
         GameManager.buttonOff();
         if (TowerCanWork)
         {
+            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(2);
             TowerCanWork = true;
 
             GameObject preview = Instantiate(towerpreview, this.transform.position, Quaternion.identity);
@@ -227,6 +241,10 @@ public class Tower : MonoBehaviour
             preview.GetComponent<TowerPreview>().TowerMoveSetUp(this.gameObject);
 
             ActiveOff();
+        }
+        else
+        {
+            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(1);
         }
     }
 

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7104ab6519eb98149bd37559a077a49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: 0
   EnemyCode: 11
   Fired: 0
   Iced: 0

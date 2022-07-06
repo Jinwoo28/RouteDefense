@@ -28,13 +28,14 @@ public class LaserTower : AtkTower
                 lR.SetPosition(1, existingTarget.position);
 
                 AtkParticle.transform.position = existingTarget.position/*FinalTarget.position + new Vector3(0, FinalTarget.localScale.y / 2, 0)*/;
+                SoundStop = false;
             }
             else
             {
                 AtkParticle.SetActive(false);
                 lR.enabled = false;
                 isAtking = false;
-                Debug.Log("Å¸°Ù ¾øÀ½");
+                SoundStop = true;
             }
         }
     }
@@ -43,6 +44,7 @@ public class LaserTower : AtkTower
 
     protected override void Attack()
     {
+        AS.Play();
         isAtking = true;
 
         if (existingTarget != FinalTarget)
@@ -53,8 +55,8 @@ public class LaserTower : AtkTower
 
         lR.enabled = true;
         AtkParticle.SetActive(true);
-        Debug.Log(existingTarget);
-        Debug.Log(existingTarget.GetComponent<IEnumyAttacked>());
+        //Debug.Log(existingTarget);
+        //Debug.Log(existingTarget.GetComponent<IEnumyAttacked>());
         existingTarget.GetComponent<IEnumyAttacked>().Attacked(atkdamage);
         atkdamage += (GetStep);
     }

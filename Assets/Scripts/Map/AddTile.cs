@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class AddTile : MonoBehaviour
 {
     private GameObject[] AddtileX = null;
+    [SerializeField] private SoundManager SM;
 
     //전체 타일 사이즈크기
     //짝수 단위로 입력할 것
@@ -264,6 +265,7 @@ X X 10 X
     {
         if (playerstate.GetSetPlayerCoin >= addtileprice)
         {
+            SM.TurnOnSound(0);
             //추가타일 가격만큼 플레이어 코인 감소
             playerstate.GetSetPlayerCoin = addtileprice;
 
@@ -404,6 +406,7 @@ X X 10 X
         }
         else
         {
+            SM.TurnOnSound(6);
             playerstate.ShowNotEnoughMoneyCor();
         }
     }

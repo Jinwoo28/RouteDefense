@@ -46,7 +46,7 @@ public class UserInformation : MonoBehaviour
 
             LoadUserInfo();
            // SetData = true;
-           // ResetUserSkillData(); // º¸À¯µ· ¸®¼Â
+            //ResetUserSkillData(); // º¸À¯µ· ¸®¼Â
             skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
 
 

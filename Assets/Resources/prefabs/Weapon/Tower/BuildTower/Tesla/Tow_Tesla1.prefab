@@ -9736,6 +9736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feed537acbf661e4f931203d4a40aac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 61
   uppertower: {fileID: 772142591241098727, guid: abd0805fd9eb16346a6a5987ceb9fa57, type: 3}
   buildstate: []
@@ -9743,10 +9744,6 @@ MonoBehaviour:
   towerBody: {fileID: 6111471583489482156}
   towerTurret: {fileID: 6111471583489482156}
   shootPos: {fileID: 6111471583489482156}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  towerstep: 1
   AtkParticle: {fileID: 0}
   Effect: {fileID: 5993204756124145185}
   ElectricBulet: {fileID: 3613143301093596118}

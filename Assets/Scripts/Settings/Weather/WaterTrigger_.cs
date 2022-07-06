@@ -64,7 +64,6 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            Debug.Log("≈ª√‚");
             other.GetComponent<Tower>().SetTowerCanWork = true;
             towerlist.Remove(other.GetComponent<Tower>());
         }

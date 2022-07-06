@@ -44,7 +44,8 @@ public class WeatherSetting : MonoBehaviour
     private void Start()
     {
         EnemyManager.stageclear += StageClear;
-        
+        SkyBox.sharedMaterial.SetColor("_Tint", new Color(0.65f, 0.65f, 0.65f));
+        Sea.sharedMaterial.SetFloat("_RimPower", 5);
     }
 
     private void OnDestroy()
@@ -89,7 +90,7 @@ public class WeatherSetting : MonoBehaviour
     //나무 생성
     private void InsTree()
     {
-        int Count = Random.Range(0, 3);
+        int Count = Random.Range(1, 2);
 
         for(int i = 0; i < Count; i++)
         {

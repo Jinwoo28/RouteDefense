@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceSkill : MonoBehaviour
+public class IceSkill : SkillParent
 {
     List<Enemy> enemylist = new List<Enemy>();
     void Start()
@@ -20,8 +20,11 @@ public class IceSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            if (other.GetComponent<Enemy_Creture>() != null)
+            {
             enemylist.Add(other.GetComponent<Enemy>());
-            other.GetComponent<Enemy_Creture>().FireAttacked(SkillSettings.ActiveSkillSearch("freezing").Value,5);
+                other.GetComponent<Enemy_Creture>().FireAttacked(SkillSettings.ActiveSkillSearch("freezing").Value, 5);
+            }
         }
     }
 
@@ -29,7 +32,10 @@ public class IceSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().SlowDown();
+            if (other.GetComponent<Enemy>() != null)
+            {
+                other.GetComponent<Enemy>().SlowDown();
+            }
         }
     }
 
@@ -37,7 +43,10 @@ public class IceSkill : MonoBehaviour
     {
         for(int i = 0; i < enemylist.Count; i++)
         {
-            enemylist[i].returnSpeed();
+            if (enemylist[i].isActiveAndEnabled)
+            {
+                enemylist[i].returnSpeed();
+            }
         }
     }
 
@@ -45,8 +54,11 @@ public class IceSkill : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            if (other.GetComponent<Enemy>() != null)
+            {
             enemylist.Remove(other.GetComponent<Enemy>());
-            other.GetComponent<Enemy>().returnSpeed();
+                other.GetComponent<Enemy>().returnSpeed();
+            }
         }
     }
 }

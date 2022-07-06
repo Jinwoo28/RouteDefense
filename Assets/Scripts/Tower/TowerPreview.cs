@@ -6,8 +6,9 @@ using UnityEngine.EventSystems;
 
 public class TowerPreview : MonoBehaviour
 {
-
+    AudioSource AS;
     private GameObject[] buildstate = null;
+    private bool[] Can = new bool[3];
     //0 = 업그레이드
     //1 = 이동가능
     //2 = 이동불가
@@ -47,6 +48,10 @@ public class TowerPreview : MonoBehaviour
 
     DetectObject detector = new DetectObject();
 
+    private void Start()
+    {
+        AS = GetComponent<AudioSource>();
+    }
     private void UiStateChange(int _i)
     {
 
@@ -54,10 +59,12 @@ public class TowerPreview : MonoBehaviour
             {
                 if (i == _i)
                 {
-                    buildstate[i].SetActive(true);
+                Can[i] = true;
+                   buildstate[i].SetActive(true);
                 }
                 else
                 {
+                Can[i] = false;
                     buildstate[i].SetActive(false);
                 }
             }
@@ -82,12 +89,15 @@ public class TowerPreview : MonoBehaviour
     //이동할 때 원래 타워의 정보
     private GameObject Origintower = null;
 
-
-
-        
-
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Can[2])
+            {
+                AS.Play();
+            }
+        }
 
         Camera cam = Camera.main;
         Vector3 thisPos = this.transform.position;
@@ -154,7 +164,7 @@ public class TowerPreview : MonoBehaviour
 
                     if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) 
                         || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater
-                        || ((towernode!=null)&&towernode.GetSetCheckNode))
+                        || ((towernode!=null)&&towernode.GetSetCheckNode) || (towernode!=null&&towernode.SetOnObstacle))
                     {
                         UiStateChange(2);
                         GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 0, 0));
@@ -187,6 +197,11 @@ public class TowerPreview : MonoBehaviour
                             //{
                             if (Input.GetMouseButtonDown(0))
                             {
+                                if (Can[2])
+                                {
+                                    AS.Play();
+                                }
+
                                 if (Origintower != null)
                                 {
                                     tower.TowerStepUp(Origintower.GetComponent<Tower>());
@@ -213,6 +228,7 @@ public class TowerPreview : MonoBehaviour
                     //이동일 때 혹은 새로 지을 때
                     else if (!alreadytower && ((towernode != null) && !towernode.SetOnObstacle) && !towernode.GetSetCheckNode)
                     {
+                      
                         if (Input.GetMouseButtonDown(0))
                         {
                             //이동인지 새로 짓는건지 검사
@@ -221,6 +237,9 @@ public class TowerPreview : MonoBehaviour
 
                             //위치변경
                             //기존의 타워를 이동할 때
+
+                  
+
                             if (Origintower != null)
                             {
                                 Origintower.transform.position = this.transform.position;

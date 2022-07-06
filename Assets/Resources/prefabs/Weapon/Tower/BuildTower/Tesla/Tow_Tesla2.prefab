@@ -5040,6 +5040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feed537acbf661e4f931203d4a40aac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 62
   uppertower: {fileID: 3336974930149280022, guid: dcc2199176a48e24e8e16bde177788b2, type: 3}
   buildstate: []

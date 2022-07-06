@@ -9,11 +9,21 @@ public class pooling
     public Queue<Enemy> enemypooling = new Queue<Enemy>();
 }
 
+[System.Serializable]
+public class Coinpooling
+{
+    public GameObject coin;
+    public Queue<Coin> coinPool = new Queue<Coin>();
+}
 
 public class EnemyPooling : MonoBehaviour
 {
 
     [SerializeField] private List<pooling> enemyPooling;
+
+    [SerializeField] private List<Coinpooling> coinPooling;
+
+
 
     public string GetName(int num)
     {
@@ -67,6 +77,46 @@ public class EnemyPooling : MonoBehaviour
     }
 
 
+    public Coin CreatCoin(int _enemyNum)
+    {
+        var newCoin = Instantiate(coinPooling[_enemyNum].coin, this.transform).GetComponent<Coin>();
+        newCoin.SetEp = this;
+        newCoin.InitSC();
+        newCoin.gameObject.SetActive(false);
+        coinPooling[_enemyNum].coinPool.Enqueue(newCoin);
+        return newCoin;
+    }
+
+    public Coin GetCoin(int _enemyNum, Vector3 _spawnPos)
+    {
+        if (coinPooling[_enemyNum].coinPool.Count > 0)
+        {
+            var obj = coinPooling[_enemyNum].coinPool.Dequeue();
+            obj.gameObject.transform.position = _spawnPos;
+            obj.gameObject.SetActive(true);
+            obj.SetUP(_spawnPos);
+            return obj;
+        }
+        else
+        {
+
+            CreatCoin(_enemyNum);
+            var newobj = GetCoin(_enemyNum, _spawnPos);
+
+            newobj.gameObject.transform.position = _spawnPos;
+            newobj.gameObject.SetActive(true);
+            newobj.SetUP(_spawnPos);
+
+            return newobj;
+        }
+    }
+
+    public void ReturnCoin(Coin coin,int num)
+    {
+        coin.gameObject.SetActive(false);
+        coin.transform.position = this.transform.position;
+        coinPooling[num].coinPool.Enqueue(coin);
+    }
 
 
 }

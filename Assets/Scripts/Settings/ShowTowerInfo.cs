@@ -25,18 +25,35 @@ public class NumChange
 
     public string HunReturnNum(float num)
     {
-        if ((num * 10) % 10 == 0)
-        {
-            return (num*100).ToString();
-        }
-        else if ((num * 100) % 10 == 0)
-        {
-            return (num*100).ToString("F1");
-        }
-        else
-        {
-            return (num*100).ToString("F2");
-        }
+        
+
+        float hunNum = num * 100;
+        return hunNum.ToString("F1");
+        //if (hunNum % 1 == 0)    //10~1퍼센트
+        //{
+        //    return 1111.ToString("F0");
+        //}
+        //else if((hunNum*10)%1==0)   //0.1퍼센트
+        //{
+        //    return 22222.ToString("F1");
+        //}
+        //else //소수점오류
+        //{
+        //    return 00000.ToString();
+        //}
+
+        //if (hunNum % 10 == 0)   //정수
+        //{
+        //    return hunNum.ToString("F0");
+        //}
+        //else if ((num * 10) % 10 == 0)//소수점 한 자리
+        //{
+        //    return hunNum.ToString("F1");
+        //}
+        //else    //소수점 2자리
+        //{
+        //    return hunNum.ToString("F2");
+        //}
     }
 }
 
@@ -141,6 +158,7 @@ public class ShowTowerInfo : MonoBehaviour
                 towerlevel.color = Color.black;
                 atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage);
                 atkdamage.color = Color.black;
+                atkcritical.fontSize = 60.5f;
                 atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%";
                 atkcritical.color = Color.black;
             }
@@ -152,6 +170,7 @@ public class ShowTowerInfo : MonoBehaviour
                     towerlevel.color = Color.red;
                     atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage) + " -> " + NC.StringReturnNum(tower.GetDamage + tower.GetTowerUPDamage);
                     atkdamage.color = Color.red;
+                    atkcritical.fontSize = 50;
                     atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%" + " -> " + NC.HunReturnNum(tower.GetCritical + tower.GetTowerUpCri) + "%";
                     atkcritical.color = Color.red;
                 }
@@ -161,6 +180,7 @@ public class ShowTowerInfo : MonoBehaviour
                     towerlevel.color = Color.black;
                     atkdamage.text = "데미지 : " + NC.StringReturnNum(tower.GetDamage);
                     atkdamage.color = Color.black;
+                    atkcritical.fontSize = 60.5f;
                     atkcritical.text = "크리티컬 : " + NC.HunReturnNum(tower.GetCritical) + "%";
                     atkcritical.color = Color.black;
                 }

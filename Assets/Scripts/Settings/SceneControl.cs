@@ -12,10 +12,14 @@ public class SceneControl : MonoBehaviour
 
     private string currentScene = null;
 
+    private string sceneName;
+
     public void ScneneChange(string _SceneNum)
     {
-       SceneManager.LoadScene(_SceneNum);
+
+        SceneManager.LoadScene(_SceneNum);
     }
+
 
     public void ReStartGameScene(string _SceneName)
     {

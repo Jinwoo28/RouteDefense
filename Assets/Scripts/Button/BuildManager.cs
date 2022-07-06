@@ -16,7 +16,7 @@ public class BuildTower
 
 public class BuildManager : MonoBehaviour
 {
-
+    [SerializeField] private SoundManager SM;
     [SerializeField] private GameObject[] buildstate = null;
 
     //string towername = null;
@@ -154,6 +154,11 @@ public class BuildManager : MonoBehaviour
     private void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SlotClick(0);
+        }
+
         if (BTowerPanel)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -222,6 +227,7 @@ public class BuildManager : MonoBehaviour
             {
                 if (!towerpreviewActive)
                 {
+                SM.TurnOnSound(0);
                     towerpreviewActive = true;
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
@@ -233,6 +239,7 @@ public class BuildManager : MonoBehaviour
             }
             else
             {
+            SM.TurnOnSound(6);
             playerstate.ShowNotEnoughMoneyCor();
             }
     }

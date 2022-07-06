@@ -209,8 +209,6 @@ public class SkillFunc : MonoBehaviour
         {
             if (Slot[0].GetComponentInChildren<Button>() != null&& skillKind[Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse)
             {
-                Debug.Log(Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum);
-                Debug.Log(skillKind[Slot[0].GetComponentInChildren<SkillNum>().GetSkillNum].CanUse+"asldkjhf");
                 Slot[0].GetComponentInChildren<Button>().onClick.Invoke();
             }
         }
@@ -239,21 +237,25 @@ public class SkillFunc : MonoBehaviour
 
     public void ClickSkill(int _skilltype)
     {
-        Debug.Log("클릭");
-
         if (setskillpos != null)
         {
             Destroy(setskillpos);
         }
 
         GameManager.OffFunc();
-
         SkillNum(_skilltype);
     }
 
     public void SkillNum(int num)
     {
-        if (skillKind[num].CanUse)
+        for(int i = 0; i < 4; i++)
+        {
+            Debug.Log($"{i}번 스킬 : " + skillKind[i].CanUse);
+        }
+
+        Debug.Log($"숫자 : {num} : {skillKind[num].CanUse}");
+
+        if (skillKind[num-1].CanUse)
         {
             skillnum = (skill)(num);
             setskillpos = Instantiate(SetSkillPos, Vector3.zero, Quaternion.Euler(90, 0, 0));
@@ -317,7 +319,6 @@ public class SkillFunc : MonoBehaviour
         {
             cooltime += Time.deltaTime;
             _button.image.fillAmount += Time.deltaTime / skillTime;
-            Debug.Log(_button.image.fillAmount);
             _showCooltime.text = (skillTime - (int)cooltime).ToString();
 
             if (cooltime >= skillTime)

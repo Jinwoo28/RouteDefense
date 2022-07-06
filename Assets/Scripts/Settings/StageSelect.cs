@@ -13,6 +13,14 @@ public class StageSelect : MonoBehaviour
     [SerializeField] private TextMeshProUGUI namalMoney = null;
     [SerializeField] private TextMeshProUGUI hardMoney = null;
 
+    [SerializeField] private TextMeshProUGUI InfoLevel1 = null;
+    [SerializeField] private TextMeshProUGUI InfoLevel2  = null;
+    [SerializeField] private TextMeshProUGUI InfoLevel3 = null;
+
+    [SerializeField] private GameObject GOeasyMoney = null;
+    [SerializeField] private GameObject GOnamalMoney = null;
+    [SerializeField] private GameObject GOhardMoney = null;
+
     private string stageShape = null;
 
     int easymoney = 0;
@@ -47,6 +55,11 @@ public class StageSelect : MonoBehaviour
         }
 
         LoadSceneControler.LoadScene("StageTest");
+    }
+    private string StageName;
+
+    public void StartGame()
+    {
     }
 
     public void ToLobby()
@@ -116,7 +129,44 @@ public class StageSelect : MonoBehaviour
 
         easyMoney.text = "보상 : "+ easymoney + "원";
         namalMoney.text = "보상 : " + nomalmoney + "원";
-        hardMoney.text = "보상 : " + hardmoney + "원";   
+        hardMoney.text = "보상 : " + hardmoney + "원";
+
+        switch (GameManager.GetSetStageType)
+        {
+            case StageType.Nomal:
+                InfoLevel1.text = "난이도 하";
+                InfoLevel2.text = "난이도 중";
+                InfoLevel3.text = "난이도 상";
+                GOeasyMoney.SetActive(true); 
+                GOnamalMoney.SetActive(true);
+                GOhardMoney.SetActive(true);
+                GOeasyMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(-400,21);
+                GOnamalMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 21);
+                GOhardMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(400, 21);
+                break;
+            case StageType.UnOrderCheckPoint:
+                InfoLevel1.text = "체크 포인트 2개";
+                InfoLevel2.text = "체크 포인트 3개";
+                InfoLevel3.text = "체크 포인트 4개";
+                GOeasyMoney.SetActive(true);
+                GOnamalMoney.SetActive(true);
+                GOhardMoney.SetActive(true);
+                GOeasyMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(-400, 21);
+                GOnamalMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 21);
+                GOhardMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(400, 21);
+                break;
+            case StageType.OrderCheckPoint:
+                InfoLevel1.text = "체크 포인트 2개";
+                InfoLevel2.text = "체크 포인트 3개";
+                GOeasyMoney.SetActive(true);
+                GOnamalMoney.SetActive(true);
+                GOhardMoney.SetActive(false);
+                GOeasyMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(-200, 21);
+                GOnamalMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(200, 21);
+                GOhardMoney.GetComponent<RectTransform>().anchoredPosition = new Vector2(400, 21);
+                break;
+
+        }
     }
 
     public void OffLevelChoice()

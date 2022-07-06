@@ -306,32 +306,47 @@ public class MapManagerTest : MonoBehaviour
         }
         else if (GameManager.GetSetStageType == StageType.OrderCheckPoint)
         {
-            //Node[,] nodelist =  grid;
+
+
+            //Route route = new Route();
+            //Node[,] nodelist = grid;
 
             //Node start = StartNode;
             //Node end = EndNode;
 
             //Node[] order = new Node[checkPointCount];
 
-            //while (true)
+            ////while (true)
+            ////{
+
+            Node[] checknode2 = new Node[checkPointCount];
+
+            for (int i = 0; i < checkPointCount; i++)
+            {
+                Node node = selectpoint.GetCheckNodePoint(useableNode);
+
+                checknode2[i] = node;
+
+                checknode[i] = node;
+
+                useableNode.Remove(node);
+                node.GetSetCheckNode = true;
+                node.GetSetPoint = i + 1;
+            }
+
+            //if (route.CheckFindPath(start, order[0]))
             //{
+            //    Node endnode = order[0];
+            //    endnode.Getwalkable = false;
+            //    while(endnode.parent != start)
+            //    {
+            //        endnode = endnode.parent;
+            //        endnode.Getwalkable = false;
+            //    }
+            //}
 
-                Node[] checknode2 = new Node[checkPointCount];
 
-                for (int i = 0; i < checkPointCount; i++)
-                {
-                    Node node = selectpoint.GetCheckNodePoint(useableNode);
 
-                    checknode2[i] = node;
-
-                    checknode[i] = node;
-
-                    useableNode.Remove(node);
-                    node.GetSetCheckNode = true;
-                    node.GetSetPoint = i + 1;
-
-                  //  order[i] = node;
-                }
 
 
 

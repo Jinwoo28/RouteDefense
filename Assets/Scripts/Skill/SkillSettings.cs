@@ -78,6 +78,8 @@ public class SkillSettings : MonoBehaviour
 
     private UserInformation userinfo = null;
 
+    [SerializeField] private SoundManager SM;
+
     private void Awake()
     {
 
@@ -139,11 +141,13 @@ public class SkillSettings : MonoBehaviour
                             }
 
                             SActiveSkill[i].skillInfoList[j].LevelUp();
+                            SM.TurnOnSound(1);
                         }
                         else
                         {
                             StopAllCoroutines();
                             StartCoroutine(ShowNotText("레벨이 Max입니다."));
+                            SM.TurnOnSound(2);
                         }
 
                     }
@@ -152,12 +156,14 @@ public class SkillSettings : MonoBehaviour
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("선행스킬이 해제되지 않았습니다."));
+                        SM.TurnOnSound(2);
                     }
 
                     else if (userinfo.userData.userCoin < SActiveSkill[i].skillInfoList[j].Price)
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("코인이 부족합니다."));
+                        SM.TurnOnSound(2);
                     }
                 }
             }
@@ -363,11 +369,13 @@ public class SkillSettings : MonoBehaviour
                             }
 
                             SPassiveSkill[i].skillInfoList[j].LevelUp();
+                            SM.TurnOnSound(1);
                         }
                         else
                         {
                             StopAllCoroutines();
                             StartCoroutine(ShowNotText("레벨이 Max입니다."));
+                            SM.TurnOnSound(2);
                         }
 
                     }
@@ -376,12 +384,14 @@ public class SkillSettings : MonoBehaviour
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("선행스킬이 해제되지 않았습니다."));
+                        SM.TurnOnSound(2);
                     }
 
                     else if(userinfo.userData.userCoin < SPassiveSkill[i].skillInfoList[j].Price)
                     {
                         StopAllCoroutines();
                         StartCoroutine(ShowNotText("코인이 부족합니다."));
+                        SM.TurnOnSound(2);
                     }
                 }
             }

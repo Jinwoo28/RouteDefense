@@ -10,6 +10,8 @@ public class NumRotation : MonoBehaviour
     [SerializeField] private bool Move;
     float MoveTime = 0;
 
+    [SerializeField] private bool Coin;
+
     void Start()
     {
         cam = Camera.main;
@@ -23,7 +25,10 @@ public class NumRotation : MonoBehaviour
 
         Vector3 Dir = Quaternion.RotateTowards(this.transform.rotation, rotationtotarget, 360).eulerAngles;
 
-        this.transform.rotation = Quaternion.Euler(0, 180+Dir.y, 0);
+
+
+            this.transform.rotation = Quaternion.Euler(0, 180 + Dir.y, 0);
+        
 
         if (Move)
         {

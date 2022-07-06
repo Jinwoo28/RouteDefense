@@ -62,6 +62,10 @@ public class Enemy_Creture : Enemy
                 fired = true;
             }
             fire = DotDamage();
+                if (hpbarprefab.GetComponent<EnemyHpbar>() != null)
+                {
+                    hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Fire);
+                }
 
             StopCoroutine("DotDamage");
             StartCoroutine("DotDamage");
@@ -75,39 +79,42 @@ public class Enemy_Creture : Enemy
     int damagecount = 5;
     public IEnumerator DotDamage()
     {
-        hpbarprefab.GetComponent<EnemyHpbar>().StateChange(enemyState.Fire);
-
-        while (damagecount > 0)
+        if (this.gameObject.activeInHierarchy)
         {
-            damagecount--;
+           
 
-            float realdamage = underTheSea?FireDamage/2:FireDamage;
-
-            if (realdamage < GetHp)
+            while (damagecount > 0)
             {
-                realDamage(realdamage,1);
-            }
-            else
-            {
-                fired = false;
-                hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
-                returnSpeed();
-                EnemyDie();
+                damagecount--;
+
+                float realdamage = underTheSea ? FireDamage / 2 : FireDamage;
+
+                if (realdamage < GetHp)
+                {
+                    realDamage(realdamage, 1);
+                }
+                else
+                {
+                    fired = false;
+                    hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
+                    returnSpeed();
+                    EnemyDie();
+                }
+
+                if (underTheSea)
+                {
+
+                    break;
+                }
+
+                yield return new WaitForSeconds(0.4f);
             }
 
-            if (underTheSea)
-            {
+            returnSpeed();
+            hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
 
-                break;
-            }
-
-            yield return new WaitForSeconds(0.4f);
+            fired = false;
         }
-
-        returnSpeed();
-        hpbarprefab.GetComponent<EnemyHpbar>().ReturnIcon(enemyState.Fire);
-
-        fired = false;
        
     }
 

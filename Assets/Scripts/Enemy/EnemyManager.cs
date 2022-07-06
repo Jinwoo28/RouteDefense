@@ -12,11 +12,10 @@ public class StageInfo
     public int EnemyCount;
 
     public List<int> enemyNum;
-
 }
 public class EnemyManager : MonoBehaviour
 {
-
+    [SerializeField] private SoundManager SM;
     public delegate void StageClear();
     public static StageClear stageclear;
 
@@ -75,7 +74,6 @@ public class EnemyManager : MonoBehaviour
     public int Getcurrentstage => StageNum + 1;
 
 
-
     private void Start()
     {
         Pooling = this.GetComponent<EnemyPooling>();
@@ -114,7 +112,9 @@ public class EnemyManager : MonoBehaviour
         //적이 나올 개수
         int count = GameManager.SetGameLevel == 3? (int)(stageinfo[StageNum ].EnemyCount*0.7f): stageinfo[StageNum].EnemyCount;
         int stagenum = StageNum;
-        
+
+        Debug.Log(count);
+        EnemyRemainCount = count;
         //적 종류
         for (int i = 0; i < count; i++)
         {
@@ -131,11 +131,11 @@ public class EnemyManager : MonoBehaviour
             enemy.gameObject.layer = 6;
             enemy.StartMove();
 
- 
+            Debug.Log(i + "적 소환");
 
             //소환되는 enemy를 list에 추가
             EnemyCount.Add(enemy.GetComponent<Enemy>());
-            EnemyRemainCount++;
+            //EnemyRemainCount++;
 
             yield return new WaitForSeconds(stageinfo[StageNum].SpawnTime);
         }
@@ -145,7 +145,7 @@ public class EnemyManager : MonoBehaviour
         {
             while (true)
             {
-                if (SpawnFinish && EnemyRemainCount == 0)
+                if (SpawnFinish && EnemyRemainCount <= 0)
                 {
                     StageNum++;
 
@@ -153,6 +153,7 @@ public class EnemyManager : MonoBehaviour
 
                     if (StageNum >= stageinfo.Length)
                     {
+                        SM.TurnOnSound(4);
                         ClearPanal.SetActive(true);
 
                         speedSet.StopGame();
@@ -167,7 +168,11 @@ public class EnemyManager : MonoBehaviour
                     ShowBoss.enabled = false;
                     gameongoing = false;
                     ShowEnemyImageReset();
-                    ShowEnemyImage(StageNum);
+
+                    if (StageNum < 20)
+                    {
+                        ShowEnemyImage(StageNum);
+                    }
                     break;
                 }
                 yield return null;
@@ -181,6 +186,8 @@ public class EnemyManager : MonoBehaviour
     //출현한 적이 체력이 다 되서 죽을 때
     public void EnemyDie(Enemy enemy,int coin)
     {
+        Pooling.GetCoin(0, enemy.transform.position);
+        
         enemy.gameObject.layer = 0;
         playerstate.PlayerCoinUp(coin + Mathf.CeilToInt(coin * EnemyCoinRate));
         EnemyCount.Remove(enemy);
@@ -190,6 +197,7 @@ public class EnemyManager : MonoBehaviour
     //출현한 적이 도착지에 도착했을 때
     public void EnemyArriveDestination(Enemy enemy)
     {
+        Pooling.GetCoin(1, enemy.transform.position);
         if (!enemy.GetBoss())
         {
             playerstate.PlayerLifeDown(1);
@@ -203,6 +211,7 @@ public class EnemyManager : MonoBehaviour
 
         if (playerstate.GetPlayerLife <= 0)
         {
+            SM.TurnOnSound(3);
             speedSet.StopGame();
             FailPanal.SetActive(true);
         }
@@ -219,7 +228,11 @@ public class EnemyManager : MonoBehaviour
     Vector2 BossTextPos;
     private void ShowEnemyImage(int num)
     {
-        for(int i =0;i< stageinfo[num].enemyNum.Count; i++)
+        int MaxCount = stageinfo[num].enemyNum.Count;
+
+       
+
+        for (int i =0;i< MaxCount; i++)
         {
             imageEnemy[i].gameObject.SetActive(true);
 

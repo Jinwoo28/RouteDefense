@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62f12849cadede4c99896730dbf3751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 53
   uppertower: {fileID: 0}
   buildstate: []

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802a39919aee99248ac66597e78124ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 22
   uppertower: {fileID: 5600623581655944651, guid: 517699ff1babbdd459dad1e113e54a97, type: 3}
   buildstate: []
@@ -84,7 +85,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -621,6 +622,10 @@ PrefabInstance:
     - target: {fileID: 8252729215831872784, guid: d8fbef6ebada549458727bbdad12bcb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252729215838747856, guid: d8fbef6ebada549458727bbdad12bcb5, type: 3}
+      propertyPath: X
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8fbef6ebada549458727bbdad12bcb5, type: 3}

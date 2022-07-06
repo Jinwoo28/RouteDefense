@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteorSkill : MonoBehaviour
+public class MeteorSkill : SkillParent
 {
     [SerializeField] private LayerMask enemylayer;
     private int Damage = 0;
@@ -13,7 +13,6 @@ public class MeteorSkill : MonoBehaviour
     private Vector3 target = Vector3.zero;
     public Vector3 SetTarget{ set { target = value; } }
 
-    private AudioSource As = null;
 
     private float size;
     private float damage;
@@ -21,7 +20,6 @@ public class MeteorSkill : MonoBehaviour
 
     private void Start()
     {
-        As = this.GetComponent<AudioSource>();
         Damage = (int)SkillSettings.ActiveSkillSearch("Meteor").Value;
         fireDamage = (int)(Damage / 3);
         MultipleSpeed.speedup += SpeedUP;

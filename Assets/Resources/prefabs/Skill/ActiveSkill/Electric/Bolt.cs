@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bolt : MonoBehaviour
+public class Bolt : SkillParent
 {
     private SphereCollider Range;
     private void Start()
@@ -19,7 +19,10 @@ public class Bolt : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().ElectricDamage(10);
+            if (other.GetComponent<Enemy>() != null)
+            {
+                other.GetComponent<Enemy>().ElectricDamage(10);
+            }
         }
     }
 }

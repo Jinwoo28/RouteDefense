@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9affa77ed0f09aa4084fce64f530e09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 42
   uppertower: {fileID: 6636577839603563935, guid: e9dd008ebe98035409562fb1ffa8026d, type: 3}
   buildstate: []
@@ -418,6 +419,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7120069093244218422}
     m_Modifications:
+    - target: {fileID: 9214557259438801877, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
+      propertyPath: X
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9214557259438801877, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
       propertyPath: m_Enabled
       value: 0

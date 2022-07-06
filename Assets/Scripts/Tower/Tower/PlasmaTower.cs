@@ -38,7 +38,10 @@ public class PlasmaTower : AtkTower
         {
             if (!ischarging)
             {
-                Charging.Play();
+                if (TowerCanWork)
+                {
+                    Charging.Play();
+                }
                 ischarging = true;
             }
         }

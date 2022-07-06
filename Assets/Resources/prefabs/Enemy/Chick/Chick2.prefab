@@ -188,12 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda773d22b269e74583108f43d26fd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Boss: 0
   EnemyCode: 2
-  electricShock: 0
   Fired: 0
   Iced: 0
   blood: 0
-  HpUpValue: 1
 --- !u!1 &6983224403829673540
 GameObject:
   m_ObjectHideFlags: 0

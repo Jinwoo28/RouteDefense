@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9affa77ed0f09aa4084fce64f530e09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 43
   uppertower: {fileID: 0}
   buildstate: []
@@ -421,6 +422,10 @@ PrefabInstance:
     - target: {fileID: 9214557259430571861, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
       propertyPath: lengthInSec
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9214557259438801877, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
+      propertyPath: X
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9214557259438801877, guid: dbe5d7bff7118dc41a72d0796a08d74c, type: 3}
       propertyPath: m_Enabled

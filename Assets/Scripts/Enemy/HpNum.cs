@@ -30,8 +30,8 @@ public class HpNum : MonoBehaviour
         if (damage <= 0&&Block == 0) text.text = "Miss";
         else if(damage <=0&&Block == 1)
         {
-            text.text = "Black";
-            text.color = new Color(0.85f, 0.85f, 0.85f);
+            text.text = "Block";
+            text.color = Color.black;
 
         }
         else
