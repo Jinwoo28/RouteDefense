@@ -60,10 +60,15 @@ public class Route : MonoBehaviour
 
     private void Update()
     {
+
+        Debug.Log(isgameing);
+
         if (TileCanChange)
         {
             if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("?????");
+
                 Node node = detector.ReturnNode();
 
                 if (node != null)
@@ -107,12 +112,16 @@ public class Route : MonoBehaviour
     public void OnClickWalkableChange()
     {
         bool can = !TileCanChange;
-
+        Debug.Log("asdf");
         GameManager.buttonOff();
+
+
+
         if (!isgameing)
         {
-           // if (!AddTileActive)
-           TileCanChange = can;
+            Debug.Log("8976543212");
+            // if (!AddTileActive)
+            TileCanChange = can;
         }
     }
 
@@ -171,6 +180,9 @@ public class Route : MonoBehaviour
                 if (!isgameing)
                 {
                     isgameing = true;
+
+                    Debug.Log(isgameing);
+
                     if (FindPath(StartNode))
                     {
                         Vector3[] waypoint = WayPoint2(StartNode, EndNode, waypointnode);
@@ -178,6 +190,8 @@ public class Route : MonoBehaviour
                     }
                     else
                     {
+
+                        Debug.Log(isgameing);
                         StopCoroutine("ShowNotFoundRoute");
                         StartCoroutine("ShowNotFoundRoute");
                         NotFound.SetActive(true);
@@ -206,7 +220,6 @@ public class Route : MonoBehaviour
         }
         else
         {
-            Debug.Log("Order");
             if (!isgameing)
             {
                 isgameing = true;
@@ -222,6 +235,7 @@ public class Route : MonoBehaviour
                     NotFound.SetActive(true);
                 }
             }
+            Debug.Log("End");
         }
     }
 
@@ -548,6 +562,7 @@ public class Route : MonoBehaviour
     private IEnumerator ShowNotFoundRoute()
     {
         SM.TurnOnSound(6);
+        isgameing = false;
         yield return new WaitForSeconds(1.0f);
         NotFound.SetActive(false);
     }
@@ -907,6 +922,11 @@ public class Route : MonoBehaviour
 
         Node[] waypoint = Find3(StartNode, EndNode);
 
+        if(waypoint == null)
+        {
+            return false;
+        }
+
         for(int i = 0; i < waypoint.Length; i++)
         {
 
@@ -963,11 +983,21 @@ public class Route : MonoBehaviour
 
         List<Node> waypoint = new List<Node>();
 
+        Debug.Log(start.gridX + " : " + start.gridY);
+        Debug.Log(end.gridX + " : " + end.gridY);
+
         //끝 노드를 추가
         waypoint.Add(currentNode);
 
         while (currentNode != start)
         {
+            Debug.Log(currentNode.parent);
+
+            if(currentNode.parent == null)
+            {
+                return null;
+            }
+
             currentNode = currentNode.parent;
             waypoint.Add(currentNode);
         }
