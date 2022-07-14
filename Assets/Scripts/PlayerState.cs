@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
 
-    [SerializeField] private int playercoin = 1000;
+    private int playercoin = 500;
     [SerializeField] private GameObject NotEnoughMoney = null;
     public int SetPlayerCoin { get => playercoin; set => playercoin = value; }
 

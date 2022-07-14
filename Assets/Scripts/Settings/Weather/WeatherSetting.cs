@@ -106,9 +106,7 @@ public class WeatherSetting : MonoBehaviour
 
             var newTree = Instantiate(MakeTreeObj[treeNum], new Vector3(checkednodelist[num].gridX, checkednodelist[num].GetYDepth / 2, checkednodelist[num].gridY), Quaternion.identity);
             newTree.GetComponent<Tree>().SetNode = checkednodelist[num];
-            
 
-            Debug.Log(checkednodelist[num].gridX + " : "  + checkednodelist[num].gridY);
 
             checkednodelist[num].OnBranch();
 
@@ -166,7 +164,6 @@ public class WeatherSetting : MonoBehaviour
                 }
             }
         }
-        Debug.Log(checkednodelist.Count);
     }
 
     public void GameStart()

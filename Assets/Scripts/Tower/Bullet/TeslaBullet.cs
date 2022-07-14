@@ -124,9 +124,6 @@ public class TeslaBullet : MonoBehaviour
         {
             Range -= 0.1f;
         }
-
-        Debug.Log(Range + " 범위");
-
         
 
         Damage--;
@@ -150,7 +147,6 @@ public class TeslaBullet : MonoBehaviour
 
         //현재 위치를 기준으로 적을 검색
         Collider[] E_collider = Physics.OverlapSphere(target.position, Range, enemylayer);
-        Debug.Log(E_collider.Length);
 
         //데미지 주기
         target.GetComponent<Enemy>().ElectricDamage(Damage);
