@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d61e6941dccd6e42af309bd4a560f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DD: {fileID: 3729677010003484839, guid: 1b7fbcaa030b89e408e2e31578989370, type: 3}
+  enemydata: []
 --- !u!4 &194772784
 Transform:
   m_ObjectHideFlags: 0
