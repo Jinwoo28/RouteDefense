@@ -87,13 +87,13 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         TimeScale = OriginTimeScale = Time.timeScale;
     }
 
-    public void SetState(EnemyState stat)
+    public void SetState(EnemyDataFrame stat)
     {
         unitstate.avoidancerate = stat.avoidance;
-        unitstate.unitamour = stat.Amour;
-        unitstate.unitspeed = stat.Speed;
+        unitstate.unitamour = stat.amour;
+        unitstate.unitspeed = stat.speed;
         unitstate.unitcoin = stat.coin;
-        unitstate.unithp = stat.Hp;
+        unitstate.unithp = stat.hp;
         unitstate.type = stat.enemytype;
         unitstate.feature = stat.feature;
     }

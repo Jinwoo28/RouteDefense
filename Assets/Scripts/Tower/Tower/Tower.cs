@@ -49,22 +49,22 @@ public class Tower : MonoBehaviour
        TowerSetUp(TowerDataSetUp.GetData(TowerCode));
     }
 
-    private void TowerSetUp(TowerData towerdata)
+    private void TowerSetUp(TowerDataFrame towerdata)
     {
-        towerinfo.atkdelay = towerdata.Delay;
-        towerinfo.towerrange = towerdata.Range;
-        towerinfo.towercritical = towerdata.Critical;
-        towerinfo.towerdamage = towerdata.Damage;
-        towerinfo.towername = towerdata.Name;
-        towerinfo.towerprice = towerdata.TowerPrice;
-        towerinfo.towerstep = towerdata.TowerStep;
-        towerinfo.CanAtk = towerdata.CanAtk;
+        towerinfo.atkdelay = towerdata.delay;
+        towerinfo.towerrange = towerdata.range;
+        towerinfo.towercritical = towerdata.critical;
+        towerinfo.towerdamage = towerdata.damage;
+        towerinfo.towername = towerdata.name;
+        towerinfo.towerprice = towerdata.towerPrice;
+        towerinfo.towerstep = towerdata.towerStep;
+        towerinfo.CanAtk = towerdata.atkType;
 
-        towerstep = towerdata.TowerStep;
+        towerstep = towerdata.towerStep;
 
-        upgradevalue.UpdamageValue = towerdata.UpgradeAtk;
-        upgradevalue.UpcriticalValue = towerdata.UpgradeCri;
-        upgradevalue.upgradeprice = towerdata.UpgradePrice;
+        upgradevalue.UpdamageValue = towerdata.upgradAtk;
+        upgradevalue.UpcriticalValue = towerdata.upgradCri;
+        upgradevalue.upgradeprice = towerdata.upgradPrice;
         upgradevalue.priceUprate = 0;
     }
 

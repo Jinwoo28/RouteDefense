@@ -70,12 +70,12 @@ public class BuildManager : MonoBehaviour
     {
         BuildInfoPanel.SetActive(true);
 
-        info[0].text = TowerDataSetUp.GetData(TowerCode).Name;
-        info[1].text = TowerDataSetUp.GetData(TowerCode).TowerInfo;
-        info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).Damage;
-        info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).Delay;
-        info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
-        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(TowerCode).Name+ TowerDataSetUp.GetData(TowerCode).TowerStep));
+        info[0].text = TowerDataSetUp.GetData(TowerCode).name;
+        info[1].text = TowerDataSetUp.GetData(TowerCode).towerInfo;
+        info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).damage;
+        info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).delay;
+        info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).towerPrice * SkillSettings.PassiveValue("SetTowerDown");
+        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(TowerCode).name+ TowerDataSetUp.GetData(TowerCode).towerStep));
     }
     public void ExitMouseBUildTowerPanel()
     {
@@ -219,7 +219,7 @@ public class BuildManager : MonoBehaviour
 
         showtowerinfo.SetTowerinfoOff();
 
-        float price = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown");
+        float price = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).towerPrice * SkillSettings.PassiveValue("SetTowerDown");
          towerprice = (int)price;
        // Debug.Log(TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown"));
         
@@ -232,7 +232,7 @@ public class BuildManager : MonoBehaviour
 
                     preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
-                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).Range);
+                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).range);
                     preview.GetComponent<TowerPreview>().FirstSetUp(buildtower[_slotnum].builditem,this);
                     playerstate.GetSetPlayerCoin = towerprice;
                 }

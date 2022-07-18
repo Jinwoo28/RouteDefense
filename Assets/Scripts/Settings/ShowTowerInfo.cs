@@ -149,7 +149,7 @@ public class ShowTowerInfo : MonoBehaviour
         {
             towername.text = $"{tower.Getname}";
             atkspeed.text =  "·¹º§ "+tower.GetStep.ToString();
-            towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(tower.GetTowerCode).Name)+TowerDataSetUp.GetData(tower.GetTowerCode).TowerStep);
+            towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(tower.GetTowerCode).name)+TowerDataSetUp.GetData(tower.GetTowerCode).towerStep);
 
 
             if (!ShowUpgradeInfo)

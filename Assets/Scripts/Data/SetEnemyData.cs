@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class EnemyState
+public class EnemyDataFrame
 {
-    public string Name;
-    public int UnitCode;
-    public float Hp;
-    public float Speed;
-    public float Damage;
+    public string name;
+    public int unitcode;
+    public float hp;
+    public float speed;
+    public float damage;
     public int coin;
-    public int Amour;
+    public int amour;
     public int avoidance;
     public float feature;
     public int enemytype;
 }
 
 [CreateAssetMenu(fileName = "EnemyDataTest", menuName = "Scriptable Object/Enemy Data", order = int.MaxValue)]
-public class EnemyDataTest : ScriptableObject
+public class SetEnemyData : ScriptableObject
 {
-    public EnemyState[] enemydata;
+    public EnemyDataFrame[] enemyData;
 }

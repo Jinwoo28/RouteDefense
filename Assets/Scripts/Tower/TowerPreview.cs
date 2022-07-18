@@ -261,7 +261,7 @@ public class TowerPreview : MonoBehaviour
                                 buildedtower.GetComponent<Tower>().SetUp(playerstate);
                                 buildedtower.GetComponent<Tower>().buildstate = buildstate;
                                 showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
-                                showtowerinfo.ShowRange(buildedtower.transform, TowerDataSetUp.GetData(buildedtower.GetComponent<Tower>().GetTowerCode).Range);
+                                showtowerinfo.ShowRange(buildedtower.transform, TowerDataSetUp.GetData(buildedtower.GetComponent<Tower>().GetTowerCode).range);
 
                             }
                             if (buildmanager != null)
@@ -329,8 +329,8 @@ public class TowerPreview : MonoBehaviour
     {
         buildmanager = _buildmanager;
         buildTower = _buildtower;
-        towername = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).Name;
-        towerstep = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).TowerStep;
+        towername = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).name;
+        towerstep = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).towerStep;
         StartCoroutine("BuildTower");
 
     }
