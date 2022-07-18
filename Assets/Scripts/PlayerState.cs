@@ -5,62 +5,60 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-
-    private int playercoin = 500;
-    [SerializeField] private GameObject NotEnoughMoney = null;
-    public int SetPlayerCoin { get => playercoin; set => playercoin = value; }
-
-    private int playerlife = 30;
+    [SerializeField] private GameObject notEnoughMoney = null;
+    
+    private int playerCoin = 500;
+    private int playerLife = 30;
 
     private void Start()
     {
-        playercoin = (int)(playercoin*SkillSettings.PassiveValue("StartMoney"));
+        playerCoin = (int)(playerCoin*SkillSettings.PassiveValue("StartMoney"));
     }
 
     public int GetSetPlayerCoin
     {
         get
         {
-            return playercoin;
+            return playerCoin;
         }
         set
         {
-            playercoin -= value;
+            playerCoin -= value;
         }
     }
 
     public void PlayerCoinUp(int count)
     {
-        playercoin += (int)(count*SkillSettings.PassiveValue("GetCoinUp"));
+        playerCoin += (int)(count*SkillSettings.PassiveValue("GetCoinUp"));
     }
 
     public int GetPlayerLife
     {
         get
         {
-            return playerlife;
+            return playerLife;
         }
 
     }
 
     public void PlayerLifeDown(int num)
     {
-        if (playerlife >= 0)
+        if (playerLife >= 0)
         {
-            playerlife-=num;
+            playerLife-=num;
         }
     }
 
     public void ShowNotEnoughMoneyCor()
     {
-        NotEnoughMoney.SetActive(true);
+        notEnoughMoney.SetActive(true);
         StopCoroutine("ShowNotEnoughMoney");
         StartCoroutine("ShowNotEnoughMoney");
     }
     private IEnumerator ShowNotEnoughMoney()
     {
         yield return new WaitForSeconds(1f);
-        NotEnoughMoney.SetActive(false);
+        notEnoughMoney.SetActive(false);
     }
 
 

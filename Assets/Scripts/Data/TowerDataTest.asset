@@ -12,235 +12,391 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f4a38ce2ff0ed4d9cc36a99736a9a5, type: 3}
   m_Name: TowerDataTest
   m_EditorClassIdentifier: 
-  towerdata:
-  - Name: "\uC11D\uAD81"
-    TowerStep: 1
-    TowerCode: 1
-    Damage: 4
-    Delay: 1
-    Range: 1.2
-    Critical: 0
-    UpgradeAtk: 3
-    UpgradeCri: 2
-    TowerPrice: 150
-    UpgradePrice: 50
-  - Name: "\uC11D\uAD81"
-    TowerStep: 2
-    TowerCode: 2
-    Damage: 7
-    Delay: 0.9
-    Range: 1.4
-    Critical: 5
-    UpgradeAtk: 2.5
-    UpgradeCri: 4
-    TowerPrice: 300
-    UpgradePrice: 75
-  - Name: "\uC11D\uAD81"
-    TowerStep: 3
-    TowerCode: 3
-    Damage: 10
-    Delay: 0.75
-    Range: 1.6
-    Critical: 10
-    UpgradeAtk: 4
-    UpgradeCri: 6
-    TowerPrice: 600
-    UpgradePrice: 100
-  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
-    TowerStep: 1
-    TowerCode: 11
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
-    TowerStep: 2
-    TowerCode: 12
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
-    TowerStep: 3
-    TowerCode: 13
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uAE30\uAD00\uCD1D"
-    TowerStep: 1
-    TowerCode: 21
-    Damage: 1
-    Delay: 0.25
-    Range: 1
-    Critical: 0
-    UpgradeAtk: 0.25
-    UpgradeCri: 2
-    TowerPrice: 150
-    UpgradePrice: 50
-  - Name: "\uAE30\uAD00\uCD1D"
-    TowerStep: 2
-    TowerCode: 22
-    Damage: 2
-    Delay: 0.225
-    Range: 1.15
-    Critical: 3
-    UpgradeAtk: 0.6
-    UpgradeCri: 3
-    TowerPrice: 300
-    UpgradePrice: 75
-  - Name: "\uAE30\uAD00\uCD1D"
-    TowerStep: 3
-    TowerCode: 23
-    Damage: 3
-    Delay: 0.2
-    Range: 1.3
-    Critical: 5
-    UpgradeAtk: 1.5
-    UpgradeCri: 5
-    TowerPrice: 600
-    UpgradePrice: 100
-  - Name: "\uB808\uC774\uC800"
-    TowerStep: 1
-    TowerCode: 31
-    Damage: 1
-    Delay: 1
-    Range: 1.75
-    Critical: 0
-    UpgradeAtk: 1
-    UpgradeCri: 3
-    TowerPrice: 200
-    UpgradePrice: 75
-  - Name: "\uB808\uC774\uC800"
-    TowerStep: 2
-    TowerCode: 32
-    Damage: 2
-    Delay: 0.85
-    Range: 2
-    Critical: 5
-    UpgradeAtk: 2
-    UpgradeCri: 5
-    TowerPrice: 400
-    UpgradePrice: 100
-  - Name: "\uB808\uC774\uC800"
-    TowerStep: 3
-    TowerCode: 33
-    Damage: 3
-    Delay: 0.6
-    Range: 2.25
-    Critical: 10
-    UpgradeAtk: 4
-    UpgradeCri: 7
-    TowerPrice: 800
-    UpgradePrice: 125
-  - Name: "\uBC15\uACA9\uD3EC"
-    TowerStep: 1
-    TowerCode: 41
-    Damage: 5
-    Delay: 2
-    Range: 2
-    Critical: 0
-    UpgradeAtk: 1.5
-    UpgradeCri: 5
-    TowerPrice: 200
-    UpgradePrice: 75
-  - Name: "\uBC15\uACA9\uD3EC"
-    TowerStep: 2
-    TowerCode: 42
-    Damage: 7
-    Delay: 1.75
-    Range: 2.25
-    Critical: 5
-    UpgradeAtk: 2.5
-    UpgradeCri: 7
-    TowerPrice: 400
-    UpgradePrice: 100
-  - Name: "\uBC15\uACA9\uD3EC"
-    TowerStep: 3
-    TowerCode: 43
-    Damage: 10
-    Delay: 1.5
-    Range: 2.5
-    Critical: 10
-    UpgradeAtk: 4
-    UpgradeCri: 10
-    TowerPrice: 800
-    UpgradePrice: 125
-  - Name: "\uD50C\uB77C\uC988\uB9C8"
-    TowerStep: 1
-    TowerCode: 51
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD50C\uB77C\uC988\uB9C8"
-    TowerStep: 2
-    TowerCode: 52
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD50C\uB77C\uC988\uB9C8"
-    TowerStep: 3
-    TowerCode: 53
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD14C\uC2AC\uB77C"
-    TowerStep: 1
-    TowerCode: 61
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD14C\uC2AC\uB77C"
-    TowerStep: 2
-    TowerCode: 62
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
-  - Name: "\uD14C\uC2AC\uB77C"
-    TowerStep: 3
-    TowerCode: 63
-    Damage: 0
-    Delay: 0
-    Range: 0
-    Critical: 0
-    UpgradeAtk: 0
-    UpgradeCri: 0
-    TowerPrice: 0
-    UpgradePrice: 0
+  towerData:
+  - name: "\uC11D\uAD81"
+    towerStep: 1
+    towerCode: 1
+    damage: 4
+    delay: 1
+    range: 1.5
+    critical: 0.01
+    upgradAtk: 1
+    upgradCri: 0.02
+    towerPrice: 150
+    upgradPrice: 50
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744 \uBC1C\uC0AC
+      \uD569\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744
+      \uBC1C\uC0AC \uD569\uB2C8\uB2E4.\r"
+  - name: "\uC11D\uAD81"
+    towerStep: 2
+    towerCode: 2
+    damage: 7
+    delay: 1
+    range: 2
+    critical: 0.02
+    upgradAtk: 1.7
+    upgradCri: 0.03
+    towerPrice: 300
+    upgradPrice: 100
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744 \uBC1C\uC0AC
+      \uD569\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744
+      \uBC1C\uC0AC \uD569\uB2C8\uB2E4.\r"
+  - name: "\uC11D\uAD81"
+    towerStep: 3
+    towerCode: 3
+    damage: 12.5
+    delay: 1
+    range: 2.5
+    critical: 0.04
+    upgradAtk: 3
+    upgradCri: 0.04
+    towerPrice: 600
+    upgradPrice: 200
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744 \uBC1C\uC0AC
+      \uD569\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uD654\uC0B4\uC744
+      \uBC1C\uC0AC \uD569\uB2C8\uB2E4.\r"
+  - name: "\uAE30\uAD00\uCD1D"
+    towerStep: 1
+    towerCode: 21
+    damage: 1
+    delay: 0.25
+    range: 1.5
+    critical: 0
+    upgradAtk: 0.5
+    upgradCri: 0
+    towerPrice: 150
+    upgradPrice: 50
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4.(\uC9C0\uC0C1,
+      \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4.\r"
+  - name: "\uAE30\uAD00\uCD1D"
+    towerStep: 2
+    towerCode: 22
+    damage: 2
+    delay: 0.225
+    range: 1.5
+    critical: 0.02
+    upgradAtk: 0.6
+    upgradCri: 0.01
+    towerPrice: 300
+    upgradPrice: 100
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4.(\uC9C0\uC0C1,
+      \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4.\r"
+  - name: "\uAE30\uAD00\uCD1D"
+    towerStep: 3
+    towerCode: 23
+    damage: 3.5
+    delay: 0.2
+    range: 1.5
+    critical: 0.03
+    upgradAtk: 0.8
+    upgradCri: 0.02
+    towerPrice: 600
+    upgradPrice: 200
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4.(\uC9C0\uC0C1,
+      \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uAE30\uAD00\uCD1D\uC744
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4.\r"
+  - name: "\uB808\uC774\uC800"
+    towerStep: 1
+    towerCode: 31
+    damage: 1
+    delay: 1
+    range: 3.25
+    critical: 0.05
+    upgradAtk: 1
+    upgradCri: 0.02
+    towerPrice: 200
+    upgradPrice: 65
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C \uBC1C\uC0AC\uD569\uB2C8\uB2E4.
+      \uAC19\uC740 \uC801\uC744 \uACF5\uACA9\uD560 \uACBD\uC6B0, \uC810\uC810 \uB370\uBBF8\uC9C0\uAC00
+      \uC62C\uB77C\uAC11\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4. \uAC19\uC740 \uC801\uC744 \uACC4\uC18D \uACF5\uACA9\uD560
+      \uACBD\uC6B0 \uB370\uBBF8\uC9C0\uAC00 \uC810\uCC28 \uC99D\uAC00\uD569\uB2C8\uB2E4.
+      (\uB370\uBBF8\uC9C0 : 1->2->3->4)\r"
+  - name: "\uB808\uC774\uC800"
+    towerStep: 2
+    towerCode: 32
+    damage: 2
+    delay: 1
+    range: 3.75
+    critical: 0.075
+    upgradAtk: 2
+    upgradCri: 0.04
+    towerPrice: 400
+    upgradPrice: 130
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C \uBC1C\uC0AC\uD569\uB2C8\uB2E4.
+      \uAC19\uC740 \uC801\uC744 \uACF5\uACA9\uD560 \uACBD\uC6B0, \uC810\uC810 \uB370\uBBF8\uC9C0\uAC00
+      \uC62C\uB77C\uAC11\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4. \uAC19\uC740 \uC801\uC744 \uACC4\uC18D \uACF5\uACA9\uD560
+      \uACBD\uC6B0 \uB370\uBBF8\uC9C0\uAC00 \uC810\uCC28 \uC99D\uAC00\uD569\uB2C8\uB2E4.
+      (\uB370\uBBF8\uC9C0 : 2->4->6->8)\r"
+  - name: "\uB808\uC774\uC800"
+    towerStep: 3
+    towerCode: 33
+    damage: 3
+    delay: 1
+    range: 4.25
+    critical: 0.1
+    upgradAtk: 3
+    upgradCri: 0.06
+    towerPrice: 800
+    upgradPrice: 260
+    atkType: 3
+    towerInfo: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C \uBC1C\uC0AC\uD569\uB2C8\uB2E4.
+      \uAC19\uC740 \uC801\uC744 \uACF5\uACA9\uD560 \uACBD\uC6B0, \uC810\uC810 \uB370\uBBF8\uC9C0\uAC00
+      \uC62C\uB77C\uAC11\uB2C8\uB2E4.(\uC9C0\uC0C1, \uACF5\uC911)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uB808\uC774\uC800\uB97C
+      \uBC1C\uC0AC\uD569\uB2C8\uB2E4. \uAC19\uC740 \uC801\uC744 \uACC4\uC18D \uACF5\uACA9\uD560
+      \uACBD\uC6B0 \uB370\uBBF8\uC9C0\uAC00 \uC810\uCC28 \uC99D\uAC00\uD569\uB2C8\uB2E4.
+      (\uB370\uBBF8\uC9C0 : 3->6->9->12)\r"
+  - name: "\uBC15\uACA9\uD3EC"
+    towerStep: 1
+    towerCode: 41
+    damage: 7
+    delay: 2.25
+    range: 1.75
+    critical: 0
+    upgradAtk: 2
+    upgradCri: 0.01
+    towerPrice: 200
+    upgradPrice: 65
+    atkType: 1
+    towerInfo: "\uD3EC\uD0C4\uC774 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC801\uC744 \uD5A5\uD574 \uD3EC\uD0C4\uC744 \uBC1C\uC0AC\uD558\uBA70,
+      \uD3EC\uD0C4\uC774 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uBC15\uACA9\uD3EC"
+    towerStep: 2
+    towerCode: 42
+    damage: 9
+    delay: 2
+    range: 2
+    critical: 0
+    upgradAtk: 2.5
+    upgradCri: 0.01
+    towerPrice: 400
+    upgradPrice: 130
+    atkType: 1
+    towerInfo: "\uD3EC\uD0C4\uC5D0 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC801\uC744 \uD5A5\uD574 \uD3EC\uD0C4\uC744 \uBC1C\uC0AC\uD558\uBA70,
+      \uD3EC\uD0C4\uC774 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uBC15\uACA9\uD3EC"
+    towerStep: 3
+    towerCode: 43
+    damage: 12.5
+    delay: 1.75
+    range: 2.25
+    critical: 0
+    upgradAtk: 3.5
+    upgradCri: 0.01
+    towerPrice: 800
+    upgradPrice: 260
+    atkType: 1
+    towerInfo: "\uD3EC\uD0C4\uC5D0 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC801\uC744 \uD5A5\uD574 \uD3EC\uD0C4\uC744 \uBC1C\uC0AC\uD558\uBA70,
+      \uD3EC\uD0C4\uC774 \uB5A8\uC5B4\uC9C4 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C
+      \uC2A4\uD50C\uB808\uC2DC \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uD50C\uB77C\uC988\uB9C8"
+    towerStep: 1
+    towerCode: 51
+    damage: 6
+    delay: 2
+    range: 2
+    critical: 0
+    upgradAtk: 1.5
+    upgradCri: 0.01
+    towerPrice: 250
+    upgradPrice: 85
+    atkType: 1
+    towerInfo: "\uC77C\uC9C1\uC120\uC73C\uB85C \uD50C\uB77C\uC988\uB9C8 \uD3EC\uB97C
+      \uC3F4 \uC9C1\uC120\uC758 \uC801 \uBAA8\uB450\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C
+      \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC77C\uC9C1\uC120\uC5D0 \uC788\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uD50C\uB77C\uC988\uB9C8"
+    towerStep: 2
+    towerCode: 52
+    damage: 10
+    delay: 2
+    range: 2
+    critical: 0.01
+    upgradAtk: 3
+    upgradCri: 0.01
+    towerPrice: 500
+    upgradPrice: 190
+    atkType: 1
+    towerInfo: "\uC77C\uC9C1\uC120\uC73C\uB85C \uD50C\uB77C\uC988\uB9C8 \uD3EC\uB97C
+      \uC3F4 \uC9C1\uC120\uC758 \uC801 \uBAA8\uB450\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C
+      \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC77C\uC9C1\uC120\uC5D0 \uC788\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uD50C\uB77C\uC988\uB9C8"
+    towerStep: 3
+    towerCode: 53
+    damage: 17
+    delay: 2
+    range: 2
+    critical: 0.025
+    upgradAtk: 4.5
+    upgradCri: 0.01
+    towerPrice: 1000
+    upgradPrice: 380
+    atkType: 1
+    towerInfo: "\uC77C\uC9C1\uC120\uC73C\uB85C \uD50C\uB77C\uC988\uB9C8 \uD3EC\uB97C
+      \uC3F4 \uC9C1\uC120\uC758 \uC801 \uBAA8\uB450\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C
+      \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uC77C\uC9C1\uC120\uC5D0 \uC788\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.\r"
+  - name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    towerStep: 1
+    towerCode: 11
+    damage: 2
+    delay: 0.375
+    range: 1.5
+    critical: 0.01
+    upgradAtk: 1
+    upgradCri: 0
+    towerPrice: 250
+    upgradPrice: 85
+    atkType: 1
+    towerInfo: "\uBD88\uAF43\uC744 \uBFDC\uC5B4 \uB2FF\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uD654\uC5FC\uC744 \uBC1C\uC0AC\uD558\uC5EC \uB2FF\uB294
+      \uC801 \uBAA8\uB450\uC5D0\uAC8C \uD654\uC5FC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.
+      \uD654\uC5FC\uC5D0 \uB9DE\uC740 \uC801\uC740 \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C
+      5\uD68C \uC785\uD799\uB2C8\uB2E4. \uB2E8, \uBB3C\uC5D0 \uC788\uB294 \uC801\uACFC
+      \uBE44\uAC00 \uC62C \uB54C\uB294 \uB370\uBBF8\uC9C0\uAC00 \uC808\uBC18\uB9CC
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.)\r"
+  - name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    towerStep: 2
+    towerCode: 12
+    damage: 2.5
+    delay: 0.35
+    range: 1.5
+    critical: 0.02
+    upgradAtk: 1.5
+    upgradCri: 0.01
+    towerPrice: 500
+    upgradPrice: 190
+    atkType: 1
+    towerInfo: "\uBD88\uAF43\uC744 \uBFDC\uC5B4 \uB2FF\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uD654\uC5FC\uC744 \uBC1C\uC0AC\uD558\uC5EC \uB2FF\uB294
+      \uC801 \uBAA8\uB450\uC5D0\uAC8C \uD654\uC5FC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.
+      \uD654\uC5FC\uC5D0 \uB9DE\uC740 \uC801\uC740 \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C
+      6\uD68C \uC785\uD799\uB2C8\uB2E4. \uB2E8, \uBB3C\uC5D0 \uC788\uB294 \uC801\uACFC
+      \uBE44\uAC00 \uC62C \uB54C\uB294 \uB370\uBBF8\uC9C0\uAC00 \uC808\uBC18\uB9CC
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.)\r"
+  - name: "\uD654\uC5FC\uBC29\uC0AC\uAE30"
+    towerStep: 3
+    towerCode: 13
+    damage: 3.5
+    delay: 0.3
+    range: 1.5
+    critical: 0.03
+    upgradAtk: 2
+    upgradCri: 0.02
+    towerPrice: 1000
+    upgradPrice: 380
+    atkType: 1
+    towerInfo: "\uBD88\uAF43\uC744 \uBFDC\uC5B4 \uB2FF\uB294 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
+      \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uD654\uC5FC\uC744 \uBC1C\uC0AC\uD558\uC5EC \uB2FF\uB294
+      \uC801 \uBAA8\uB450\uC5D0\uAC8C \uD654\uC5FC \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.
+      \uD654\uC5FC\uC5D0 \uB9DE\uC740 \uC801\uC740 \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uB97C
+      7\uD68C \uC785\uD799\uB2C8\uB2E4. \uB2E8, \uBB3C\uC5D0 \uC788\uB294 \uC801\uACFC
+      \uBE44\uAC00 \uC62C \uB54C\uB294 \uB370\uBBF8\uC9C0\uAC00 \uC808\uBC18\uB9CC
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.)\r"
+  - name: "\uD14C\uC2AC\uB77C"
+    towerStep: 1
+    towerCode: 61
+    damage: 5
+    delay: 1.5
+    range: 2.22
+    critical: 0.01
+    upgradAtk: 1
+    upgradCri: 0.01
+    towerPrice: 250
+    upgradPrice: 85
+    atkType: 1
+    towerInfo: "\uC801\uC5D0\uAC8C \uC804\uAE30 \uACF5\uACA9\uC744 \uD558\uACE0 \uAC10\uC804
+      \uC0C1\uD0DC\uB85C \uB9CC\uB4ED\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uC804\uAE30 \uACF5\uACA9\uC744
+      \uD558\uACE0 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C 2\uD68C \uC5F0\uC1C4\uACF5\uACA9\uC744
+      \uD569\uB2C8\uB2E4. \uB9DE\uC740 \uC801\uC740 1\uCD08\uB3D9\uC548 \uAC10\uC804
+      \uC0C1\uD0DC\uAC00 \uB418\uACE0, \uAC10\uC804\uB41C \uC0C1\uD0DC\uC758 \uC801\uC744
+      \uACF5\uACA9\uD558\uBA74 \uC5F0\uC1C4\uACF5\uACA9\uC774 \uCD5C\uB300 5\uD68C\uAE4C\uC9C0
+      \uB298\uC5B4\uB0A9\uB2C8\uB2E4. \uBE44\uAC00 \uC624\uAC70\uB098 \uBB3C\uC5D0
+      \uC788\uB294 \uC801\uC5D0\uAC8C\uB294 2\uBC30\uC758 \uB370\uBBF8\uC9C0\uAC00
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uAC00 \uB4E4\uC5B4\uAC11\uB2C8\uB2E4.)\r"
+  - name: "\uD14C\uC2AC\uB77C"
+    towerStep: 2
+    towerCode: 62
+    damage: 7
+    delay: 1.5
+    range: 2.22
+    critical: 0.02
+    upgradAtk: 1.5
+    upgradCri: 0.01
+    towerPrice: 500
+    upgradPrice: 190
+    atkType: 1
+    towerInfo: "\uC801\uC5D0\uAC8C \uC804\uAE30 \uACF5\uACA9\uC744 \uD558\uACE0 \uAC10\uC804
+      \uC0C1\uD0DC\uB85C \uB9CC\uB4ED\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uC804\uAE30 \uACF5\uACA9\uC744
+      \uD558\uACE0 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C 3\uD68C \uC5F0\uC1C4\uACF5\uACA9\uC744
+      \uD569\uB2C8\uB2E4. \uB9DE\uC740 \uC801\uC740 1\uCD08\uB3D9\uC548 \uAC10\uC804
+      \uC0C1\uD0DC\uAC00 \uB418\uACE0, \uAC10\uC804\uB41C \uC0C1\uD0DC\uC758 \uC801\uC744
+      \uACF5\uACA9\uD558\uBA74 \uC5F0\uC1C4\uACF5\uACA9\uC774 \uCD5C\uB300 7\uD68C\uAE4C\uC9C0
+      \uB298\uC5B4\uB0A9\uB2C8\uB2E4. \uBE44\uAC00 \uC624\uAC70\uB098 \uBB3C\uC5D0
+      \uC788\uB294 \uC801\uC5D0\uAC8C\uB294 2\uBC30\uC758 \uB370\uBBF8\uC9C0\uAC00
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uAC00 \uB4E4\uC5B4\uAC11\uB2C8\uB2E4.)\r"
+  - name: "\uD14C\uC2AC\uB77C"
+    towerStep: 3
+    towerCode: 63
+    damage: 10
+    delay: 1.5
+    range: 2.22
+    critical: 0.03
+    upgradAtk: 2
+    upgradCri: 0.01
+    towerPrice: 1000
+    upgradPrice: 380
+    atkType: 1
+    towerInfo: "\uC801\uC5D0\uAC8C \uC804\uAE30 \uACF5\uACA9\uC744 \uD558\uACE0 \uAC10\uC804
+      \uC0C1\uD0DC\uB85C \uB9CC\uB4ED\uB2C8\uB2E4.(\uC9C0\uC0C1)"
+    detailInformation: "\uB2E8\uC77C \uC801\uC744 \uD5A5\uD574 \uC804\uAE30 \uACF5\uACA9\uC744
+      \uD558\uACE0 \uC8FC\uC704\uC758 \uC801\uC5D0\uAC8C 4\uD68C \uC5F0\uC1C4\uACF5\uACA9\uC744
+      \uD569\uB2C8\uB2E4. \uB9DE\uC740 \uC801\uC740 1\uCD08\uB3D9\uC548 \uAC10\uC804
+      \uC0C1\uD0DC\uAC00 \uB418\uACE0, \uAC10\uC804\uB41C \uC0C1\uD0DC\uC758 \uC801\uC744
+      \uACF5\uACA9\uD558\uBA74 \uC5F0\uC1C4\uACF5\uACA9\uC774 \uCD5C\uB300 9\uD68C\uAE4C\uC9C0
+      \uB298\uC5B4\uB0A9\uB2C8\uB2E4. \uBE44\uAC00 \uC624\uAC70\uB098 \uBB3C\uC5D0
+      \uC788\uB294 \uC801\uC5D0\uAC8C\uB294 2\uBC30\uC758 \uB370\uBBF8\uC9C0\uAC00
+      \uB4E4\uC5B4\uAC11\uB2C8\uB2E4. (\uB3D9\uBB3C \uC885\uC871\uC5D0 \uD55C\uD574
+      \uC544\uBA38\uB97C \uBB34\uC2DC\uD558\uACE0 \uB370\uBBF8\uC9C0\uAC00 \uB4E4\uC5B4\uAC11\uB2C8\uB2E4.)"

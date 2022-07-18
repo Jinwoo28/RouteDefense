@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour
 {
-    [SerializeField] private AddTile mapmanager = null;
-    [SerializeField] private PlayerState playerstate = null;
-    [SerializeField] private EnemyManager enemymanager = null;
-    [SerializeField] private Image Gettetris = null;
-    [SerializeField] private Sprite[] Settetris = null;
-    [SerializeField] private TextMeshProUGUI tileprice = null;
-    [SerializeField] private TextMeshProUGUI playercoin = null;
-    [SerializeField] private TextMeshProUGUI playerlife = null;
+    [SerializeField] private AddTile addTile = null;
+    [SerializeField] private PlayerState playerState = null;
+    [SerializeField] private EnemyManager enemyManager = null;
+    [SerializeField] private Image tetrisImage = null;
+    [SerializeField] private Sprite[] tetrisSprites = null;
 
-    [SerializeField] private TextMeshProUGUI stageinfo = null;
+    [SerializeField] private TextMeshProUGUI textTilePrice = null;
+    [SerializeField] private TextMeshProUGUI textPlayerCoin = null;
+    [SerializeField] private TextMeshProUGUI textPlayerLife = null;
+    [SerializeField] private TextMeshProUGUI textStageCount = null;
+
 
 
     void Update()
@@ -25,23 +26,23 @@ public class TextManager : MonoBehaviour
 
     public void SetVariable()
     {
-        int coin = playerstate.GetSetPlayerCoin;
-        int life = playerstate.GetPlayerLife;
+        int coin = playerState.GetSetPlayerCoin;
+        int life = playerState.GetPlayerLife;
 
-        int maxstage = enemymanager.Getmaxstage;
-        int currentstage = enemymanager.Getcurrentstage;
+        int maxStage = enemyManager.Getmaxstage;
+        int currentStage = enemyManager.Getcurrentstage;
 
-        int addtilenum = mapmanager.GetAddTileNum;
-        int addtileprice = mapmanager.GetAddtilePrice;
+        int addTileNum = addTile.GetAddTileNum;
+        int addTilePrice = addTile.GetAddtilePrice;
 
-        playercoin.text = "$" + coin;
-        playerlife.text = $"{life}";
+        textPlayerCoin.text = "$" + coin;
+        textPlayerLife.text = $"{life}";
 
-        if (currentstage <= 20)
+        if (currentStage <= 20)
         {
-            stageinfo.text = $"스테이지 {currentstage} / {maxstage}";
+            textStageCount.text = $"스테이지 {currentStage} / {maxStage}";
         }
-        Gettetris.sprite = Settetris[addtilenum];
-        tileprice.text = "$" + addtileprice.ToString();
+        tetrisImage.sprite = tetrisSprites[addTileNum];
+        textTilePrice.text = "$" + addTilePrice.ToString();
     }
 }

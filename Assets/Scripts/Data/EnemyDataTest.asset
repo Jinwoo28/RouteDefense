@@ -12,247 +12,244 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d61e6941dccd6e42af309bd4a560f48, type: 3}
   m_Name: EnemyDataTest
   m_EditorClassIdentifier: 
-  enemydata:
-  - Name: "Chick(\uB178\uB9D0)"
-    UnitCode: 1
-    Hp: 10
-    Speed: 0.6
-    Damage: 1
-    coin: 3
-    Amour: 0
+  enemyData:
+  - name: "\uBCD1\uC544\uB9AC1"
+    unitcode: 1
+    hp: 8
+    speed: 1
+    damage: 1
+    coin: 10
+    amour: 0
     avoidance: 0
+    feature: 0
     enemytype: 0
-  - Name: Chick
-    UnitCode: 2
-    Hp: 5
-    Speed: 0.8
-    Damage: 1
-    coin: 3
-    Amour: 0
+  - name: "\uBCD1\uC544\uB9AC2"
+    unitcode: 2
+    hp: 22
+    speed: 1.25
+    damage: 1
+    coin: 13
+    amour: 1
+    avoidance: 5
+    feature: 2
+    enemytype: 0
+  - name: "\uBCD1\uC544\uB9AC3"
+    unitcode: 3
+    hp: 58
+    speed: 1.5
+    damage: 1
+    coin: 17
+    amour: 2
+    avoidance: 10
+    feature: 4
+    enemytype: 0
+  - name: "\uBCD1\uC544\uB9AC4"
+    unitcode: 4
+    hp: 80
+    speed: 1.75
+    damage: 1
+    coin: 21
+    amour: 3
+    avoidance: 15
+    feature: 6
+    enemytype: 0
+  - name: "\uBD84\uD64D\uB3FC\uC9C0"
+    unitcode: 11
+    hp: 15
+    speed: 0.5
+    damage: 2
+    coin: 10
+    amour: 0
     avoidance: 0
+    feature: 1
     enemytype: 0
-  - Name: Chick
-    UnitCode: 3
-    Hp: 7
-    Speed: 1
-    Damage: 1
-    coin: 4
-    Amour: 0
+  - name: "\uB178\uB791\uB3FC\uC9C0"
+    unitcode: 12
+    hp: 50
+    speed: 0.45
+    damage: 2
+    coin: 13
+    amour: 0
     avoidance: 0
+    feature: 3
     enemytype: 0
-  - Name: Chick
-    UnitCode: 4
-    Hp: 9
-    Speed: 1
-    Damage: 1
-    coin: 4
-    Amour: 0
+  - name: "\uD30C\uB791\uB3FC\uC9C0"
+    unitcode: 13
+    hp: 120
+    speed: 0.4
+    damage: 2
+    coin: 17
+    amour: 0
     avoidance: 0
+    feature: 5
     enemytype: 0
-  - Name: Pig
-    UnitCode: 11
-    Hp: 16
-    Speed: 0.5
-    Damage: 2
-    coin: 4
-    Amour: 1
+  - name: "\uBE68\uAC15\uB3FC\uC9C0"
+    unitcode: 14
+    hp: 160
+    speed: 0.35
+    damage: 2
+    coin: 21
+    amour: 0
     avoidance: 0
+    feature: 7
     enemytype: 0
-  - Name: Pig
-    UnitCode: 12
-    Hp: 18
-    Speed: 0.7
-    Damage: 2
-    coin: 5
-    Amour: 1
+  - name: "\uD751\uB3FC\uC9C0(\uBCF4\uC2A4)"
+    unitcode: 15
+    hp: 200
+    speed: 0.5
+    damage: 2
+    coin: 300
+    amour: 1
+    avoidance: 4
+    feature: 9
+    enemytype: 0
+  - name: "\uB179\uC0C9\uBC40"
+    unitcode: 21
+    hp: 11
+    speed: 2
+    damage: 1
+    coin: 10
+    amour: 0
+    avoidance: 22
+    feature: 0
+    enemytype: 0
+  - name: "\uD558\uC580\uBC40"
+    unitcode: 22
+    hp: 30
+    speed: 2.25
+    damage: 1
+    coin: 13
+    amour: 0
+    avoidance: 33
+    feature: 0
+    enemytype: 0
+  - name: "\uD558\uB298\uBC40"
+    unitcode: 23
+    hp: 50
+    speed: 2.5
+    damage: 1
+    coin: 17
+    amour: 0
+    avoidance: 44
+    feature: 0
+    enemytype: 0
+  - name: "\uBCF4\uB77C\uBC40"
+    unitcode: 24
+    hp: 85
+    speed: 2.75
+    damage: 1
+    coin: 21
+    amour: 0
+    avoidance: 55
+    feature: 0
+    enemytype: 0
+  - name: "\uAE5C\uC7A5\uBC40(\uBCF4\uC2A4)"
+    unitcode: 25
+    hp: 300
+    speed: 1.25
+    damage: 1
+    coin: 500
+    amour: 1
+    avoidance: 66
+    feature: 4
+    enemytype: 0
+  - name: "\uB178\uB791\uC591"
+    unitcode: 31
+    hp: 20
+    speed: 0.8
+    damage: 3
+    coin: 10
+    amour: 3
     avoidance: 0
+    feature: 0
     enemytype: 0
-  - Name: Pig
-    UnitCode: 13
-    Hp: 22
-    Speed: 0.65
-    Damage: 2
-    coin: 5
-    Amour: 1
+  - name: "\uB179\uC0C9\uC591"
+    unitcode: 32
+    hp: 40
+    speed: 0.9
+    damage: 3
+    coin: 13
+    amour: 6
     avoidance: 0
+    feature: 0
     enemytype: 0
-  - Name: Pig
-    UnitCode: 14
-    Hp: 25
-    Speed: 0.65
-    Damage: 2
-    coin: 6
-    Amour: 2
+  - name: "\uD551\uD06C\uC591"
+    unitcode: 33
+    hp: 70
+    speed: 1
+    damage: 3
+    coin: 17
+    amour: 10
     avoidance: 0
+    feature: 0
     enemytype: 0
-  - Name: Pig
-    UnitCode: 15
-    Hp: 30
-    Speed: 0.75
-    Damage: 2
-    coin: 7
-    Amour: 3
+  - name: "\uD770\uC591"
+    unitcode: 34
+    hp: 100
+    speed: 1.1
+    damage: 3
+    coin: 21
+    amour: 12
     avoidance: 0
+    feature: 0
     enemytype: 0
-  - Name: Snake
-    UnitCode: 21
-    Hp: 5
-    Speed: 1.2
-    Damage: 1
-    coin: 2
-    Amour: 0
-    avoidance: 30
+  - name: "\uAE5C\uC7A5\uC591(\uBCF4\uC2A4)"
+    unitcode: 35
+    hp: 500
+    speed: 0.8
+    damage: 3
+    coin: 700
+    amour: 23
+    avoidance: 5
+    feature: 5
     enemytype: 0
-  - Name: Snake
-    UnitCode: 22
-    Hp: 6
-    Speed: 1.2
-    Damage: 1
-    coin: 2
-    Amour: 0
+  - name: "\uD30C\uB791\uC0C8"
+    unitcode: 41
+    hp: 10
+    speed: 2.5
+    damage: 2
+    coin: 10
+    amour: 0
+    avoidance: 0
+    feature: 0
+    enemytype: 1
+  - name: "\uBE68\uAC15\uC0C8"
+    unitcode: 42
+    hp: 30
+    speed: 2.8
+    damage: 2
+    coin: 15
+    amour: 1
+    avoidance: 10
+    feature: 2
+    enemytype: 1
+  - name: "\uAE4C\uB9C8\uADC0"
+    unitcode: 43
+    hp: 50
+    speed: 3.1
+    damage: 1
+    coin: 18
+    amour: 2
+    avoidance: 15
+    feature: 4
+    enemytype: 1
+  - name: "\uB178\uB791\uC0C8"
+    unitcode: 44
+    hp: 70
+    speed: 3.4
+    damage: 1
+    coin: 22
+    amour: 3
+    avoidance: 25
+    feature: 6
+    enemytype: 1
+  - name: "\uB3C5\uC218\uB9AC(\uBCF4\uC2A4)"
+    unitcode: 45
+    hp: 750
+    speed: 1.5
+    damage: 1
+    coin: 1000
+    amour: 4
     avoidance: 40
-    enemytype: 0
-  - Name: Snake
-    UnitCode: 23
-    Hp: 7
-    Speed: 1.5
-    Damage: 1
-    coin: 3
-    Amour: 0
-    avoidance: 50
-    enemytype: 0
-  - Name: Snake
-    UnitCode: 24
-    Hp: 8
-    Speed: 1.2
-    Damage: 1
-    coin: 4
-    Amour: 0
-    avoidance: 50
-    enemytype: 0
-  - Name: Snake
-    UnitCode: 25
-    Hp: 9
-    Speed: 1.5
-    Damage: 1
-    coin: 4
-    Amour: 0
-    avoidance: 60
-    enemytype: 0
-  - Name: Sheep
-    UnitCode: 31
-    Hp: 20
-    Speed: 1.2
-    Damage: 3
-    coin: 6
-    Amour: 3
-    avoidance: 20
-    enemytype: 0
-  - Name: Sheep
-    UnitCode: 32
-    Hp: 22
-    Speed: 1.2
-    Damage: 3
-    coin: 6
-    Amour: 3
-    avoidance: 20
-    enemytype: 0
-  - Name: Sheep
-    UnitCode: 33
-    Hp: 24
-    Speed: 1.5
-    Damage: 3
-    coin: 6
-    Amour: 3
-    avoidance: 20
-    enemytype: 0
-  - Name: Sheep
-    UnitCode: 34
-    Hp: 26
-    Speed: 1.8
-    Damage: 3
-    coin: 6
-    Amour: 4
-    avoidance: 20
-    enemytype: 0
-  - Name: Sheep
-    UnitCode: 35
-    Hp: 28
-    Speed: 1.8
-    Damage: 3
-    coin: 7
-    Amour: 5
-    avoidance: 20
-    enemytype: 0
-  - Name: Bird
-    UnitCode: 41
-    Hp: 20
-    Speed: 0.5
-    Damage: 2
-    coin: 7
-    Amour: 0
-    avoidance: 0
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 42
-    Hp: 12
-    Speed: 0.65
-    Damage: 2
-    coin: 8
-    Amour: 1
-    avoidance: 60
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 43
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 44
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 45
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 46
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 47
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
-    enemytype: 1
-  - Name: Bird
-    UnitCode: 48
-    Hp: 1
-    Speed: 1
-    Damage: 1
-    coin: 1
-    Amour: 1
-    avoidance: 1
+    feature: 8
     enemytype: 1
