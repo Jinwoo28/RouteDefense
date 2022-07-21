@@ -5,8 +5,6 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] Audio;
-
     [SerializeField] private AudioClip[] DD;
     AudioSource audioSource = new AudioSource();
 

@@ -16,10 +16,8 @@ public class SceneControl : MonoBehaviour
 
     public void ScneneChange(string _SceneNum)
     {
-
         SceneManager.LoadScene(_SceneNum);
     }
-
 
     public void ReStartGameScene(string _SceneName)
     {

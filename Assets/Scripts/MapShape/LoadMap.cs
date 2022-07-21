@@ -7,34 +7,20 @@ using Newtonsoft.Json;
 
 public class LoadMap : MonoBehaviour
 {
-    private static bool MapSuccess = false;
+    private static bool mapSuccess = false;
 
     public static MapShapeSettings map = new MapShapeSettings();
 
     void Start()
     {
-        if (!MapSuccess)
+        if (!mapSuccess)
         {
-            LoadInfo2();
-            MapSuccess = true;
+            LoadMapInfo();
+            mapSuccess = true;
         }
     }
 
-
-    public void LoadInfo()
-    {
-
-        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.Open);
-
-        byte[] data = new byte[stream.Length];
-        stream.Read(data, 0, data.Length);
-        stream.Close();
-
-        string jsonData = Encoding.UTF8.GetString(data);
-        map = JsonConvert.DeserializeObject<MapShapeSettings>(jsonData);
-    }
-
-    public void LoadInfo2()
+    public void LoadMapInfo()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "MapShape.json");
         string mapdata = File.ReadAllText(path);

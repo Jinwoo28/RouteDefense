@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class EnemyStateSetUp : MonoBehaviour
+public class EnemyDataSetUp : MonoBehaviour
 {
-    public SetEnemyData Enemydata;
+    public SetEnemyData enemyData;
 
     const string URL = "https://docs.google.com/spreadsheets/d/1TGYXHFpwIhrgfxqPvFgqKRWoIfrCWKggKbzQOVXlHeQ/export?format=tsv&range=A2:J";
 
@@ -26,6 +26,8 @@ public class EnemyStateSetUp : MonoBehaviour
         }
     }
     
+
+    //웹에서 EnemyData 가져오기
     IEnumerator DataSetFromWeb()
     {
         UnityWebRequest www = UnityWebRequest.Get(URL);
@@ -43,8 +45,11 @@ public class EnemyStateSetUp : MonoBehaviour
 
     void SetEnemy(string tsv)
     {
+        //행으로 행 구분
         string[] row = tsv.Split('\n');
         int rowSize = row.Length;
+
+        //구글 스프레드 시트는 열과 열 사이가 탭으로 구분되어 있음
         int columnsize = row[0].Split('\t').Length;
 
         for(int i = 0; i < rowSize; i++)
@@ -53,7 +58,7 @@ public class EnemyStateSetUp : MonoBehaviour
 
             for(int j = 0; j < columnsize; j++)
             {
-                EnemyDataFrame item = Enemydata.enemyData[i];
+                EnemyDataFrame item = enemyData.enemyData[i];
 
                 item.name = column[0];
                 item.unitcode = int.Parse(column[1]);
@@ -68,9 +73,10 @@ public class EnemyStateSetUp : MonoBehaviour
             }
         }
 
-        enemystate = Enemydata.enemyData;
+        enemystate = enemyData.enemyData;
     }
 
+    //유닛 코드로 특정 유닛의 정보 가져오기
     public static EnemyDataFrame GetData(int unitcode)
     {
         for(int i = 0; i < enemystate.Length; i++)

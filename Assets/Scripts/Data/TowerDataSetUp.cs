@@ -5,14 +5,16 @@ using UnityEngine.Networking;
 
 public class TowerDataSetUp : MonoBehaviour
 {
-    public SetTowerData TD;
+    public SetTowerData towerData;
 
+    //데이터를 가져올 URL주소
     const string URL = "https://docs.google.com/spreadsheets/d/19oIy0vvxi2Xtfw5X8V8ZsdRhoujJgtXPAy7Qru5Sjv4/export?format=tsv&range=A2:N";
 
+    //다른 곳에서 정보를 가져갈 수 있게 static으로 변경
     public static TowerDataFrame[] towerDatas;
 
+    //게임 시작시에만 데이터를 초기화
     private static int AlreadySet = 0;
-
     [SerializeField] private GameObject DarkImage = null;
 
     private void Awake()
@@ -23,12 +25,10 @@ public class TowerDataSetUp : MonoBehaviour
             DarkImage.SetActive(true);
             StartCoroutine(DataSetFromWeb());
             AlreadySet = 1;
-
         }
-
-        
     }
 
+    //구글 스프레드 시트에서 TowerData가져오기
     IEnumerator DataSetFromWeb()
     {
         UnityWebRequest www = UnityWebRequest.Get(URL);
@@ -45,14 +45,9 @@ public class TowerDataSetUp : MonoBehaviour
 
     void SetEnemy(string tsv)
     {
-
-
         string[] row = tsv.Split('\n');
         int rowSize = row.Length;
         int columnsize = row[0].Split('\t').Length;
-
-    
-        // Debug.Log(so.enemydata.Length + "asdf");
 
         for (int i = 0; i < rowSize; i++)
         {
@@ -60,7 +55,7 @@ public class TowerDataSetUp : MonoBehaviour
 
             for (int j = 0; j < columnsize; j++)
             {
-                TowerDataFrame item = TD.towerData[i];
+                TowerDataFrame item = towerData.towerData[i];
 
                 item.name = column[0];
                 item.towerStep = int.Parse(column[1]);
@@ -79,9 +74,10 @@ public class TowerDataSetUp : MonoBehaviour
             }
         }
 
-        towerDatas = TD.towerData;
+        towerDatas = towerData.towerData;
     }
 
+    //타워 코드로 특정 타워의 정보 가져오기
     public static TowerDataFrame GetData(int unitcode)
     {
         for (int i = 0; i < towerDatas.Length; i++)

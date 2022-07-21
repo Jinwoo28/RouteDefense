@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
     private void Awake()
     {
-        SetState(EnemyStateSetUp.GetData(EnemyCode));
+        SetState(EnemyDataSetUp.GetData(EnemyCode));
         TimeScale = OriginTimeScale = Time.timeScale;
     }
 
