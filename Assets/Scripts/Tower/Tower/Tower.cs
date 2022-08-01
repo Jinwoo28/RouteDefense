@@ -32,13 +32,12 @@ public class TowerInfo
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] GameObject SM;
-
     [SerializeField] private int TowerCode = 0;
-
+    
+    [SerializeField] private GameObject alterSound;
     //진화 할 상위 타워
+    
     [SerializeField] private GameObject uppertower = null;
-
     //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
 
@@ -72,6 +71,7 @@ public class Tower : MonoBehaviour
 
     //타워의 업그레이드 수준
     private int towerlevel = 0;
+    private int sellprice = 0;
 
     //포신이 회전할 속도
     protected float rotationspeed = 720;
@@ -82,6 +82,7 @@ public class Tower : MonoBehaviour
     //현재 타워 아래에 있는 타일의 노드
     private Node node = null;
 
+    protected bool isAtking = false;
 
     //타워의 공격범위
     private ShowTowerInfo showtowerinfo = null;
@@ -113,7 +114,8 @@ public class Tower : MonoBehaviour
     protected virtual void Start()
     {
         AS = this.GetComponent<AudioSource>();
-        Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(1);
+        var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+        sound.PlaySound(AlertKind.Build,sound.gameObject);
         atkDelay = towerinfo.atkdelay;
         StartCoroutine("AutoSearch");
         node.GetOnTower = true;
@@ -159,15 +161,15 @@ public class Tower : MonoBehaviour
         yield return null;
     }
 
-    protected bool Atking = false;
-
+    //타워 업그레이드
     public void TowerUpgrade()
     {
         int upgradeprice = (int)(upgradeValue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
 
         if (playerstate.GetSetPlayerCoin >= upgradeprice)
         {
-            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(2);
+            var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+            sound.PlaySound(AlertKind.OK, sound.gameObject);
             sellprice += upgradeprice;
 
             towerlevel++;
@@ -186,45 +188,46 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(0);
+            var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+            sound.PlaySound(AlertKind.Cant, sound.gameObject);
         }
     }
 
+    //타워 판매
     public void SellTower()
     {
         GameManager.buttonOff();
 
         playerstate.GetSetPlayerCoin = (-sellprice);
         node.GetOnTower = false;
+        var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+        sound.PlaySound(AlertKind.OK, sound.gameObject);
         Destroy(this.gameObject);
-        Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(3);
     }
 
-    private int sellprice = 0;
-    public int GetSetSellPrice { get => sellprice; set => sellprice = value; }
-
+    //타워 이동
     public void TowerMove()
     {
         GameManager.buttonOff();
         if (TowerCanWork)
         {
-            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(2);
+            var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+            sound.PlaySound(AlertKind.OK, sound.gameObject);
             TowerCanWork = true;
 
             GameObject preview = Instantiate(towerpreview, this.transform.position, Quaternion.identity);
             showtowerinfo.SetTowerinfoOff();
-            //preview.GetComponent<TowerPreview>().SetBuildState = buildstate;
-            //preview.GetComponent<TowerPreview>().SetShowTowerInfo(showtowerinfo, towerinfo.towerrange);
 
-            preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, towerinfo.towerrange);
-
-            preview.GetComponent<TowerPreview>().TowerMoveSetUp(this.gameObject);
+            var towerPreview = preview.GetComponent<TowerPreview>();
+            towerPreview.TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, towerinfo.towerrange);
+            towerPreview.TowerMoveSetUp(this.gameObject);
 
             ActiveOff();
         }
         else
         {
-            Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(1);
+            var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
+            sound.PlaySound(AlertKind.Cant, sound.gameObject);
         }
     }
 
@@ -251,7 +254,7 @@ public class Tower : MonoBehaviour
         StartCoroutine("AutoSearch");
     }
 
-
+    //타워 업그레이드 수치
     public void SetState(int _lev1, int _lev2)
     {
         int lev = (_lev1 + _lev2) / 2;
@@ -259,40 +262,26 @@ public class Tower : MonoBehaviour
         towerinfo.towerdamage += (lev * upgradeValue.UpdamageValue);
         towerinfo.towercritical += (lev * (float)upgradeValue.UpcriticalValue);
         upgradeValue.upgradeprice += towerlevel * upgradeValue.priceUprate;
-       
     }
 
+    //타워 진화
     public void TowerStepUp(Tower _tower)
     {
         GameObject buildedtower = Instantiate(uppertower, this.transform.position, Quaternion.identity);
 
-        buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
-        buildedtower.GetComponent<Tower>().SetState(_tower.GetTowerLevel, towerlevel);
-        buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;
+        var tower = buildedtower.GetComponent<Tower>();
 
-        buildedtower.GetComponent<Tower>().GetSetSellPrice += 
+        tower.TowerSetUp(node, showtowerinfo, buildstate, playerstate);
+        tower.SetState(_tower.GetTowerLevel, towerlevel);
+        tower.towerinfo.towername = towerinfo.towername;
+        tower.GetSetSellPrice += 
             ((sellprice - towerinfo.towerprice) + (_tower.sellprice-_tower.towerinfo.towerprice));
 
-
-
         showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
         showtowerinfo.ClickTower();
 
         Destroy(this.gameObject);
     }
-
-    public void TowerUpSkill()
-    {
-        GameObject buildedtower = Instantiate(uppertower, this.transform.position, Quaternion.identity);
-        buildedtower.GetComponent<Tower>().TowerSetUp(node, showtowerinfo, buildstate, playerstate);
-        buildedtower.GetComponent<Tower>().SetState(1, towerlevel);
-        buildedtower.GetComponent<Tower>().towerinfo.towername = towerinfo.towername;
-        showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
-        showtowerinfo.ClickTower();
-
-        Destroy(this.gameObject);
-    }
-
 
     //프리뷰가 타워에게 넘겨줄 정보
     //타워가 다음 타워에게 넘겨줄 정보
@@ -321,7 +310,7 @@ public class Tower : MonoBehaviour
 
     #region TowerProperties
 
-    public bool SetTowerCanWork
+    public bool IsSetTowerCanWork
     {
         get => TowerCanWork;
         set => TowerCanWork = value;
@@ -338,8 +327,8 @@ public class Tower : MonoBehaviour
         }
     }
 
-
-    public bool GetCanWork { get => TowerCanWork; set => TowerCanWork = value; }
+    public int GetSetSellPrice { get => sellprice; set => sellprice = value; }
+    public bool IsGetCanWork { get => TowerCanWork; set => TowerCanWork = value; }
 
     //타워 이름
     public string Getname => towerinfo.towername;

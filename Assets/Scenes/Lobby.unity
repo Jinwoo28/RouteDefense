@@ -294,10 +294,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6712,10 +6712,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12233,7 +12233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cf68dfe63204047b8b0dd57c353ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerData: {fileID: 11400000, guid: 3bcaa9b31619fc3479a4f5f6865997d0, type: 2}
+  towerData: {fileID: 11400000, guid: e99a0f82946a1c44eb8a050280177855, type: 2}
   DarkImage: {fileID: 1707057546}
 --- !u!114 &804211876
 MonoBehaviour:
@@ -17763,10 +17763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DD:
-  - {fileID: 8300000, guid: 09ef0b00c4f4aad4d9297b42eec69ead, type: 3}
-  - {fileID: 8300000, guid: 110540b3555b22042aaa487bff0c655f, type: 3}
-  - {fileID: 8300000, guid: 318a6d62ea0648c4eb963c1e8a62de46, type: 3}
+  AudioClips: []
 --- !u!4 &1105710790
 Transform:
   m_ObjectHideFlags: 0
@@ -21539,7 +21536,6 @@ MonoBehaviour:
   NotText: {fileID: 75162115}
   ActiveBundle: {fileID: 11400000, guid: 2f75d8403da4b584cadc2e5b3b0917d4, type: 2}
   passiveBundle: {fileID: 11400000, guid: aca59389dc16bb949992edcdf9d47523, type: 2}
-  SM: {fileID: 1105710789}
 --- !u!1 &1384722365
 GameObject:
   m_ObjectHideFlags: 0
@@ -24423,10 +24419,10 @@ MonoBehaviour:
           m_StringArgument: SelectStage
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -31954,10 +31950,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -32440,10 +32436,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -33689,10 +33685,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1105710789}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 923040013}
+        m_TargetAssemblyTypeName: ShowInformation, Assembly-CSharp
+        m_MethodName: PlayOkBunSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

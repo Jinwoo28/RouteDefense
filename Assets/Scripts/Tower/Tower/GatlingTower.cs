@@ -29,7 +29,7 @@ public class GatlingTower : HitScanTower
     {
         base.Update();
 
-        if (SetTowerCanWork)
+        if (IsSetTowerCanWork)
         {
             if (FinalTarget != null)
             {

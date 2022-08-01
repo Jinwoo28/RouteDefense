@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class AddTile : MonoBehaviour
 {
-    [SerializeField] private SoundManager SM;
     [SerializeField] private PlayerState playerState = null;
     [SerializeField] private GameObject AddTilePrefab;
 
@@ -15,14 +14,14 @@ public class AddTile : MonoBehaviour
     //짝수 단위로 입력할 것
     private int gridX;
     private int gridY;
+    private int addPrice = 10;
+    //추가될 테트리스 타일 넘버
+    private int tetrisNum = 0;
 
     private bool isTileActive = false;
     private bool isCanBuildTile = false;
 
-    private int addPrice = 10;
-
-    //추가될 테트리스 타일 넘버
-    private int tetrisNum = 0;
+    private AlertSetting alter = new AlertSetting();
 
     //Node를 2차원 배열로 만들어 index값 부여
     private Node[,] grid;
@@ -264,7 +263,7 @@ X X 10 X
     {
         if (playerState.GetSetPlayerCoin >= addPrice)
         {
-            SM.TurnOnSound(0);
+            alter.PlaySound(AlertKind.Click, this.gameObject);
             //추가타일 가격만큼 플레이어 코인 감소
             playerState.GetSetPlayerCoin = addPrice;
 
@@ -405,7 +404,7 @@ X X 10 X
         }
         else
         {
-            SM.TurnOnSound(6);
+            alter.PlaySound(AlertKind.bubu, this.gameObject);
             playerState.ShowNotEnoughMoneyCor();
         }
     }

@@ -135,15 +135,12 @@ public class AtkTower : Tower
  
             towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
 
-
-        bool atkstart = false;
-
         if (FinalTarget != null)
         {
             if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
             {
 
-                Atking = true;
+                isAtking = true;
                 atkDelay -= Time.deltaTime;
                 if (atkDelay <= 0)
                 {
@@ -161,8 +158,7 @@ public class AtkTower : Tower
             }
             else
             {
-                Atking = false;
-                atkstart = false;
+                isAtking = false;
             }
         }
     }

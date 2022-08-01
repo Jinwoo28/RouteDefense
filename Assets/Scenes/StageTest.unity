@@ -525,10 +525,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8546,7 +8546,7 @@ MonoBehaviour:
           m_StringArgument: Lobby
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: TurnOnSound
         m_Mode: 3
@@ -11358,10 +11358,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11975,10 +11975,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13314,10 +13314,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13975,7 +13975,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: TurnOnSound
         m_Mode: 3
@@ -14682,6 +14682,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1863088095}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SettingPanalOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16116,10 +16128,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: TurnOnSound
-        m_Mode: 3
+      - m_Target: {fileID: 2058199563}
+        m_TargetAssemblyTypeName: Route, Assembly-CSharp
+        m_MethodName: PlayOnClickBtnSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16989,7 +17001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerstate: {fileID: 968497605}
-  SM: {fileID: 1248947844}
   sellinfo: {fileID: 268936135}
   layermask:
     serializedVersion: 2
@@ -17842,7 +17853,7 @@ MonoBehaviour:
           m_StringArgument: StageTest
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: TurnOnSound
         m_Mode: 3
@@ -18830,154 +18841,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!1 &1248947843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1248947846}
-  - component: {fileID: 1248947845}
-  - component: {fileID: 1248947844}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1248947844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248947843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DD:
-  - {fileID: 8300000, guid: 09ef0b00c4f4aad4d9297b42eec69ead, type: 3}
-  - {fileID: 8300000, guid: f88800b3c611a6c43a4fec5fc967a69a, type: 3}
-  - {fileID: 8300000, guid: 5975ab78d6ded474a9af1df39d66c3f4, type: 3}
-  - {fileID: 8300000, guid: 67611795245344943bc72857d07e8e5b, type: 3}
-  - {fileID: 8300000, guid: d069bce1c092cfe4ead6178b88613ce8, type: 3}
-  - {fileID: 8300000, guid: 267d240d7a9f383419a2024ce45897c8, type: 3}
-  - {fileID: 8300000, guid: 318a6d62ea0648c4eb963c1e8a62de46, type: 3}
---- !u!82 &1248947845
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248947843}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &1248947846
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248947843}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 982.2772, y: 258.8134, z: -50.667755}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249278759
 GameObject:
   m_ObjectHideFlags: 0
@@ -19318,7 +19181,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1248947844}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: TurnOnSound
         m_Mode: 3
@@ -20509,7 +20372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2c924c767260042b20f6fa0a88262e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SM: {fileID: 1248947844}
   buildstate:
   - {fileID: 7217829235735812302}
   - {fileID: 1208377128462817696}
@@ -20648,7 +20510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DD: []
+  AudioClips: []
 --- !u!1 &1495850289
 GameObject:
   m_ObjectHideFlags: 0
@@ -22506,7 +22368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbc86f47d8e9594cb705a39690e2b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SM: {fileID: 1248947844}
   speedSet: {fileID: 1863088093}
   ClearPanal: {fileID: 477512801}
   PlusCoin1: {fileID: 1681057581}
@@ -22514,67 +22375,6 @@ MonoBehaviour:
   PlusCoin2: {fileID: 0}
   water: {fileID: 1630533016}
   unituiParent: {fileID: 0}
-  stageinfo:
-  - SpawnTime: 1
-    EnemyCount: 10
-    enemyNum: 00000000
-  - SpawnTime: 1
-    EnemyCount: 15
-    enemyNum: 04000000
-  - SpawnTime: 1
-    EnemyCount: 20
-    enemyNum: 000000000400000013000000
-  - SpawnTime: 1
-    EnemyCount: 25
-    enemyNum: 0400000009000000
-  - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 08000000
-  - SpawnTime: 1
-    EnemyCount: 30
-    enemyNum: 010000000e000000
-  - SpawnTime: 1
-    EnemyCount: 35
-    enemyNum: 05000000
-  - SpawnTime: 1
-    EnemyCount: 40
-    enemyNum: 010000000a00000014000000
-  - SpawnTime: 1
-    EnemyCount: 45
-    enemyNum: 050000000f000000
-  - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 0d000000
-  - SpawnTime: 1
-    EnemyCount: 50
-    enemyNum: 020000000a000000
-  - SpawnTime: 1
-    EnemyCount: 55
-    enemyNum: 050000000f000000
-  - SpawnTime: 1
-    EnemyCount: 60
-    enemyNum: 020000000600000015000000
-  - SpawnTime: 1
-    EnemyCount: 65
-    enemyNum: 0b000000
-  - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 12000000
-  - SpawnTime: 1
-    EnemyCount: 70
-    enemyNum: 0600000010000000
-  - SpawnTime: 1
-    EnemyCount: 75
-    enemyNum: 0300000007000000
-  - SpawnTime: 1
-    EnemyCount: 80
-    enemyNum: 0c00000016000000
-  - SpawnTime: 1
-    EnemyCount: 85
-    enemyNum: 11000000
-  - SpawnTime: 1
-    EnemyCount: 1
-    enemyNum: 17000000
   playerstate: {fileID: 968497605}
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}
@@ -23303,7 +23103,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2058199564}
         m_TargetAssemblyTypeName: AddTile, Assembly-CSharp
-        m_MethodName: OnClickAddTile
+        m_MethodName: OnClickAddBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27777,7 +27577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7364a412b0d4a419db6c574b6d8d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SM: {fileID: 1248947844}
   cursorimage: {fileID: 2800000, guid: 2aae0fa96c6bdf041956ee19e8da7fe2, type: 3}
   NotFound: {fileID: 866557939}
   EM: {fileID: 1667784359}
@@ -27793,8 +27592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c84e4cec58c88c46ab053a10f467c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SM: {fileID: 1248947844}
-  playerState: {fileID: 0}
+  playerState: {fileID: 968497605}
   AddTilePrefab: {fileID: 4156143761454224607, guid: e87c515dec63c494a8add1d7fabf7f5c, type: 3}
 --- !u!1 &2079056532
 GameObject:

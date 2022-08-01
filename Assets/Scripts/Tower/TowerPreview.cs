@@ -17,19 +17,19 @@ public class TowerPreview : MonoBehaviour
     private bool alreadytower = false;
 
     //타일 위인지 검사
-    private bool ontile = false;
+    private bool isOnTile = false;
 
-    private bool OnWater = false;
-    public bool SetWeater { set => OnWater = value; }
+    private bool isOnWater = false;
+    public bool isSetWeater { set => isOnWater = value; }
 
     //이동하는 길목인지 확인
-    private bool checkOnroute = false;
+    private bool isCheckOnroute = false;
     
     //build할 수 있는지 최종 여부
-    private bool canbuildable = false;
+    private bool isCanBuildAble = false;
 
     //합체가능 한지 여부
-    private bool CanCombination = false;
+    private bool isCanCombination = false;
     
     [SerializeField] private LayerMask layermask;
 
@@ -45,8 +45,16 @@ public class TowerPreview : MonoBehaviour
 
     private bool thisActive = true;
 
-
     DetectObject detector = new DetectObject();
+
+    private Node towernode;
+    private Tower tower = null;
+    private ShowTowerInfo showtowerinfo = null;
+    private BuildManager buildmanager = null;
+    private float range = 0;
+
+    //이동할 때 원래 타워의 정보
+    private GameObject Origintower = null;
 
     private void Start()
     {
@@ -54,21 +62,19 @@ public class TowerPreview : MonoBehaviour
     }
     private void UiStateChange(int _i)
     {
-
-            for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == _i)
             {
-                if (i == _i)
-                {
-                Can[i] = true;
-                   buildstate[i].SetActive(true);
-                }
-                else
-                {
-                Can[i] = false;
-                    buildstate[i].SetActive(false);
-                }
+               Can[i] = true;
+               buildstate[i].SetActive(true);
             }
-        
+            else
+            {
+                Can[i] = false;
+                buildstate[i].SetActive(false);
+            }
+        }
     }
 
      private void UiStateOff()
@@ -78,16 +84,6 @@ public class TowerPreview : MonoBehaviour
             buildstate[i].SetActive(false);
         }
     }
-
-    private Node towernode;
-
-    private Tower tower = null;
-    private ShowTowerInfo showtowerinfo = null;
-    private BuildManager buildmanager = null;
-    private float range = 0;
-
-    //이동할 때 원래 타워의 정보
-    private GameObject Origintower = null;
 
     private void Update()
     {
@@ -115,24 +111,23 @@ public class TowerPreview : MonoBehaviour
                 Origintower.GetComponent<Tower>().ActiveOn();
             }
         }
-
-       // Debug.Log("합체 가능 : "+CanCombination + " -- "+"타워있음 : " + alreadytower);
     }
 
     IEnumerator BuildTower()
     {
         while (true)
         {
-            // Debug.Log(showtowerinfo);
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layermask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Tile")))
             {
                 if (hit.collider.CompareTag("Tile"))
                 {
-                    int X = hit.collider.GetComponent<Node>().gridX;
-                    int Z = hit.collider.GetComponent<Node>().gridY;
+                    var nodeInfo = hit.collider.GetComponent<Node>();
+
+                    int X = nodeInfo.gridX;
+                    int Z = nodeInfo.gridY;
                     float Y = hit.collider.transform.localScale.y;
                     this.transform.position = new Vector3(X, (Y / 2), Z);
 
@@ -141,17 +136,17 @@ public class TowerPreview : MonoBehaviour
                         showtowerinfo.ShowRange(this.gameObject.transform, range);
                     }
                     //타일 위에 있는지
-                    ontile = true;
+                    isOnTile = true;
                     //이미 타워가 있는지
-                    alreadytower = hit.collider.GetComponent<Node>().GetOnTower;
+                    alreadytower = nodeInfo.GetOnTower;
                     //이동 길목인지
-                    checkOnroute = hit.collider.GetComponent<Node>().Getwalkable;
+                    isCheckOnroute = nodeInfo.Getwalkable;
 
-                    towernode = hit.collider.GetComponent<Node>();
+                    towernode = nodeInfo;
                 }
                 else
                 {
-                    ontile = false;
+                    isOnTile = false;
                 }
             }
 
@@ -161,19 +156,16 @@ public class TowerPreview : MonoBehaviour
                 {
                     //현재 위치의 설치가능 여부에 따라 preview 위에 ui표시
                     //불가능
-
-                    if ((alreadytower && !CanCombination) || (CanCombination && towerstep == 3) 
-                        || (CanCombination && tower.GetStep == 3) || checkOnroute || OnWater
+                    if ((alreadytower && !isCanCombination) || (isCanCombination && towerstep == 3) 
+                        || (isCanCombination && tower.GetStep == 3) || isCheckOnroute || isOnWater
                         || ((towernode!=null)&&towernode.GetSetCheckNode) || (towernode!=null&&towernode.SetOnObstacle))
                     {
                         UiStateChange(2);
                         GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 0, 0));
                     }
-
                     //합체
-                    else if ((alreadytower && CanCombination && towerstep != 3 && tower.GetStep != 3) && !OnWater)
+                    else if ((alreadytower && isCanCombination && towerstep != 3 && tower.GetStep != 3) && !isOnWater)
                     {
-                        //  Debug.Log(alreadytower + " : " + CanCombination + " : " + (towerstep != 3 && tower.GetStep != 3));
                         GetComponentInChildren<Renderer>().sharedMaterial.SetColor("_Color", new Color(1, 1, 0));
                         UiStateChange(0);
                     }
@@ -185,11 +177,10 @@ public class TowerPreview : MonoBehaviour
                     }
                 }
 
-
                 //타워 합체
-                if (ontile && !checkOnroute && !OnWater)
+                if (isOnTile && !isCheckOnroute && !isOnWater)
                 {
-                    if (CanCombination && alreadytower)
+                    if (isCanCombination && alreadytower)
                     {
                         if (tower != null)
                         {
@@ -214,7 +205,7 @@ public class TowerPreview : MonoBehaviour
                                 }
 
                                 if (buildmanager != null)
-                                    buildmanager.GettowerpreviewActive = false;
+                                    buildmanager.IsGettowerpreviewActive = false;
 
                                 tower.GetBuildState = buildstate;
 
@@ -225,10 +216,9 @@ public class TowerPreview : MonoBehaviour
                         }
                     }
 
-                    //이동일 때 혹은 새로 지을 때
+                    //이동 혹은 새로 지을 때
                     else if (!alreadytower && ((towernode != null) && !towernode.SetOnObstacle) && !towernode.GetSetCheckNode)
                     {
-                      
                         if (Input.GetMouseButtonDown(0))
                         {
                             //이동인지 새로 짓는건지 검사
@@ -238,38 +228,40 @@ public class TowerPreview : MonoBehaviour
                             //위치변경
                             //기존의 타워를 이동할 때
 
-                  
-
                             if (Origintower != null)
                             {
+                                var originTower = Origintower.GetComponent<Tower>();
                                 Origintower.transform.position = this.transform.position;
-                                Origintower.GetComponent<Tower>().SetNode = towernode;
-                                Origintower.GetComponent<Tower>().ActiveOn();
-                                showtowerinfo.ShowInfo(Origintower.GetComponent<Tower>());
+                                originTower.SetNode = towernode;
+                                originTower.ActiveOn();
+                                showtowerinfo.ShowInfo(originTower);
 
                                 Destroy(this.gameObject);
                             }
-
                             //새로운 타워 건설
                             //빌드매니저에서 생성한 프리뷰가 타일에 지어질 때
                             else
                             {
                                 GameObject buildedtower = Instantiate(buildTower, this.transform.position, Quaternion.identity);
-                                buildedtower.GetComponent<Tower>().SetNode = towernode;
-                                buildedtower.GetComponent<Tower>().SetNode.GetOnTower = true;
-                                buildedtower.GetComponent<Tower>().SetShowTower = showtowerinfo;
-                                buildedtower.GetComponent<Tower>().SetUp(playerstate);
-                                buildedtower.GetComponent<Tower>().buildstate = buildstate;
+
+                                var tower = buildedtower.GetComponent<Tower>();
+                                tower.SetNode = towernode;
+                                tower.SetNode.GetOnTower = true;
+                                tower.SetShowTower = showtowerinfo;
+                                tower.SetUp(playerstate);
+                                tower.buildstate = buildstate;
+
                                 showtowerinfo.ShowInfo(buildedtower.GetComponent<Tower>());
                                 showtowerinfo.ShowRange(buildedtower.transform, TowerDataSetUp.GetData(buildedtower.GetComponent<Tower>().GetTowerCode).range);
-
                             }
+
                             if (buildmanager != null)
-                                buildmanager.GettowerpreviewActive = false;
+                            {
+                                buildmanager.IsGettowerpreviewActive = false;
+                            }
                             showtowerinfo.SetTowerinfo();
                             UiStateOff();
                             Destroy(this.gameObject);
-
                         }
 
                     }
@@ -291,37 +283,28 @@ public class TowerPreview : MonoBehaviour
     //타일 위, 길 X, 타워 X => 타워 짓기
     //타일 위, 길 X, 타워 O -- 형재 미리보기와 같은 이름 단게 => 진화타워짓기
 
-
     private void OnTriggerEnter(Collider other)
     {
-       // Debug.Log(towerstep);
         if (other.CompareTag("Tower"))
         {
-
-            //       Debug.Log("asdasdfasdfasdfsdfsdfaasdfasdfsdfasdfasfasdf");
-            if (other.GetComponent<Tower>().Getname == towername&& other.GetComponent<Tower>().GetStep==towerstep && other.GetComponent<Tower>().GetStep !=3&&towerstep!=3&& other.GetComponent<Tower>().GetCanWork)
+            var towerCom = other.GetComponent<Tower>();
+            if (towerCom.Getname == towername && towerCom.GetStep==towerstep && towerCom.GetStep !=3 && towerstep!=3 && towerCom.IsGetCanWork)
             {
-               
-                CanCombination = true;
-               // Debug.Log(CanCombination + " : 합체 여부");
+                isCanCombination = true;
                 tower = other.GetComponent<Tower>();
             }
             else
             {
-         //       Debug.Log("4564548564856456456456456456456456");
-                CanCombination = false;
+                isCanCombination = false;
                 tower = null;
             }
-
          //alreadytower = true;
         }
         //else
         //{
-        //    Debug.Log("4564548564856456456456456456456456 : 456456456456456");
         //    CanCombination = false;
         //    //alreadytower = false;
         //}
-     //   Debug.Log(CanCombination + " : 합체 여부222");
     }
 
     //빌드매니저에서 프리뷰를 생성할 때 초기화함수
@@ -329,18 +312,21 @@ public class TowerPreview : MonoBehaviour
     {
         buildmanager = _buildmanager;
         buildTower = _buildtower;
-        towername = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).name;
-        towerstep = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode).towerStep;
-        StartCoroutine("BuildTower");
 
+        var towerinfo = TowerDataSetUp.GetData(_buildtower.GetComponent<Tower>().GetTowerCode);
+        towername = towerinfo.name;
+        towerstep = towerinfo.towerStep;
+        StartCoroutine("BuildTower");
     }
 
     //타워에서 이동버튼을 눌렀을 때 초기화함수
     public void TowerMoveSetUp(GameObject _OriginTower)
     {
         Origintower = _OriginTower;
-        towername = _OriginTower.GetComponent<Tower>().Getname;
-        towerstep = _OriginTower.GetComponent<Tower>().GetStep;
+
+        var towerCompo = _OriginTower.GetComponent<Tower>();
+        towername = towerCompo.Getname;
+        towerstep = towerCompo.GetStep;
         StartCoroutine("BuildTower");
     }
 

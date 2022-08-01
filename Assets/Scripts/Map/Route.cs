@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Route : MonoBehaviour
 {
-    [SerializeField] private SoundManager SM;
+    [SerializeField] private Texture2D cursorimage = null;
+    [SerializeField] private GameObject NotFound = null;
+    
     private int gridX;
     private int gridY;
 
     //Node를 2차원 배열로 만들어 index값 부여
     private Node[,] grid;
-
-    [SerializeField] private Texture2D cursorimage = null;
+    
+    //길찾기에서 시작과 끝 노드
+    private Node StartNode;
+    private Node Start2Node;
+    private Node EndNode;
 
     private DetectObject detector = new DetectObject();
 
     private HashSet<Node> overlapcheck = new HashSet<Node>();
 
-    private bool isgameing = false;
-
-    private bool TileCanChange = false;
+    private bool isGameing = false;
+    private bool isTileCanChange = false;
 
     private List<Node> waypointnode = new List<Node>();
     Vector3[] waypoints1;
@@ -27,12 +31,7 @@ public class Route : MonoBehaviour
     private List<Node> waypointnode2 = new List<Node>();
     Vector3[] waypoints2;
 
-    //길찾기에서 시작과 끝 노드
-    private Node StartNode;
-    private Node Start2Node;
-    private Node EndNode;
-
-    [SerializeField] private GameObject NotFound = null;
+    private AlertSetting alter = new AlertSetting();
 
     public EnemyManager EM = null;
 
@@ -61,7 +60,7 @@ public class Route : MonoBehaviour
     private void Update()
     {
 
-        if (TileCanChange)
+        if (isTileCanChange)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -74,7 +73,7 @@ public class Route : MonoBehaviour
             }
         }
 
-        if (TileCanChange)
+        if (isTileCanChange)
         {
             Cursor.SetCursor(cursorimage, Vector2.zero, CursorMode.ForceSoftware);
         }
@@ -106,28 +105,25 @@ public class Route : MonoBehaviour
     //버튼으로 길만들기 활성화, 비활성화 시킬 버튼함수
     public void OnClickWalkableChange()
     {
-        bool can = !TileCanChange;
-        Debug.Log("asdf");
+        bool can = !isTileCanChange;
         GameManager.buttonOff();
 
-
-
-        if (!isgameing)
+        if (!isGameing)
         {
             // if (!AddTileActive)
-            TileCanChange = can;
+            isTileCanChange = can;
         }
     }
 
     public void MouseChage()
     {
-        TileCanChange = false;
+        isTileCanChange = false;
     }
 
     public void RouteReset()
     {
         GameManager.buttonOff();
-        if (!isgameing)
+        if (!isGameing)
         {
             foreach (Node i in overlapcheck)
             {
@@ -146,9 +142,9 @@ public class Route : MonoBehaviour
         {
             if (GameManager.SetGameLevel == 3)
             {
-                if (!isgameing)
+                if (!isGameing)
                 {
-                    isgameing = true;
+                    isGameing = true;
                     if (FindPath(Start2Node) && FindPath(StartNode))
                     {
 
@@ -171,11 +167,11 @@ public class Route : MonoBehaviour
             }
             else
             {
-                if (!isgameing)
+                if (!isGameing)
                 {
-                    isgameing = true;
+                    isGameing = true;
 
-                    Debug.Log(isgameing);
+                    Debug.Log(isGameing);
 
                     if (FindPath(StartNode))
                     {
@@ -185,7 +181,7 @@ public class Route : MonoBehaviour
                     else
                     {
 
-                        Debug.Log(isgameing);
+                        Debug.Log(isGameing);
                         StopCoroutine("ShowNotFoundRoute");
                         StartCoroutine("ShowNotFoundRoute");
                         NotFound.SetActive(true);
@@ -196,9 +192,9 @@ public class Route : MonoBehaviour
         else if(GameManager.GetSetStageType == StageType.UnOrderCheckPoint)
         {
             Debug.Log("UnOrder");
-            if (!isgameing)
+            if (!isGameing)
             {
-                isgameing = true;
+                isGameing = true;
                 if (FindPath2(StartNode))
                 {
                     Vector3[] waypoint = WayPoint2(StartNode, EndNode, waypointnode);
@@ -214,9 +210,9 @@ public class Route : MonoBehaviour
         }
         else
         {
-            if (!isgameing)
+            if (!isGameing)
             {
-                isgameing = true;
+                isGameing = true;
                 if (FindPath3(StartNode))
                 {
                     Vector3[] waypoint = WayPoint2(StartNode, EndNode, waypointnode);
@@ -318,13 +314,13 @@ public class Route : MonoBehaviour
 
             if (findpath)
             {
-                TileCanChange = false;
+                isTileCanChange = false;
             //Vector3[] waypoint = WayPoint(StartNode, EndNode);
             //EM.gameStartCourtain(waypoint, waypoint[0]);
             //waypoint = WayPoint(_start, EndNode, _waypoint);
             //EM.gameStartCourtain(waypoint, waypoint[0]);
 
-            SM.TurnOnSound(0);
+            alter.PlaySound(AlertKind.Click, this.gameObject);
             return true;
             }
 
@@ -335,7 +331,7 @@ public class Route : MonoBehaviour
                 //NotFound.SetActive(true);
                 Debug.Log("길찾기 실패");
             
-            isgameing = false;
+            isGameing = false;
             return false;
             }
         
@@ -555,8 +551,8 @@ public class Route : MonoBehaviour
 
     private IEnumerator ShowNotFoundRoute()
     {
-        SM.TurnOnSound(6);
-        isgameing = false;
+        alter.PlaySound(AlertKind.Cant, this.gameObject);
+        isGameing = false;
         yield return new WaitForSeconds(1.0f);
         NotFound.SetActive(false);
     }
@@ -565,10 +561,10 @@ public class Route : MonoBehaviour
     {
         while (true)
         {
-            isgameing = EM.GameOnGoing;
-            if (!isgameing)
+            isGameing = EM.GameOnGoing;
+            if (!isGameing)
             {
-                SM.TurnOnSound(6);
+                alter.PlaySound(AlertKind.Cant, this.gameObject);
                 break;
             }
             yield return null;
@@ -583,7 +579,7 @@ public class Route : MonoBehaviour
 
     private void StageClear()
     {
-        isgameing = false;
+        isGameing = false;
 
         for (int i = 0; i < waypointnode.Count - 1; i++)
         {
@@ -787,7 +783,7 @@ public class Route : MonoBehaviour
 
         if (findpath && CheckCount ==0)
         {
-            TileCanChange = false;
+            isTileCanChange = false;
             //Vector3[] waypoint = WayPoint(StartNode, EndNode);
             //EM.gameStartCourtain(waypoint, waypoint[0]);
             //waypoint = WayPoint(_start, EndNode, _waypoint);
@@ -803,7 +799,7 @@ public class Route : MonoBehaviour
             //StartCoroutine("ShowNotFoundRoute");
             //NotFound.SetActive(true);
             Debug.Log("길찾기 실패");
-            isgameing = false;
+            isGameing = false;
             return false;
         }
 
@@ -951,7 +947,7 @@ public class Route : MonoBehaviour
 
         if (findpath && succesed)
         {
-            TileCanChange = false;
+            isTileCanChange = false;
             //Vector3[] waypoint = WayPoint(StartNode, EndNode);
             //EM.gameStartCourtain(waypoint, waypoint[0]);
             //waypoint = WayPoint(_start, EndNode, _waypoint);
@@ -965,7 +961,7 @@ public class Route : MonoBehaviour
             //StartCoroutine("ShowNotFoundRoute");
             //NotFound.SetActive(true);
             Debug.Log("길찾기 실패");
-            isgameing = false;
+            isGameing = false;
             return false;
         }
 
@@ -1003,6 +999,11 @@ public class Route : MonoBehaviour
         Node[] waypointary = waypoint.ToArray();
 
         return waypointary;
+    }
+
+    public void PlayOnClickBtnSound()
+    {
+        alter.PlaySound(AlertKind.Click,this.gameObject);
     }
 
 }

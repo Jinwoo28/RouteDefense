@@ -13,18 +13,22 @@ public class BuildTower
     public GameObject builditem = null;
 }
 
-
 public class BuildManager : MonoBehaviour
 {
-    [SerializeField] private SoundManager SM;
+    private const string ATK_POWER = "공격력 : ";
+    private const string ATK_SPEED = "공격속도 : ";
+    private const string TOWER_COST = "비용 : ";
+
     [SerializeField] private GameObject[] buildstate = null;
-
-    //string towername = null;
-
-
     [SerializeField] private ShowTowerInfo showtowerinfo = null;
     [SerializeField] private BuildTower[] buildtower = null;
     [SerializeField] private PlayerState playerstate= null;
+
+    [SerializeField] private GameObject BuildInfoPanel = null;
+    [SerializeField] private TextMeshProUGUI[] info = null;
+    [SerializeField] private Image towerimage = null;
+    
+    private AlertSetting alertSetting = new AlertSetting();
     int playercoin = 0;
 
     //타워 미리보기 프리펩
@@ -43,39 +47,49 @@ public class BuildManager : MonoBehaviour
 
     private static bool iswet = false;
 
-    [SerializeField] private GameObject BuildInfoPanel = null;
-    [SerializeField] private TextMeshProUGUI[] info = null;
-    [SerializeField] private Image towerimage = null;
     private int TowerCode = 0;
     private int PrefabsNum = 0;
-    private bool BTowerPanel = false;
-    private bool BMouseOnPanel = false;
+    private bool IsBTowerPanel = false;
+    private bool IsBMouseOnPanel = false;
+
+    private int towerprice;
+    private int upgradeprice;
+
+    //프리뷰 포탑이 활성화 되어있는지
+    private bool towerpreviewActive = false;
+
+    //private bool canbuild = false;
+
+    Vector3 mousepos = Vector3.zero;
+
+    public GameObject Testtile = null;
 
     public void TOnPanel()
     {
-        BMouseOnPanel = true;
+        IsBMouseOnPanel = true;
     }
     public void FOnPanel()
     {
-        BMouseOnPanel = false;
+        IsBMouseOnPanel = false;
     }
 
     public void ClickBtnCode(int Code)
     {
         TowerCode = Code;
-        BTowerPanel = true;
+        IsBTowerPanel = true;
     }
 
     public void OnMouseBuildTowerPanel(int TowerCode)
     {
         BuildInfoPanel.SetActive(true);
 
-        info[0].text = TowerDataSetUp.GetData(TowerCode).name;
-        info[1].text = TowerDataSetUp.GetData(TowerCode).towerInfo;
-        info[2].text = "공격력 : " + TowerDataSetUp.GetData(TowerCode).damage;
-        info[3].text = "공격속도 : "+TowerDataSetUp.GetData(TowerCode).delay;
-        info[4].text = "비용 : " + TowerDataSetUp.GetData(TowerCode).towerPrice * SkillSettings.PassiveValue("SetTowerDown");
-        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (TowerDataSetUp.GetData(TowerCode).name+ TowerDataSetUp.GetData(TowerCode).towerStep));
+        var towerCode = TowerDataSetUp.GetData(TowerCode);
+        info[0].text = towerCode.name;
+        info[1].text = towerCode.towerInfo;
+        info[2].text = ATK_POWER + towerCode.damage;
+        info[3].text = ATK_SPEED + towerCode.delay;
+        info[4].text = TOWER_COST + towerCode.towerPrice * SkillSettings.PassiveValue("SetTowerDown");
+        towerimage.sprite = Resources.Load<Sprite>("Image/Tower/" + (towerCode.name+ towerCode.towerStep));
     }
     public void ExitMouseBUildTowerPanel()
     {
@@ -90,7 +104,7 @@ public class BuildManager : MonoBehaviour
 
     private void OffTowerPanel()
     {
-        BTowerPanel = false;
+        IsBTowerPanel = false;
         FOnPanel();
         BuildInfoPanel.SetActive(false);
     }
@@ -135,31 +149,14 @@ public class BuildManager : MonoBehaviour
         firetowerlist.Clear();
     }
 
-
-    //프리뷰 포탑이 활성화 되어있는지
-    private bool towerpreviewActive = false;
-    
-    //private bool canbuild = false;
-
-
-    Vector3 mousepos = Vector3.zero;
-
-    public GameObject Testtile = null;
-
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             SlotClick(0);
         }
 
-        if (BTowerPanel)
+        if (IsBTowerPanel)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -167,7 +164,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!BMouseOnPanel)
+        if (!IsBMouseOnPanel)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -186,7 +183,6 @@ public class BuildManager : MonoBehaviour
                 CancelTower();
             }
         }
-
     }
 
     public void CancelTower()
@@ -195,7 +191,6 @@ public class BuildManager : MonoBehaviour
         playerstate.GetSetPlayerCoin = -towerprice;
         preview.GetComponent<TowerPreview>().DestroyThis();
     }
-
 
     //포탑 짓기
     //타일이 없는 곳, 이미 포탑이 있는 곳, 길이 있는 곳은 포탑 짓기 불가
@@ -207,7 +202,6 @@ public class BuildManager : MonoBehaviour
 
     public void SlotClick(int _slotnum)
     {
-
         GameManager.buttonOff();
 
         if (towerpreviewActive)
@@ -220,34 +214,34 @@ public class BuildManager : MonoBehaviour
         showtowerinfo.SetTowerinfoOff();
 
         float price = TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).towerPrice * SkillSettings.PassiveValue("SetTowerDown");
-         towerprice = (int)price;
-       // Debug.Log(TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).TowerPrice * SkillSettings.PassiveValue("SetTowerDown"));
-        
-            if (playercoin >= towerprice)
+        towerprice = (int)price;
+   
+        if (playercoin >= towerprice)
+        {
+            if (!towerpreviewActive)
             {
-                if (!towerpreviewActive)
-                {
-                SM.TurnOnSound(0);
-                    towerpreviewActive = true;
+                alertSetting.PlaySound(AlertKind.Click,this.gameObject);
+                towerpreviewActive = true;
 
-                    preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
+                preview = Instantiate(buildtower[_slotnum].preview, Vector3.zero, Quaternion.identity);
 
-                    preview.GetComponent<TowerPreview>().TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).range);
-                    preview.GetComponent<TowerPreview>().FirstSetUp(buildtower[_slotnum].builditem,this);
-                    playerstate.GetSetPlayerCoin = towerprice;
-                }
+                var towerPreview = preview.GetComponent<TowerPreview>();
+                towerPreview.TowerPreviewSetUp(showtowerinfo, buildstate, playerstate, TowerDataSetUp.GetData(buildtower[_slotnum].builditem.GetComponent<Tower>().GetTowerCode).range);
+                towerPreview.FirstSetUp(buildtower[_slotnum].builditem,this);
+                playerstate.GetSetPlayerCoin = towerprice;
             }
-            else
-            {
-            SM.TurnOnSound(6);
+        }
+        else
+        {
+            alertSetting.PlaySound(AlertKind.Cant, this.gameObject);
             playerstate.ShowNotEnoughMoneyCor();
-            }
+        }
     }
 
 
 
 
-    public bool GettowerpreviewActive
+    public bool IsGettowerpreviewActive
     {
         set
         {
@@ -255,8 +249,6 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    int towerprice;
-    int upgradeprice;
 
     
 

@@ -36,9 +36,11 @@ public class StageSelect : MonoBehaviour
     StageDataSetUp SDSU = new StageDataSetUp();
     private string stageShape = null;
 
-    int easymoney = 0;
-    int nomalmoney = 0;
-    int hardmoney = 0;
+    private int easymoney = 0;
+    private int nomalmoney = 0;
+    private int hardmoney = 0;
+
+    private AlertSetting alter = new AlertSetting();
 
     public void StageShape(int name)
     {
@@ -200,6 +202,11 @@ public class StageSelect : MonoBehaviour
 
         GameType.SetActive(false);
         levelChoice.SetActive(true);
+    }
+
+    public void PlayOnBtnSound()
+    {
+        alter.PlaySound(AlertKind.Click, this.gameObject);
     }
 
 }

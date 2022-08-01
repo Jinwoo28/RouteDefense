@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] DD;
+    [SerializeField] private AudioClip[] AudioClips;
     AudioSource audioSource = new AudioSource();
 
     static AudioClip[] SAudio;
@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSource = this.GetComponent<AudioSource>();
 
-        SAudio = DD;
+        SAudio = AudioClips;
 
         
         audioSource.volume = PlayerPrefs.GetFloat("ESound");
@@ -43,14 +43,14 @@ public class SoundManager : MonoBehaviour
 
     public void TurnOnSound(int soundNum)
     {
-        audioSource.clip = DD[soundNum];
+        audioSource.clip = AudioClips[soundNum];
         audioSource.Play();
     }
 
     public void InsthisObj(int num)
     {
         audioSource = this.GetComponent<AudioSource>();
-        audioSource.clip = DD[num];
+        audioSource.clip = AudioClips[num];
         audioSource.Play();
     }
 

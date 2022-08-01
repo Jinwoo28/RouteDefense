@@ -21,11 +21,11 @@ public class ShowInformation : MonoBehaviour
 {
     public GameObject InformationPanel;
     public TextMeshProUGUI Page = null;
-    int CurrentPage = 1;
-    int MaxPage = 0;
+    private int CurrentPage = 1;
+    private int MaxPage = 0;
 
-    bool BPrograss = false;
-    bool BForest = false;
+    private bool BPrograss = false;
+    private bool BForest = false;
 
     public Image progress;
     public TextMeshProUGUI progresstext;
@@ -36,6 +36,8 @@ public class ShowInformation : MonoBehaviour
     public InformationKind[] informationkind;
 
     private infoKind Kind = new infoKind();
+
+    private AlertSetting alter = new AlertSetting();
 
     public void ClickProgress()
     {
@@ -162,6 +164,11 @@ public class ShowInformation : MonoBehaviour
         {
             informationkind[0].Child[i].SetActive(false);
         }
+    }
+
+    public void PlayOkBunSound() 
+    {
+        alter.PlaySound(AlertKind.Click, this.gameObject);
     }
 
 }

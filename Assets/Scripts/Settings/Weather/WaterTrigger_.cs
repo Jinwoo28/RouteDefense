@@ -18,7 +18,7 @@ public class WaterTrigger_ : MonoBehaviour
         if (other.CompareTag("Tower"))
         {
             Debug.Log("¹Ù´Ù");
-            other.GetComponent<Tower>().SetTowerCanWork = false;
+            other.GetComponent<Tower>().IsSetTowerCanWork = false;
             towerlist.Add(other.GetComponent<Tower>());
         }
 
@@ -29,7 +29,7 @@ public class WaterTrigger_ : MonoBehaviour
 
         if (other.CompareTag("TowerPreview"))
         {
-            other.GetComponent<TowerPreview>().SetWeater = true;
+            other.GetComponent<TowerPreview>().isSetWeater = true;
         }
 
         if (other.CompareTag("Fruit"))
@@ -55,7 +55,7 @@ public class WaterTrigger_ : MonoBehaviour
 
         foreach (Tower tower in towerlist)
         {
-            tower.GetCanWork = true;
+            tower.IsGetCanWork = true;
         }
     }
 
@@ -64,12 +64,12 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            other.GetComponent<Tower>().SetTowerCanWork = true;
+            other.GetComponent<Tower>().IsSetTowerCanWork = true;
             towerlist.Remove(other.GetComponent<Tower>());
         }
         if (other.CompareTag("TowerPreview"))
         {
-            other.GetComponent<TowerPreview>().SetWeater = false;
+            other.GetComponent<TowerPreview>().isSetWeater = false;
         }
         //if (other.CompareTag("Fruit"))
         //{
