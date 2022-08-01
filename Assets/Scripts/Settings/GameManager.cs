@@ -34,4 +34,9 @@ public class GameManager : MonoBehaviour
         buttonOff();
     }
 
+    private static StageDataFrame stageData;
+    public static StageDataFrame GetStageData() => stageData;
+    public static StageDataFrame SetStageData { set => stageData = value; }
+
+
 }

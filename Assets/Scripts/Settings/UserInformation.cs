@@ -193,7 +193,7 @@ public class UserInformation : MonoBehaviour
 //    https://forum.unity.com/threads/json-file-not-found-after-building.959523/
 
         userData = JsonConvert.DeserializeObject<UserData>(jdata);
-        Debug.Log("불러오기");
+       // Debug.Log("불러오기");
     }
 
  

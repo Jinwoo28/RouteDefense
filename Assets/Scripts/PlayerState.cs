@@ -8,7 +8,7 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject notEnoughMoney = null;
     
     private int playerCoin = 500;
-    private int playerLife = 30;
+    private int playerLife = 5000;
 
     private void Start()
     {

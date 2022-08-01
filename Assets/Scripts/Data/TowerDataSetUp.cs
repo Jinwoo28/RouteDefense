@@ -36,7 +36,7 @@ public class TowerDataSetUp : MonoBehaviour
 
         string data = www.downloadHandler.text;
 
-        print(data);
+        //print(data);
 
         SetEnemy(data);
         DarkImage.SetActive(false);

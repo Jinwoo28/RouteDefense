@@ -61,14 +61,10 @@ public class Route : MonoBehaviour
     private void Update()
     {
 
-        Debug.Log(isgameing);
-
         if (TileCanChange)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("?????");
-
                 Node node = detector.ReturnNode();
 
                 if (node != null)
@@ -95,7 +91,6 @@ public class Route : MonoBehaviour
         while (Input.GetMouseButton(0))
         {
             Node changenode = detector.ReturnNode();
-            Debug.Log(changenode);
             if (changenode != null)
             {
                 changenode.ChangeWalkableColor(walkable);
@@ -119,7 +114,6 @@ public class Route : MonoBehaviour
 
         if (!isgameing)
         {
-            Debug.Log("8976543212");
             // if (!AddTileActive)
             TileCanChange = can;
         }

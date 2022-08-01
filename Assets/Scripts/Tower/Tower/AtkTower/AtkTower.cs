@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AtkTower : Tower
 {
-    private Transform targetCollider = null;
+    [SerializeField] protected Transform shootPos = null;
+    [SerializeField] protected GameObject AtkParticle = null;
 
+    private Transform targetCollider = null;
     protected override void Awake()
     {
         base.Awake();
@@ -142,10 +144,10 @@ public class AtkTower : Tower
             {
 
                 Atking = true;
-                atkspeed -= Time.deltaTime;
-                if (atkspeed <= 0)
+                atkDelay -= Time.deltaTime;
+                if (atkDelay <= 0)
                 {
-                    atkspeed = towerinfo.atkdelay;
+                    atkDelay = towerinfo.atkdelay;
                     int critical = Random.Range(1, 101);
                     float origindamage = towerinfo.towerdamage;
                     if (critical <= towerinfo.towercritical * 100)

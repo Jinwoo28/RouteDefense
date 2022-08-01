@@ -345,11 +345,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Diamond
           m_BoolArgument: 0
@@ -695,6 +695,7 @@ MonoBehaviour:
   GOeasyMoney: {fileID: 639980116}
   GOnamalMoney: {fileID: 1908709628}
   GOhardMoney: {fileID: 879305820}
+  SSED: {fileID: 11400000, guid: df0b7509a5dd2604b9d70ed130eb1cfc, type: 2}
 --- !u!1 &221684539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,11 +1460,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: DotMap
           m_BoolArgument: 0
@@ -3324,11 +3325,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: Xshape
           m_BoolArgument: 0
@@ -4406,11 +4407,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: WellMap
           m_BoolArgument: 0
@@ -4641,7 +4642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Audio: []
   DD:
   - {fileID: 8300000, guid: 09ef0b00c4f4aad4d9297b42eec69ead, type: 3}
   - {fileID: 8300000, guid: e1dc774be4254454cbe279d1c3644562, type: 3}
@@ -5547,11 +5547,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: Center
           m_BoolArgument: 0
@@ -5859,11 +5859,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: WindowMap
           m_BoolArgument: 0
@@ -6995,11 +6995,11 @@ MonoBehaviour:
       - m_Target: {fileID: 216082915}
         m_TargetAssemblyTypeName: StageSelect, Assembly-CSharp
         m_MethodName: StageShape
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: PlusMap
           m_BoolArgument: 0

@@ -18860,7 +18860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Audio: []
   DD:
   - {fileID: 8300000, guid: 09ef0b00c4f4aad4d9297b42eec69ead, type: 3}
   - {fileID: 8300000, guid: f88800b3c611a6c43a4fec5fc967a69a, type: 3}
@@ -20649,7 +20648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53015f8edfb5cc48b2c28f392f8e98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Audio: []
   DD: []
 --- !u!1 &1495850289
 GameObject:
@@ -22510,6 +22508,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SM: {fileID: 1248947844}
   speedSet: {fileID: 1863088093}
+  ClearPanal: {fileID: 477512801}
+  PlusCoin1: {fileID: 1681057581}
+  FailPanal: {fileID: 488221030}
+  PlusCoin2: {fileID: 0}
+  water: {fileID: 1630533016}
   unituiParent: {fileID: 0}
   stageinfo:
   - SpawnTime: 1
@@ -22576,6 +22579,7 @@ MonoBehaviour:
   canvas: {fileID: 1229054796}
   hpbar: {fileID: 1189757018881186735, guid: 7c3bc81d59799c14a809adb26198ff78, type: 3}
   damagenum: {fileID: 1949477120848397248, guid: b144792fec3bb2e45a0ad7dfcd3bfa83, type: 3}
+  weather: {fileID: 1523878242}
   imagebar: {fileID: 1086045436}
   imageEnemy:
   - {fileID: 864132361}
@@ -22586,12 +22590,6 @@ MonoBehaviour:
   - {fileID: 231864778}
   - {fileID: 608342291}
   ShowBoss: {fileID: 617194974}
-  ClearPanal: {fileID: 477512801}
-  PlusCoin1: {fileID: 1681057581}
-  FailPanal: {fileID: 488221030}
-  PlusCoin2: {fileID: 0}
-  water: {fileID: 1630533016}
-  weather: {fileID: 1523878242}
 --- !u!4 &1667784360
 Transform:
   m_ObjectHideFlags: 0
@@ -25976,7 +25974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cdf2316dcdab741839bd8ff1c240a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datatext: {fileID: 33622758}
+  informationText: {fileID: 33622758}
   EnemyPanel: {fileID: 33622760}
   EnemyPanelUi: {fileID: 33622757}
   TowerPanel: {fileID: 33622759}
@@ -27796,7 +27794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SM: {fileID: 1248947844}
-  playerstate: {fileID: 968497605}
+  playerState: {fileID: 0}
   AddTilePrefab: {fileID: 4156143761454224607, guid: e87c515dec63c494a8add1d7fabf7f5c, type: 3}
 --- !u!1 &2079056532
 GameObject:

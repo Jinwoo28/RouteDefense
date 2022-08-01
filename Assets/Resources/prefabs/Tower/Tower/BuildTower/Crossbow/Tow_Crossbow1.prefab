@@ -174,13 +174,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SM: {fileID: 6114825406157058419, guid: 18aace1fce7c4fe48bdb2cea783177ac, type: 3}
   TowerCode: 1
+  XXX: 5
   uppertower: {fileID: 405412040106067813, guid: da8765adcd3f5fd4e801719133c60476, type: 3}
-  buildstate: []
   towerpreview: {fileID: 8977786347504842678, guid: 09f00cb5dbd62ce4d930d577a5a67142, type: 3}
   towerBody: {fileID: 7312581385093490555}
   towerTurret: {fileID: 8880757005168006989}
   shootPos: {fileID: 4535378073526765344}
   AtkParticle: {fileID: 0}
+  buildstate: []
 --- !u!114 &-8894788529478161516
 MonoBehaviour:
   m_ObjectHideFlags: 0

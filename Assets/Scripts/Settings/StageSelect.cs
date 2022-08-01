@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum MapShape
+{
+    Diamond=1,
+    Plus,
+    Well,
+    Window,
+    Xshape,
+    Center,
+    Dot
+}
 
 public class StageSelect : MonoBehaviour
 {
@@ -20,26 +30,27 @@ public class StageSelect : MonoBehaviour
     [SerializeField] private GameObject GOeasyMoney = null;
     [SerializeField] private GameObject GOnamalMoney = null;
     [SerializeField] private GameObject GOhardMoney = null;
+    [SerializeField] private SetStageEnemyData SSED;
 
+    MapShape MS;
+    StageDataSetUp SDSU = new StageDataSetUp();
     private string stageShape = null;
 
     int easymoney = 0;
     int nomalmoney = 0;
     int hardmoney = 0;
 
-    public void StageShape(string _shape)
+    public void StageShape(int name)
     {
-        stageShape = _shape;
+        MS = (MapShape)name;
+        stageShape = MS.ToString();
+        GameManager.SetStageData = SDSU.GetStageInfo(name, SSED);
     }
-
 
     public void SelectStage(int level)
     {
         GameManager.SetStageShape = stageShape;
         GameManager.SetGameLevel = level;
-
-
-
 
         switch (level)
         {

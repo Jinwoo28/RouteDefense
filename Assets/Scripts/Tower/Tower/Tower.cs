@@ -36,6 +36,21 @@ public class Tower : MonoBehaviour
 
     [SerializeField] private int TowerCode = 0;
 
+    //진화 할 상위 타워
+    [SerializeField] private GameObject uppertower = null;
+
+    //미리보기 타워 프리펩
+    [SerializeField] private GameObject towerpreview = null;
+
+    //적 방향으로 돌아갈 포신
+    //y축 회전
+    [SerializeField] protected Transform towerBody;
+    //x축 회전
+    [SerializeField] protected Transform towerTurret;
+
+    //타워별 업그레이드 수치
+    private UpgradeValue upgradeValue = new UpgradeValue();
+
     protected bool TowerCanWork = true;
 
     protected AudioSource AS = null;
@@ -43,12 +58,41 @@ public class Tower : MonoBehaviour
     //주위를 검사할 레이어
     protected int SearchLayer;
 
+    //타워별 수치
+    protected TowerInfo towerinfo = new TowerInfo();
+
+    //tower prefab에게 넘겨줄 상태 Ui
+    public GameObject[] buildstate = null;
+
+    //플레이어 coin값을 가져올 playstate
+    private PlayerState playerstate = null;
+
+    //포탄을 발사 후 공격속도 값을 구할 떄 사용할 변수
+    protected float atkDelay = 0;
+
+    //타워의 업그레이드 수준
+    private int towerlevel = 0;
+
+    //포신이 회전할 속도
+    protected float rotationspeed = 720;
+
+    //타겟 Transform
+    protected Transform FinalTarget = null;
+
+    //현재 타워 아래에 있는 타일의 노드
+    private Node node = null;
+
+
+    //타워의 공격범위
+    private ShowTowerInfo showtowerinfo = null;
+
+    private bulletpolling objectPooling = null;
+
     protected virtual void Awake()
     {
-        this.transform.rotation = Quaternion.Euler(0, 180,0);
+       //this.transform.rotation = Quaternion.Euler(0, 180,0);
        TowerSetUp(TowerDataSetUp.GetData(TowerCode));
     }
-
     private void TowerSetUp(TowerDataFrame towerdata)
     {
         towerinfo.atkdelay = towerdata.delay;
@@ -60,87 +104,24 @@ public class Tower : MonoBehaviour
         towerinfo.towerstep = towerdata.towerStep;
         towerinfo.CanAtk = towerdata.atkType;
 
-        towerstep = towerdata.towerStep;
-
-        upgradevalue.UpdamageValue = towerdata.upgradAtk;
-        upgradevalue.UpcriticalValue = towerdata.upgradCri;
-        upgradevalue.upgradeprice = towerdata.upgradPrice;
-        upgradevalue.priceUprate = 0;
+        upgradeValue.UpdamageValue = towerdata.upgradAtk;
+        upgradeValue.UpcriticalValue = towerdata.upgradCri;
+        upgradeValue.upgradeprice = towerdata.upgradPrice;
+        upgradeValue.priceUprate = 0;
     }
-
-    
-
-    //진화 할 상위 타워
-    [SerializeField] private GameObject uppertower = null;
-
-    //타워별 업그레이드 수치
-    UpgradeValue upgradevalue = new UpgradeValue();
-
-    //타워별 수치
-    protected TowerInfo towerinfo = new TowerInfo();
-
-    //tower prefab에게 넘겨줄 상태 Ui
-    public GameObject[] buildstate = null;
-
-    //미리보기 타워 프리펩
-    [SerializeField] private GameObject towerpreview = null;
-
-
-
-    //적 방향으로 돌아갈 포신
-    //y축 회전
-    [SerializeField] protected Transform towerBody;
-    //x축 회전
-    [SerializeField] protected Transform towerTurret;
-
-    [SerializeField] protected Transform shootPos = null;
-
-    //플레이어 coin값을 가져올 playstate
-    private PlayerState playerstate = null;
-
-    //포탄을 발사 후 공격속도 값을 구할 떄 사용할 변수
-    protected float atkspeed = 0;
-
-    //타워의 업그레이드 수준
-    private int towerlevel = 0;
-    
-    //타워의 합체 단계 1,2,3단계
-    private int towerstep = 1;
-
-    //포신이 회전할 속도
-    protected float rotationspeed = 720;
-
-    //적 타겟 Transform
-    protected Transform FinalTarget = null;
-
-    //현재 타워 아래에 있는 타일의 노드
-    private Node node = null;
-
-    public bool GetCanWork { get => TowerCanWork; set => TowerCanWork = value; }
-
-    //타워의 공격범위
-    private ShowTowerInfo showtowerinfo = null;
-
-    private bulletpolling objectPooling = null;
-
-    protected Camera cam = null;
-
-    [SerializeField] 
-    protected GameObject AtkParticle = null;
 
     protected virtual void Start()
     {
         AS = this.GetComponent<AudioSource>();
         Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(1);
-        atkspeed = towerinfo.atkdelay;
+        atkDelay = towerinfo.atkdelay;
         StartCoroutine("AutoSearch");
         node.GetOnTower = true;
         MultipleSpeed.speedup += SpeedUP;
-        cam = Camera.main;
         AS.volume = PlayerPrefs.GetFloat("ESound");
         SoundSettings.effectsound += SoundChange;
 
-        upgradevalue.upgradeprice = (int)(upgradevalue.upgradeprice*SkillSettings.PassiveValue("UpTowerDown"));
+        upgradeValue.upgradeprice = (int)(upgradeValue.upgradeprice*SkillSettings.PassiveValue("UpTowerDown"));
         towerinfo.towerprice = (int)(towerinfo.towerprice * SkillSettings.PassiveValue("SetTowerDown"));
 
         sellprice += (int)(towerinfo.towerprice * SkillSettings.PassiveValue("SellTowerUp"));
@@ -182,7 +163,7 @@ public class Tower : MonoBehaviour
 
     public void TowerUpgrade()
     {
-        int upgradeprice = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+        int upgradeprice = (int)(upgradeValue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
 
         if (playerstate.GetSetPlayerCoin >= upgradeprice)
         {
@@ -190,33 +171,32 @@ public class Tower : MonoBehaviour
             sellprice += upgradeprice;
 
             towerlevel++;
-            towerinfo.towerdamage += upgradevalue.UpdamageValue;
-            if (towerinfo.towercritical + upgradevalue.UpcriticalValue >= 100)
+            towerinfo.towerdamage += upgradeValue.UpdamageValue;
+            if (towerinfo.towercritical + upgradeValue.UpcriticalValue >= 100)
             {
                 towerinfo.towercritical = 100;
             }
             else
             {
-                towerinfo.towercritical += upgradevalue.UpcriticalValue;
+                towerinfo.towercritical += upgradeValue.UpcriticalValue;
             }
 
-            playerstate.GetSetPlayerCoin = (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
-            upgradevalue.upgradeprice += (int)(upgradevalue.priceUprate * SkillSettings.PassiveValue("UpTowerDown"));
+            playerstate.GetSetPlayerCoin = (int)(upgradeValue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+            upgradeValue.upgradeprice += (int)(upgradeValue.priceUprate * SkillSettings.PassiveValue("UpTowerDown"));
         }
         else
         {
             Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(0);
         }
-
     }
 
     public void SellTower()
     {
         GameManager.buttonOff();
 
-            playerstate.GetSetPlayerCoin = (-sellprice);
-            node.GetOnTower = false;
-            Destroy(this.gameObject);
+        playerstate.GetSetPlayerCoin = (-sellprice);
+        node.GetOnTower = false;
+        Destroy(this.gameObject);
         Instantiate(SM, this.transform.position, Quaternion.identity).GetComponent<SoundManager>().InsthisObj(3);
     }
 
@@ -258,7 +238,6 @@ public class Tower : MonoBehaviour
 
     public void ActiveOff()
     {
- 
         this.gameObject.SetActive(false);
         node.GetOnTower = false;
     }
@@ -277,9 +256,9 @@ public class Tower : MonoBehaviour
     {
         int lev = (_lev1 + _lev2) / 2;
         towerlevel = lev;
-        towerinfo.towerdamage += (lev * upgradevalue.UpdamageValue);
-        towerinfo.towercritical += (lev * (float)upgradevalue.UpcriticalValue);
-        upgradevalue.upgradeprice += towerlevel * upgradevalue.priceUprate;
+        towerinfo.towerdamage += (lev * upgradeValue.UpdamageValue);
+        towerinfo.towercritical += (lev * (float)upgradeValue.UpcriticalValue);
+        upgradeValue.upgradeprice += towerlevel * upgradeValue.priceUprate;
        
     }
 
@@ -360,10 +339,12 @@ public class Tower : MonoBehaviour
     }
 
 
+    public bool GetCanWork { get => TowerCanWork; set => TowerCanWork = value; }
+
     //타워 이름
     public string Getname => towerinfo.towername;
     //타워 단계
-    public int GetStep { get => towerstep; }
+    public int GetStep { get => towerinfo.towerstep; }
     //타워레벨
     public int GetTowerLevel => towerlevel;
     //타워 데미지
@@ -371,16 +352,16 @@ public class Tower : MonoBehaviour
     //크리티컬 확률
     public float GetCritical => towerinfo.towercritical;
     //타워 공격 속도
-    public float GetSpeed => atkspeed;
+    public float GetSpeed => atkDelay;
     //타워 공격범위
     public float GetRange => towerinfo.towerrange;
     //타워가격
     public int Gettowerprice => towerinfo.towerprice;
 
-    public int Gettowerupgradeprice => (int)(upgradevalue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
+    public int Gettowerupgradeprice => (int)(upgradeValue.upgradeprice * SkillSettings.PassiveValue("UpTowerDown"));
 
-    public float GetTowerUPDamage => upgradevalue.UpdamageValue;
-    public float GetTowerUpCri => upgradevalue.UpcriticalValue;
+    public float GetTowerUPDamage => upgradeValue.UpdamageValue;
+    public float GetTowerUpCri => upgradeValue.UpcriticalValue;
     public int GetTowerCode => TowerCode;
 
     #endregion

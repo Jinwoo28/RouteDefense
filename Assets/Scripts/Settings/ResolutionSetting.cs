@@ -88,7 +88,7 @@ public class ResolutionSetting : MonoBehaviour
         fullscreenDropdown.options.Add(fulloption);
         fullscreenDropdown.options.Add(windowoption);
 
-        int optionNum = 0;
+        //int optionNum = 0;
 
 
         foreach (Resolution res in resolutions)
@@ -163,7 +163,7 @@ public class ResolutionSetting : MonoBehaviour
             fullscreenDropdown.value = 1;
         }
 
-        Debug.Log("확인");
+        //Debug.Log("확인");
         //해상도에 따라서 canvas의 Viewport Rect값을 변경하여 일정하게 표시
         //https://giseung.tistory.com/19
         //https://www.youtube.com/watch?v=wUkwN8Evy8s&t=823s

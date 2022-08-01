@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
 
     static AudioClip[] SAudio;
 
+    AlertSetting AS = new AlertSetting();
+
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();

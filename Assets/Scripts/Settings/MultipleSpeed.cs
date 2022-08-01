@@ -15,17 +15,9 @@ public class MultipleSpeed : MonoBehaviour
 
     private void Start()
     {
-
         OnClickStart(1);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-
-        }
-    }
     public void OnClickSpeedUp()
     {
         speednum++;

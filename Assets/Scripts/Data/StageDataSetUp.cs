@@ -11,9 +11,15 @@ public class StageDataSetUp : MonoBehaviour
 
     //https://www.youtube.com/watch?v=Xo7EEegTUfE&t=670s
 
+    private static int alreadyLoad = 0;
+
     private void Awake()
     {
-        StartCoroutine("CoDataSetFromWeb");
+        if (alreadyLoad == 0)
+        {
+            StartCoroutine("CoDataSetFromWeb");
+            alreadyLoad = 1;
+        }
     }
 
     IEnumerator CoDataSetFromWeb()
@@ -27,10 +33,10 @@ public class StageDataSetUp : MonoBehaviour
         yield return wwwI.SendWebRequest();
         string dataI = wwwI.downloadHandler.text;
 
-        print(dataR);
+        //print(dataR);
         SetStageRound(dataR);
         SetStageInformation(dataI);
-        print(dataI);
+        //print(dataI);
     }
 
     private void SetStageRound(string dataR)
@@ -49,7 +55,6 @@ public class StageDataSetUp : MonoBehaviour
                 StageDataFrame item = stageData.stageDataFrame[i];
                 item.stageCode = int.Parse(column[0]);
                 item.stageCount = int.Parse(column[1]);
-                Debug.Log(item.stageCount);
             }
         }
     }
@@ -80,12 +85,11 @@ public class StageDataSetUp : MonoBehaviour
                 item.roundData[j] = new RoundData();
                 string[] enemyKind = columnEnemyKind[j].Split(',');
 
-                item.roundData[j].spawnTime = float.Parse(columnSpawnTime[j]);
-                item.roundData[j].spawnCount = int.Parse(columnSpawnCount[j]);
+                item.roundData[j].spawnCount = int.Parse(columnSpawnTime[j]);
+                item.roundData[j].spawnTime = float.Parse(columnSpawnCount[j]);
 
                 item.roundData[j].enemyKind = new int[enemyKind.Length];
 
-                Debug.Log(enemyKind.Length);
                 for (int k = 0; k < enemyKind.Length; k++)
                 {
                     item.roundData[j].enemyKind[k] = int.Parse(enemyKind[k]);
@@ -93,6 +97,21 @@ public class StageDataSetUp : MonoBehaviour
             }
         }
     }
+
+    public StageDataFrame GetStageInfo(int code,SetStageEnemyData SSED)
+    {
+        for(int i = 0; i < SSED.stageDataFrame.Length;i++)
+        {
+            if(SSED.stageDataFrame[i].stageCode == code)
+            {
+                return SSED.stageDataFrame[i];
+            }
+        }
+        return null;
+    }
+    
+
+
 
 
 

@@ -8,6 +8,7 @@ public class GatlingTower : HitScanTower
 
     [SerializeField] GameObject HitEffect = null;
 
+    private Camera cam = null;
     bool isatk = false;
     bool soundPlay = false;
 
@@ -21,6 +22,7 @@ public class GatlingTower : HitScanTower
     {
         base.RotateTurret();
         RotateBarral.Rotate(0, 0, 720*Time.deltaTime);
+        cam = Camera.main;
     }
 
     protected override void Update()
