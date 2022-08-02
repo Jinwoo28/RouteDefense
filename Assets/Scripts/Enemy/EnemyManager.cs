@@ -25,9 +25,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform water = null;
     [SerializeField] private GameObject unituiParent = null;
 
-    //스테이지 정보
-    //[SerializeField] private StageInfo[] stageDataroundData = null;
-
     //적이 죽거나 도착지에 도착했을 때, 골드획득이나 라이프 감소를 위한 플레이어 정보
     [SerializeField] private PlayerState playerstate = null;
 
@@ -80,12 +77,10 @@ public class EnemyManager : MonoBehaviour
     {
         stageData = GameManager.GetStageData();
     }
-
+    
     private void Start()
     {
         Pooling = this.GetComponent<EnemyPooling>();
-
-        //EnemyCount = new List<Enemy>();
         MultipleSpeed.speedup += SpeedUP;
         ClearPanal.SetActive(false);
         FailPanal.SetActive(false);
@@ -117,7 +112,7 @@ public class EnemyManager : MonoBehaviour
         //적이 나올 개수
         int count = GameManager.SetGameLevel == 3 ? (int)(stageData.roundData[StageNum].spawnCount * 0.5f) : stageData.roundData[StageNum].spawnCount;
 
-        EnemyRemainCount = count * 2;
+        EnemyRemainCount = GameManager.SetGameLevel==3?count * 2:count;
 
         int stagenum = StageNum;
 

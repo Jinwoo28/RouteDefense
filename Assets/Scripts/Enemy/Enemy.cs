@@ -10,7 +10,7 @@ public interface IEnumyAttacked
     Transform GetPos();
 }
 
-   public class  UnitState
+public class  UnitState
 {
     public float unitspeed = 0;
     public int unitcoin = 0;
@@ -26,7 +26,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     [SerializeField] private bool Boss;
     public bool GetBoss() => Boss;
     [SerializeField] private int EnemyCode;
-
 
     //적의 이동 경로
     private Vector3[] Waypoint;
@@ -61,14 +60,12 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     private int enemyNum = 0;
     float Hp = 0;
 
-
     private bool electricShock = false;
     public bool GetShock() => electricShock;
 
     public bool Fired = false;
     public bool Iced = false;
     public bool blood = false;
-
 
     public void SetPooling(EnemyPooling _pooling, int _num)
     {
@@ -113,7 +110,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         TimeScale = x;
     }
 
-
     public void SetUpEnemy(EnemyManager _enemymanager, Vector3[] _waypoint, Transform _canvas, GameObject _hpbar, GameObject _damagenum, Transform _water)
     {
         Water = _water;
@@ -126,7 +122,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
     public void StartMove()
     {
-
         unitspeed = unitstate.unitspeed;
 
         if (hpbarprefab == null)
@@ -163,7 +158,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
             if (waypointindex < Waypoint.Length)
             {
-
                 //waypoint 변경
                 if (Vector3.Magnitude(MoveToPoint - this.transform.position) < 0.05f)
                 {
@@ -171,39 +165,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
                     waypointindex++;
                     jump = false;
                 }
-
-                ////오르막길
-                //if (Waypoint[waypointindex].y > currentPos.y)
-                //{
-                //    if (!jump)
-                //    {
-                //        jump = true;
-                //        unitspeed *= 0.8f;
-                //    }
-                //}
-
-                ////내리막길
-                //else if (Waypoint[waypointindex].y < currentPos.y)
-                //{
-                //    if (!jump)
-                //    {
-                //        jump = true;
-                //        unitspeed *= 1.2f;
-                //    }
-                //}
-
-                ////평지
-                //else
-                //{
-                //    float X = unitspeed - unitstate.unitspeed;
-
-                //    //속도 안정화
-                //    if (X < -0.05f) unitspeed += Time.unscaledDeltaTime * TimeScale;
-                //    else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime * TimeScale;
-                //    else unitspeed = unitstate.unitspeed;
-
-                //    //다음 목적지로 이동
-                //}
                 
                 this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime * TimeScale);
 
@@ -283,7 +244,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
                 //내리막길
                 else if (Waypoint[waypointindex].y < currentPos.y)
                 {
-
                     if (!jump)
                     {
                         if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
@@ -302,7 +262,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
                     if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
                     else
                     {
-
                         if (X < -0.05f) unitspeed += Time.unscaledDeltaTime * TimeScale;
                         else if (X > 0.05f) unitspeed -= Time.unscaledDeltaTime * TimeScale;
                         else unitspeed = unitstate.unitspeed;
@@ -355,13 +314,8 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
             heightvalue = 0;
         }
 
-        //Debug.Log(heightvalue+ "현재 Parabola");
-
-        //Debug.Log(heightvalue + pos.y + "현재 Y");
         return new Vector3(pos.x, heightvalue + pos.y, pos.z);
     }
-
-
 
     private IEnumerator MoveToNext(Vector3 _current, Vector3 _next)
     {
@@ -407,7 +361,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     }
 
     
-
     public virtual void EnemyAttacked(float _damage)
     {
         float realdamage = 0;
@@ -505,10 +458,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
     }
 
-  
-
-    
-
     public void EnemyDie()
     {
         if(this.GetComponentInChildren<Bullet>() != null)
@@ -530,27 +479,21 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     public void ShowDamage(float _damage, int _Block)
     {
         cam = Camera.main;
-
-        GameObject damagecount = null;
-
-        if (unitstate.type == 0)
-        {
-            damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position), Quaternion.identity);
-        }
-        else
-        {
-            damagecount = Instantiate(damagenum, cam.WorldToScreenPoint(this.GetComponentInChildren<FlyEnemy>().GetBody().position), Quaternion.identity);
-        }
-        damagecount.transform.SetParent(canvas);
+       
+       // GameObject damagecount = null;
 
         if (unitstate.type == 0)
         {
-            damagecount.GetComponent<HpNum>().SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage, _Block);
+            var item = Instantiate(damagenum, cam.WorldToScreenPoint(this.transform.position), Quaternion.identity).GetComponent<HpNum>();
+            item.transform.SetParent(canvas);
+            item.SetUp(this.transform.position.x, this.transform.position.y, this.transform.position.z, _damage, _Block);
         }
         else
         {
+            var item = Instantiate(damagenum, cam.WorldToScreenPoint(this.GetComponentInChildren<FlyEnemy>().GetBody().position), Quaternion.identity).GetComponent<HpNum>();
+            item.transform.SetParent(canvas);
             Vector3 pos = this.GetComponentInChildren<FlyEnemy>().GetBody().position;
-            damagecount.GetComponent<HpNum>().SetUp(pos.x, pos.y, pos.z, _damage, _Block);
+            item.SetUp(pos.x, pos.y, pos.z, _damage, _Block);
         }
     }
 

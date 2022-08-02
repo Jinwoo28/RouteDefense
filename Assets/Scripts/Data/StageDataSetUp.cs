@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class StageDataSetUp : MonoBehaviour
 {
+    [SerializeField] private GameObject DarkImage = null;
     public SetStageEnemyData stageData;
     const string URL_Round = "https://docs.google.com/spreadsheets/d/1XoikRd33aGUOpZk_C94GhEb8U9pkaQ_fN8ZasNaCbbo/export?format=tsv&range=A2:B9";
     const string URL_Info = "https://docs.google.com/spreadsheets/d/1uDvzQHEDCkAJiwIzR2pTcsPJ20Z1z6u-YPNPSwPI8nE/export?format=tsv&range=B2:Z";
@@ -12,11 +13,12 @@ public class StageDataSetUp : MonoBehaviour
     //https://www.youtube.com/watch?v=Xo7EEegTUfE&t=670s
 
     private static int alreadyLoad = 0;
-
     private void Awake()
     {
+        DarkImage.SetActive(false);
         if (alreadyLoad == 0)
         {
+            DarkImage.SetActive(true);
             StartCoroutine("CoDataSetFromWeb");
             alreadyLoad = 1;
         }
@@ -33,10 +35,11 @@ public class StageDataSetUp : MonoBehaviour
         yield return wwwI.SendWebRequest();
         string dataI = wwwI.downloadHandler.text;
 
-        //print(dataR);
         SetStageRound(dataR);
         SetStageInformation(dataI);
-        //print(dataI);
+        print(dataR);
+        print(dataI);
+        DarkImage.SetActive(false);
     }
 
     private void SetStageRound(string dataR)

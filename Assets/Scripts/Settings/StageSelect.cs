@@ -6,12 +6,12 @@ using TMPro;
 public enum MapShape
 {
     Diamond=1,
-    Plus,
-    Well,
-    Window,
+    PlusMap,
+    WellMap,
+    WindowMap,
     Xshape,
     Center,
-    Dot
+    DotMap
 }
 
 public class StageSelect : MonoBehaviour

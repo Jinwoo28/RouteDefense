@@ -7,7 +7,7 @@ public class LaserTower : AtkTower
     private LineRenderer lR = null;
     private Transform existingTarget = null;
     private float atkdamage = 0;
-    private bool isAtking = false;
+    private bool islaserAtking = false;
 
     protected override void Start()
     {
@@ -20,7 +20,7 @@ public class LaserTower : AtkTower
     {
         base.Update();
 
-        if (isAtking)
+        if (islaserAtking)
         {
             if (FinalTarget != null)
             {
@@ -34,7 +34,7 @@ public class LaserTower : AtkTower
             {
                 AtkParticle.SetActive(false);
                 lR.enabled = false;
-                isAtking = false;
+                islaserAtking = false;
                 SoundStop = true;
             }
         }
@@ -45,7 +45,7 @@ public class LaserTower : AtkTower
     protected override void Attack()
     {
         AS.Play();
-        isAtking = true;
+        islaserAtking = true;
 
         if (existingTarget != FinalTarget)
         {

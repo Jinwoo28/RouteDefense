@@ -9,7 +9,6 @@ public class WaterTrigger_ : MonoBehaviour
     private HashSet<Tower> towerlist = new HashSet<Tower>();
     private HashSet<Node> nodelist = new HashSet<Node>();
 
-
     private bool iced = false;
     public bool Geticed { set => iced = value; }
 
@@ -17,7 +16,6 @@ public class WaterTrigger_ : MonoBehaviour
     {
         if (other.CompareTag("Tower"))
         {
-            Debug.Log("¹Ù´Ù");
             other.GetComponent<Tower>().IsSetTowerCanWork = false;
             towerlist.Add(other.GetComponent<Tower>());
         }
@@ -30,11 +28,6 @@ public class WaterTrigger_ : MonoBehaviour
         if (other.CompareTag("TowerPreview"))
         {
             other.GetComponent<TowerPreview>().isSetWeater = true;
-        }
-
-        if (other.CompareTag("Fruit"))
-        {
-          //  fruit.Add(other.GetComponent<Fruit>());
         }
     }
 
@@ -71,9 +64,5 @@ public class WaterTrigger_ : MonoBehaviour
         {
             other.GetComponent<TowerPreview>().isSetWeater = false;
         }
-        //if (other.CompareTag("Fruit"))
-        //{
-        //    other.GetComponent<Fruit>().ReturnPos();
-        //}
     }
 }

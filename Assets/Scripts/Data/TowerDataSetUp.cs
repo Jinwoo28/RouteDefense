@@ -23,20 +23,20 @@ public class TowerDataSetUp : MonoBehaviour
         if (AlreadySet == 0)
         {
             DarkImage.SetActive(true);
-            StartCoroutine(DataSetFromWeb());
+            StartCoroutine(CoDataSetFromWeb());
             AlreadySet = 1;
         }
     }
 
     //구글 스프레드 시트에서 TowerData가져오기
-    IEnumerator DataSetFromWeb()
+    IEnumerator CoDataSetFromWeb()
     {
         UnityWebRequest www = UnityWebRequest.Get(URL);
         yield return www.SendWebRequest();
 
         string data = www.downloadHandler.text;
 
-        //print(data);
+        print(data);
 
         SetEnemy(data);
         DarkImage.SetActive(false);

@@ -34,9 +34,9 @@ public class Tower : MonoBehaviour
 {
     [SerializeField] private int TowerCode = 0;
     
-    [SerializeField] private GameObject alterSound;
-    //진화 할 상위 타워
+    private GameObject alterSound;
     
+    //진화 할 상위 타워
     [SerializeField] private GameObject uppertower = null;
     //미리보기 타워 프리펩
     [SerializeField] private GameObject towerpreview = null;
@@ -114,6 +114,7 @@ public class Tower : MonoBehaviour
     protected virtual void Start()
     {
         AS = this.GetComponent<AudioSource>();
+        alterSound = Resources.Load<GameObject>("prefabs/Tower/" + "SoundObject");
         var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
         sound.PlaySound(AlertKind.Build,sound.gameObject);
         atkDelay = towerinfo.atkdelay;
@@ -211,6 +212,7 @@ public class Tower : MonoBehaviour
         GameManager.buttonOff();
         if (TowerCanWork)
         {
+
             var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
             sound.PlaySound(AlertKind.OK, sound.gameObject);
             TowerCanWork = true;

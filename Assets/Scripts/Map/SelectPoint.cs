@@ -6,7 +6,6 @@ public class SelectPoint
 {
     private List<Node> alreadyNode = new List<Node>();
 
-
     public Node GetStartNodePoint(List<Node> nodelist)
     {
         int NodeNum = Random.Range(0, nodelist.Count);

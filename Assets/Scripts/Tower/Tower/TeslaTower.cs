@@ -8,7 +8,7 @@ public class TeslaTower : AtkTower
     [SerializeField] private ParticleSystem Effect = null;
     [SerializeField] private GameObject ElectricBulet = null;
 
-    private bool isAtking = false;
+    private bool isTeslaAtking = false;
     private bool isWetTower = false;
     protected override void Start()
     {

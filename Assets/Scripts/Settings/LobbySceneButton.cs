@@ -23,7 +23,6 @@ public class LobbySceneButton : MonoBehaviour
 
     public void SettingPanalOn()
     {
-        Debug.Log("??");
         settingPanal.SetActive(true);
     }
     public void SettingPanalOff()

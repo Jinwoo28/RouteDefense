@@ -38,25 +38,13 @@ public class UserInformation : MonoBehaviour
 
     private void Start()
     {
-
         skill = this.GetComponent<SkillSettings>();
 
-        // PSkillSetUp();
+        LoadUserInfo();
         //ResetUserSkillData();
-
-            LoadUserInfo();
-           // SetData = true;
-            //ResetUserSkillData(); // º¸À¯µ· ¸®¼Â
-            skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
-
-
+        skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
         userData.userCoin += getMoney;
         getMoney = 0;
-
-        //if (Path.Combine(Application.streamingAssetsPath, "PlayerData.json") == null)
-        //{
-        //    File.Create(Path.Combine(Application.streamingAssetsPath, "PlayerData.json"));
-        //}
     }
 
     private void ResetUserSkillData()
