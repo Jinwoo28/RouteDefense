@@ -75,6 +75,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(GameManager.GetStageData());
         stageData = GameManager.GetStageData();
     }
     

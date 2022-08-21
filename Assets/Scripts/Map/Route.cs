@@ -409,8 +409,6 @@ public class Route : MonoBehaviour
                 nodelist[i].GetComponentInChildren<ShowRoute>().ShowArrow(4);
             }
         }
-
-
         return waypointary;
     }
 
@@ -470,7 +468,6 @@ public class Route : MonoBehaviour
         //openList가 비었다는 것은 모든 노드를 검색했다는 뜻
         while (OpenList.Count > 0)
         {
-
             //현재 노드는 OpenList[0] 즉, 시작 노드부터
             Node currentNode = OpenList[0];
 

@@ -113,12 +113,13 @@ public class MapManagerTest : MonoBehaviour
         int[,] temp = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
         for (int i = 0; i < Count; i++)
         {
+            //랜덤 높이값
             int RanNum = Random.Range(2, 5);
             int Near = Random.Range(0, 3);
 
             int Xnum = Random.Range(0, gridX);
             int Ynum = Random.Range(0, gridY);
-            grid[Xnum, Ynum].UpDownTile(grid[Xnum, Ynum].neighbournode, RanNum);
+            grid[Xnum, Ynum].ChangeNodeHeight(grid[Xnum, Ynum].neighbournode, RanNum);
             if (Near >= 1)
             {
                 while (Near >= 1)
@@ -127,10 +128,8 @@ public class MapManagerTest : MonoBehaviour
                     int RanNum2 = Random.Range(0, 4);
                     if (Xnum + temp[RanNum2, 0] < gridX && Xnum + temp[RanNum2, 0] >= 0 && Ynum + temp[RanNum2, 1] < gridY && Ynum + temp[RanNum2, 1] >= 0)
                     {
-                        grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].UpDownTile(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
-
+                        grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].ChangeNodeHeight(grid[Xnum + temp[RanNum2, 0], Ynum + temp[RanNum2, 1]].neighbournode, RanNum);
                     }
-                   
                 }
             }
 
@@ -162,10 +161,8 @@ public class MapManagerTest : MonoBehaviour
                 //생성된 타일을 ParentGrid의 자식으로 넣어서 관리
 
                 //생성과 동시에 인덱스 번호 부여
-                //grid[i, j] = new Node(tile,false, i, j, 0,false);
 
                 grid[i, j] = tile.GetComponent<Node>();
-                   // tile.AddComponent<Node>();
                 tile.GetComponent<Node>().Setnode(tile, false, j, i, false);
                 tile.GetComponent<Node>().SetColor(Tilecolor);
 
@@ -176,7 +173,6 @@ public class MapManagerTest : MonoBehaviour
                 //해결방법 2. monobegaviour을 사용하지 않는다면 없앤다.
 
                 //https://etst.tistory.com/32
-
 
                 tile.gameObject.SetActive(false);
                 //생성과 동시에 모두 비활성화
@@ -207,14 +203,12 @@ public class MapManagerTest : MonoBehaviour
                 }
             }
 
-
         /////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////
 
         int widthcount = initialGridX;
 
         int xcount = initialGridX - 1;
-
 
         #region MapShape
         //모양대로 타일 활성화
@@ -248,13 +242,10 @@ public class MapManagerTest : MonoBehaviour
 
         CamPos.transform.position = new Vector3(RanX+5f, CamPos.transform.position.y, RanY+2.5f);
 
-
-
         #endregion
 
 
         //https://kinanadel.blogspot.com/2018/09/c.html
-        //    int RandomNum;
 
         //시작지점, 종료지점 만들기
 
@@ -306,19 +297,6 @@ public class MapManagerTest : MonoBehaviour
         }
         else if (GameManager.GetSetStageType == StageType.OrderCheckPoint)
         {
-
-
-            //Route route = new Route();
-            //Node[,] nodelist = grid;
-
-            //Node start = StartNode;
-            //Node end = EndNode;
-
-            //Node[] order = new Node[checkPointCount];
-
-            ////while (true)
-            ////{
-
             Node[] checknode2 = new Node[checkPointCount];
 
             for (int i = 0; i < checkPointCount; i++)
@@ -333,29 +311,10 @@ public class MapManagerTest : MonoBehaviour
                 node.GetSetCheckNode = true;
                 node.GetSetPoint = i + 1;
             }
-
-            //if (route.CheckFindPath(start, order[0]))
-            //{
-            //    Node endnode = order[0];
-            //    endnode.Getwalkable = false;
-            //    while(endnode.parent != start)
-            //    {
-            //        endnode = endnode.parent;
-            //        endnode.Getwalkable = false;
-            //    }
-            //}
-
-
-
-
-
-
                 for (int i = 0; i < checkPointCount; i++)
                 {
                     useableNode.Add(checknode2[i]);
                 }
-
-            //}
         }
 
     }
@@ -364,14 +323,6 @@ public class MapManagerTest : MonoBehaviour
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
 
-    #region MapShape
-
-    
-
-
-    #endregion
-
-    ///    
     public int GetgridX
     {
         get
@@ -418,16 +369,6 @@ public class MapManagerTest : MonoBehaviour
             return EndNode;
         }
     }
-
-    //public bool GetSetTileChange
-    //{
-    //    set
-    //    {
-    //        TileCanChange = value;
-    //    }
-    //}
-
-
     #endregion
 }
 

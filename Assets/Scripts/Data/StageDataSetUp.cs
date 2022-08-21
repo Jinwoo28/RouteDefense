@@ -16,12 +16,11 @@ public class StageDataSetUp : MonoBehaviour
     private void Awake()
     {
         DarkImage.SetActive(false);
-        if (alreadyLoad == 0)
-        {
+
+            Debug.Log("???");
             DarkImage.SetActive(true);
-            StartCoroutine("CoDataSetFromWeb");
-            alreadyLoad = 1;
-        }
+            StartCoroutine(CoDataSetFromWeb());
+
     }
 
     IEnumerator CoDataSetFromWeb()

@@ -289,6 +289,11 @@ public class TowerPreview : MonoBehaviour
                     tower = null;
                 }
             }
+            else
+            {
+                isCanCombination = false;
+                tower = null;
+            }
         }
     }
 

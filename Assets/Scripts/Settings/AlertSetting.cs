@@ -35,6 +35,8 @@ public class AlertSetting : MonoBehaviour
         AudioClip clip = Resources.Load<AudioClip>("Sound/Button/" + soundName);
 
         AS.clip = clip;
+        AS.volume = PlayerPrefs.GetFloat("ESound");
+        Debug.Log(AS.volume);
         AS.Play();
     }
 }

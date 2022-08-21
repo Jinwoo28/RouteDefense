@@ -194,14 +194,13 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         EP.ReturnEnemy(this, enemyNum);
     }
 
+    //지상유닛 움직임
     public IEnumerator MoveGroundUnit()
     {
         int waypointindex = 0;
 
         Vector3 MoveToPoint = Waypoint[waypointindex];
-
         Vector3 currentPos = this.transform.position;
-
 
         while (waypointindex != Waypoint.Length - 1)
         {
@@ -222,12 +221,10 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
 
             if (waypointindex < Waypoint.Length)
             {
-
                 if (Vector3.Magnitude(MoveToPoint - this.transform.position) < 0.05f)
                 {
                     currentPos = Waypoint[waypointindex];
                     waypointindex++;
-
                 }
 
                 //오르막길
@@ -255,9 +252,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
                 //평지
                 else
                 {
-
                     float X = unitspeed - unitstate.unitspeed;
-
                     //느린상태
                     if (underTheSea) unitspeed = unitstate.unitspeed * 0.5f;
                     else
@@ -270,7 +265,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
                     this.transform.position = Vector3.MoveTowards(transform.position, MoveToPoint, unitspeed * Time.unscaledDeltaTime * TimeScale);
                 }
 
-                //Debug.Log("유닛 스피드 : " + unitspeed);
                 Vector3 relativePos = Waypoint[waypointindex] - this.transform.position;
                 //현재 위치에서 타겟위치로의 방향값
                 Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
@@ -285,7 +279,6 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
             }
             else
             {
-
                 yield break;
             }
         }
@@ -297,11 +290,11 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
     }
 
     //포물선 이동
-    private Vector3 parabola(Vector3 _start, Vector3 _end, float _height, float _power, float _time)
+    private Vector3 parabola(Vector3 _start, Vector3 _end, float _power, float _time)
     {
         //y축은 파워값과 높이값에 time.deltatime을 곱한다.
         //time이 1보다 작을 때는 양수, 1보다 클 때는(음수)이기 때문에 포물선 이동이 가능
-        float heightvalue = -_power * _height * _time * _time + _power * _height * _time;
+        float heightvalue = -1 * _power * _time * _time + 1 * _power * _time;
 
         //Mathf.sin
         //시작 지점의 좌표와 도착지점의 좌표 보간값
@@ -325,7 +318,7 @@ public class Enemy : MonoBehaviour, IEnumyAttacked
         {
             Timer += Time.unscaledDeltaTime * TimeScale;
 
-            Vector3 MovePos = parabola(_current, _next, 1.5f, 1, Timer * unitspeed);
+            Vector3 MovePos = parabola(_current, _next, 1.5f, Timer * unitspeed);
 
             this.transform.position = MovePos;
             yield return null;

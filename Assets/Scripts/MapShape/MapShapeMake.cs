@@ -281,11 +281,13 @@ public class MapShapeMake : MonoBehaviour
         {
             if (mapname.Length <= 3)
             {
+                Debug.Log("맵 이름은 3글자 이상이어야 합니다.");
                 return;
             }
 
             if (mapsettings.CheckOverlab(mapname))
             {
+                Debug.Log("이미 존재하는 이름 입니다.");
                 return;
             }
 
@@ -295,13 +297,15 @@ public class MapShapeMake : MonoBehaviour
         }
 
 
-        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
+        FileStream stream = new FileStream(Application.streamingAssetsPath + "/MapShape.json", FileMode.OpenOrCreate);
         string jsonData = JsonConvert.SerializeObject(mapsettings, Formatting.Indented);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
         stream.Close();
 
         //Save2();
+
+
 
         OKPanal.SetActive(false);
 
@@ -313,7 +317,7 @@ public class MapShapeMake : MonoBehaviour
 
     public void Save2()
     {
-        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.OpenOrCreate);
+        FileStream stream = new FileStream(Application.streamingAssetsPath + "/MapShape.json", FileMode.OpenOrCreate);
         string jsonData = JsonConvert.SerializeObject(mapsettings, Formatting.Indented);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         stream.Write(data, 0, data.Length);
@@ -322,7 +326,8 @@ public class MapShapeMake : MonoBehaviour
 
     public void LoadInfo()
     {
-        FileStream stream = new FileStream(Application.dataPath + "/MapShape.json", FileMode.Open);
+        FileStream stream = new FileStream(Application.streamingAssetsPath + "/MapShape.json", FileMode.Open);
+        //string path = Path.Combine(Application.streamingAssetsPath, "PlayerData.json");
         byte[] data = new byte[stream.Length];
         stream.Read(data, 0, data.Length);
         stream.Close();
@@ -335,8 +340,7 @@ public class MapShapeMake : MonoBehaviour
     {
 
 
-            mapsettings.RemoveShape(mapname);
-        
+        mapsettings.RemoveShape(mapname);
 
         InitDropBox();
 

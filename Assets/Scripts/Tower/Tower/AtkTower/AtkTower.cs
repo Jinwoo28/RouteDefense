@@ -38,7 +38,6 @@ public class AtkTower : Tower
         {
             if (FinalTarget != null)
             {
-
                 if (!FinalTarget.transform.gameObject.activeInHierarchy||Vector3.Distance(FinalTarget.GetComponent<IEnumyAttacked>().GetPos().gameObject.transform.position, this.transform.position) > towerinfo.towerrange)
                 {
                     FinalTarget = null;
@@ -46,7 +45,6 @@ public class AtkTower : Tower
             }
             else
             {
-
                 //OverlapSphere : 객체 주변의 Collider를 검출
                 //검출한 collider를 배열형 변수에 저장
                 Collider[] E_collider = Physics.OverlapSphere(this.transform.position, towerinfo.towerrange, SearchLayer);
@@ -62,6 +60,7 @@ public class AtkTower : Tower
 
                     foreach (Collider EC in E_collider)
                     {
+                        //타워 타입과 적 타입에 탐색 여부
                         if(towerinfo.CanAtk == 1)
                         {
                             if (EC.GetComponent<Enemy>().GetEnemyType == 1)
@@ -107,8 +106,6 @@ public class AtkTower : Tower
                     FinalTarget = null;
                 }
             }
-
-
             yield return null;
         }
     }
@@ -117,11 +114,8 @@ public class AtkTower : Tower
     {
         Vector3 relativePos = Vector3.zero;
 
+        relativePos = FinalTarget.position - transform.position;
 
-            relativePos = FinalTarget.position - transform.position;
-
-
-        
         //현재 위치에서 타겟위치로의 방향값
         Quaternion rotationtotarget = Quaternion.LookRotation(relativePos);
 
@@ -132,14 +126,12 @@ public class AtkTower : Tower
         //현재의 rotation값에 Vector3형태로 저장한 값 사용
          towerBody.rotation = Quaternion.Euler(0, TowerDir.y, 0);
 
- 
-            towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
+         towerTurret.rotation = Quaternion.Euler(TowerDir2.x + (FinalTarget.localScale.y / 2), TowerDir2.y, 0);
 
         if (FinalTarget != null)
         {
             if (Quaternion.Angle(towerTurret.rotation, rotationtotarget) < 1.0f)
             {
-
                 isAtking = true;
                 atkDelay -= Time.deltaTime;
                 if (atkDelay <= 0)
@@ -152,7 +144,6 @@ public class AtkTower : Tower
                         towerinfo.towerdamage *= 2;
                     }
                     Attack();
-
                     towerinfo.towerdamage = origindamage;
                 }
             }

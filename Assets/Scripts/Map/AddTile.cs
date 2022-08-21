@@ -58,23 +58,22 @@ public class AddTile : MonoBehaviour
         Vector3[] returnTilePos = new Vector3[4];
 
         /*
-         
         모든 타일생성에 필요한 index번호
         0이 마우스 기준
         X 1 2  3
         4 5 0  6
         X 7 8  9
         X X 10 X
+        
+        타일 모양 / 변형가능횟수
+         O(0) I(1) S(2) Z(2) L(4) J(4) T(4)
+
+        타일모양 O     I          S           Z           L           J           T
+        □ □ □ □       □ □ ■ □    □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □
+        □ ■ ■ □       □ □ ■ □    □ □ ■ ■     □ ■ ■ □     □ ■ □ □     □ □ □ ■     □ □ ■ □
+        □ ■ ■ □       □ □ ■ □    □ ■ ■ □     □ □ ■ ■     □ ■ ■ ■     □ ■ ■ ■     □ ■ ■ ■
+        □ □ □ □       □ □ ■ □    □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □
          */
-
-        //타일 모양 / 변형가능횟수
-        // O(0) I(1) S(2) Z(2) L(4) J(4) T(4)
-
-        //타일모양 O     I          S           Z           L           J           T
-        //□ □ □ □       □ □ ■ □    □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □
-        //□ ■ ■ □       □ □ ■ □    □ □ ■ ■     □ ■ ■ □     □ ■ □ □     □ □ □ ■     □ □ ■ □
-        //□ ■ ■ □       □ □ ■ □    □ ■ ■ □     □ □ ■ ■     □ ■ ■ ■     □ ■ ■ ■     □ ■ ■ ■
-        //□ □ □ □       □ □ ■ □    □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □     □ □ □ □
 
         tileList[0] = new Vector3(Xnum, 0, Ynum);
         tileList[1] = new Vector3(Xnum - 1, 0, Ynum + 1);
@@ -245,12 +244,7 @@ X X 10 X
                 }
                 break;
         }
-
-        /*if (AddTilePos2(returntilepos))*/
         return returnTilePos;
-        //else return null;
-
-
     }
 
     public void OnClickAddBtn()
@@ -293,19 +287,10 @@ X X 10 X
 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
-                    // if(!hit.collider.CompareTag("Tile")&&hit.point.x>=0&& hit.point.x<gridX)
                     mousepos = hit.point;
                 }
 
-                if (SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].x < gridX
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[0].z < gridY
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].x < gridX
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[1].z < gridY
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].x < gridX
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[2].z < gridY
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].x < gridX
-                    && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z >= 0 && SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[3].z < gridY
-                    )
+                if (IsInBoundaryTetris(tiledir, mousepos))
                 {
                     //4개 타일의 위치
                     for (int i = 0; i < 4; i++)
@@ -322,36 +307,11 @@ X X 10 X
 
 
                         //4개 타일의 크기와 색
-                        if (tiles[0].GetComponent<Preview>().CanBuildable && tiles[1].GetComponent<Preview>().CanBuildable && tiles[2].GetComponent<Preview>().CanBuildable && tiles[3].GetComponent<Preview>().CanBuildable)
+                        if (tiles[0].GetComponent<Preview>().CanBuildable && tiles[1].GetComponent<Preview>().CanBuildable &&
+                            tiles[2].GetComponent<Preview>().CanBuildable && tiles[3].GetComponent<Preview>().CanBuildable)
                         {
                             isCanBuildTile = true;
-                            switch ((int)(intmousepos.y * 2) - 1)
-                            {
-                                case 1:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[0].color;
-                                    break;
-                                case 2:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[1].color;
-                                    break;
-                                case 3:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[2].color;
-                                    break;
-                                case 4:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[3].color;
-                                    break;
-                                case 5:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[4].color;
-                                    break;
-                                case 6:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[5].color;
-                                    break;
-                                case 7:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[6].color;
-                                    break;
-                                case 8:
-                                    tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[7].color;
-                                    break;
-                            }
+                            tiles[i].GetComponentInChildren<MeshRenderer>().material.color = tilecolor[((int)(intmousepos.y * 2))-2].color;
                         }
                         else
                         {
@@ -420,6 +380,24 @@ X X 10 X
             }
             playerState.GetSetPlayerCoin = -addPrice;
         }
+    }
+
+    //테트리스 범위 제한
+    private bool IsInBoundaryTetris(int tiledir, Vector3 mousepos)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(!(SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x >= 0 &&
+                SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].x < gridX &&
+                SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z >= 0 &&
+                SetTilePos(tetrisNum, tiledir, (int)mousepos.x, (int)mousepos.z)[i].z < gridY))
+            {
+                return false;
+            }
+        }
+
+        return true;
+
     }
 
     public void TileChange()
