@@ -113,6 +113,7 @@ public class Tower : MonoBehaviour
 
     protected virtual void Start()
     {
+
         AS = this.GetComponent<AudioSource>();
         alterSound = Resources.Load<GameObject>("prefabs/Tower/" + "SoundObject");
         var sound = Instantiate(alterSound, this.transform.position, Quaternion.identity).GetComponent<AlertSetting>();
