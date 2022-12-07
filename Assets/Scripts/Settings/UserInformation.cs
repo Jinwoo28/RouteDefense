@@ -41,7 +41,7 @@ public class UserInformation : MonoBehaviour
         skill = this.GetComponent<SkillSettings>();
 
         LoadUserInfo();
-        //ResetUserSkillData();
+        ResetUserSkillData();
         skill.SkillSetUp(userData.PassiveSkill, userData.ActiveSkill);
         userData.userCoin += getMoney;
         getMoney = 0;
